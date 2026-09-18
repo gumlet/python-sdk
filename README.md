@@ -1,2 +1,224 @@
-# python-sdk
-Python SDK for Gumlet
+# Gumlet
+
+This library provides convenient access to the Gumlet REST API from Python.
+
+The full API of this library can be found in [api.md](./api.md).
+
+<br />
+
+## Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Reference](./api.md)
+- [Async](#async)
+- [Authentication](#authentication)
+- [Errors](#errors)
+- [Client Options](#client-options)
+- [Retries and Timeouts](#retries-and-timeouts)
+- [Helpers](#helpers)
+- [Logging](#logging)
+- [Requirements](#requirements)
+
+<br />
+
+## Installation
+
+```sh
+pip install gumlet
+```
+
+<br />
+
+## Usage
+
+```python
+import os
+
+from gumlet import Gumlet
+
+client = Gumlet(
+    api_key=os.environ.get("API_KEY"),
+)
+
+video_asset = client.video_assets.create(
+    input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
+    collection_id="646df1c9173a4a2fcac180b4",
+    profile_id="646df1c9173a4a2fcac180b7",
+    format="ABR",
+    tag=["ball"],
+    description="some description",
+    metadata={"headermeta": "metavalue"},
+    call_to_actions=[
+        {
+            "start_time": 1,
+            "end_time": 90,
+            "text": "some test",
+            "url": "https://some-url.com",
+            "position_from_top": 11,
+            "position_from_right": 23,
+            "border_radius": "11",
+            "font_color": "#000001",
+            "background_color": "#ffffff",
+        }
+    ],
+    playlist_id="6597acd5ed6f26a9c5ca9633",
+    folder="697375fbfa2d1037283140e4",
+)
+
+print(video_asset)
+```
+
+The examples in the following sections assume a `client` configured as shown above.
+
+See the [API reference](./api.md) for every available operation.
+
+<br />
+
+## Async
+
+Every client has an `Async` counterpart (`AsyncGumlet`) exposing the same resource tree with `await`.
+
+```python
+import asyncio
+
+from gumlet import AsyncGumlet
+
+
+async def main() -> None:
+    client = AsyncGumlet()
+    video_asset = await client.video_assets.create(
+        input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
+        collection_id="646df1c9173a4a2fcac180b4",
+        profile_id="646df1c9173a4a2fcac180b7",
+        format="ABR",
+        tag=["ball"],
+        description="some description",
+        metadata={"headermeta": "metavalue"},
+        call_to_actions=[
+            {
+                "start_time": 1,
+                "end_time": 90,
+                "text": "some test",
+                "url": "https://some-url.com",
+                "position_from_top": 11,
+                "position_from_right": 23,
+                "border_radius": "11",
+                "font_color": "#000001",
+                "background_color": "#ffffff",
+            }
+        ],
+        playlist_id="6597acd5ed6f26a9c5ca9633",
+        folder="697375fbfa2d1037283140e4",
+    )
+
+
+asyncio.run(main())
+```
+
+<br />
+
+## Authentication
+
+Pass credentials to the generated client constructor. Environment variables are read automatically when supported by the target runtime.
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `api_key` | `string \| provider` | - | Credential for the API_KEY scheme. Defaults to API_KEY. |
+
+Declared schemes:
+
+- `API_KEY` bearer token
+
+<br />
+
+## Errors
+
+Non-success responses throw generated API errors. Error objects expose status, headers, response body, and request metadata where the target runtime supports it.
+
+```python
+from gumlet import APIStatusError
+
+try:
+    video_asset = client.video_assets.create(
+        input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
+        collection_id="646df1c9173a4a2fcac180b4",
+        profile_id="646df1c9173a4a2fcac180b7",
+        format="ABR",
+        tag=["ball"],
+        description="some description",
+        metadata={"headermeta": "metavalue"},
+        call_to_actions=[
+            {
+                "start_time": 1,
+                "end_time": 90,
+                "text": "some test",
+                "url": "https://some-url.com",
+                "position_from_top": 11,
+                "position_from_right": 23,
+                "border_radius": "11",
+                "font_color": "#000001",
+                "background_color": "#ffffff",
+            }
+        ],
+        playlist_id="6597acd5ed6f26a9c5ca9633",
+        folder="697375fbfa2d1037283140e4",
+    )
+except APIStatusError as err:
+    print(err.status_code, err.message)
+    raise
+```
+
+Documented error statuses: `400`, `401`, `403`, `404`, `4XX`.
+
+<br />
+
+## Client Options
+
+Configure the generated client by setting any of these options when you create it.
+
+```python
+from gumlet import Gumlet
+
+client = Gumlet(
+    timeout=60.0,
+    max_retries=2,
+)
+```
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `api_key` | `str \| None` | `os.environ.get("API_KEY")` | Credential for the API_KEY scheme. |
+| `base_url` | `str \| httpx.URL \| None` | - | Override the default API base URL. |
+| `timeout` | `float \| Timeout \| None` | `60.0` | Maximum time in seconds to wait for a response before aborting a request. |
+| `max_retries` | `int` | `2` | Number of retries for temporary failures. |
+| `default_headers` | `Mapping[str, str] \| None` | - | Headers sent with every request. |
+| `default_query` | `Mapping[str, object] \| None` | - | Query parameters sent with every request. |
+
+<br />
+
+## Retries and Timeouts
+
+Generated clients support request timeouts and retry temporary failures such as network errors, 408, 409, 429, and 5xx responses. Retry delays honor `Retry-After` headers when present. Tune the retry and timeout client options shown above, or override them per request.
+
+<br />
+
+## Helpers
+
+- Use `client.with_raw_response.<resource>.<method>(...)` to access the raw `httpx.Response` and parse it yourself.
+- Use `client.with_streaming_response.<resource>.<method>(...)` to stream a response body without buffering it.
+
+<br />
+
+## Logging
+
+- Set the `GUMLET_LOG` environment variable to `info` or `debug` to enable HTTP logging.
+- Logs are emitted through the standard `logging` module under the `gumlet` logger.
+
+<br />
+
+## Requirements
+
+- Python 3.8 or newer
+
+Powered by Scalar.

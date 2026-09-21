@@ -164,7 +164,7 @@ class PlayerConfig(BaseModel):
     """Enable / disable playback from last viewed position. `true` means the playback will resume from last position."""
 
     cc_color: Optional[str] = None
-    """Closed captions  / subtitle color."""
+    """Closed captions / subtitle color."""
 
     cc_bg_color: Optional[str] = None
     """Closed captions / subtitle background color."""

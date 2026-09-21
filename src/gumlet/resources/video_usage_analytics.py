@@ -64,7 +64,7 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
         This endpoint gives usage analytics data of your videos. Ex - top assets, bandwidth consumption
 
         Args:
-            metrics: Define the metric you need the data for, currently we only support `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `bandwidth_consumption_by_collection`, `errored_videos` and `widget_data`
+            metrics: Define the metric you need the data for. Currently we only support `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `bandwidth_consumption_by_collection`, `errored_videos` and `widget_data`
             date_range: The timeframe to get the data for. Currently we only support a maximum of 60 days between `start_at` and `end_at`.
             filters: Body parameter.
             top_assets_count: Count of video assets that should be returned. Max assets count is 1000 per page.
@@ -211,7 +211,7 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
         This endpoint gives usage analytics data of your videos. Ex - top assets, bandwidth consumption
 
         Args:
-            metrics: Define the metric you need the data for, currently we only support `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `bandwidth_consumption_by_collection`, `errored_videos` and `widget_data`
+            metrics: Define the metric you need the data for. Currently we only support `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `bandwidth_consumption_by_collection`, `errored_videos` and `widget_data`
             date_range: The timeframe to get the data for. Currently we only support a maximum of 60 days between `start_at` and `end_at`.
             filters: Body parameter.
             top_assets_count: Count of video assets that should be returned. Max assets count is 1000 per page.

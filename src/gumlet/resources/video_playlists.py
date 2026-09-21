@@ -392,8 +392,8 @@ class VideoPlaylistsResource(SyncAPIResource):
             playlist_id: ID of playlist in which you need to list assets.
             sort_by: Optional, if sort_by is set to asset_title it will sorted by title name. Otherwise order in which user added the assets in playlist.
             sort_order: -1 or 1
-            page_number: Optional, Minimun 1
-            page_size: Optional, Minimun 10
+            page_number: Optional. Minimum: 1
+            page_size: Optional. Minimum: 10
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -884,8 +884,8 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
             playlist_id: ID of playlist in which you need to list assets.
             sort_by: Optional, if sort_by is set to asset_title it will sorted by title name. Otherwise order in which user added the assets in playlist.
             sort_order: -1 or 1
-            page_number: Optional, Minimun 1
-            page_size: Optional, Minimun 10
+            page_number: Optional. Minimum: 1
+            page_size: Optional. Minimum: 10
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.

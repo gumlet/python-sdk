@@ -20,10 +20,10 @@ class VideoAssetUpdateParams(TypedDict, total=False):
     """Attach some textual data with the asset. This field is neither searchable nor filterable."""
 
     tag: str
-    """Specify a text string or identifier which can identify an asset or bunch of assets later. You can pass multiple comma separated values."""
+    """Specify a text string or identifier which can identify an asset or bunch of assets later. You can pass multiple comma-separated values."""
 
     call_to_actions: Iterable[CallToAction]
-    """CTA, is an explicit prompt within the video content encouraging viewers to take a particular action."""
+    """A CTA is an explicit prompt within the video content encouraging viewers to take a particular action."""
 
     metadata: str
     """Set of key-value pairs that you can attach to this Asset. This can be useful for storing additional information.<br/> Example: <br/> <code>  {  "internal_video_id" : "123Abc"  }  </code>"""

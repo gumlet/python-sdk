@@ -14,7 +14,7 @@ class AudioUploadCompleteParams(TypedDict, total=False):
 
 class UploadResponse(TypedDict, total=False):
     language_code: str
-    """Language Code for uploaded audio file."""
+    """Language code for uploaded audio file."""
 
     uploaded: bool
     """Status of language uploaded audio file. (If status code was 200, You can mark true else false)"""

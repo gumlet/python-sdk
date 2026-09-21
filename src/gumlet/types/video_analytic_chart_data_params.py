@@ -32,7 +32,7 @@ class VideoAnalyticChartDataParams(TypedDict, total=False):
     """Data can be grouped by `daily`, `weekly` or `monthly`."""
 
     chart_dimension: ChartDimension
-    """Metrics result Group by selected dimension, You can select upto 3 dimensions to get nested category result. result will follow selection orders."""
+    """Group metrics by the selected dimension. You can select up to 3 dimensions for nested category results; results follow the selection order."""
 
 
 class ChartDimensionGroupBy(TypedDict, total=False):

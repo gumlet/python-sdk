@@ -33,7 +33,7 @@ class ImageUsageAnalyticRetrieveParams(TypedDict, total=False):
             ]
         ]
     ]
-    """Define the metric you need the data for, currently we support "bandwidth_consumption", "requests_count","status_4xx","status_5xx","avg_response_time"\""""
+    """Define the metric you need the data for. Currently we support `bandwidth_consumption`, `requests_count`, `status_4xx`, `status_5xx`, and `avg_response_time`."""
 
     date_range: Required[DateRange]
     """The timeframe to get the data for. Currently we only support a maximum of 30 days between `start_at` and `end_at`."""

@@ -16,7 +16,7 @@ class LiveStreamAssetCreateParams(TypedDict, total=False):
     """Gumlet live video source/collection id."""
 
     resolution: Required[str]
-    """Required resolutions in HLS delivery format for live stream. Can be an array of string out of the following values:  `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Re-sized rendition will retain the input aspect ratio."""
+    """Required resolutions in HLS delivery format for live stream. Can be an array of string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Resized rendition will retain the input aspect ratio."""
 
     title: str
     """Your live stream asset title"""

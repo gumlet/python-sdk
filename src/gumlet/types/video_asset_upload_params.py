@@ -28,7 +28,7 @@ class VideoAssetUploadParams(TypedDict, total=False):
     """Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile."""
 
     format: Literal["ABR", "MP4"]
-    """Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and`MP4`."""
+    """Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`."""
 
     tag: SequenceNotStr[str]
     """Specify a text string or identifier which can identify an asset or bunch of assets later."""
@@ -49,7 +49,7 @@ class VideoAssetUploadParams(TypedDict, total=False):
     """Resize video with the given height. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset height will be ignored. Applicable only when specified format is `MP4`."""
 
     resolution: str
-    """Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Re-sized rendition will retain the input aspect ratio."""
+    """Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma-separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Resized rendition will retain the input aspect ratio."""
 
     crop: Crop
     """This transformation can be used to crop the video by defining a rectangular area within the dimensions of the output video."""
@@ -73,7 +73,7 @@ class VideoAssetUploadParams(TypedDict, total=False):
     """Add additional Audio / Subtitle tracks to Gumlet for transcoding and delivery along with video asset track."""
 
     generate_subtitles: GenerateSubtitles
-    """Gumlet allows to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)"""
+    """Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)"""
 
     mp4_access: bool
     """Creates `MP4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**"""
@@ -88,10 +88,10 @@ class VideoAssetUploadParams(TypedDict, total=False):
     """This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case, video transformation and thumbnails/animated GIFs would not be created. **Default: `false`**"""
 
     enable_drm: bool
-    """Enable DRM encryption for transcoded videos. Gumlet supports Widevine and Fairplay DRMs."""
+    """Enable DRM encryption for transcoded videos. Gumlet supports Widevine and FairPlay DRMs."""
 
     call_to_actions: Iterable[CallToAction]
-    """CTA, is an explicit prompt within the video content encouraging viewers to take a particular action."""
+    """A CTA is an explicit prompt within the video content encouraging viewers to take a particular action."""
 
     playlist_id: str
     """Add this asset to a playlist."""
@@ -163,13 +163,13 @@ class AnimatedGif(TypedDict, total=False):
 
 class TextOverlay(TypedDict, total=False):
     text: Required[str]
-    """Text to be overlayed on video."""
+    """Text to be overlaid on video."""
 
     horizontal_align: str
-    """This parameter specifies the horizontal alignment of the overlayed image and can be either `left` or `right`. **Default: `right`**"""
+    """This parameter specifies the horizontal alignment of the overlaid text and can be either `left` or `right`. **Default: `right`**"""
 
     vertical_align: str
-    """This parameter specifies the vertical alignment of the overlayed image and can be either `top` or `bottom`. **Default: `bottom`**"""
+    """This parameter specifies the vertical alignment of the overlaid text and can be either `top` or `bottom`. **Default: `bottom`**"""
 
     horizontal_margin: str
     """This parameter defines the horizontal coordinate value of the corner (determined by `horizontal_align`) of the overlay area. Values can be an absolute number of pixels relative to the video width. **Default: `0`**"""
@@ -190,7 +190,7 @@ class TextOverlay(TypedDict, total=False):
     """Overlay text opacity can be specified with opacity parameter where value can be between `0` and `100` where `0` is considered completely transparent and `100` is considered completely opaque. **Default: `100`**"""
 
     box: bool
-    """This parameter allows rectangular drawing a box over the overlayed text. **Default: `false`**"""
+    """This parameter allows drawing a rectangular box over the overlaid text. **Default: `false`**"""
 
     box_color: str
     """Box color can be specified with this parameter. **Default: `white`**"""
@@ -204,7 +204,7 @@ class TextOverlay(TypedDict, total=False):
 
 class ImageOverlay(TypedDict, total=False):
     url: Required[str]
-    """This is the required parameter for image overlay, it can be a URL to an image that needs to be overlayed."""
+    """This is the required parameter for image overlay; it can be a URL to an image that needs to be overlaid."""
 
     horizontal_margin: str
     """This parameter defines the horizontal coordinate value of the corner (determined by `horizontal_align`) of the overlay area. Values can be an absolute number of pixels or a percentage value relative to the video width. **Default: `0`**"""
@@ -213,16 +213,16 @@ class ImageOverlay(TypedDict, total=False):
     """This parameter defines the vertical coordinate value of the corner (determined by `vertical_align`) of the overlay area. Values can be an absolute number of pixels or a percentage value relative to the video height. **Default: `0`**"""
 
     horizontal_align: str
-    """This parameter specifies the horizontal alignment of the overlayed image and can be either `left` or `right`. **Default: `right`**"""
+    """This parameter specifies the horizontal alignment of the overlaid image and can be either `left` or `right`. **Default: `right`**"""
 
     vertical_align: str
-    """This parameter specifies the vertical alignment of the overlayed image and can be either `top` or `bottom`. **Default: `bottom`**"""
+    """This parameter specifies the vertical alignment of the overlaid image and can be either `top` or `bottom`. **Default: `bottom`**"""
 
     width: str
-    """Width of the overlayed image. **Default: `image width`**"""
+    """Width of the overlaid image. **Default: `image width`**"""
 
     height: str
-    """Height of the overlayed image. **Default: `image height`**"""
+    """Height of the overlaid image. **Default: `image height`**"""
 
 
 class Trim(TypedDict, total=False):

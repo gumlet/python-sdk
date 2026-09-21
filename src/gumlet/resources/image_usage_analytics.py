@@ -69,7 +69,7 @@ class ImageUsageAnalyticsResource(SyncAPIResource):
         This endpoint helps you get image analytics data like bandwidth consumption, request count, CDN hit ratio, etc.
 
         Args:
-            metrics: Define the metric you need the data for, currently we support "bandwidth_consumption", "requests_count","status_4xx","status_5xx","avg_response_time""
+            metrics: Define the metric you need the data for. Currently we support `bandwidth_consumption`, `requests_count`, `status_4xx`, `status_5xx`, and `avg_response_time`.
             date_range: The timeframe to get the data for. Currently we only support a maximum of 30 days between `start_at` and `end_at`.
             group_by: Body parameter.
             filters: Body parameter.
@@ -153,7 +153,7 @@ class AsyncImageUsageAnalyticsResource(AsyncAPIResource):
         This endpoint helps you get image analytics data like bandwidth consumption, request count, CDN hit ratio, etc.
 
         Args:
-            metrics: Define the metric you need the data for, currently we support "bandwidth_consumption", "requests_count","status_4xx","status_5xx","avg_response_time""
+            metrics: Define the metric you need the data for. Currently we support `bandwidth_consumption`, `requests_count`, `status_4xx`, `status_5xx`, and `avg_response_time`.
             date_range: The timeframe to get the data for. Currently we only support a maximum of 30 days between `start_at` and `end_at`.
             group_by: Body parameter.
             filters: Body parameter.

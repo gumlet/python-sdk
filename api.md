@@ -114,6 +114,8 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [Delete Workspace](#delete-workspace-1)
 - [`LiveStreamAnalytics`](#livestreamanalytics)
   - [Usage Analytics](#usage-analytics)
+- [`GlobalSearch`](#globalsearch)
+  - [Global Search](#global-search)
 
 ## Setup
 
@@ -1667,5 +1669,29 @@ live_stream_analytic = client.live_stream_analytics.usage(
     date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     group_by="daily",
     metrics=["bandwidth_consumption"],
+)
+```
+
+## `GlobalSearch`
+
+Search all video assets / playlists / folders etc across workspaces.
+
+### Global Search
+
+Search all video assets / playlists / folders etc across workspaces.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`GlobalSearchSearchParams`](./src/gumlet/types/global_search_search_params.py) |
+| Response | [`GlobalSearchSearchResponse`](./src/gumlet/types/global_search_search_response.py) |
+
+```python
+global_search = client.global_search.search(
+    search_query="search_query",
+    size=20,
+    assets_offset=0,
+    folders_offset=0,
+    playlists_offset=0,
+    channels_offset=0,
 )
 ```

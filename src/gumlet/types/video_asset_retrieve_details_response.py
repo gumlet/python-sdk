@@ -16,6 +16,7 @@ __all__ = [
     "InputTransformationsImageOverlay",
     "InputTransformationsGenerateSubtitles",
     "InputTransformationsPreviewThumbnails",
+    "InputTransformationsDrm",
     "InputChapter",
     "Output",
     "OutputStorageDetails",
@@ -27,7 +28,13 @@ __all__ = [
     "OutputStorageDetailsPreviewThumbnail",
     "Warning",
     "VideoProtection",
+    "AccessControls",
 ]
+
+
+class AccessControls(BaseModel):
+    password: Optional[str] = None
+    """Hidden password field"""
 
 
 class VideoProtection(BaseModel):
@@ -88,19 +95,17 @@ class OutputStorageDetailsVideo(BaseModel):
 
 
 class OutputStorageDetails(BaseModel):
-    video: Optional[List[OutputStorageDetailsVideo]] = None
+    video: List[OutputStorageDetailsVideo]
 
-    audio: Optional[List[OutputStorageDetailsAudio]] = None
+    audio: List[OutputStorageDetailsAudio]
 
-    playlist: Optional[List[OutputStorageDetailsPlaylist]] = None
+    playlist: List[OutputStorageDetailsPlaylist]
 
-    thumbnail: Optional[List[OutputStorageDetailsThumbnail]] = None
+    thumbnail: List[OutputStorageDetailsThumbnail]
 
-    subtitle: Optional[List[OutputStorageDetailsSubtitle]] = None
+    subtitle: List[OutputStorageDetailsSubtitle]
 
-    preview_thumbnail: Optional[List[OutputStorageDetailsPreviewThumbnail]] = FieldInfo(
-        alias="previewThumbnail", default=None
-    )
+    preview_thumbnail: List[OutputStorageDetailsPreviewThumbnail] = FieldInfo(alias="previewThumbnail")
 
 
 class Output(BaseModel):
@@ -127,6 +132,10 @@ class InputChapter(BaseModel):
     end_time: Optional[int] = FieldInfo(alias="endTime", default=None)
 
     label: Optional[str] = None
+
+
+class InputTransformationsDrm(BaseModel):
+    type: Literal["widevine", "fairplay", "clearkey", "widevine,fairplay", "fairplay,widevine"]
 
 
 class InputTransformationsPreviewThumbnails(BaseModel):
@@ -158,7 +167,7 @@ class InputTransformationsImageOverlay(BaseModel):
 
 
 class InputTransformations(BaseModel):
-    format: Optional[str] = None
+    format: str
 
     resolution: Optional[List[str]] = None
 
@@ -188,7 +197,12 @@ class InputTransformations(BaseModel):
     """Flag indicating if the pre-processing was successful"""
 
     generate_chapters: Optional[bool] = None
-    """Flag if chapter generation is enabled"""
+    """Flag if AI chapter generation is enabled"""
+
+    drm: Optional[InputTransformationsDrm] = None
+
+    generate_description: Optional[bool] = None
+    """Flag if AI description generation is enabled"""
 
 
 class Input(BaseModel):
@@ -216,19 +230,21 @@ class Input(BaseModel):
 
     height: Optional[int] = None
 
+    file_size: str
+
 
 class VideoAssetRetrieveDetailsResponse(BaseModel):
     asset_id: str
 
     progress: Optional[int] = None
 
-    created_at: Optional[int] = None
+    created_at: int
     """Asset created timestamp in milliseconds since epoch"""
 
     updated_at: Optional[int] = None
     """Asset updated timestamp in milliseconds since epoch"""
 
-    status: Optional[str] = None
+    status: str
 
     tag: Optional[List[str]] = None
 
@@ -262,3 +278,5 @@ class VideoAssetRetrieveDetailsResponse(BaseModel):
 
     access_control: Optional[Literal["private", "public", "password-protected", "dashboardOnly"]] = None
     """Access control"""
+
+    access_controls: Optional[AccessControls] = None

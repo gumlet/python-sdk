@@ -176,6 +176,14 @@ from .live_stream_analytics import (
     LiveStreamAnalyticsResourceWithStreamingResponse,
     AsyncLiveStreamAnalyticsResourceWithStreamingResponse,
 )
+from .global_search import (
+    GlobalSearchResource,
+    AsyncGlobalSearchResource,
+    GlobalSearchResourceWithRawResponse,
+    AsyncGlobalSearchResourceWithRawResponse,
+    GlobalSearchResourceWithStreamingResponse,
+    AsyncGlobalSearchResourceWithStreamingResponse,
+)
 
 __all__ = [
     "VideoAssetsResource",
@@ -310,4 +318,10 @@ __all__ = [
     "AsyncLiveStreamAnalyticsResourceWithRawResponse",
     "LiveStreamAnalyticsResourceWithStreamingResponse",
     "AsyncLiveStreamAnalyticsResourceWithStreamingResponse",
+    "GlobalSearchResource",
+    "AsyncGlobalSearchResource",
+    "GlobalSearchResourceWithRawResponse",
+    "AsyncGlobalSearchResourceWithRawResponse",
+    "GlobalSearchResourceWithStreamingResponse",
+    "AsyncGlobalSearchResourceWithStreamingResponse",
 ]

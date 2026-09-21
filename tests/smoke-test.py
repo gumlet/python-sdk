@@ -1348,6 +1348,29 @@ def _smoke_case_116() -> None:
     )
 
 
+def _smoke_case_117() -> None:
+    global_search = client.global_search.search(
+        search_query="search_query",
+        size=20,
+        assets_offset=0,
+        folders_offset=0,
+        playlists_offset=0,
+        channels_offset=0,
+    )
+
+
+def _smoke_case_118() -> None:
+    global_search = client.global_search.search(
+        search_query="search_query",
+        collection_id="collection_id",
+        size=20,
+        assets_offset=0,
+        folders_offset=0,
+        playlists_offset=0,
+        channels_offset=0,
+    )
+
+
 cases: list[SmokeCase] = [
     {
         "operation": "create",
@@ -2108,6 +2131,20 @@ cases: list[SmokeCase] = [
         "method": "POST",
         "path": "/video/live/analytics",
         "run": _smoke_case_116,
+    },
+    {
+        "operation": "search",
+        "method": "GET",
+        "path": "/entities/global-search",
+        "label": "required params",
+        "run": _smoke_case_117,
+    },
+    {
+        "operation": "search",
+        "method": "GET",
+        "path": "/entities/global-search",
+        "label": "all params",
+        "run": _smoke_case_118,
     },
 ]
 

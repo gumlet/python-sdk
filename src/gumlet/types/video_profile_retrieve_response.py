@@ -26,6 +26,9 @@ class Transformations(BaseModel):
 
     resolution: Optional[str] = None
 
+    generate_chapters: Optional[bool] = None
+    """Flag that shows if AI generated chapters are enabled"""
+
 
 class VideoProfileRetrieveResponse(BaseModel):
     profile_id: Optional[str] = None

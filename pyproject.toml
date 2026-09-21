@@ -5,7 +5,7 @@ description = "Gumlet helps developers deliver online video and images. This API
 readme = "README.md"
 license = "Apache-2.0"
 authors = [
-  { name = "Gumlet" },
+  { name = "Gumlet", email = "support@gumlet.com"},
 ]
 requires-python = ">= 3.9"
 dependencies = [
@@ -16,6 +16,15 @@ dependencies = [
   "distro>=1.7.0, <2",
   "sniffio",
 ]
+
+keywords = ["gumlet", "api", "video"]
+
+[project.urls]
+homepage = "https://www.gumlet.com/"
+source = "https://github.com/gumlet/python-sdk"
+issues = "https://github.com/gumlet/python-sdk/issues"
+changelog = "https://github.com/gumlet/python-sdk/blob/main/CHANGELOG.md"
+documentation = "https://docs.gumlet.com/reference"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]

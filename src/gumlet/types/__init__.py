@@ -190,3 +190,5 @@ from .live_stream_workspace_delete_response import (
 )
 from .live_stream_analytic_usage_response import LiveStreamAnalyticUsageResponse as LiveStreamAnalyticUsageResponse
 from .live_stream_analytic_usage_params import LiveStreamAnalyticUsageParams as LiveStreamAnalyticUsageParams
+from .global_search_search_response import GlobalSearchSearchResponse as GlobalSearchSearchResponse
+from .global_search_search_params import GlobalSearchSearchParams as GlobalSearchSearchParams

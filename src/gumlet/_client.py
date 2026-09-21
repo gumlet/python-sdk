@@ -56,6 +56,7 @@ if TYPE_CHECKING:
         billing,
         live_stream_workspaces,
         live_stream_analytics,
+        global_search,
     )
     from .resources.video_assets import VideoAssetsResource, AsyncVideoAssetsResource
     from .resources.subtitle_upload import SubtitleUploadResource, AsyncSubtitleUploadResource
@@ -79,6 +80,7 @@ if TYPE_CHECKING:
     from .resources.billing import BillingResource, AsyncBillingResource
     from .resources.live_stream_workspaces import LiveStreamWorkspacesResource, AsyncLiveStreamWorkspacesResource
     from .resources.live_stream_analytics import LiveStreamAnalyticsResource, AsyncLiveStreamAnalyticsResource
+    from .resources.global_search import GlobalSearchResource, AsyncGlobalSearchResource
 
 # Serializes lazy resource imports so concurrent cold access from multiple
 # threads cannot deadlock on CPython import locks (see CPython 3.14).
@@ -282,6 +284,12 @@ class Gumlet(SyncAPIClient):
         with _RESOURCE_IMPORT_LOCK:
             from .resources.live_stream_analytics import LiveStreamAnalyticsResource
         return LiveStreamAnalyticsResource(self)
+
+    @cached_property
+    def global_search(self) -> "GlobalSearchResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.global_search import GlobalSearchResource
+        return GlobalSearchResource(self)
 
     @cached_property
     def with_raw_response(self) -> GumletWithRawResponse:
@@ -607,6 +615,12 @@ class AsyncGumlet(AsyncAPIClient):
         return AsyncLiveStreamAnalyticsResource(self)
 
     @cached_property
+    def global_search(self) -> "AsyncGlobalSearchResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.global_search import AsyncGlobalSearchResource
+        return AsyncGlobalSearchResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncGumletWithRawResponse:
         return AsyncGumletWithRawResponse(self)
 
@@ -871,6 +885,12 @@ class GumletWithRawResponse:
             from .resources.live_stream_analytics import LiveStreamAnalyticsResourceWithRawResponse
         return LiveStreamAnalyticsResourceWithRawResponse(self._client.live_stream_analytics)
 
+    @cached_property
+    def global_search(self) -> global_search.GlobalSearchResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.global_search import GlobalSearchResourceWithRawResponse
+        return GlobalSearchResourceWithRawResponse(self._client.global_search)
+
 
 class AsyncGumletWithRawResponse:
     _client: AsyncGumlet
@@ -1009,6 +1029,12 @@ class AsyncGumletWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.live_stream_analytics import AsyncLiveStreamAnalyticsResourceWithRawResponse
         return AsyncLiveStreamAnalyticsResourceWithRawResponse(self._client.live_stream_analytics)
+
+    @cached_property
+    def global_search(self) -> global_search.AsyncGlobalSearchResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.global_search import AsyncGlobalSearchResourceWithRawResponse
+        return AsyncGlobalSearchResourceWithRawResponse(self._client.global_search)
 
 
 class GumletWithStreamedResponse:
@@ -1149,6 +1175,12 @@ class GumletWithStreamedResponse:
             from .resources.live_stream_analytics import LiveStreamAnalyticsResourceWithStreamingResponse
         return LiveStreamAnalyticsResourceWithStreamingResponse(self._client.live_stream_analytics)
 
+    @cached_property
+    def global_search(self) -> global_search.GlobalSearchResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.global_search import GlobalSearchResourceWithStreamingResponse
+        return GlobalSearchResourceWithStreamingResponse(self._client.global_search)
+
 
 class AsyncGumletWithStreamedResponse:
     _client: AsyncGumlet
@@ -1287,6 +1319,12 @@ class AsyncGumletWithStreamedResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.live_stream_analytics import AsyncLiveStreamAnalyticsResourceWithStreamingResponse
         return AsyncLiveStreamAnalyticsResourceWithStreamingResponse(self._client.live_stream_analytics)
+
+    @cached_property
+    def global_search(self) -> global_search.AsyncGlobalSearchResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.global_search import AsyncGlobalSearchResourceWithStreamingResponse
+        return AsyncGlobalSearchResourceWithStreamingResponse(self._client.global_search)
 
 
 # Alias names for the documented `Client` / `AsyncClient` symbols.

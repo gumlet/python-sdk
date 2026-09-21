@@ -95,19 +95,17 @@ class OutputStorageDetailsVideo(BaseModel):
 
 
 class OutputStorageDetails(BaseModel):
-    video: Optional[List[OutputStorageDetailsVideo]] = None
+    video: List[OutputStorageDetailsVideo]
 
-    audio: Optional[List[OutputStorageDetailsAudio]] = None
+    audio: List[OutputStorageDetailsAudio]
 
-    playlist: Optional[List[OutputStorageDetailsPlaylist]] = None
+    playlist: List[OutputStorageDetailsPlaylist]
 
-    thumbnail: Optional[List[OutputStorageDetailsThumbnail]] = None
+    thumbnail: List[OutputStorageDetailsThumbnail]
 
-    subtitle: Optional[List[OutputStorageDetailsSubtitle]] = None
+    subtitle: List[OutputStorageDetailsSubtitle]
 
-    preview_thumbnail: Optional[List[OutputStorageDetailsPreviewThumbnail]] = FieldInfo(
-        alias="previewThumbnail", default=None
-    )
+    preview_thumbnail: List[OutputStorageDetailsPreviewThumbnail] = FieldInfo(alias="previewThumbnail")
 
 
 class Output(BaseModel):

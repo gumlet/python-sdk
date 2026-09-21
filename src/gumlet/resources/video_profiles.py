@@ -72,19 +72,19 @@ class VideoProfilesResource(SyncAPIResource):
             format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`.
             width: Resize video with the given width. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset width will be ignored. Only applicable when specified `format` is `MP4`.
             height: Resize video with the given height. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset height will be ignored. Only applicable when specified `format` is `MP4`.
-            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma separated string out of the following values:  `240p`, `360p`, `480p`, `540p`, `720p`,  and `1080p `. Re-sized rendition will retain the input aspect ratio.
+            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma-separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p `. Resized rendition will retain the input aspect ratio.
             crop: This transformation can be used to crop the video by defining a rectangular area within the dimensions of the output video.
             pad: This transformation can be used to add padding to the video.
             trim: Trim transformation can be used to trim videos based on time duration.
             image_overlay: Image overlay can be used to brand a video or add a visual label in the form of an image.
             text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
             animated_gif: Create an animated GIF from a video.
-            generate_subtitles: Gumlet allows to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). Remove this object if you do not want to generate AI subtitles.
+            generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). Remove this object if you do not want to generate AI subtitles.
             mp4_access: Creates `mp4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
             per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
             process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
             audio_only: This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case,This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case, video transformation and thumbnails/animated GIFs would not be created. **Default: `false`**
-            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and Fairplay DRMs.
+            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and FairPlay DRMs.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -225,12 +225,12 @@ class VideoProfilesResource(SyncAPIResource):
             image_overlay: Image overlay can be used to brand a video or add a visual label in the form of an image.
             text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
             animated_gif: Create an animated GIF from a video.
-            generate_subtitles: Gumlet allows to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). You can remove this object if don't want to generate AI subtitles.
+            generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). You can remove this object if you don't want to generate AI subtitles.
             mp4_access: Creates `mp4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
             per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
             process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
             audio_only: This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case,This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case, video transformation and thumbnails/animated GIFs would not be created. **Default: `false`**
-            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and Fairplay DRMs.
+            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and FairPlay DRMs.
             vc: Video Codecs
             generate_chapters: Whether Gumlet should generate chapters.
             generate_description: Whether Gumlet should generate descriptions.
@@ -414,19 +414,19 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`.
             width: Resize video with the given width. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset width will be ignored. Only applicable when specified `format` is `MP4`.
             height: Resize video with the given height. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset height will be ignored. Only applicable when specified `format` is `MP4`.
-            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma separated string out of the following values:  `240p`, `360p`, `480p`, `540p`, `720p`,  and `1080p `. Re-sized rendition will retain the input aspect ratio.
+            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma-separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p `. Resized rendition will retain the input aspect ratio.
             crop: This transformation can be used to crop the video by defining a rectangular area within the dimensions of the output video.
             pad: This transformation can be used to add padding to the video.
             trim: Trim transformation can be used to trim videos based on time duration.
             image_overlay: Image overlay can be used to brand a video or add a visual label in the form of an image.
             text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
             animated_gif: Create an animated GIF from a video.
-            generate_subtitles: Gumlet allows to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). Remove this object if you do not want to generate AI subtitles.
+            generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). Remove this object if you do not want to generate AI subtitles.
             mp4_access: Creates `mp4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
             per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
             process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
             audio_only: This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case,This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case, video transformation and thumbnails/animated GIFs would not be created. **Default: `false`**
-            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and Fairplay DRMs.
+            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and FairPlay DRMs.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -567,12 +567,12 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             image_overlay: Image overlay can be used to brand a video or add a visual label in the form of an image.
             text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
             animated_gif: Create an animated GIF from a video.
-            generate_subtitles: Gumlet allows to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). You can remove this object if don't want to generate AI subtitles.
+            generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). You can remove this object if you don't want to generate AI subtitles.
             mp4_access: Creates `mp4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
             per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
             process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
             audio_only: This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case,This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case, video transformation and thumbnails/animated GIFs would not be created. **Default: `false`**
-            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and Fairplay DRMs.
+            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and FairPlay DRMs.
             vc: Video Codecs
             generate_chapters: Whether Gumlet should generate chapters.
             generate_description: Whether Gumlet should generate descriptions.

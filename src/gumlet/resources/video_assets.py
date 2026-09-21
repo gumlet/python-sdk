@@ -94,19 +94,19 @@ class VideoAssetsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> VideoAssetCreateResponse:
         """
-        An asset refers to a media content/video that is processed, stored, and delivered through Gumlet. This endpoint creates an asset allowing users to ingest media content into the Gumlet system for processing and delivery.
+        An asset refers to media content/video that is processed, stored, and delivered through Gumlet. This endpoint creates an asset allowing users to ingest media content into the Gumlet system for processing and delivery.
 
         Args:
             input: URL or web address of a file that Gumlet should download to create a new asset.
             profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile.
-            format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and`MP4`.
+            format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`.
             tag: Specify a text string or identifier which can identify an asset or bunch of assets later.
             title: Specify a text string or identifier which can be used for filtering or searching the asset.
             description: Attach some textual data with the asset. This field is neither searchable nor filterable.
             metadata: Add your metadata you want to associate with this asset.<br/> Example: <br/> <code>  {  "internal_video_id" : "123Abc"  }  </code>
             width: Resize video with the given width. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset width will be ignored. Applicable only when specified format is `MP4`.
             height: Resize video with the given height. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset height will be ignored. Applicable only when specified format is `MP4`.
-            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Re-sized rendition will retain the input aspect ratio.
+            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma-separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Resized rendition will retain the input aspect ratio.
             crop: This transformation can be used to crop the video by defining a rectangular area within the dimensions of the output video.
             pad: This transformation can be used to add padding to the video.
             trim: Trim transformation can be used to trim videos based on time duration.
@@ -114,13 +114,13 @@ class VideoAssetsResource(SyncAPIResource):
             text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
             animated_gif: Create an animated GIF from the video.
             additional_tracks: Add additional Audio / Subtitle tracks to Gumlet for transcoding and delivery along with video asset track.
-            generate_subtitles: Gumlet allows to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
+            generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
             mp4_access: Creates `MP4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
             per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
             process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
             audio_only: This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case, video transformation and thumbnails/animated GIFs would not be created. **Default: `false`**
-            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and Fairplay DRMs.
-            call_to_actions: CTA, is an explicit prompt within the video content encouraging viewers to take a particular action.
+            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and FairPlay DRMs.
+            call_to_actions: A CTA is an explicit prompt within the video content encouraging viewers to take a particular action.
             playlist_id: Add this asset to a playlist.
             folder: Add this asset to an existing folder by `folder_id`.
             workspace_id: Gumlet video workspace id.
@@ -219,19 +219,19 @@ class VideoAssetsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> VideoAssetUploadResponse:
         """
-        This endpoint creates a video asset allowing to upload of the video from the local file system and ingest media content into the Gumlet system for processing and delivery.Body Parameters are the same as the Create Asset Body Parameters except for the `input` parameter which this endpoint does not take.A successful response will be returned with `upload_url` field. You can make `PUT` request to that URL to upload video. To upload video using `upload_url` refer to [this](https://docs.gumlet.com/docs/direct-upload#2-use-the-url-to-upload-a-file).
+        This endpoint creates a video asset allowing upload of a video from the local file system and ingest media content into the Gumlet system for processing and delivery. Body parameters are the same as the Create Asset body parameters except for the `input` parameter, which this endpoint does not take. A successful response will be returned with `upload_url` field. You can make `PUT` request to that URL to upload video. To upload video using `upload_url` refer to [this](https://docs.gumlet.com/docs/direct-upload#2-use-the-url-to-upload-a-file).
 
         Args:
             collection_id: Gumlet video workspace id.
             profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile.
-            format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and`MP4`.
+            format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`.
             tag: Specify a text string or identifier which can identify an asset or bunch of assets later.
             title: Specify a text string or identifier which can be used for filtering or searching the asset.
             description: Attach some textual data with the asset. This field is neither searchable nor filterable.
             metadata: Add your metadata you want to associate with this asset.<br/> Example: <br/> <code>  {  "internal_video_id" : "123Abc"  }  </code>
             width: Resize video with the given width. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset width will be ignored. Applicable only when specified format is `MP4`.
             height: Resize video with the given height. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset height will be ignored. Applicable only when specified format is `MP4`.
-            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Re-sized rendition will retain the input aspect ratio.
+            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma-separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Resized rendition will retain the input aspect ratio.
             crop: This transformation can be used to crop the video by defining a rectangular area within the dimensions of the output video.
             pad: This transformation can be used to add padding to the video.
             trim: Trim transformation can be used to trim videos based on time duration.
@@ -239,13 +239,13 @@ class VideoAssetsResource(SyncAPIResource):
             text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
             animated_gif: Create an animated GIF from the video.
             additional_tracks: Add additional Audio / Subtitle tracks to Gumlet for transcoding and delivery along with video asset track.
-            generate_subtitles: Gumlet allows to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
+            generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
             mp4_access: Creates `MP4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
             per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
             process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
             audio_only: This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case, video transformation and thumbnails/animated GIFs would not be created. **Default: `false`**
-            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and Fairplay DRMs.
-            call_to_actions: CTA, is an explicit prompt within the video content encouraging viewers to take a particular action.
+            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and FairPlay DRMs.
+            call_to_actions: A CTA is an explicit prompt within the video content encouraging viewers to take a particular action.
             playlist_id: Add this asset to a playlist.
             folder: Add this asset to an existing folder by `folder_id`.
             extra_headers: Send extra headers with the request.
@@ -431,8 +431,8 @@ class VideoAssetsResource(SyncAPIResource):
             asset_id: Asset Id
             title: Specify a text string or identifier which can be used for filtering or searching the asset.
             description: Attach some textual data with the asset. This field is neither searchable nor filterable.
-            tag: Specify a text string or identifier which can identify an asset or bunch of assets later. You can pass multiple comma separated values.
-            call_to_actions: CTA, is an explicit prompt within the video content encouraging viewers to take a particular action.
+            tag: Specify a text string or identifier which can identify an asset or bunch of assets later. You can pass multiple comma-separated values.
+            call_to_actions: A CTA is an explicit prompt within the video content encouraging viewers to take a particular action.
             metadata: Set of key-value pairs that you can attach to this Asset. This can be useful for storing additional information.<br/> Example: <br/> <code>  {  "internal_video_id" : "123Abc"  }  </code>
             remove_subtitles: Comma separated string of language codes.
             input: For replacing videos, pass this along with `asset_id`
@@ -1035,19 +1035,19 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> VideoAssetCreateResponse:
         """
-        An asset refers to a media content/video that is processed, stored, and delivered through Gumlet. This endpoint creates an asset allowing users to ingest media content into the Gumlet system for processing and delivery.
+        An asset refers to media content/video that is processed, stored, and delivered through Gumlet. This endpoint creates an asset allowing users to ingest media content into the Gumlet system for processing and delivery.
 
         Args:
             input: URL or web address of a file that Gumlet should download to create a new asset.
             profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile.
-            format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and`MP4`.
+            format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`.
             tag: Specify a text string or identifier which can identify an asset or bunch of assets later.
             title: Specify a text string or identifier which can be used for filtering or searching the asset.
             description: Attach some textual data with the asset. This field is neither searchable nor filterable.
             metadata: Add your metadata you want to associate with this asset.<br/> Example: <br/> <code>  {  "internal_video_id" : "123Abc"  }  </code>
             width: Resize video with the given width. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset width will be ignored. Applicable only when specified format is `MP4`.
             height: Resize video with the given height. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset height will be ignored. Applicable only when specified format is `MP4`.
-            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Re-sized rendition will retain the input aspect ratio.
+            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma-separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Resized rendition will retain the input aspect ratio.
             crop: This transformation can be used to crop the video by defining a rectangular area within the dimensions of the output video.
             pad: This transformation can be used to add padding to the video.
             trim: Trim transformation can be used to trim videos based on time duration.
@@ -1055,13 +1055,13 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
             animated_gif: Create an animated GIF from the video.
             additional_tracks: Add additional Audio / Subtitle tracks to Gumlet for transcoding and delivery along with video asset track.
-            generate_subtitles: Gumlet allows to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
+            generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
             mp4_access: Creates `MP4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
             per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
             process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
             audio_only: This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case, video transformation and thumbnails/animated GIFs would not be created. **Default: `false`**
-            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and Fairplay DRMs.
-            call_to_actions: CTA, is an explicit prompt within the video content encouraging viewers to take a particular action.
+            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and FairPlay DRMs.
+            call_to_actions: A CTA is an explicit prompt within the video content encouraging viewers to take a particular action.
             playlist_id: Add this asset to a playlist.
             folder: Add this asset to an existing folder by `folder_id`.
             workspace_id: Gumlet video workspace id.
@@ -1160,19 +1160,19 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> VideoAssetUploadResponse:
         """
-        This endpoint creates a video asset allowing to upload of the video from the local file system and ingest media content into the Gumlet system for processing and delivery.Body Parameters are the same as the Create Asset Body Parameters except for the `input` parameter which this endpoint does not take.A successful response will be returned with `upload_url` field. You can make `PUT` request to that URL to upload video. To upload video using `upload_url` refer to [this](https://docs.gumlet.com/docs/direct-upload#2-use-the-url-to-upload-a-file).
+        This endpoint creates a video asset allowing upload of a video from the local file system and ingest media content into the Gumlet system for processing and delivery. Body parameters are the same as the Create Asset body parameters except for the `input` parameter, which this endpoint does not take. A successful response will be returned with `upload_url` field. You can make `PUT` request to that URL to upload video. To upload video using `upload_url` refer to [this](https://docs.gumlet.com/docs/direct-upload#2-use-the-url-to-upload-a-file).
 
         Args:
             collection_id: Gumlet video workspace id.
             profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile.
-            format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and`MP4`.
+            format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`.
             tag: Specify a text string or identifier which can identify an asset or bunch of assets later.
             title: Specify a text string or identifier which can be used for filtering or searching the asset.
             description: Attach some textual data with the asset. This field is neither searchable nor filterable.
             metadata: Add your metadata you want to associate with this asset.<br/> Example: <br/> <code>  {  "internal_video_id" : "123Abc"  }  </code>
             width: Resize video with the given width. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset width will be ignored. Applicable only when specified format is `MP4`.
             height: Resize video with the given height. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset height will be ignored. Applicable only when specified format is `MP4`.
-            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Re-sized rendition will retain the input aspect ratio.
+            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma-separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Resized rendition will retain the input aspect ratio.
             crop: This transformation can be used to crop the video by defining a rectangular area within the dimensions of the output video.
             pad: This transformation can be used to add padding to the video.
             trim: Trim transformation can be used to trim videos based on time duration.
@@ -1180,13 +1180,13 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
             animated_gif: Create an animated GIF from the video.
             additional_tracks: Add additional Audio / Subtitle tracks to Gumlet for transcoding and delivery along with video asset track.
-            generate_subtitles: Gumlet allows to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
+            generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
             mp4_access: Creates `MP4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
             per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
             process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
             audio_only: This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case, video transformation and thumbnails/animated GIFs would not be created. **Default: `false`**
-            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and Fairplay DRMs.
-            call_to_actions: CTA, is an explicit prompt within the video content encouraging viewers to take a particular action.
+            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and FairPlay DRMs.
+            call_to_actions: A CTA is an explicit prompt within the video content encouraging viewers to take a particular action.
             playlist_id: Add this asset to a playlist.
             folder: Add this asset to an existing folder by `folder_id`.
             extra_headers: Send extra headers with the request.
@@ -1372,8 +1372,8 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             asset_id: Asset Id
             title: Specify a text string or identifier which can be used for filtering or searching the asset.
             description: Attach some textual data with the asset. This field is neither searchable nor filterable.
-            tag: Specify a text string or identifier which can identify an asset or bunch of assets later. You can pass multiple comma separated values.
-            call_to_actions: CTA, is an explicit prompt within the video content encouraging viewers to take a particular action.
+            tag: Specify a text string or identifier which can identify an asset or bunch of assets later. You can pass multiple comma-separated values.
+            call_to_actions: A CTA is an explicit prompt within the video content encouraging viewers to take a particular action.
             metadata: Set of key-value pairs that you can attach to this Asset. This can be useful for storing additional information.<br/> Example: <br/> <code>  {  "internal_video_id" : "123Abc"  }  </code>
             remove_subtitles: Comma separated string of language codes.
             input: For replacing videos, pass this along with `asset_id`

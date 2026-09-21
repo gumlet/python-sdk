@@ -25,7 +25,7 @@ class VideoUsageAnalyticRetrieveParams(TypedDict, total=False):
             ]
         ]
     ]
-    """Define the metric you need the data for, currently we only support `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `bandwidth_consumption_by_collection`, `errored_videos` and `widget_data`"""
+    """Define the metric you need the data for. Currently we only support `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `bandwidth_consumption_by_collection`, `errored_videos` and `widget_data`"""
 
     date_range: Required[DateRange]
     """The timeframe to get the data for. Currently we only support a maximum of 60 days between `start_at` and `end_at`."""

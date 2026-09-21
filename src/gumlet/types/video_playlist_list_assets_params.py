@@ -15,7 +15,7 @@ class VideoPlaylistListAssetsParams(TypedDict, total=False):
     """-1 or 1"""
 
     page_number: int
-    """Optional, Minimun 1"""
+    """Optional. Minimum: 1"""
 
     page_size: str
-    """Optional, Minimun 10"""
+    """Optional. Minimum: 10"""

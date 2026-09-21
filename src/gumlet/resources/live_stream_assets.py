@@ -63,11 +63,11 @@ class LiveStreamAssetsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LiveStreamAssetCreateResponse:
         """
-        A live asset refers to a media content/video that is live-streamed through Gumlet. This endpoint creates a live streaming asset allowing users to live stream a video that will be pushed to Gumlet.
+        A live asset refers to media content/video that is live-streamed through Gumlet. This endpoint creates a live streaming asset allowing users to live stream a video that will be pushed to Gumlet.
 
         Args:
             live_source_id: Gumlet live video source/collection id.
-            resolution: Required resolutions in HLS delivery format for live stream. Can be an array of string out of the following values:  `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Re-sized rendition will retain the input aspect ratio.
+            resolution: Required resolutions in HLS delivery format for live stream. Can be an array of string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Resized rendition will retain the input aspect ratio.
             title: Your live stream asset title
             mp4_access: Creates <code>MP4</code> version for download purpose.
             orientation: Body parameter.
@@ -121,7 +121,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LiveStreamAssetUpdateResponse:
         """
-        A live asset refers to a media content/video that is live-streamed through Gumlet. This endpoint allows user to update a live streaming asset.
+        A live asset refers to media content/video that is live-streamed through Gumlet. This endpoint allows users to update a live streaming asset.
 
         Args:
             live_asset_id: Gumlet live video asset id.
@@ -173,7 +173,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
         This endpoint retrieves the details of a live video asset that has previously been created.
 
         Args:
-            live_asset_id: An live asset id for the previously created asset.
+            live_asset_id: A live asset id for the previously created asset.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -438,7 +438,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
         This endpoint retrieves the history of a live video asset that has previously been created.
 
         Args:
-            live_asset_id: An live asset id for the previously created asset.
+            live_asset_id: A live asset id for the previously created asset.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -491,11 +491,11 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LiveStreamAssetCreateResponse:
         """
-        A live asset refers to a media content/video that is live-streamed through Gumlet. This endpoint creates a live streaming asset allowing users to live stream a video that will be pushed to Gumlet.
+        A live asset refers to media content/video that is live-streamed through Gumlet. This endpoint creates a live streaming asset allowing users to live stream a video that will be pushed to Gumlet.
 
         Args:
             live_source_id: Gumlet live video source/collection id.
-            resolution: Required resolutions in HLS delivery format for live stream. Can be an array of string out of the following values:  `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Re-sized rendition will retain the input aspect ratio.
+            resolution: Required resolutions in HLS delivery format for live stream. Can be an array of string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Resized rendition will retain the input aspect ratio.
             title: Your live stream asset title
             mp4_access: Creates <code>MP4</code> version for download purpose.
             orientation: Body parameter.
@@ -549,7 +549,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LiveStreamAssetUpdateResponse:
         """
-        A live asset refers to a media content/video that is live-streamed through Gumlet. This endpoint allows user to update a live streaming asset.
+        A live asset refers to media content/video that is live-streamed through Gumlet. This endpoint allows users to update a live streaming asset.
 
         Args:
             live_asset_id: Gumlet live video asset id.
@@ -601,7 +601,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         This endpoint retrieves the details of a live video asset that has previously been created.
 
         Args:
-            live_asset_id: An live asset id for the previously created asset.
+            live_asset_id: A live asset id for the previously created asset.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -866,7 +866,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         This endpoint retrieves the history of a live video asset that has previously been created.
 
         Args:
-            live_asset_id: An live asset id for the previously created asset.
+            live_asset_id: A live asset id for the previously created asset.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.

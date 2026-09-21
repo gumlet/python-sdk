@@ -52,7 +52,7 @@ class AudioUploadResource(SyncAPIResource):
 
         Args:
             asset_id: An asset id for the previously created asset.
-            language_codes: List of language Code to upload audio file  (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
+            language_codes: List of language codes to upload audio file (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -160,7 +160,7 @@ class AsyncAudioUploadResource(AsyncAPIResource):
 
         Args:
             asset_id: An asset id for the previously created asset.
-            language_codes: List of language Code to upload audio file  (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
+            language_codes: List of language codes to upload audio file (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.

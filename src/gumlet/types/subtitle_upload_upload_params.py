@@ -10,4 +10,4 @@ __all__ = ["SubtitleUploadUploadParams"]
 
 class SubtitleUploadUploadParams(TypedDict, total=False):
     language_codes: SequenceNotStr[str]
-    """List of language Code to upload subtitle file  (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)"""
+    """List of language codes to upload subtitle file (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)"""

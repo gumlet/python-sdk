@@ -65,7 +65,7 @@ class VideoAnalyticsResource(SyncAPIResource):
             date_range: The timeframe to get the data for.
             filters: Build *segments* of users using multiple filters on the data, `value` should be an *exact match*
             group_by: Data can be grouped by `daily`, `weekly` or `monthly`.
-            chart_dimension: Metrics result Group by selected dimension, You can select upto 3 dimensions to get nested category result. result will follow selection orders.
+            chart_dimension: Group metrics by the selected dimension. You can select up to 3 dimensions for nested category results; results follow the selection order.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -254,7 +254,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
             date_range: The timeframe to get the data for.
             filters: Build *segments* of users using multiple filters on the data, `value` should be an *exact match*
             group_by: Data can be grouped by `daily`, `weekly` or `monthly`.
-            chart_dimension: Metrics result Group by selected dimension, You can select upto 3 dimensions to get nested category result. result will follow selection orders.
+            chart_dimension: Group metrics by the selected dimension. You can select up to 3 dimensions for nested category results; results follow the selection order.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.

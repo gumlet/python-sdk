@@ -230,8 +230,6 @@ class Input(BaseModel):
 
     height: Optional[int] = None
 
-    file_size: str
-
 
 class VideoAssetRetrieveDetailsResponse(BaseModel):
     asset_id: str

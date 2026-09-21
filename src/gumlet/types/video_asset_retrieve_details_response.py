@@ -264,9 +264,6 @@ class VideoAssetRetrieveDetailsResponse(BaseModel):
     thumbnail_updated_at: Optional[int] = None
     """Thumbnail updated timestamp in milliseconds since epoch"""
 
-    collection_updated_at: int
-    """Collection updated timestamp in milliseconds since epoch"""
-
     warning: Optional[List[Warning]] = None
 
     audio_only: Optional[bool] = FieldInfo(alias="audioOnly", default=None)
@@ -278,3 +275,6 @@ class VideoAssetRetrieveDetailsResponse(BaseModel):
     """Access control"""
 
     access_controls: Optional[AccessControls] = None
+
+    workspace_updated_at: int
+    """Collection updated timestamp in milliseconds since epoch"""

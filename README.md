@@ -43,27 +43,9 @@ client = Gumlet(
 
 video_asset = client.video_assets.create(
     input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-    collection_id="646df1c9173a4a2fcac180b4",
-    profile_id="646df1c9173a4a2fcac180b7",
     format="ABR",
-    tag=["ball"],
-    description="some description",
-    metadata={"headermeta": "metavalue"},
-    call_to_actions=[
-        {
-            "start_time": 1,
-            "end_time": 90,
-            "text": "some test",
-            "url": "https://some-url.com",
-            "position_from_top": 11,
-            "position_from_right": 23,
-            "border_radius": "11",
-            "font_color": "#000001",
-            "background_color": "#ffffff",
-        }
-    ],
-    playlist_id="6597acd5ed6f26a9c5ca9633",
-    folder="697375fbfa2d1037283140e4",
+    title="Example Title",
+    workspace_id="<your workspace id>",
 )
 
 print(video_asset)
@@ -89,27 +71,9 @@ async def main() -> None:
     client = AsyncGumlet()
     video_asset = await client.video_assets.create(
         input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-        collection_id="646df1c9173a4a2fcac180b4",
-        profile_id="646df1c9173a4a2fcac180b7",
         format="ABR",
-        tag=["ball"],
-        description="some description",
-        metadata={"headermeta": "metavalue"},
-        call_to_actions=[
-            {
-                "start_time": 1,
-                "end_time": 90,
-                "text": "some test",
-                "url": "https://some-url.com",
-                "position_from_top": 11,
-                "position_from_right": 23,
-                "border_radius": "11",
-                "font_color": "#000001",
-                "background_color": "#ffffff",
-            }
-        ],
-        playlist_id="6597acd5ed6f26a9c5ca9633",
-        folder="697375fbfa2d1037283140e4",
+        title="Example Title",
+        workspace_id="<your workspace id>",
     )
 
 
@@ -142,27 +106,9 @@ from gumlet import APIStatusError
 try:
     video_asset = client.video_assets.create(
         input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-        collection_id="646df1c9173a4a2fcac180b4",
-        profile_id="646df1c9173a4a2fcac180b7",
         format="ABR",
-        tag=["ball"],
-        description="some description",
-        metadata={"headermeta": "metavalue"},
-        call_to_actions=[
-            {
-                "start_time": 1,
-                "end_time": 90,
-                "text": "some test",
-                "url": "https://some-url.com",
-                "position_from_top": 11,
-                "position_from_right": 23,
-                "border_radius": "11",
-                "font_color": "#000001",
-                "background_color": "#ffffff",
-            }
-        ],
-        playlist_id="6597acd5ed6f26a9c5ca9633",
-        folder="697375fbfa2d1037283140e4",
+        title="Example Title",
+        workspace_id="<your workspace id>",
     )
 except APIStatusError as err:
     print(err.status_code, err.message)
@@ -220,5 +166,3 @@ Generated clients support request timeouts and retry temporary failures such as 
 ## Requirements
 
 - Python 3.8 or newer
-
-Powered by Scalar.

@@ -24,9 +24,6 @@ class VideoAssetCreateParams(TypedDict, total=False):
     input: Required[str]
     """URL or web address of a file that Gumlet should download to create a new asset."""
 
-    collection_id: Required[str]
-    """Gumlet video workspace id."""
-
     profile_id: str
     """Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile."""
 
@@ -101,6 +98,9 @@ class VideoAssetCreateParams(TypedDict, total=False):
 
     folder: str
     """Add this asset to an existing folder by `folder_id`."""
+
+    workspace_id: Required[str]
+    """Gumlet video workspace id."""
 
 
 class CallToAction(TypedDict, total=False):

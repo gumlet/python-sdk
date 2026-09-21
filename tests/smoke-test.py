@@ -48,40 +48,21 @@ class SmokeCase(_SmokeCaseBase, total=False):
 def _smoke_case_0() -> None:
     video_asset = client.video_assets.create(
         input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-        collection_id="646df1c9173a4a2fcac180b4",
-        profile_id="646df1c9173a4a2fcac180b7",
         format="ABR",
-        tag=["ball"],
-        description="some description",
-        metadata={"headermeta": "metavalue"},
-        call_to_actions=[
-            {
-                "start_time": 1,
-                "end_time": 90,
-                "text": "some test",
-                "url": "https://some-url.com",
-                "position_from_top": 11,
-                "position_from_right": 23,
-                "border_radius": "11",
-                "font_color": "#000001",
-                "background_color": "#ffffff",
-            }
-        ],
-        playlist_id="6597acd5ed6f26a9c5ca9633",
-        folder="697375fbfa2d1037283140e4",
+        title="Example Title",
+        workspace_id="<your workspace id>",
     )
 
 
 def _smoke_case_1() -> None:
     video_asset = client.video_assets.create(
         input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-        collection_id="646df1c9173a4a2fcac180b4",
-        profile_id="646df1c9173a4a2fcac180b7",
+        profile_id="",
         format="ABR",
-        tag=["ball"],
-        title="",
-        description="some description",
-        metadata={"headermeta": "metavalue"},
+        tag=[""],
+        title="Example Title",
+        description="",
+        metadata={},
         width="",
         height="",
         resolution="",
@@ -120,21 +101,10 @@ def _smoke_case_1() -> None:
         process_low_resolution_input=False,
         audio_only=False,
         enable_drm=False,
-        call_to_actions=[
-            {
-                "start_time": 1,
-                "end_time": 90,
-                "text": "some test",
-                "url": "https://some-url.com",
-                "position_from_top": 11,
-                "position_from_right": 23,
-                "border_radius": "11",
-                "font_color": "#000001",
-                "background_color": "#ffffff",
-            }
-        ],
-        playlist_id="6597acd5ed6f26a9c5ca9633",
-        folder="697375fbfa2d1037283140e4",
+        call_to_actions=[{}],
+        playlist_id="",
+        folder="",
+        workspace_id="<your workspace id>",
     )
 
 

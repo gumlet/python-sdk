@@ -16,6 +16,7 @@ __all__ = [
     "InputTransformationsImageOverlay",
     "InputTransformationsGenerateSubtitles",
     "InputTransformationsPreviewThumbnails",
+    "InputTransformationsDrm",
     "InputChapter",
     "Output",
     "OutputStorageDetails",
@@ -27,7 +28,13 @@ __all__ = [
     "OutputStorageDetailsPreviewThumbnail",
     "Warning",
     "VideoProtection",
+    "AccessControls",
 ]
+
+
+class AccessControls(BaseModel):
+    password: Optional[str] = None
+    """Hidden password field"""
 
 
 class VideoProtection(BaseModel):
@@ -129,6 +136,10 @@ class InputChapter(BaseModel):
     label: Optional[str] = None
 
 
+class InputTransformationsDrm(BaseModel):
+    type: Literal["widevine", "fairplay", "clearkey", "widevine,fairplay", "fairplay,widevine"]
+
+
 class InputTransformationsPreviewThumbnails(BaseModel):
     max_tiles: Optional[int] = None
 
@@ -188,7 +199,12 @@ class InputTransformations(BaseModel):
     """Flag indicating if the pre-processing was successful"""
 
     generate_chapters: Optional[bool] = None
-    """Flag if chapter generation is enabled"""
+    """Flag if AI chapter generation is enabled"""
+
+    drm: Optional[InputTransformationsDrm] = None
+
+    generate_description: Optional[bool] = None
+    """Flag if AI description generation is enabled"""
 
 
 class Input(BaseModel):
@@ -222,13 +238,13 @@ class VideoAssetRetrieveDetailsResponse(BaseModel):
 
     progress: Optional[int] = None
 
-    created_at: Optional[int] = None
+    created_at: int
     """Asset created timestamp in milliseconds since epoch"""
 
     updated_at: Optional[int] = None
     """Asset updated timestamp in milliseconds since epoch"""
 
-    status: Optional[str] = None
+    status: str
 
     tag: Optional[List[str]] = None
 
@@ -262,3 +278,5 @@ class VideoAssetRetrieveDetailsResponse(BaseModel):
 
     access_control: Optional[Literal["private", "public", "password-protected", "dashboardOnly"]] = None
     """Access control"""
+
+    access_controls: Optional[AccessControls] = None

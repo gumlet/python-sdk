@@ -246,10 +246,6 @@ class VideoAssetRetrieveDetailsResponse(BaseModel):
 
     tag: Optional[List[str]] = None
 
-    source_id: Optional[str] = None
-
-    collection_id: Optional[str] = None
-
     input: Optional[Input] = None
 
     output: Optional[Output] = None
@@ -278,3 +274,6 @@ class VideoAssetRetrieveDetailsResponse(BaseModel):
 
     workspace_updated_at: int
     """Collection updated timestamp in milliseconds since epoch"""
+
+    workspace_id: Optional[str] = None
+    """Workspace ID"""

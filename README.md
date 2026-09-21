@@ -115,7 +115,7 @@ except APIStatusError as err:
     raise
 ```
 
-Documented error statuses: `400`, `401`, `403`, `404`, `4XX`.
+Documented error statuses: `400`, `401`, `402`, `403`, `404`, `413`, `422`, `500`.
 
 <br />
 

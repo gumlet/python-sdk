@@ -112,6 +112,8 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [Create Workspace](#create-workspace-1)
   - [Update Workspace](#update-workspace-1)
   - [Delete Workspace](#delete-workspace-1)
+- [`LiveStreamAnalytics`](#livestreamanalytics)
+  - [Usage Analytics](#usage-analytics)
 
 ## Setup
 
@@ -1644,5 +1646,26 @@ Delete the live stream workspace.
 ```python
 live_stream_workspace = client.live_stream_workspaces.delete(
     live_workspace_id="liveWorkspaceId",
+)
+```
+
+## `LiveStreamAnalytics`
+
+Get usage analytics for live streams.
+
+### Usage Analytics
+
+Get usage analytics for your live streams.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`LiveStreamAnalyticUsageParams`](./src/gumlet/types/live_stream_analytic_usage_params.py) |
+| Response | [`LiveStreamAnalyticUsageResponse`](./src/gumlet/types/live_stream_analytic_usage_response.py) |
+
+```python
+live_stream_analytic = client.live_stream_analytics.usage(
+    date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
+    group_by="daily",
+    metrics=["bandwidth_consumption"],
 )
 ```

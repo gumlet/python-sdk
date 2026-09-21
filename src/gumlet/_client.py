@@ -55,6 +55,7 @@ if TYPE_CHECKING:
         audit_logs,
         billing,
         live_stream_workspaces,
+        live_stream_analytics,
     )
     from .resources.video_assets import VideoAssetsResource, AsyncVideoAssetsResource
     from .resources.subtitle_upload import SubtitleUploadResource, AsyncSubtitleUploadResource
@@ -77,6 +78,7 @@ if TYPE_CHECKING:
     from .resources.audit_logs import AuditLogsResource, AsyncAuditLogsResource
     from .resources.billing import BillingResource, AsyncBillingResource
     from .resources.live_stream_workspaces import LiveStreamWorkspacesResource, AsyncLiveStreamWorkspacesResource
+    from .resources.live_stream_analytics import LiveStreamAnalyticsResource, AsyncLiveStreamAnalyticsResource
 
 # Serializes lazy resource imports so concurrent cold access from multiple
 # threads cannot deadlock on CPython import locks (see CPython 3.14).
@@ -274,6 +276,12 @@ class Gumlet(SyncAPIClient):
         with _RESOURCE_IMPORT_LOCK:
             from .resources.live_stream_workspaces import LiveStreamWorkspacesResource
         return LiveStreamWorkspacesResource(self)
+
+    @cached_property
+    def live_stream_analytics(self) -> "LiveStreamAnalyticsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.live_stream_analytics import LiveStreamAnalyticsResource
+        return LiveStreamAnalyticsResource(self)
 
     @cached_property
     def with_raw_response(self) -> GumletWithRawResponse:
@@ -593,6 +601,12 @@ class AsyncGumlet(AsyncAPIClient):
         return AsyncLiveStreamWorkspacesResource(self)
 
     @cached_property
+    def live_stream_analytics(self) -> "AsyncLiveStreamAnalyticsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.live_stream_analytics import AsyncLiveStreamAnalyticsResource
+        return AsyncLiveStreamAnalyticsResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncGumletWithRawResponse:
         return AsyncGumletWithRawResponse(self)
 
@@ -851,6 +865,12 @@ class GumletWithRawResponse:
             from .resources.live_stream_workspaces import LiveStreamWorkspacesResourceWithRawResponse
         return LiveStreamWorkspacesResourceWithRawResponse(self._client.live_stream_workspaces)
 
+    @cached_property
+    def live_stream_analytics(self) -> live_stream_analytics.LiveStreamAnalyticsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.live_stream_analytics import LiveStreamAnalyticsResourceWithRawResponse
+        return LiveStreamAnalyticsResourceWithRawResponse(self._client.live_stream_analytics)
+
 
 class AsyncGumletWithRawResponse:
     _client: AsyncGumlet
@@ -983,6 +1003,12 @@ class AsyncGumletWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.live_stream_workspaces import AsyncLiveStreamWorkspacesResourceWithRawResponse
         return AsyncLiveStreamWorkspacesResourceWithRawResponse(self._client.live_stream_workspaces)
+
+    @cached_property
+    def live_stream_analytics(self) -> live_stream_analytics.AsyncLiveStreamAnalyticsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.live_stream_analytics import AsyncLiveStreamAnalyticsResourceWithRawResponse
+        return AsyncLiveStreamAnalyticsResourceWithRawResponse(self._client.live_stream_analytics)
 
 
 class GumletWithStreamedResponse:
@@ -1117,6 +1143,12 @@ class GumletWithStreamedResponse:
             from .resources.live_stream_workspaces import LiveStreamWorkspacesResourceWithStreamingResponse
         return LiveStreamWorkspacesResourceWithStreamingResponse(self._client.live_stream_workspaces)
 
+    @cached_property
+    def live_stream_analytics(self) -> live_stream_analytics.LiveStreamAnalyticsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.live_stream_analytics import LiveStreamAnalyticsResourceWithStreamingResponse
+        return LiveStreamAnalyticsResourceWithStreamingResponse(self._client.live_stream_analytics)
+
 
 class AsyncGumletWithStreamedResponse:
     _client: AsyncGumlet
@@ -1249,6 +1281,12 @@ class AsyncGumletWithStreamedResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.live_stream_workspaces import AsyncLiveStreamWorkspacesResourceWithStreamingResponse
         return AsyncLiveStreamWorkspacesResourceWithStreamingResponse(self._client.live_stream_workspaces)
+
+    @cached_property
+    def live_stream_analytics(self) -> live_stream_analytics.AsyncLiveStreamAnalyticsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.live_stream_analytics import AsyncLiveStreamAnalyticsResourceWithStreamingResponse
+        return AsyncLiveStreamAnalyticsResourceWithStreamingResponse(self._client.live_stream_analytics)
 
 
 # Alias names for the documented `Client` / `AsyncClient` symbols.

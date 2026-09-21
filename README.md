@@ -220,5 +220,3 @@ Generated clients support request timeouts and retry temporary failures such as 
 ## Requirements
 
 - Python 3.8 or newer
-
-Powered by Scalar.

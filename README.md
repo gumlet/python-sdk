@@ -43,9 +43,9 @@ client = Gumlet(
 
 video_asset = client.video_assets.create(
     input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-    collection_id="<your workspace id>",
     format="ABR",
     title="Example Title",
+    workspace_id="<your workspace id>",
 )
 
 print(video_asset)
@@ -71,9 +71,9 @@ async def main() -> None:
     client = AsyncGumlet()
     video_asset = await client.video_assets.create(
         input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-        collection_id="<your workspace id>",
         format="ABR",
         title="Example Title",
+        workspace_id="<your workspace id>",
     )
 
 
@@ -106,9 +106,9 @@ from gumlet import APIStatusError
 try:
     video_asset = client.video_assets.create(
         input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-        collection_id="<your workspace id>",
         format="ABR",
         title="Example Title",
+        workspace_id="<your workspace id>",
     )
 except APIStatusError as err:
     print(err.status_code, err.message)

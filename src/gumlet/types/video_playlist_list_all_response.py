@@ -9,7 +9,7 @@ __all__ = ["VideoPlaylistListAllResponse", "VideoPlaylistListAllResponseItem"]
 
 
 class VideoPlaylistListAllResponseItem(BaseModel):
-    id: Optional[str] = None
+    id: str
 
     collection_id: Optional[str] = None
 

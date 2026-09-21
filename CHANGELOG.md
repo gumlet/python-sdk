@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/gumlet/python-sdk/compare/v1.0.1...v1.0.2) (2026-09-21)
+
+
+### Chores
+
+* **api:** regenerate SDK ([425e252](https://github.com/gumlet/python-sdk/commit/425e25222ebda0df8fb7b62d9a78805c07a5aeae))
+
 ## [1.0.1](https://github.com/gumlet/python-sdk/compare/v1.0.0...v1.0.1) (2026-09-21)
 
 

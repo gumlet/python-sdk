@@ -85,7 +85,7 @@ class ImageUsageAnalyticsResource(SyncAPIResource):
             ```python
             image_usage_analytic = client.image_usage_analytics.retrieve(
                 metrics=["bandwidth_consumption"],
-                date_range={},
+                date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
             )
             ```
@@ -169,7 +169,7 @@ class AsyncImageUsageAnalyticsResource(AsyncAPIResource):
             ```python
             image_usage_analytic = await client.image_usage_analytics.retrieve(
                 metrics=["bandwidth_consumption"],
-                date_range={},
+                date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
             )
             ```

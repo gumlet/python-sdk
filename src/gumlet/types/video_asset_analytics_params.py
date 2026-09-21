@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
-from typing import List
-from typing_extensions import Literal, Required, TypedDict
+from typing import List, Union
+from datetime import date
+from typing_extensions import Annotated, Literal, Required, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["VideoAssetAnalyticsParams", "DateRange"]
 
@@ -40,8 +43,8 @@ class VideoAssetAnalyticsParams(TypedDict, total=False):
 
 
 class DateRange(TypedDict, total=False):
-    start_at: Required[str]
+    start_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
     """ISO 8601 start timestamp"""
 
-    end_at: Required[str]
+    end_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
     """ISO 8601 end timestamp"""

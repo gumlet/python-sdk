@@ -18,7 +18,7 @@ from gumlet import Gumlet
 
 # The shared smoke-test runner injects base URL and credentials through the same
 # environment variables the generated client reads in normal use.
-client = Gumlet(max_retries=0, timeout=30)
+client = Gumlet(max_retries=2, timeout=10)
 
 
 class SmokeResult(TypedDict, total=False):
@@ -358,7 +358,7 @@ def _smoke_case_17() -> None:
     video_asset = client.video_assets.analytics(
         asset_id="assetId",
         group_by="daily",
-        date_range={"start_at": "", "end_at": ""},
+        date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
         metrics=["impressions"],
     )
 
@@ -367,7 +367,7 @@ def _smoke_case_18() -> None:
     video_asset = client.video_assets.analytics(
         asset_id="assetId",
         group_by="daily",
-        date_range={"start_at": "", "end_at": ""},
+        date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
         metrics=["impressions"],
         page_number=0,
         page_size=0,
@@ -859,7 +859,7 @@ def _smoke_case_62() -> None:
 def _smoke_case_63() -> None:
     image_usage_analytic = client.image_usage_analytics.retrieve(
         metrics=["bandwidth_consumption"],
-        date_range={},
+        date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
         group_by="daily",
     )
 

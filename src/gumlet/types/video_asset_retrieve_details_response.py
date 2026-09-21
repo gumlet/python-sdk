@@ -169,7 +169,7 @@ class InputTransformationsImageOverlay(BaseModel):
 
 
 class InputTransformations(BaseModel):
-    format: Optional[str] = None
+    format: str
 
     resolution: Optional[List[str]] = None
 
@@ -231,6 +231,8 @@ class Input(BaseModel):
     width: Optional[int] = None
 
     height: Optional[int] = None
+
+    file_size: str
 
 
 class VideoAssetRetrieveDetailsResponse(BaseModel):

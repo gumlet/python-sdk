@@ -145,9 +145,9 @@ An asset refers to a media content/video that is processed, stored, and delivere
 ```python
 video_asset = client.video_assets.create(
     input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-    collection_id="<your workspace id>",
     format="ABR",
     title="Example Title",
+    workspace_id="<your workspace id>",
 )
 ```
 

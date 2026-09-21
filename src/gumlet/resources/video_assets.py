@@ -60,7 +60,6 @@ class VideoAssetsResource(SyncAPIResource):
         self,
         *,
         input: str,
-        collection_id: str,
         profile_id: str | Omit = omit,
         format: Literal["ABR", "MP4"],
         tag: SequenceNotStr[str] | Omit = omit,
@@ -86,6 +85,7 @@ class VideoAssetsResource(SyncAPIResource):
         call_to_actions: Iterable[video_asset_create_params.CallToAction] | Omit = omit,
         playlist_id: str | Omit = omit,
         folder: str | Omit = omit,
+        workspace_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -98,7 +98,6 @@ class VideoAssetsResource(SyncAPIResource):
 
         Args:
             input: URL or web address of a file that Gumlet should download to create a new asset.
-            collection_id: Gumlet video workspace id.
             profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile.
             format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and`MP4`.
             tag: Specify a text string or identifier which can identify an asset or bunch of assets later.
@@ -124,6 +123,7 @@ class VideoAssetsResource(SyncAPIResource):
             call_to_actions: CTA, is an explicit prompt within the video content encouraging viewers to take a particular action.
             playlist_id: Add this asset to a playlist.
             folder: Add this asset to an existing folder by `folder_id`.
+            workspace_id: Gumlet video workspace id.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -136,9 +136,9 @@ class VideoAssetsResource(SyncAPIResource):
             ```python
             video_asset = client.video_assets.create(
                 input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-                collection_id="<your workspace id>",
                 format="ABR",
                 title="Example Title",
+                workspace_id="<your workspace id>",
             )
             ```
         """
@@ -147,7 +147,6 @@ class VideoAssetsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "input": input,
-                    "collection_id": collection_id,
                     "profile_id": profile_id,
                     "format": format,
                     "tag": tag,
@@ -173,6 +172,7 @@ class VideoAssetsResource(SyncAPIResource):
                     "call_to_actions": call_to_actions,
                     "playlist_id": playlist_id,
                     "folder": folder,
+                    "workspace_id": workspace_id,
                 },
                 video_asset_create_params.VideoAssetCreateParams,
             ),
@@ -1001,7 +1001,6 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         self,
         *,
         input: str,
-        collection_id: str,
         profile_id: str | Omit = omit,
         format: Literal["ABR", "MP4"],
         tag: SequenceNotStr[str] | Omit = omit,
@@ -1027,6 +1026,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         call_to_actions: Iterable[video_asset_create_params.CallToAction] | Omit = omit,
         playlist_id: str | Omit = omit,
         folder: str | Omit = omit,
+        workspace_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1039,7 +1039,6 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
 
         Args:
             input: URL or web address of a file that Gumlet should download to create a new asset.
-            collection_id: Gumlet video workspace id.
             profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile.
             format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and`MP4`.
             tag: Specify a text string or identifier which can identify an asset or bunch of assets later.
@@ -1065,6 +1064,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             call_to_actions: CTA, is an explicit prompt within the video content encouraging viewers to take a particular action.
             playlist_id: Add this asset to a playlist.
             folder: Add this asset to an existing folder by `folder_id`.
+            workspace_id: Gumlet video workspace id.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -1077,9 +1077,9 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             ```python
             video_asset = await client.video_assets.create(
                 input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-                collection_id="<your workspace id>",
                 format="ABR",
                 title="Example Title",
+                workspace_id="<your workspace id>",
             )
             ```
         """
@@ -1088,7 +1088,6 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "input": input,
-                    "collection_id": collection_id,
                     "profile_id": profile_id,
                     "format": format,
                     "tag": tag,
@@ -1114,6 +1113,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                     "call_to_actions": call_to_actions,
                     "playlist_id": playlist_id,
                     "folder": folder,
+                    "workspace_id": workspace_id,
                 },
                 video_asset_create_params.VideoAssetCreateParams,
             ),

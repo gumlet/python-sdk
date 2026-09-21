@@ -48,16 +48,15 @@ class SmokeCase(_SmokeCaseBase, total=False):
 def _smoke_case_0() -> None:
     video_asset = client.video_assets.create(
         input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-        collection_id="<your workspace id>",
         format="ABR",
         title="Example Title",
+        workspace_id="<your workspace id>",
     )
 
 
 def _smoke_case_1() -> None:
     video_asset = client.video_assets.create(
         input="http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
-        collection_id="<your workspace id>",
         profile_id="",
         format="ABR",
         tag=[""],
@@ -105,6 +104,7 @@ def _smoke_case_1() -> None:
         call_to_actions=[{}],
         playlist_id="",
         folder="",
+        workspace_id="<your workspace id>",
     )
 
 

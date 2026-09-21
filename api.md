@@ -380,7 +380,7 @@ Get video analytics for a single asset.
 video_asset = client.video_assets.analytics(
     asset_id="assetId",
     group_by="daily",
-    date_range={"start_at": "", "end_at": ""},
+    date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     metrics=["impressions"],
 )
 ```
@@ -983,7 +983,7 @@ This endpoint helps you get image analytics data like bandwidth consumption, req
 ```python
 image_usage_analytic = client.image_usage_analytics.retrieve(
     metrics=["bandwidth_consumption"],
-    date_range={},
+    date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     group_by="daily",
 )
 ```

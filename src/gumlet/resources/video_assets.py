@@ -980,7 +980,7 @@ class VideoAssetsResource(SyncAPIResource):
             video_asset = client.video_assets.analytics(
                 asset_id="assetId",
                 group_by="daily",
-                date_range={"start_at": "", "end_at": ""},
+                date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 metrics=["impressions"],
             )
             ```
@@ -1939,7 +1939,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             video_asset = await client.video_assets.analytics(
                 asset_id="assetId",
                 group_by="daily",
-                date_range={"start_at": "", "end_at": ""},
+                date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 metrics=["impressions"],
             )
             ```

@@ -51,8 +51,8 @@ class Filters(TypedDict, total=False):
 
 
 class DateRange(TypedDict, total=False):
-    start_at: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
+    start_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
     """The starting date to consider"""
 
-    end_at: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
+    end_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
     """The ending date to consider"""

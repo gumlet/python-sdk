@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import List, Optional
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
@@ -24,7 +25,22 @@ __all__ = [
     "OutputStorageDetailsThumbnail",
     "OutputStorageDetailsSubtitle",
     "OutputStorageDetailsPreviewThumbnail",
+    "Warning",
+    "VideoProtection",
 ]
+
+
+class VideoProtection(BaseModel):
+    signed_url: Optional[bool] = None
+    """Flag is signed URL is enabled for this asset"""
+
+
+class Warning(BaseModel):
+    code: str
+    """Warning code for the asset"""
+
+    message: str
+    """Human friendly warning message"""
 
 
 class OutputStorageDetailsPreviewThumbnail(BaseModel):
@@ -168,6 +184,12 @@ class InputTransformations(BaseModel):
 
     preview_thumbnails: Optional[InputTransformationsPreviewThumbnails] = None
 
+    pre_processing_successful: Optional[bool] = None
+    """Flag indicating if the pre-processing was successful"""
+
+    generate_chapters: Optional[bool] = None
+    """Flag if chapter generation is enabled"""
+
 
 class Input(BaseModel):
     transformations: Optional[InputTransformations] = None
@@ -196,13 +218,15 @@ class Input(BaseModel):
 
 
 class VideoAssetRetrieveDetailsResponse(BaseModel):
-    asset_id: Optional[str] = None
+    asset_id: str
 
     progress: Optional[int] = None
 
     created_at: Optional[int] = None
+    """Asset created timestamp in milliseconds since epoch"""
 
     updated_at: Optional[int] = None
+    """Asset updated timestamp in milliseconds since epoch"""
 
     status: Optional[str] = None
 
@@ -222,3 +246,19 @@ class VideoAssetRetrieveDetailsResponse(BaseModel):
 
     playlists: Optional[List[str]] = None
     """Array of Playlist IDs"""
+
+    thumbnail_updated_at: Optional[int] = None
+    """Thumbnail updated timestamp in milliseconds since epoch"""
+
+    collection_updated_at: int
+    """Collection updated timestamp in milliseconds since epoch"""
+
+    warning: Optional[List[Warning]] = None
+
+    audio_only: Optional[bool] = FieldInfo(alias="audioOnly", default=None)
+    """If `true` the asset is audio only"""
+
+    video_protection: Optional[VideoProtection] = None
+
+    access_control: Optional[Literal["private", "public", "password", "dashboardOnly"]] = None
+    """Access control"""

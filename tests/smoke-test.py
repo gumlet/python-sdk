@@ -1340,6 +1340,14 @@ def _smoke_case_115() -> None:
     )
 
 
+def _smoke_case_116() -> None:
+    live_stream_analytic = client.live_stream_analytics.usage(
+        date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
+        group_by="daily",
+        metrics=["bandwidth_consumption"],
+    )
+
+
 cases: list[SmokeCase] = [
     {
         "operation": "create",
@@ -2094,6 +2102,12 @@ cases: list[SmokeCase] = [
         "method": "DELETE",
         "path": "/video/sources/live/{live_workspace_id}",
         "run": _smoke_case_115,
+    },
+    {
+        "operation": "usage",
+        "method": "POST",
+        "path": "/video/live/analytics",
+        "run": _smoke_case_116,
     },
 ]
 

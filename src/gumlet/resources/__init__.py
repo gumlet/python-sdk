@@ -168,6 +168,14 @@ from .live_stream_workspaces import (
     LiveStreamWorkspacesResourceWithStreamingResponse,
     AsyncLiveStreamWorkspacesResourceWithStreamingResponse,
 )
+from .live_stream_analytics import (
+    LiveStreamAnalyticsResource,
+    AsyncLiveStreamAnalyticsResource,
+    LiveStreamAnalyticsResourceWithRawResponse,
+    AsyncLiveStreamAnalyticsResourceWithRawResponse,
+    LiveStreamAnalyticsResourceWithStreamingResponse,
+    AsyncLiveStreamAnalyticsResourceWithStreamingResponse,
+)
 
 __all__ = [
     "VideoAssetsResource",
@@ -296,4 +304,10 @@ __all__ = [
     "AsyncLiveStreamWorkspacesResourceWithRawResponse",
     "LiveStreamWorkspacesResourceWithStreamingResponse",
     "AsyncLiveStreamWorkspacesResourceWithStreamingResponse",
+    "LiveStreamAnalyticsResource",
+    "AsyncLiveStreamAnalyticsResource",
+    "LiveStreamAnalyticsResourceWithRawResponse",
+    "AsyncLiveStreamAnalyticsResourceWithRawResponse",
+    "LiveStreamAnalyticsResourceWithStreamingResponse",
+    "AsyncLiveStreamAnalyticsResourceWithStreamingResponse",
 ]

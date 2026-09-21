@@ -48,7 +48,7 @@ class PlayerConfig(BaseModel):
 
 
 class VideoPlaylistUpdateResponse(BaseModel):
-    id: Optional[str] = None
+    id: str
 
     collection_id: Optional[str] = None
 

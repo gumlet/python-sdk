@@ -260,5 +260,5 @@ class VideoAssetRetrieveDetailsResponse(BaseModel):
 
     video_protection: Optional[VideoProtection] = None
 
-    access_control: Optional[Literal["private", "public", "password", "dashboardOnly"]] = None
+    access_control: Optional[Literal["private", "public", "password-protected", "dashboardOnly"]] = None
     """Access control"""

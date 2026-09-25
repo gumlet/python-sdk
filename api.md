@@ -30,6 +30,8 @@ Complete reference of every operation, grouped by resource. See [the README](./R
 - [`MultipartUpload`](#multipartupload)
   - [Get Part Upload URL](#get-part-upload-url)
   - [Complete Multipart Upload](#complete-multipart-upload)
+  - [Abort Upload](#abort-upload)
+  - [List Uploads](#list-uploads)
 - [`VideoProfiles`](#videoprofiles)
   - [Create Profile](#create-profile)
   - [List Profiles](#list-profiles)
@@ -513,6 +515,36 @@ Once you upload all parts to S3 bucket via pre-signed URL, use this endpoint to 
 
 ```python
 multipart_upload = client.multipart_upload.complete(
+    asset_id="assetId",
+)
+```
+
+### Abort Upload
+
+This call aborts multi-part upload and deletes the already uploaded parts from the storage.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`MultipartUploadAbortParams`](./src/gumlet/types/multipart_upload_abort_params.py) |
+| Response | [`MultipartUploadAbortResponse`](./src/gumlet/types/multipart_upload_abort_response.py) |
+
+```python
+multipart_upload = client.multipart_upload.abort(
+    asset_id="assetId",
+)
+```
+
+### List Uploads
+
+Lists all parts uploaded so far.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`MultipartUploadListParams`](./src/gumlet/types/multipart_upload_list_params.py) |
+| Response | [`MultipartUploadListResponse`](./src/gumlet/types/multipart_upload_list_response.py) |
+
+```python
+multipart_upload = client.multipart_upload.list(
     asset_id="assetId",
 )
 ```

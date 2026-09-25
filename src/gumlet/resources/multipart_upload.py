@@ -20,6 +20,8 @@ from .._base_client import make_request_options
 from ..types.multipart_upload_retrieve_part_url_response import MultipartUploadRetrievePartURLResponse
 from ..types.multipart_upload_complete_response import MultipartUploadCompleteResponse
 from ..types import multipart_upload_complete_params
+from ..types.multipart_upload_abort_response import MultipartUploadAbortResponse
+from ..types.multipart_upload_list_response import MultipartUploadListResponse
 
 __all__ = ["MultipartUploadResource", "AsyncMultipartUploadResource"]
 
@@ -129,6 +131,88 @@ class MultipartUploadResource(SyncAPIResource):
             cast_to=MultipartUploadCompleteResponse,
         )
 
+    def abort(
+        self,
+        asset_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MultipartUploadAbortResponse:
+        """
+        This call aborts multi-part upload and deletes the already uploaded parts from the storage.
+
+        Args:
+            asset_id: An asset id for the asset.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+
+        Returns:
+            MultipartUploadAbortResponse: Successful response
+
+        Example:
+            ```python
+            multipart_upload = client.multipart_upload.abort(
+                asset_id="assetId",
+            )
+            ```
+        """
+        if asset_id is None or (isinstance(asset_id, str) and not asset_id):
+            raise ValueError(f"Expected a non-empty value for `asset_id` but received {asset_id!r}")
+        return self._post(
+            path_template("/video/assets/{asset_id}/multipartupload/abort", **{"asset_id": asset_id}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MultipartUploadAbortResponse,
+        )
+
+    def list(
+        self,
+        asset_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MultipartUploadListResponse:
+        """
+        Lists all parts uploaded so far.
+
+        Args:
+            asset_id: An asset id for the asset.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+
+        Returns:
+            MultipartUploadListResponse: Successful response
+
+        Example:
+            ```python
+            multipart_upload = client.multipart_upload.list(
+                asset_id="assetId",
+            )
+            ```
+        """
+        if asset_id is None or (isinstance(asset_id, str) and not asset_id):
+            raise ValueError(f"Expected a non-empty value for `asset_id` but received {asset_id!r}")
+        return self._post(
+            path_template("/video/assets/{asset_id}/multipartupload/list", **{"asset_id": asset_id}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MultipartUploadListResponse,
+        )
+
 
 class AsyncMultipartUploadResource(AsyncAPIResource):
     @cached_property
@@ -235,6 +319,88 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
             cast_to=MultipartUploadCompleteResponse,
         )
 
+    async def abort(
+        self,
+        asset_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MultipartUploadAbortResponse:
+        """
+        This call aborts multi-part upload and deletes the already uploaded parts from the storage.
+
+        Args:
+            asset_id: An asset id for the asset.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+
+        Returns:
+            MultipartUploadAbortResponse: Successful response
+
+        Example:
+            ```python
+            multipart_upload = await client.multipart_upload.abort(
+                asset_id="assetId",
+            )
+            ```
+        """
+        if asset_id is None or (isinstance(asset_id, str) and not asset_id):
+            raise ValueError(f"Expected a non-empty value for `asset_id` but received {asset_id!r}")
+        return await self._post(
+            path_template("/video/assets/{asset_id}/multipartupload/abort", **{"asset_id": asset_id}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MultipartUploadAbortResponse,
+        )
+
+    async def list(
+        self,
+        asset_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MultipartUploadListResponse:
+        """
+        Lists all parts uploaded so far.
+
+        Args:
+            asset_id: An asset id for the asset.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+
+        Returns:
+            MultipartUploadListResponse: Successful response
+
+        Example:
+            ```python
+            multipart_upload = await client.multipart_upload.list(
+                asset_id="assetId",
+            )
+            ```
+        """
+        if asset_id is None or (isinstance(asset_id, str) and not asset_id):
+            raise ValueError(f"Expected a non-empty value for `asset_id` but received {asset_id!r}")
+        return await self._post(
+            path_template("/video/assets/{asset_id}/multipartupload/list", **{"asset_id": asset_id}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MultipartUploadListResponse,
+        )
+
 
 class MultipartUploadResourceWithRawResponse:
     def __init__(self, multipart_upload: MultipartUploadResource) -> None:
@@ -245,6 +411,12 @@ class MultipartUploadResourceWithRawResponse:
         )
         self.complete = to_raw_response_wrapper(
             multipart_upload.complete,
+        )
+        self.abort = to_raw_response_wrapper(
+            multipart_upload.abort,
+        )
+        self.list = to_raw_response_wrapper(
+            multipart_upload.list,
         )
 
 
@@ -258,6 +430,12 @@ class AsyncMultipartUploadResourceWithRawResponse:
         self.complete = async_to_raw_response_wrapper(
             multipart_upload.complete,
         )
+        self.abort = async_to_raw_response_wrapper(
+            multipart_upload.abort,
+        )
+        self.list = async_to_raw_response_wrapper(
+            multipart_upload.list,
+        )
 
 
 class MultipartUploadResourceWithStreamingResponse:
@@ -270,6 +448,12 @@ class MultipartUploadResourceWithStreamingResponse:
         self.complete = to_streamed_response_wrapper(
             multipart_upload.complete,
         )
+        self.abort = to_streamed_response_wrapper(
+            multipart_upload.abort,
+        )
+        self.list = to_streamed_response_wrapper(
+            multipart_upload.list,
+        )
 
 
 class AsyncMultipartUploadResourceWithStreamingResponse:
@@ -281,4 +465,10 @@ class AsyncMultipartUploadResourceWithStreamingResponse:
         )
         self.complete = async_to_streamed_response_wrapper(
             multipart_upload.complete,
+        )
+        self.abort = async_to_streamed_response_wrapper(
+            multipart_upload.abort,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            multipart_upload.list,
         )

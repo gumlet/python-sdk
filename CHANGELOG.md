@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.0.8](https://github.com/gumlet/python-sdk/compare/v1.0.6...v1.0.8) (2026-09-25)
+
+
+### Features
+
+* **api:** add operation multipartUpload.abort (+1 more change) ([4812260](https://github.com/gumlet/python-sdk/commit/48122605f0f8ced3cde4a9b78875eaa3c95e6e45))
+
+
+### Chores
+
+* **api:** regenerate SDK ([a1f8ed9](https://github.com/gumlet/python-sdk/commit/a1f8ed9cb0fad9a745954b62d8e74841cba483d4))
+* release 1.0.8 ([f27dc4b](https://github.com/gumlet/python-sdk/commit/f27dc4bb85be957747f9193ac92f99c42d24737e))
+* release 1.0.8 ([aecfd81](https://github.com/gumlet/python-sdk/commit/aecfd81e9034a21fda71e42c7708e600da693579))
+
 ## [1.0.6](https://github.com/gumlet/python-sdk/compare/v1.0.5...v1.0.6) (2026-09-21)
 
 

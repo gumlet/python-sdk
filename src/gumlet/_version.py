@@ -1,4 +1,4 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 __title__ = "gumlet"
-__version__ = "1.0.6"  # x-release-please-version
+__version__ = "1.0.8"  # x-release-please-version

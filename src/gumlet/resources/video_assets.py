@@ -541,7 +541,7 @@ class VideoAssetsResource(SyncAPIResource):
         Here is the sample curl request.
         
         ```bash
-        curl --location --request PUT '<upload_url>' \
+        curl --location --request PUT '<upload_url>' \\
         --data '<YOUR_FILE_PATH>'
         ```
         
@@ -1482,7 +1482,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         Here is the sample curl request.
         
         ```bash
-        curl --location --request PUT '<upload_url>' \
+        curl --location --request PUT '<upload_url>' \\
         --data '<YOUR_FILE_PATH>'
         ```
         

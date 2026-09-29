@@ -511,6 +511,7 @@ def _smoke_case_36() -> None:
         path_profile_id="profileId",
         body_profile_id="",
         format="ABR",
+        vc=["libx264"],
     )
 
 
@@ -557,7 +558,7 @@ def _smoke_case_37() -> None:
         process_low_resolution_input=False,
         audio_only=False,
         enable_drm=False,
-        vc=[""],
+        vc=["libx264"],
         generate_chapters=False,
         generate_description=False,
     )

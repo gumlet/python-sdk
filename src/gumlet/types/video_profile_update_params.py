@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import List
 from typing_extensions import Annotated, Literal, Required, TypedDict
 from .._types import SequenceNotStr
 
@@ -74,7 +75,7 @@ class VideoProfileUpdateParams(TypedDict, total=False):
     enable_drm: bool
     """Enable DRM encryption for transcoded videos. Gumlet supports Widevine and FairPlay DRMs."""
 
-    vc: SequenceNotStr[str]
+    vc: List[Literal["libx264", "libsvtav1"]]
     """Video Codecs"""
 
     generate_chapters: bool

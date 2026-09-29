@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import httpx
 
+from typing import List
 from typing_extensions import Literal
-from .._types import SequenceNotStr
 
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
@@ -198,7 +198,7 @@ class VideoProfilesResource(SyncAPIResource):
         process_low_resolution_input: bool | Omit = omit,
         audio_only: bool | Omit = omit,
         enable_drm: bool | Omit = omit,
-        vc: SequenceNotStr[str] | Omit = omit,
+        vc: List[Literal["libx264", "libsvtav1"]] | Omit = omit,
         generate_chapters: bool | Omit = omit,
         generate_description: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -248,6 +248,7 @@ class VideoProfilesResource(SyncAPIResource):
                 path_profile_id="profileId",
                 body_profile_id="",
                 format="ABR",
+                vc=["libx264"],
             )
             ```
         """
@@ -540,7 +541,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
         process_low_resolution_input: bool | Omit = omit,
         audio_only: bool | Omit = omit,
         enable_drm: bool | Omit = omit,
-        vc: SequenceNotStr[str] | Omit = omit,
+        vc: List[Literal["libx264", "libsvtav1"]] | Omit = omit,
         generate_chapters: bool | Omit = omit,
         generate_description: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -590,6 +591,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
                 path_profile_id="profileId",
                 body_profile_id="",
                 format="ABR",
+                vc=["libx264"],
             )
             ```
         """

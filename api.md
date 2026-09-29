@@ -596,6 +596,7 @@ video_profile = client.video_profiles.update(
     path_profile_id="profileId",
     body_profile_id="",
     format="ABR",
+    vc=["libx264"],
 )
 ```
 

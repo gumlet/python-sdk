@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import List, Optional
+from typing_extensions import Literal
 
 from .._models import BaseModel
 
@@ -24,7 +25,7 @@ class AllSourceChannelSettings(BaseModel):
 
     description: Optional[str] = None
 
-    privacy_type: Optional[str] = None
+    privacy_type: Optional[Literal["public", "private", "password-protected", "dashboardOnly"]] = None
 
     custom_logo: Optional[bool] = None
 

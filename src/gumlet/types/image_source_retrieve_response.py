@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import List, Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -326,9 +327,11 @@ class Webfolder(BaseModel):
 
 
 class ImageSourceRetrieveResponse(BaseModel):
-    id: Optional[str] = None
+    id: str
+    """Image source ID"""
 
     namespace: str
+    """Source namespace (i.e. subdomain of gumlet.io)"""
 
     type: Literal[
         "dostorage",
@@ -347,19 +350,21 @@ class ImageSourceRetrieveResponse(BaseModel):
         "linode",
     ]
 
-    cdn_type: Optional[str] = None
-
     cdn_cache_time: Optional[int] = None
+    """CDN cache time in seconds"""
 
     canonical_url: Optional[bool] = None
 
     browser_cache_time: Optional[int] = None
+    """Browser cache time in seconds"""
 
     is_cloudfront: Optional[bool] = None
 
-    created_at: Optional[str] = None
+    created_at: Optional[datetime] = None
+    """Created timestamp in ISO 8601"""
 
-    updated_at: Optional[str] = None
+    updated_at: Optional[datetime] = None
+    """Updated timestamp in ISO 8601"""
 
     webfolder: Optional[Webfolder] = None
     """This is a required field if source type is webfolder."""

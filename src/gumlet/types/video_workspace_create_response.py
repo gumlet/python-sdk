@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import List, Optional
+from datetime import datetime
 
 from .._models import BaseModel
 
@@ -95,20 +96,27 @@ class PlayerConfig(BaseModel):
 
 class VideoWorkspaceCreateResponse(BaseModel):
     id: Optional[str] = None
+    """Workspace ID"""
 
     name: Optional[str] = None
+    """Workspace name"""
 
     type: Optional[str] = None
+    """Workspace type"""
 
-    created_at: Optional[str] = None
+    created_at: Optional[datetime] = None
+    """Created at time in ISO 8601 format"""
 
-    updated_at: Optional[str] = None
+    updated_at: Optional[datetime] = None
+    """Updated at time in ISO 8601"""
 
     video_protection: Optional[object] = None
 
     player_config: Optional[PlayerConfig] = None
+    """Player configuration for this workspace"""
 
     default_profile_id: Optional[str] = None
+    """Default profile for this workspace"""
 
     insight_property_id: Optional[str] = None
 
@@ -117,5 +125,6 @@ class VideoWorkspaceCreateResponse(BaseModel):
     embed_details: Optional[EmbedDetails] = None
 
     folders: Optional[List[str]] = None
+    """List of folders inside this workspace"""
 
     channel_settings: Optional[ChannelSettings] = None

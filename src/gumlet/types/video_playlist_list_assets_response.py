@@ -11,20 +11,26 @@ __all__ = ["VideoPlaylistListAssetsResponse", "AssetList"]
 
 class AssetList(BaseModel):
     id: Optional[str] = None
+    """Asset ID"""
 
     title: Optional[str] = None
+    """Asset title"""
 
     description: Optional[str] = None
+    """Asset description"""
 
     status: Optional[str] = None
+    """Status"""
 
     created_at: Optional[str] = None
 
     duration: Optional[int] = None
+    """Asset duration"""
 
 
 class VideoPlaylistListAssetsResponse(BaseModel):
     asset_list: Optional[List[AssetList]] = None
+    """List of assets inside playlist"""
 
     has_next_page: Optional[bool] = None
 

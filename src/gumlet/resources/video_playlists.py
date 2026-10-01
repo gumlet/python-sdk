@@ -65,9 +65,9 @@ class VideoPlaylistsResource(SyncAPIResource):
         Create new playlist inside video wprkspace
 
         Args:
-            collection_id: Body parameter.
-            title: Body parameter.
-            description: Body parameter.
+            collection_id: Workspace ID in which the playlist should be created
+            title: Playlist title
+            description: Playlist description
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -116,7 +116,7 @@ class VideoPlaylistsResource(SyncAPIResource):
         Get all playlists for given workspace
 
         Args:
-            collection_id: Video Collection ID
+            collection_id: Workspace ID
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -215,7 +215,7 @@ class VideoPlaylistsResource(SyncAPIResource):
 
         Args:
             playlist_id: Playlist ID that is to be deleted.
-            delete_list: Array of video asset ids.
+            delete_list: Array of video asset ids to delete
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -267,8 +267,8 @@ class VideoPlaylistsResource(SyncAPIResource):
 
         Args:
             playlist_id: ID for the playlist to update.
-            title: Body parameter.
-            description: Body parameter.
+            title: Playlist title
+            description: Playlist description
             position: Playlists have order in which they will be shown on the channel page.
             player_config: Configure player settings for this playlist, it overrides the setting set on collection.
             channel_visibility: If true then playlist will be visible on channel page.
@@ -343,7 +343,7 @@ class VideoPlaylistsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Deletes this playlist.
+        Deletes a playlist by plalist ID.
 
         Args:
             playlist_id: Playlist ID that is to be deleted.
@@ -557,9 +557,9 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         Create new playlist inside video wprkspace
 
         Args:
-            collection_id: Body parameter.
-            title: Body parameter.
-            description: Body parameter.
+            collection_id: Workspace ID in which the playlist should be created
+            title: Playlist title
+            description: Playlist description
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -608,7 +608,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         Get all playlists for given workspace
 
         Args:
-            collection_id: Video Collection ID
+            collection_id: Workspace ID
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -707,7 +707,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
 
         Args:
             playlist_id: Playlist ID that is to be deleted.
-            delete_list: Array of video asset ids.
+            delete_list: Array of video asset ids to delete
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -759,8 +759,8 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
 
         Args:
             playlist_id: ID for the playlist to update.
-            title: Body parameter.
-            description: Body parameter.
+            title: Playlist title
+            description: Playlist description
             position: Playlists have order in which they will be shown on the channel page.
             player_config: Configure player settings for this playlist, it overrides the setting set on collection.
             channel_visibility: If true then playlist will be visible on channel page.
@@ -835,7 +835,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Deletes this playlist.
+        Deletes a playlist by plalist ID.
 
         Args:
             playlist_id: Playlist ID that is to be deleted.

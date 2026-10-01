@@ -9,8 +9,10 @@ __all__ = ["VideoPlaylistUpdateParams", "PlayerConfig"]
 
 class VideoPlaylistUpdateParams(TypedDict, total=False):
     title: str
+    """Playlist title"""
 
     description: str
+    """Playlist description"""
 
     position: int
     """Playlists have order in which they will be shown on the channel page."""

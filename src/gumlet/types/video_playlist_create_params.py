@@ -9,7 +9,10 @@ __all__ = ["VideoPlaylistCreateParams"]
 
 class VideoPlaylistCreateParams(TypedDict, total=False):
     collection_id: Required[str]
+    """Workspace ID in which the playlist should be created"""
 
     title: Required[str]
+    """Playlist title"""
 
     description: str
+    """Playlist description"""

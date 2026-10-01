@@ -9,8 +9,10 @@ __all__ = ["WebhookUpdateResponse"]
 
 class WebhookUpdateResponse(BaseModel):
     id: Optional[str] = None
+    """Webhook ID"""
 
     url: Optional[str] = None
+    """Webhook URL"""
 
     triggers: Optional[List[str]] = None
 

@@ -10,6 +10,7 @@ __all__ = ["SubtitleUploadCompleteParams", "UploadResponse"]
 
 class SubtitleUploadCompleteParams(TypedDict, total=False):
     upload_responses: Iterable[UploadResponse]
+    """Array of objects of uploaded languages"""
 
 
 class UploadResponse(TypedDict, total=False):

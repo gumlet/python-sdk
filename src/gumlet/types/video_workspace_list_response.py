@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import List, Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -130,14 +131,19 @@ class AllSourceVideoProtection(BaseModel):
 
 class AllSource(BaseModel):
     id: Optional[str] = None
+    """Workspace ID"""
 
     name: Optional[str] = None
+    """Workspace name"""
 
     type: Optional[str] = None
+    """Workspace type"""
 
-    created_at: Optional[str] = None
+    created_at: Optional[datetime] = None
+    """Workspace created time in ISO 8601"""
 
-    updated_at: Optional[str] = None
+    updated_at: Optional[datetime] = None
+    """Workspace updated timestamo in ISO 8601"""
 
     video_protection: Optional[AllSourceVideoProtection] = None
 

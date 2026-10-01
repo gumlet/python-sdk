@@ -343,7 +343,7 @@ class VideoPlaylistsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Deletes this playlist.
+        Deletes a playlist by plalist ID.
 
         Args:
             playlist_id: Playlist ID that is to be deleted.
@@ -835,7 +835,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Deletes this playlist.
+        Deletes a playlist by plalist ID.
 
         Args:
             playlist_id: Playlist ID that is to be deleted.

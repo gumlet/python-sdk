@@ -81,23 +81,30 @@ class Input(BaseModel):
 
 class VideoAssetCreateResponse(BaseModel):
     asset_id: Optional[str] = None
+    """Asset ID of created asset."""
 
     progress: Optional[int] = None
+    """Processing progress percentage showing value between 0 and 100."""
 
     created_at: Optional[int] = None
+    """Created at time in milliseconds since epoch"""
 
     updated_at: Optional[int] = None
+    """Updated at time in milliseconds since epoch"""
 
     status: Optional[str] = None
+    """Status of video"""
 
     tag: Optional[List[str]] = None
-
-    source_id: Optional[str] = None
-
-    collection_id: Optional[str] = None
+    """List of tags"""
 
     input: Optional[Input] = None
+    """Input parameters"""
 
     output: Optional[Output] = None
+    """Output parameters"""
 
     playlists: Optional[List[str]] = None
+
+    workspace_id: Optional[str] = None
+    """Workdspace ID"""

@@ -14,6 +14,7 @@ class VideoPlaylistCreateAssetParams(TypedDict, total=False):
 
 class AssetList(TypedDict, total=False):
     asset_id: str
+    """Asset ID"""
 
     position: int
     """Optional, if not provided asset will added at the back/last of playlist"""

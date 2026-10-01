@@ -73,25 +73,32 @@ class Input(BaseModel):
 
 class VideoAssetUploadResponse(BaseModel):
     asset_id: Optional[str] = None
+    """Asset ID of the created asset"""
 
     progress: Optional[int] = None
+    """Processing progress percentage number between 0 and 100"""
 
     created_at: Optional[int] = None
+    """Created at timestamp in milliseconds since epoch"""
 
     updated_at: Optional[int] = None
+    """Updated at timestamp in milliseconds since epoch"""
 
     status: Optional[str] = None
+    """Status of asset"""
 
     tag: Optional[List[str]] = None
-
-    source_id: Optional[str] = None
-
-    collection_id: Optional[str] = None
 
     input: Optional[Input] = None
 
     output: Optional[Output] = None
+    """Output data information"""
 
     upload_url: Optional[str] = None
+    """Upload URL on which you need to send actual file using PUT request"""
 
     playlists: Optional[List[str]] = None
+    """Information about playlists"""
+
+    workspace_id: Optional[str] = None
+    """Workdspace ID"""

@@ -8,5 +8,5 @@ __all__ = ["VideoAssetThumbnailSelectParams"]
 
 
 class VideoAssetThumbnailSelectParams(TypedDict, total=False):
-    frame_at_second: Required[int]
-    """Frame secound"""
+    frame_at_second: Required[float]
+    """Actual time in second at which thumbnail extraction needs to be done. It can be a fraction of a second as well"""

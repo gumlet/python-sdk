@@ -9,4 +9,4 @@ __all__ = ["VideoPlaylistListAllParams"]
 
 class VideoPlaylistListAllParams(TypedDict, total=False):
     collection_id: str
-    """Video Collection ID"""
+    """Workspace ID"""

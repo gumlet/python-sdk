@@ -100,7 +100,7 @@ class SubtitleUploadResource(SyncAPIResource):
 
         Args:
             asset_id: An asset id for the previously created asset.
-            upload_responses: Body parameter.
+            upload_responses: Array of objects of uploaded languages
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -207,7 +207,7 @@ class AsyncSubtitleUploadResource(AsyncAPIResource):
 
         Args:
             asset_id: An asset id for the previously created asset.
-            upload_responses: Body parameter.
+            upload_responses: Array of objects of uploaded languages
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.

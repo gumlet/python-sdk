@@ -10,4 +10,4 @@ __all__ = ["VideoPlaylistDeleteAssetParams"]
 
 class VideoPlaylistDeleteAssetParams(TypedDict, total=False):
     delete_list: Required[SequenceNotStr[str]]
-    """Array of video asset ids."""
+    """Array of video asset ids to delete"""

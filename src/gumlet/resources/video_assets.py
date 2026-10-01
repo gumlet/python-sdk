@@ -479,7 +479,7 @@ class VideoAssetsResource(SyncAPIResource):
         self,
         asset_id: str,
         *,
-        frame_at_second: int,
+        frame_at_second: float,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -492,7 +492,7 @@ class VideoAssetsResource(SyncAPIResource):
 
         Args:
             asset_id: Asset id of the video asset which needs to be deleted.
-            frame_at_second: Frame secound
+            frame_at_second: Actual time in second at which thumbnail extraction needs to be done. It can be a fraction of a second as well
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -589,7 +589,7 @@ class VideoAssetsResource(SyncAPIResource):
 
         Args:
             asset_id: Gumlet asset ID
-            chapters: Body parameter.
+            chapters: List of chapters
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -1420,7 +1420,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         self,
         asset_id: str,
         *,
-        frame_at_second: int,
+        frame_at_second: float,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1433,7 +1433,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
 
         Args:
             asset_id: Asset id of the video asset which needs to be deleted.
-            frame_at_second: Frame secound
+            frame_at_second: Actual time in second at which thumbnail extraction needs to be done. It can be a fraction of a second as well
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -1530,7 +1530,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
 
         Args:
             asset_id: Gumlet asset ID
-            chapters: Body parameter.
+            chapters: List of chapters
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.

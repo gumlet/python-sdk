@@ -11,6 +11,7 @@ class VideoAssetThumbnailSelectResponse(BaseModel):
     success: Optional[bool] = None
 
     asset_id: Optional[str] = None
+    """Asset ID"""
 
     thumbnail_updated_at: Optional[int] = None
     """Milliseconds since epoch for the updated time."""

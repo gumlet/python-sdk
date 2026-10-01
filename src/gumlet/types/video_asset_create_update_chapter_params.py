@@ -12,11 +12,12 @@ __all__ = ["VideoAssetCreateUpdateChapterParams", "Chapter"]
 
 class VideoAssetCreateUpdateChapterParams(TypedDict, total=False):
     chapters: Required[Iterable[Chapter]]
+    """List of chapters"""
 
 
 class Chapter(TypedDict, total=False):
     label: Required[str]
-    """Label for the chapter."""
+    """Label for the chapter"""
 
     start_time: Required[Annotated[int, PropertyInfo(alias="startTime")]]
     """Start time of chapter in seconds. 0 means chapter is put as the video starts."""

@@ -49,11 +49,15 @@ class PlayerConfig(BaseModel):
 
 class VideoPlaylistUpdateResponse(BaseModel):
     id: str
+    """Playlist ID"""
 
     collection_id: Optional[str] = None
+    """Workspace ID"""
 
     title: Optional[str] = None
+    """Updated playlist title"""
 
     description: Optional[str] = None
+    """Updated playlist description"""
 
     player_config: Optional[PlayerConfig] = None

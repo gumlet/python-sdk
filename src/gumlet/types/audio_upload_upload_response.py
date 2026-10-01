@@ -11,8 +11,10 @@ __all__ = ["AudioUploadUploadResponse", "SignedURL"]
 
 class SignedURL(BaseModel):
     language_code: str
+    """Audio language code"""
 
     upload_url: str
+    """Upload URL on which actual audio file should be uploaded using a PUT request"""
 
 
 class AudioUploadUploadResponse(BaseModel):
@@ -20,3 +22,4 @@ class AudioUploadUploadResponse(BaseModel):
     """Gumlet Asset ID"""
 
     signed_urls: List[SignedURL]
+    """Details about signed URLs for each language"""

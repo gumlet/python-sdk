@@ -49,11 +49,16 @@ class PlayerConfig(BaseModel):
 
 class VideoPlaylistCreateResponse(BaseModel):
     id: str
+    """Playlist ID"""
 
     collection_id: Optional[str] = None
+    """Workspace ID"""
 
     title: Optional[str] = None
+    """Playlist title"""
 
     description: Optional[str] = None
+    """Playlist description"""
 
     player_config: Optional[PlayerConfig] = None
+    """Player config for assets in the playlist"""

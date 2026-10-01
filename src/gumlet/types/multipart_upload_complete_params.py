@@ -17,6 +17,7 @@ class MultipartUploadCompleteParams(TypedDict, total=False):
 
 class Part(TypedDict, total=False):
     part_number: Annotated[int, PropertyInfo(alias="PartNumber")]
+    """Part number"""
 
     e_tag: Annotated[str, PropertyInfo(alias="ETag")]
     """ETag received while uploading the part using PUT"""

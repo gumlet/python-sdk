@@ -10,14 +10,19 @@ __all__ = ["VideoPlaylistListAllResponse", "VideoPlaylistListAllResponseItem"]
 
 class VideoPlaylistListAllResponseItem(BaseModel):
     id: str
+    """Playlist ID"""
 
     collection_id: Optional[str] = None
+    """Workspace ID"""
 
     title: Optional[str] = None
+    """Title of the playlist"""
 
     description: Optional[str] = None
+    """Description of the playlist"""
 
     player_config: Optional[object] = None
+    """Player configuration for the playlist"""
 
 
 VideoPlaylistListAllResponse: TypeAlias = List[VideoPlaylistListAllResponseItem]

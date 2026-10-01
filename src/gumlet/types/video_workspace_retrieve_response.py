@@ -54,7 +54,7 @@ class ChannelSettings(BaseModel):
     active: bool
     """Whether the channel is active."""
 
-    privacy_type: Literal["private", "public", "password", "dashboardOnly"]
+    privacy_type: Literal["private", "public", "password-protected", "dashboardOnly"]
     """Privacy type of videos in this workspace"""
 
     channel_access_control: Literal["private", "public"]

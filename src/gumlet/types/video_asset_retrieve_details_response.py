@@ -133,6 +133,8 @@ class InputChapter(BaseModel):
 
     label: Optional[str] = None
 
+    start_time: Optional[int] = FieldInfo(alias="startTime", default=None)
+
 
 class InputTransformationsDrm(BaseModel):
     type: Literal["widevine", "fairplay", "clearkey", "widevine,fairplay", "fairplay,widevine"]

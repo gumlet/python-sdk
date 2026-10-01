@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.12](https://github.com/gumlet/python-sdk/compare/v1.0.11...v1.0.12) (2026-10-01)
+
+
+### Chores
+
+* release 1.0.12 ([18f7cae](https://github.com/gumlet/python-sdk/commit/18f7cae31ed9f9297cdf97b7feefe82bfd54e649))
+* release 1.0.12 ([60a3201](https://github.com/gumlet/python-sdk/commit/60a32012b097ed2036c961dcaa96e98adb7f70ee))
+
 ## [1.0.11](https://github.com/gumlet/python-sdk/compare/v1.0.10...v1.0.11) (2026-10-01)
 
 

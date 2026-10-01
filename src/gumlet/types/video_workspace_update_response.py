@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import List, Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -122,14 +123,17 @@ class VideoProtection(BaseModel):
 
 class VideoWorkspaceUpdateResponse(BaseModel):
     id: str
+    """Workspace ID"""
 
     name: str
+    """Workspace name"""
 
     type: str
+    """Workspace type"""
 
-    created_at: str
+    created_at: datetime
 
-    updated_at: str
+    updated_at: datetime
 
     video_protection: Optional[VideoProtection] = None
 

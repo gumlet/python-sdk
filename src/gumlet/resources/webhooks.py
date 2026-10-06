@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import httpx
 
+from typing import List
+from typing_extensions import Literal
 from .._types import SequenceNotStr
 
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -41,7 +43,39 @@ class WebhooksResource(SyncAPIResource):
         *,
         url: str,
         secret_token: str,
-        triggers: SequenceNotStr[str],
+        triggers: List[
+            Literal[
+                "status",
+                "live-video-status",
+                "video.status.created",
+                "video.status.downloaded",
+                "video.status.optimized",
+                "video.status.ready",
+                "video.status.errored",
+                "video.status.deleted",
+                "video.status.repackaged",
+                "video.status.stream_ready",
+                "live.video.status.created",
+                "live.video.status.ready",
+                "live.video.status.preparing",
+                "live.video.status.connected",
+                "live.video.status.active",
+                "live.video.status.complete",
+                "live.video.status.disconnected",
+                "event.embed.viewed",
+                "event.embed.cta_clicked",
+                "event.video.updated",
+                "event.video.uploaded",
+                "event.playlist.created",
+                "event.playlist.asset",
+                "event.playlist.deleted",
+                "event.video.analytics",
+                "event.image.analytics",
+                "event.embed.form_submitted",
+                "event.comment.all",
+                "event.channel.member_joined",
+            ]
+        ],
         sources: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -51,12 +85,12 @@ class WebhooksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookCreateResponse:
         """
-        Creates a new webhook listener.
+        Creates a new webhook listener. Gumlet POSTs JSON to `url` for each matching event and sends `secret_token` in the `x-gumlet-token` header. Payload schemas are documented in the webhooks section.
 
         Args:
             url: URL from the application you want to send data to.
-            secret_token: Authentication token to ensure legitimacy of Gumlet Webhook request on your application.
-            triggers: Triggers for the invocation of webhookos, supported option is `status`.
+            secret_token: Secret sent back in the `x-gumlet-token` header of each webhook POST so you can confirm the request came from Gumlet.
+            triggers: Events that invoke this webhook. `status` subscribes to every video asset status event. `live-video-status` subscribes to every live video status event. Any other value subscribes to that event only.
             sources: List of video collection identifiers for which webhooks are needed to be invoked.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
@@ -71,7 +105,7 @@ class WebhooksResource(SyncAPIResource):
             webhook = client.webhooks.create(
                 url="",
                 secret_token="",
-                triggers=[""],
+                triggers=["status"],
                 sources=[""],
             )
             ```
@@ -134,7 +168,40 @@ class WebhooksResource(SyncAPIResource):
         *,
         url: str | Omit = omit,
         secret_token: str | Omit = omit,
-        triggers: str | Omit = omit,
+        triggers: List[
+            Literal[
+                "status",
+                "live-video-status",
+                "video.status.created",
+                "video.status.downloaded",
+                "video.status.optimized",
+                "video.status.ready",
+                "video.status.errored",
+                "video.status.deleted",
+                "video.status.repackaged",
+                "video.status.stream_ready",
+                "live.video.status.created",
+                "live.video.status.ready",
+                "live.video.status.preparing",
+                "live.video.status.connected",
+                "live.video.status.active",
+                "live.video.status.complete",
+                "live.video.status.disconnected",
+                "event.embed.viewed",
+                "event.embed.cta_clicked",
+                "event.video.updated",
+                "event.video.uploaded",
+                "event.playlist.created",
+                "event.playlist.asset",
+                "event.playlist.deleted",
+                "event.video.analytics",
+                "event.image.analytics",
+                "event.embed.form_submitted",
+                "event.comment.all",
+                "event.channel.member_joined",
+            ]
+        ]
+        | Omit = omit,
         sources: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -149,8 +216,8 @@ class WebhooksResource(SyncAPIResource):
         Args:
             webhook_id: Unique identifier for the Gumlet Webhook which needs to be updated.
             url: URL from the application you want to send data to.
-            secret_token: Authentication token to ensure legitimacy of Gumlet Webhook request on your application.
-            triggers: Triggers for the invocation of webhookos, supported option is `status`.
+            secret_token: Secret sent back in the `x-gumlet-token` header of each webhook POST so you can confirm the request came from Gumlet.
+            triggers: Events that invoke this webhook. `status` subscribes to every video asset status event. `live-video-status` subscribes to every live video status event. Any other value subscribes to that event only.
             sources: List of video collection identifiers for which webhooks are needed to be invoked.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
@@ -283,7 +350,39 @@ class AsyncWebhooksResource(AsyncAPIResource):
         *,
         url: str,
         secret_token: str,
-        triggers: SequenceNotStr[str],
+        triggers: List[
+            Literal[
+                "status",
+                "live-video-status",
+                "video.status.created",
+                "video.status.downloaded",
+                "video.status.optimized",
+                "video.status.ready",
+                "video.status.errored",
+                "video.status.deleted",
+                "video.status.repackaged",
+                "video.status.stream_ready",
+                "live.video.status.created",
+                "live.video.status.ready",
+                "live.video.status.preparing",
+                "live.video.status.connected",
+                "live.video.status.active",
+                "live.video.status.complete",
+                "live.video.status.disconnected",
+                "event.embed.viewed",
+                "event.embed.cta_clicked",
+                "event.video.updated",
+                "event.video.uploaded",
+                "event.playlist.created",
+                "event.playlist.asset",
+                "event.playlist.deleted",
+                "event.video.analytics",
+                "event.image.analytics",
+                "event.embed.form_submitted",
+                "event.comment.all",
+                "event.channel.member_joined",
+            ]
+        ],
         sources: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -293,12 +392,12 @@ class AsyncWebhooksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookCreateResponse:
         """
-        Creates a new webhook listener.
+        Creates a new webhook listener. Gumlet POSTs JSON to `url` for each matching event and sends `secret_token` in the `x-gumlet-token` header. Payload schemas are documented in the webhooks section.
 
         Args:
             url: URL from the application you want to send data to.
-            secret_token: Authentication token to ensure legitimacy of Gumlet Webhook request on your application.
-            triggers: Triggers for the invocation of webhookos, supported option is `status`.
+            secret_token: Secret sent back in the `x-gumlet-token` header of each webhook POST so you can confirm the request came from Gumlet.
+            triggers: Events that invoke this webhook. `status` subscribes to every video asset status event. `live-video-status` subscribes to every live video status event. Any other value subscribes to that event only.
             sources: List of video collection identifiers for which webhooks are needed to be invoked.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
@@ -313,7 +412,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
             webhook = await client.webhooks.create(
                 url="",
                 secret_token="",
-                triggers=[""],
+                triggers=["status"],
                 sources=[""],
             )
             ```
@@ -376,7 +475,40 @@ class AsyncWebhooksResource(AsyncAPIResource):
         *,
         url: str | Omit = omit,
         secret_token: str | Omit = omit,
-        triggers: str | Omit = omit,
+        triggers: List[
+            Literal[
+                "status",
+                "live-video-status",
+                "video.status.created",
+                "video.status.downloaded",
+                "video.status.optimized",
+                "video.status.ready",
+                "video.status.errored",
+                "video.status.deleted",
+                "video.status.repackaged",
+                "video.status.stream_ready",
+                "live.video.status.created",
+                "live.video.status.ready",
+                "live.video.status.preparing",
+                "live.video.status.connected",
+                "live.video.status.active",
+                "live.video.status.complete",
+                "live.video.status.disconnected",
+                "event.embed.viewed",
+                "event.embed.cta_clicked",
+                "event.video.updated",
+                "event.video.uploaded",
+                "event.playlist.created",
+                "event.playlist.asset",
+                "event.playlist.deleted",
+                "event.video.analytics",
+                "event.image.analytics",
+                "event.embed.form_submitted",
+                "event.comment.all",
+                "event.channel.member_joined",
+            ]
+        ]
+        | Omit = omit,
         sources: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -391,8 +523,8 @@ class AsyncWebhooksResource(AsyncAPIResource):
         Args:
             webhook_id: Unique identifier for the Gumlet Webhook which needs to be updated.
             url: URL from the application you want to send data to.
-            secret_token: Authentication token to ensure legitimacy of Gumlet Webhook request on your application.
-            triggers: Triggers for the invocation of webhookos, supported option is `status`.
+            secret_token: Secret sent back in the `x-gumlet-token` header of each webhook POST so you can confirm the request came from Gumlet.
+            triggers: Events that invoke this webhook. `status` subscribes to every video asset status event. `live-video-status` subscribes to every live video status event. Any other value subscribes to that event only.
             sources: List of video collection identifiers for which webhooks are needed to be invoked.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.

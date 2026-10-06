@@ -2,6 +2,6 @@
 
 from typing_extensions import TypeAlias
 
-__all__ = ["WebhookDeleteResponse"]
+__all__ = ["WebhookDeleteEndpointResponse"]
 
-WebhookDeleteResponse: TypeAlias = object
+WebhookDeleteEndpointResponse: TypeAlias = object

@@ -6,10 +6,10 @@ from typing import List
 from typing_extensions import Literal, Required, TypedDict
 from .._types import SequenceNotStr
 
-__all__ = ["WebhookCreateParams"]
+__all__ = ["WebhookCreateEndpointParams"]
 
 
-class WebhookCreateParams(TypedDict, total=False):
+class WebhookCreateEndpointParams(TypedDict, total=False):
     url: Required[str]
     """URL from the application you want to send data to."""
 

@@ -88,7 +88,7 @@ Pass credentials to the generated client constructor. Environment variables are 
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `api_key` | `string \| provider` | - | Credential for the API_KEY scheme. Defaults to API_KEY. |
+| `api_key` | `str \| None` | - | Credential for the API_KEY scheme. Defaults to API_KEY. |
 
 Declared schemes:
 
@@ -165,4 +165,4 @@ Generated clients support request timeouts and retry temporary failures such as 
 
 ## Requirements
 
-- Python 3.8 or newer
+- Python 3.9 or newer

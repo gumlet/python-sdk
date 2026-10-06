@@ -788,11 +788,11 @@ video_playlist = client.video_playlists.reorder_asset(
 
 ## `Webhooks`
 
-Configure webhooks for account and asset events.
+Create webhook listeners and receive video status, live video status, and product events. Gumlet POSTs JSON to your URL with the `x-gumlet-token` header.
 
 ### Create Webhook
 
-Creates a new webhook listener.
+Creates a new webhook listener. Gumlet POSTs JSON to `url` for each matching event and sends `secret_token` in the `x-gumlet-token` header. Payload schemas are documented in the webhooks section.
 
 | Direction | Type |
 | --- | --- |
@@ -803,7 +803,7 @@ Creates a new webhook listener.
 webhook = client.webhooks.create(
     url="",
     secret_token="",
-    triggers=[""],
+    triggers=["status"],
     sources=[""],
 )
 ```

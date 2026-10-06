@@ -19,6 +19,7 @@ dependencies = [
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
+webhooks = ["standardwebhooks >= 1.0.1, < 2"]
 
 [build-system]
 requires = ["hatchling>=1.18.0"]

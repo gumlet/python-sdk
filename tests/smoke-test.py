@@ -680,7 +680,7 @@ def _smoke_case_49() -> None:
 
 
 def _smoke_case_50() -> None:
-    webhook = client.webhooks.create(
+    webhook_endpoint = client.webhook_endpoints.create(
         url="",
         secret_token="",
         triggers=["status"],
@@ -689,17 +689,17 @@ def _smoke_case_50() -> None:
 
 
 def _smoke_case_51() -> None:
-    webhook = client.webhooks.list()
+    webhook_endpoint = client.webhook_endpoints.list()
 
 
 def _smoke_case_52() -> None:
-    webhook = client.webhooks.update(
+    webhook_endpoint = client.webhook_endpoints.update(
         webhook_id="webhookId",
     )
 
 
 def _smoke_case_53() -> None:
-    webhook = client.webhooks.update(
+    webhook_endpoint = client.webhook_endpoints.update(
         webhook_id="webhookId",
         url="",
         secret_token="",
@@ -709,13 +709,13 @@ def _smoke_case_53() -> None:
 
 
 def _smoke_case_54() -> None:
-    webhook = client.webhooks.delete(
+    webhook_endpoint = client.webhook_endpoints.delete(
         webhook_id="webhookId",
     )
 
 
 def _smoke_case_55() -> None:
-    webhook = client.webhooks.history(
+    webhook_endpoint = client.webhook_endpoints.history(
         webhook_id="webhookId",
     )
 

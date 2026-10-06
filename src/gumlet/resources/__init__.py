@@ -56,13 +56,13 @@ from .video_playlists import (
     VideoPlaylistsResourceWithStreamingResponse,
     AsyncVideoPlaylistsResourceWithStreamingResponse,
 )
-from .webhooks import (
-    WebhooksResource,
-    AsyncWebhooksResource,
-    WebhooksResourceWithRawResponse,
-    AsyncWebhooksResourceWithRawResponse,
-    WebhooksResourceWithStreamingResponse,
-    AsyncWebhooksResourceWithStreamingResponse,
+from .webhook_endpoints import (
+    WebhookEndpointsResource,
+    AsyncWebhookEndpointsResource,
+    WebhookEndpointsResourceWithRawResponse,
+    AsyncWebhookEndpointsResourceWithRawResponse,
+    WebhookEndpointsResourceWithStreamingResponse,
+    AsyncWebhookEndpointsResourceWithStreamingResponse,
 )
 from .image_sources import (
     ImageSourcesResource,
@@ -184,6 +184,10 @@ from .global_search import (
     GlobalSearchResourceWithStreamingResponse,
     AsyncGlobalSearchResourceWithStreamingResponse,
 )
+from .webhooks import (
+    WebhooksResource,
+    AsyncWebhooksResource,
+)
 
 __all__ = [
     "VideoAssetsResource",
@@ -228,12 +232,12 @@ __all__ = [
     "AsyncVideoPlaylistsResourceWithRawResponse",
     "VideoPlaylistsResourceWithStreamingResponse",
     "AsyncVideoPlaylistsResourceWithStreamingResponse",
-    "WebhooksResource",
-    "AsyncWebhooksResource",
-    "WebhooksResourceWithRawResponse",
-    "AsyncWebhooksResourceWithRawResponse",
-    "WebhooksResourceWithStreamingResponse",
-    "AsyncWebhooksResourceWithStreamingResponse",
+    "WebhookEndpointsResource",
+    "AsyncWebhookEndpointsResource",
+    "WebhookEndpointsResourceWithRawResponse",
+    "AsyncWebhookEndpointsResourceWithRawResponse",
+    "WebhookEndpointsResourceWithStreamingResponse",
+    "AsyncWebhookEndpointsResourceWithStreamingResponse",
     "ImageSourcesResource",
     "AsyncImageSourcesResource",
     "ImageSourcesResourceWithRawResponse",
@@ -324,4 +328,6 @@ __all__ = [
     "AsyncGlobalSearchResourceWithRawResponse",
     "GlobalSearchResourceWithStreamingResponse",
     "AsyncGlobalSearchResourceWithStreamingResponse",
+    "WebhooksResource",
+    "AsyncWebhooksResource",
 ]

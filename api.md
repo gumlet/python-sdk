@@ -47,7 +47,7 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [Delete Playlist](#delete-playlist)
   - [Get playlist assets](#get-playlist-assets)
   - [Arrange Videos In Playlist](#arrange-videos-in-playlist)
-- [`Webhooks`](#webhooks)
+- [`WebhookEndpoints`](#webhookendpoints)
   - [Create Webhook](#create-webhook)
   - [List Webhooks](#list-webhooks)
   - [Update Webhook](#update-webhook)
@@ -786,7 +786,7 @@ video_playlist = client.video_playlists.reorder_asset(
 )
 ```
 
-## `Webhooks`
+## `WebhookEndpoints`
 
 Create webhook listeners and receive video status, live video status, and product events. Gumlet POSTs JSON to your URL with the `x-gumlet-token` header.
 
@@ -796,11 +796,11 @@ Creates a new webhook listener. Gumlet POSTs JSON to `url` for each matching eve
 
 | Direction | Type |
 | --- | --- |
-| Request | [`WebhookCreateParams`](./src/gumlet/types/webhook_create_params.py) |
-| Response | [`WebhookCreateResponse`](./src/gumlet/types/webhook_create_response.py) |
+| Request | [`WebhookEndpointCreateParams`](./src/gumlet/types/webhook_endpoint_create_params.py) |
+| Response | [`WebhookEndpointCreateResponse`](./src/gumlet/types/webhook_endpoint_create_response.py) |
 
 ```python
-webhook = client.webhooks.create(
+webhook_endpoint = client.webhook_endpoints.create(
     url="",
     secret_token="",
     triggers=["status"],
@@ -814,10 +814,10 @@ List all webhooks.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`WebhookListResponse`](./src/gumlet/types/webhook_list_response.py) |
+| Response | [`WebhookEndpointListResponse`](./src/gumlet/types/webhook_endpoint_list_response.py) |
 
 ```python
-webhook = client.webhooks.list()
+webhook_endpoint = client.webhook_endpoints.list()
 ```
 
 ### Update Webhook
@@ -826,11 +826,11 @@ Update a webhook listener.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`WebhookUpdateParams`](./src/gumlet/types/webhook_update_params.py) |
-| Response | [`WebhookUpdateResponse`](./src/gumlet/types/webhook_update_response.py) |
+| Request | [`WebhookEndpointUpdateParams`](./src/gumlet/types/webhook_endpoint_update_params.py) |
+| Response | [`WebhookEndpointUpdateResponse`](./src/gumlet/types/webhook_endpoint_update_response.py) |
 
 ```python
-webhook = client.webhooks.update(
+webhook_endpoint = client.webhook_endpoints.update(
     webhook_id="webhookId",
 )
 ```
@@ -841,10 +841,10 @@ Delete webhook listener endpoint.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`WebhookDeleteResponse`](./src/gumlet/types/webhook_delete_response.py) |
+| Response | [`WebhookEndpointDeleteResponse`](./src/gumlet/types/webhook_endpoint_delete_response.py) |
 
 ```python
-webhook = client.webhooks.delete(
+webhook_endpoint = client.webhook_endpoints.delete(
     webhook_id="webhookId",
 )
 ```
@@ -855,10 +855,10 @@ Get logs history for a given webhook.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`WebhookHistoryResponse`](./src/gumlet/types/webhook_history_response.py) |
+| Response | [`WebhookEndpointHistoryResponse`](./src/gumlet/types/webhook_endpoint_history_response.py) |
 
 ```python
-webhook = client.webhooks.history(
+webhook_endpoint = client.webhook_endpoints.history(
     webhook_id="webhookId",
 )
 ```

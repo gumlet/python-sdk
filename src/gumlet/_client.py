@@ -41,7 +41,7 @@ if TYPE_CHECKING:
         multipart_upload,
         video_profiles,
         video_playlists,
-        webhooks,
+        webhook_endpoints,
         image_sources,
         image_usage_analytics,
         live_stream_assets,
@@ -57,6 +57,7 @@ if TYPE_CHECKING:
         live_stream_workspaces,
         live_stream_analytics,
         global_search,
+        webhooks,
     )
     from .resources.video_assets import VideoAssetsResource, AsyncVideoAssetsResource
     from .resources.subtitle_upload import SubtitleUploadResource, AsyncSubtitleUploadResource
@@ -65,7 +66,7 @@ if TYPE_CHECKING:
     from .resources.multipart_upload import MultipartUploadResource, AsyncMultipartUploadResource
     from .resources.video_profiles import VideoProfilesResource, AsyncVideoProfilesResource
     from .resources.video_playlists import VideoPlaylistsResource, AsyncVideoPlaylistsResource
-    from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
+    from .resources.webhook_endpoints import WebhookEndpointsResource, AsyncWebhookEndpointsResource
     from .resources.image_sources import ImageSourcesResource, AsyncImageSourcesResource
     from .resources.image_usage_analytics import ImageUsageAnalyticsResource, AsyncImageUsageAnalyticsResource
     from .resources.live_stream_assets import LiveStreamAssetsResource, AsyncLiveStreamAssetsResource
@@ -81,6 +82,7 @@ if TYPE_CHECKING:
     from .resources.live_stream_workspaces import LiveStreamWorkspacesResource, AsyncLiveStreamWorkspacesResource
     from .resources.live_stream_analytics import LiveStreamAnalyticsResource, AsyncLiveStreamAnalyticsResource
     from .resources.global_search import GlobalSearchResource, AsyncGlobalSearchResource
+    from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
 
 # Serializes lazy resource imports so concurrent cold access from multiple
 # threads cannot deadlock on CPython import locks (see CPython 3.14).
@@ -92,11 +94,13 @@ __all__ = ["Gumlet", "AsyncGumlet", "Client", "AsyncClient", "Timeout", "Transpo
 class Gumlet(SyncAPIClient):
     # client options
     api_key: str
+    webhook_secret: str | None
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
+        webhook_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -120,6 +124,7 @@ class Gumlet(SyncAPIClient):
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `api_key` from `API_KEY`
+        - `webhook_secret` from `GUMLET_WEBHOOK_SECRET`
         """
         if api_key is None:
             api_key = os.environ.get("API_KEY")
@@ -128,6 +133,9 @@ class Gumlet(SyncAPIClient):
                 "The api_key client option must be set either by passing api_key to the client or by setting the API_KEY environment variable"
             )
         self.api_key = api_key
+        if webhook_secret is None:
+            webhook_secret = os.environ.get("GUMLET_WEBHOOK_SECRET")
+        self.webhook_secret = webhook_secret
         if base_url is None:
             base_url = os.environ.get("GUMLET_BASE_URL")
         if base_url is None:
@@ -196,10 +204,10 @@ class Gumlet(SyncAPIClient):
         return VideoPlaylistsResource(self)
 
     @cached_property
-    def webhooks(self) -> "WebhooksResource":
+    def webhook_endpoints(self) -> "WebhookEndpointsResource":
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.webhooks import WebhooksResource
-        return WebhooksResource(self)
+            from .resources.webhook_endpoints import WebhookEndpointsResource
+        return WebhookEndpointsResource(self)
 
     @cached_property
     def image_sources(self) -> "ImageSourcesResource":
@@ -292,6 +300,12 @@ class Gumlet(SyncAPIClient):
         return GlobalSearchResource(self)
 
     @cached_property
+    def webhooks(self) -> "WebhooksResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.webhooks import WebhooksResource
+        return WebhooksResource(self)
+
+    @cached_property
     def with_raw_response(self) -> GumletWithRawResponse:
         return GumletWithRawResponse(self)
 
@@ -357,6 +371,7 @@ class Gumlet(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        webhook_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -385,6 +400,7 @@ class Gumlet(SyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
+            webhook_secret=webhook_secret or self.webhook_secret,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -421,11 +437,13 @@ class Gumlet(SyncAPIClient):
 class AsyncGumlet(AsyncAPIClient):
     # client options
     api_key: str
+    webhook_secret: str | None
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
+        webhook_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -449,6 +467,7 @@ class AsyncGumlet(AsyncAPIClient):
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `api_key` from `API_KEY`
+        - `webhook_secret` from `GUMLET_WEBHOOK_SECRET`
         """
         if api_key is None:
             api_key = os.environ.get("API_KEY")
@@ -457,6 +476,9 @@ class AsyncGumlet(AsyncAPIClient):
                 "The api_key client option must be set either by passing api_key to the client or by setting the API_KEY environment variable"
             )
         self.api_key = api_key
+        if webhook_secret is None:
+            webhook_secret = os.environ.get("GUMLET_WEBHOOK_SECRET")
+        self.webhook_secret = webhook_secret
         if base_url is None:
             base_url = os.environ.get("GUMLET_BASE_URL")
         if base_url is None:
@@ -525,10 +547,10 @@ class AsyncGumlet(AsyncAPIClient):
         return AsyncVideoPlaylistsResource(self)
 
     @cached_property
-    def webhooks(self) -> "AsyncWebhooksResource":
+    def webhook_endpoints(self) -> "AsyncWebhookEndpointsResource":
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.webhooks import AsyncWebhooksResource
-        return AsyncWebhooksResource(self)
+            from .resources.webhook_endpoints import AsyncWebhookEndpointsResource
+        return AsyncWebhookEndpointsResource(self)
 
     @cached_property
     def image_sources(self) -> "AsyncImageSourcesResource":
@@ -621,6 +643,12 @@ class AsyncGumlet(AsyncAPIClient):
         return AsyncGlobalSearchResource(self)
 
     @cached_property
+    def webhooks(self) -> "AsyncWebhooksResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.webhooks import AsyncWebhooksResource
+        return AsyncWebhooksResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncGumletWithRawResponse:
         return AsyncGumletWithRawResponse(self)
 
@@ -686,6 +714,7 @@ class AsyncGumlet(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        webhook_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
@@ -714,6 +743,7 @@ class AsyncGumlet(AsyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
+            webhook_secret=webhook_secret or self.webhook_secret,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -796,10 +826,10 @@ class GumletWithRawResponse:
         return VideoPlaylistsResourceWithRawResponse(self._client.video_playlists)
 
     @cached_property
-    def webhooks(self) -> webhooks.WebhooksResourceWithRawResponse:
+    def webhook_endpoints(self) -> webhook_endpoints.WebhookEndpointsResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.webhooks import WebhooksResourceWithRawResponse
-        return WebhooksResourceWithRawResponse(self._client.webhooks)
+            from .resources.webhook_endpoints import WebhookEndpointsResourceWithRawResponse
+        return WebhookEndpointsResourceWithRawResponse(self._client.webhook_endpoints)
 
     @cached_property
     def image_sources(self) -> image_sources.ImageSourcesResourceWithRawResponse:
@@ -941,10 +971,10 @@ class AsyncGumletWithRawResponse:
         return AsyncVideoPlaylistsResourceWithRawResponse(self._client.video_playlists)
 
     @cached_property
-    def webhooks(self) -> webhooks.AsyncWebhooksResourceWithRawResponse:
+    def webhook_endpoints(self) -> webhook_endpoints.AsyncWebhookEndpointsResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.webhooks import AsyncWebhooksResourceWithRawResponse
-        return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
+            from .resources.webhook_endpoints import AsyncWebhookEndpointsResourceWithRawResponse
+        return AsyncWebhookEndpointsResourceWithRawResponse(self._client.webhook_endpoints)
 
     @cached_property
     def image_sources(self) -> image_sources.AsyncImageSourcesResourceWithRawResponse:
@@ -1086,10 +1116,10 @@ class GumletWithStreamedResponse:
         return VideoPlaylistsResourceWithStreamingResponse(self._client.video_playlists)
 
     @cached_property
-    def webhooks(self) -> webhooks.WebhooksResourceWithStreamingResponse:
+    def webhook_endpoints(self) -> webhook_endpoints.WebhookEndpointsResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.webhooks import WebhooksResourceWithStreamingResponse
-        return WebhooksResourceWithStreamingResponse(self._client.webhooks)
+            from .resources.webhook_endpoints import WebhookEndpointsResourceWithStreamingResponse
+        return WebhookEndpointsResourceWithStreamingResponse(self._client.webhook_endpoints)
 
     @cached_property
     def image_sources(self) -> image_sources.ImageSourcesResourceWithStreamingResponse:
@@ -1231,10 +1261,10 @@ class AsyncGumletWithStreamedResponse:
         return AsyncVideoPlaylistsResourceWithStreamingResponse(self._client.video_playlists)
 
     @cached_property
-    def webhooks(self) -> webhooks.AsyncWebhooksResourceWithStreamingResponse:
+    def webhook_endpoints(self) -> webhook_endpoints.AsyncWebhookEndpointsResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
-        return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)
+            from .resources.webhook_endpoints import AsyncWebhookEndpointsResourceWithStreamingResponse
+        return AsyncWebhookEndpointsResourceWithStreamingResponse(self._client.webhook_endpoints)
 
     @cached_property
     def image_sources(self) -> image_sources.AsyncImageSourcesResourceWithStreamingResponse:

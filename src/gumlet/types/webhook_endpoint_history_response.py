@@ -5,10 +5,10 @@ from typing_extensions import Literal, TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["WebhookHistoryResponse", "WebhookHistoryResponseItem"]
+__all__ = ["WebhookEndpointHistoryResponse", "WebhookEndpointHistoryResponseItem"]
 
 
-class WebhookHistoryResponseItem(BaseModel):
+class WebhookEndpointHistoryResponseItem(BaseModel):
     id: str
     """Webhook event ID"""
 
@@ -56,4 +56,4 @@ class WebhookHistoryResponseItem(BaseModel):
     """Event timestamp in ISO 8601 format"""
 
 
-WebhookHistoryResponse: TypeAlias = List[WebhookHistoryResponseItem]
+WebhookEndpointHistoryResponse: TypeAlias = List[WebhookEndpointHistoryResponseItem]

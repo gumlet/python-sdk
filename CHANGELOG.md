@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.1.0](https://github.com/gumlet/python-sdk/compare/v1.0.14...v1.1.0) (2026-10-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 5 breaking changes to the SDK surface.
+    - Removed operation `webhooks.create` (`POST /org/webhooks`).
+    - Removed operation `webhooks.list` (`GET /org/webhooks`).
+    - Removed operation `webhooks.update` (`POST /org/webhooks/{webhook_id}`).
+    - Removed operation `webhooks.delete` (`DELETE /org/webhooks/{webhook_id}`).
+    - Removed operation `webhooks.history` (`GET /org/webhook/{webhook_id}/history`).
+
+### Features
+
+* **api:** add schema webhook_error_detail (+10 more changes) ([8157aa1](https://github.com/gumlet/python-sdk/commit/8157aa164e643129ffc848d15307f38872732c6d))
+* **api:** remove operation webhooks.create (+9 more changes) ([5ed1245](https://github.com/gumlet/python-sdk/commit/5ed1245e63a9b5bd153ec41160bee3bdd228419f))
+
+
+### Chores
+
+* release 1.1.0 ([ef5a530](https://github.com/gumlet/python-sdk/commit/ef5a53067ecfc184678502f28cc919bf51f49965))
+* release 1.1.0 ([1f7fe22](https://github.com/gumlet/python-sdk/commit/1f7fe22aa6546716bdc8eb8856804d3b3349e416))
+
 ## [1.0.14](https://github.com/gumlet/python-sdk/compare/v1.0.12...v1.0.14) (2026-10-06)
 
 

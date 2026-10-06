@@ -4,10 +4,10 @@ from typing import List, Optional
 
 from .._models import BaseModel
 
-__all__ = ["WebhookUpdateEndpointResponse"]
+__all__ = ["WebhookCreateResponse"]
 
 
-class WebhookUpdateEndpointResponse(BaseModel):
+class WebhookCreateResponse(BaseModel):
     id: Optional[str] = None
     """Webhook ID"""
 
@@ -15,6 +15,7 @@ class WebhookUpdateEndpointResponse(BaseModel):
     """Webhook URL"""
 
     triggers: Optional[List[str]] = None
+    """List of triggers"""
 
     created_at: Optional[str] = None
 

@@ -680,7 +680,7 @@ def _smoke_case_49() -> None:
 
 
 def _smoke_case_50() -> None:
-    webhook = client.webhooks.create_endpoint(
+    webhook = client.webhooks.create(
         url="",
         secret_token="",
         triggers=["status"],
@@ -689,17 +689,17 @@ def _smoke_case_50() -> None:
 
 
 def _smoke_case_51() -> None:
-    webhook = client.webhooks.list_endpoints()
+    webhook = client.webhooks.list()
 
 
 def _smoke_case_52() -> None:
-    webhook = client.webhooks.update_endpoint(
+    webhook = client.webhooks.update(
         webhook_id="webhookId",
     )
 
 
 def _smoke_case_53() -> None:
-    webhook = client.webhooks.update_endpoint(
+    webhook = client.webhooks.update(
         webhook_id="webhookId",
         url="",
         secret_token="",
@@ -709,7 +709,7 @@ def _smoke_case_53() -> None:
 
 
 def _smoke_case_54() -> None:
-    webhook = client.webhooks.delete_endpoint(
+    webhook = client.webhooks.delete(
         webhook_id="webhookId",
     )
 
@@ -1684,33 +1684,33 @@ cases: list[SmokeCase] = [
         "run": _smoke_case_49,
     },
     {
-        "operation": "createEndpoint",
+        "operation": "create",
         "method": "POST",
         "path": "/org/webhooks",
         "run": _smoke_case_50,
     },
     {
-        "operation": "listEndpoints",
+        "operation": "list",
         "method": "GET",
         "path": "/org/webhooks",
         "run": _smoke_case_51,
     },
     {
-        "operation": "updateEndpoint",
+        "operation": "update",
         "method": "POST",
         "path": "/org/webhooks/{webhook_id}",
         "label": "required params",
         "run": _smoke_case_52,
     },
     {
-        "operation": "updateEndpoint",
+        "operation": "update",
         "method": "POST",
         "path": "/org/webhooks/{webhook_id}",
         "label": "all params",
         "run": _smoke_case_53,
     },
     {
-        "operation": "deleteEndpoint",
+        "operation": "delete",
         "method": "DELETE",
         "path": "/org/webhooks/{webhook_id}",
         "run": _smoke_case_54,

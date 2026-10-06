@@ -1,19 +1,19 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from typing import List, Optional
-from typing_extensions import Literal
+from __future__ import annotations
 
-from .._models import BaseModel
+from typing import List
+from typing_extensions import Literal, TypedDict
 
-__all__ = ["WebhookListEndpointsResponse"]
+__all__ = ["WebhookUpdateParams"]
 
 
-class WebhookListEndpointsResponse(BaseModel):
-    id: str
-    """Webhook ID"""
-
+class WebhookUpdateParams(TypedDict, total=False):
     url: str
-    """Webhook URL"""
+    """URL from the application you want to send data to."""
+
+    secret_token: str
+    """Secret sent back in the `x-gumlet-token` header of each webhook POST so you can confirm the request came from Gumlet."""
 
     triggers: List[
         Literal[
@@ -50,14 +50,5 @@ class WebhookListEndpointsResponse(BaseModel):
     ]
     """Events that invoke this webhook. `status` subscribes to every video asset status event. `live-video-status` subscribes to every live video status event. Any other value subscribes to that event only."""
 
-    created_at: str
-    """Creation timestamp in ISO 8601 format"""
-
-    updated_at: str
-    """Update timestamp in ISO 8601 format"""
-
-    sources: List[str]
-    """List of workspace IDs for which the webhook is enabled."""
-
-    secret_token: Optional[str] = None
-    """Secret you supplied when creating the webhook. Gumlet sends this value in the `x-gumlet-token` header of each webhook POST."""
+    sources: str
+    """List of video collection identifiers for which webhooks are needed to be invoked."""

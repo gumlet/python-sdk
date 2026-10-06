@@ -796,11 +796,11 @@ Creates a new webhook listener. Gumlet POSTs JSON to `url` for each matching eve
 
 | Direction | Type |
 | --- | --- |
-| Request | [`WebhookCreateEndpointParams`](./src/gumlet/types/webhook_create_endpoint_params.py) |
-| Response | [`WebhookCreateEndpointResponse`](./src/gumlet/types/webhook_create_endpoint_response.py) |
+| Request | [`WebhookCreateParams`](./src/gumlet/types/webhook_create_params.py) |
+| Response | [`WebhookCreateResponse`](./src/gumlet/types/webhook_create_response.py) |
 
 ```python
-webhook = client.webhooks.create_endpoint(
+webhook = client.webhooks.create(
     url="",
     secret_token="",
     triggers=["status"],
@@ -814,10 +814,10 @@ List all webhooks.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`WebhookListEndpointsResponse`](./src/gumlet/types/webhook_list_endpoints_response.py) |
+| Response | [`WebhookListResponse`](./src/gumlet/types/webhook_list_response.py) |
 
 ```python
-webhook = client.webhooks.list_endpoints()
+webhook = client.webhooks.list()
 ```
 
 ### Update Webhook
@@ -826,11 +826,11 @@ Update a webhook listener.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`WebhookUpdateEndpointParams`](./src/gumlet/types/webhook_update_endpoint_params.py) |
-| Response | [`WebhookUpdateEndpointResponse`](./src/gumlet/types/webhook_update_endpoint_response.py) |
+| Request | [`WebhookUpdateParams`](./src/gumlet/types/webhook_update_params.py) |
+| Response | [`WebhookUpdateResponse`](./src/gumlet/types/webhook_update_response.py) |
 
 ```python
-webhook = client.webhooks.update_endpoint(
+webhook = client.webhooks.update(
     webhook_id="webhookId",
 )
 ```
@@ -841,10 +841,10 @@ Delete webhook listener endpoint.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`WebhookDeleteEndpointResponse`](./src/gumlet/types/webhook_delete_endpoint_response.py) |
+| Response | [`WebhookDeleteResponse`](./src/gumlet/types/webhook_delete_response.py) |
 
 ```python
-webhook = client.webhooks.delete_endpoint(
+webhook = client.webhooks.delete(
     webhook_id="webhookId",
 )
 ```

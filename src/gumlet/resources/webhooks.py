@@ -24,11 +24,11 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.webhook_create_endpoint_response import WebhookCreateEndpointResponse
-from ..types import webhook_create_endpoint_params, webhook_update_endpoint_params
-from ..types.webhook_list_endpoints_response import WebhookListEndpointsResponse
-from ..types.webhook_update_endpoint_response import WebhookUpdateEndpointResponse
-from ..types.webhook_delete_endpoint_response import WebhookDeleteEndpointResponse
+from ..types.webhook_create_response import WebhookCreateResponse
+from ..types import webhook_create_params, webhook_update_params
+from ..types.webhook_list_response import WebhookListResponse
+from ..types.webhook_update_response import WebhookUpdateResponse
+from ..types.webhook_delete_response import WebhookDeleteResponse
 from ..types.webhook_history_response import WebhookHistoryResponse
 
 __all__ = ["WebhooksResource", "AsyncWebhooksResource"]
@@ -69,7 +69,7 @@ class WebhooksResource(SyncAPIResource):
             ),
         )
 
-    def create_endpoint(
+    def create(
         self,
         *,
         url: str,
@@ -114,7 +114,7 @@ class WebhooksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookCreateEndpointResponse:
+    ) -> WebhookCreateResponse:
         """
         Creates a new webhook listener. Gumlet POSTs JSON to `url` for each matching event and sends `secret_token` in the `x-gumlet-token` header. Payload schemas are documented in the webhooks section.
 
@@ -129,11 +129,11 @@ class WebhooksResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            WebhookCreateEndpointResponse: 200
+            WebhookCreateResponse: 200
 
         Example:
             ```python
-            webhook = client.webhooks.create_endpoint(
+            webhook = client.webhooks.create(
                 url="",
                 secret_token="",
                 triggers=["status"],
@@ -150,15 +150,15 @@ class WebhooksResource(SyncAPIResource):
                     "triggers": triggers,
                     "sources": sources,
                 },
-                webhook_create_endpoint_params.WebhookCreateEndpointParams,
+                webhook_create_params.WebhookCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebhookCreateEndpointResponse,
+            cast_to=WebhookCreateResponse,
         )
 
-    def list_endpoints(
+    def list(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -167,7 +167,7 @@ class WebhooksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookListEndpointsResponse:
+    ) -> WebhookListResponse:
         """
         List all webhooks.
 
@@ -178,11 +178,11 @@ class WebhooksResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            WebhookListEndpointsResponse: Successful response
+            WebhookListResponse: Successful response
 
         Example:
             ```python
-            webhook = client.webhooks.list_endpoints()
+            webhook = client.webhooks.list()
             ```
         """
         return self._get(
@@ -190,10 +190,10 @@ class WebhooksResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebhookListEndpointsResponse,
+            cast_to=WebhookListResponse,
         )
 
-    def update_endpoint(
+    def update(
         self,
         webhook_id: str,
         *,
@@ -240,7 +240,7 @@ class WebhooksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookUpdateEndpointResponse:
+    ) -> WebhookUpdateResponse:
         """
         Update a webhook listener.
 
@@ -256,11 +256,11 @@ class WebhooksResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            WebhookUpdateEndpointResponse: 200
+            WebhookUpdateResponse: 200
 
         Example:
             ```python
-            webhook = client.webhooks.update_endpoint(
+            webhook = client.webhooks.update(
                 webhook_id="webhookId",
             )
             ```
@@ -276,15 +276,15 @@ class WebhooksResource(SyncAPIResource):
                     "triggers": triggers,
                     "sources": sources,
                 },
-                webhook_update_endpoint_params.WebhookUpdateEndpointParams,
+                webhook_update_params.WebhookUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebhookUpdateEndpointResponse,
+            cast_to=WebhookUpdateResponse,
         )
 
-    def delete_endpoint(
+    def delete(
         self,
         webhook_id: str,
         *,
@@ -294,7 +294,7 @@ class WebhooksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookDeleteEndpointResponse:
+    ) -> WebhookDeleteResponse:
         """
         Delete webhook listener endpoint.
 
@@ -306,11 +306,11 @@ class WebhooksResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            WebhookDeleteEndpointResponse: 204
+            WebhookDeleteResponse: 204
 
         Example:
             ```python
-            webhook = client.webhooks.delete_endpoint(
+            webhook = client.webhooks.delete(
                 webhook_id="webhookId",
             )
             ```
@@ -322,7 +322,7 @@ class WebhooksResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebhookDeleteEndpointResponse,
+            cast_to=WebhookDeleteResponse,
         )
 
     def history(
@@ -402,7 +402,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
             ),
         )
 
-    async def create_endpoint(
+    async def create(
         self,
         *,
         url: str,
@@ -447,7 +447,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookCreateEndpointResponse:
+    ) -> WebhookCreateResponse:
         """
         Creates a new webhook listener. Gumlet POSTs JSON to `url` for each matching event and sends `secret_token` in the `x-gumlet-token` header. Payload schemas are documented in the webhooks section.
 
@@ -462,11 +462,11 @@ class AsyncWebhooksResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            WebhookCreateEndpointResponse: 200
+            WebhookCreateResponse: 200
 
         Example:
             ```python
-            webhook = await client.webhooks.create_endpoint(
+            webhook = await client.webhooks.create(
                 url="",
                 secret_token="",
                 triggers=["status"],
@@ -483,15 +483,15 @@ class AsyncWebhooksResource(AsyncAPIResource):
                     "triggers": triggers,
                     "sources": sources,
                 },
-                webhook_create_endpoint_params.WebhookCreateEndpointParams,
+                webhook_create_params.WebhookCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebhookCreateEndpointResponse,
+            cast_to=WebhookCreateResponse,
         )
 
-    async def list_endpoints(
+    async def list(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -500,7 +500,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookListEndpointsResponse:
+    ) -> WebhookListResponse:
         """
         List all webhooks.
 
@@ -511,11 +511,11 @@ class AsyncWebhooksResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            WebhookListEndpointsResponse: Successful response
+            WebhookListResponse: Successful response
 
         Example:
             ```python
-            webhook = await client.webhooks.list_endpoints()
+            webhook = await client.webhooks.list()
             ```
         """
         return await self._get(
@@ -523,10 +523,10 @@ class AsyncWebhooksResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebhookListEndpointsResponse,
+            cast_to=WebhookListResponse,
         )
 
-    async def update_endpoint(
+    async def update(
         self,
         webhook_id: str,
         *,
@@ -573,7 +573,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookUpdateEndpointResponse:
+    ) -> WebhookUpdateResponse:
         """
         Update a webhook listener.
 
@@ -589,11 +589,11 @@ class AsyncWebhooksResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            WebhookUpdateEndpointResponse: 200
+            WebhookUpdateResponse: 200
 
         Example:
             ```python
-            webhook = await client.webhooks.update_endpoint(
+            webhook = await client.webhooks.update(
                 webhook_id="webhookId",
             )
             ```
@@ -609,15 +609,15 @@ class AsyncWebhooksResource(AsyncAPIResource):
                     "triggers": triggers,
                     "sources": sources,
                 },
-                webhook_update_endpoint_params.WebhookUpdateEndpointParams,
+                webhook_update_params.WebhookUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebhookUpdateEndpointResponse,
+            cast_to=WebhookUpdateResponse,
         )
 
-    async def delete_endpoint(
+    async def delete(
         self,
         webhook_id: str,
         *,
@@ -627,7 +627,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookDeleteEndpointResponse:
+    ) -> WebhookDeleteResponse:
         """
         Delete webhook listener endpoint.
 
@@ -639,11 +639,11 @@ class AsyncWebhooksResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            WebhookDeleteEndpointResponse: 204
+            WebhookDeleteResponse: 204
 
         Example:
             ```python
-            webhook = await client.webhooks.delete_endpoint(
+            webhook = await client.webhooks.delete(
                 webhook_id="webhookId",
             )
             ```
@@ -655,7 +655,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebhookDeleteEndpointResponse,
+            cast_to=WebhookDeleteResponse,
         )
 
     async def history(
@@ -704,17 +704,17 @@ class WebhooksResourceWithRawResponse:
     def __init__(self, webhooks: WebhooksResource) -> None:
         self._webhooks = webhooks
 
-        self.create_endpoint = to_raw_response_wrapper(
-            webhooks.create_endpoint,
+        self.create = to_raw_response_wrapper(
+            webhooks.create,
         )
-        self.list_endpoints = to_raw_response_wrapper(
-            webhooks.list_endpoints,
+        self.list = to_raw_response_wrapper(
+            webhooks.list,
         )
-        self.update_endpoint = to_raw_response_wrapper(
-            webhooks.update_endpoint,
+        self.update = to_raw_response_wrapper(
+            webhooks.update,
         )
-        self.delete_endpoint = to_raw_response_wrapper(
-            webhooks.delete_endpoint,
+        self.delete = to_raw_response_wrapper(
+            webhooks.delete,
         )
         self.history = to_raw_response_wrapper(
             webhooks.history,
@@ -725,17 +725,17 @@ class AsyncWebhooksResourceWithRawResponse:
     def __init__(self, webhooks: AsyncWebhooksResource) -> None:
         self._webhooks = webhooks
 
-        self.create_endpoint = async_to_raw_response_wrapper(
-            webhooks.create_endpoint,
+        self.create = async_to_raw_response_wrapper(
+            webhooks.create,
         )
-        self.list_endpoints = async_to_raw_response_wrapper(
-            webhooks.list_endpoints,
+        self.list = async_to_raw_response_wrapper(
+            webhooks.list,
         )
-        self.update_endpoint = async_to_raw_response_wrapper(
-            webhooks.update_endpoint,
+        self.update = async_to_raw_response_wrapper(
+            webhooks.update,
         )
-        self.delete_endpoint = async_to_raw_response_wrapper(
-            webhooks.delete_endpoint,
+        self.delete = async_to_raw_response_wrapper(
+            webhooks.delete,
         )
         self.history = async_to_raw_response_wrapper(
             webhooks.history,
@@ -746,17 +746,17 @@ class WebhooksResourceWithStreamingResponse:
     def __init__(self, webhooks: WebhooksResource) -> None:
         self._webhooks = webhooks
 
-        self.create_endpoint = to_streamed_response_wrapper(
-            webhooks.create_endpoint,
+        self.create = to_streamed_response_wrapper(
+            webhooks.create,
         )
-        self.list_endpoints = to_streamed_response_wrapper(
-            webhooks.list_endpoints,
+        self.list = to_streamed_response_wrapper(
+            webhooks.list,
         )
-        self.update_endpoint = to_streamed_response_wrapper(
-            webhooks.update_endpoint,
+        self.update = to_streamed_response_wrapper(
+            webhooks.update,
         )
-        self.delete_endpoint = to_streamed_response_wrapper(
-            webhooks.delete_endpoint,
+        self.delete = to_streamed_response_wrapper(
+            webhooks.delete,
         )
         self.history = to_streamed_response_wrapper(
             webhooks.history,
@@ -767,17 +767,17 @@ class AsyncWebhooksResourceWithStreamingResponse:
     def __init__(self, webhooks: AsyncWebhooksResource) -> None:
         self._webhooks = webhooks
 
-        self.create_endpoint = async_to_streamed_response_wrapper(
-            webhooks.create_endpoint,
+        self.create = async_to_streamed_response_wrapper(
+            webhooks.create,
         )
-        self.list_endpoints = async_to_streamed_response_wrapper(
-            webhooks.list_endpoints,
+        self.list = async_to_streamed_response_wrapper(
+            webhooks.list,
         )
-        self.update_endpoint = async_to_streamed_response_wrapper(
-            webhooks.update_endpoint,
+        self.update = async_to_streamed_response_wrapper(
+            webhooks.update,
         )
-        self.delete_endpoint = async_to_streamed_response_wrapper(
-            webhooks.delete_endpoint,
+        self.delete = async_to_streamed_response_wrapper(
+            webhooks.delete,
         )
         self.history = async_to_streamed_response_wrapper(
             webhooks.history,

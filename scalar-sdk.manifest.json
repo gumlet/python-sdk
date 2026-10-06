@@ -6531,8 +6531,8 @@
     {
       "resource": "webhooks",
       "publicResource": "webhooks",
-      "operation": "createEndpoint",
-      "publicOperation": "createEndpoint",
+      "operation": "create",
+      "publicOperation": "create",
       "deprecated": false,
       "method": "POST",
       "path": "/org/webhooks",
@@ -6579,7 +6579,7 @@
       "publicCookieParams": [],
       "cookieParamDetails": [],
       "paramsModel": {
-        "publicName": "WebhookCreateEndpointParams"
+        "publicName": "WebhookCreateParams"
       },
       "requestBody": {
         "contentType": "application/json",
@@ -6678,8 +6678,8 @@
     {
       "resource": "webhooks",
       "publicResource": "webhooks",
-      "operation": "listEndpoints",
-      "publicOperation": "listEndpoints",
+      "operation": "list",
+      "publicOperation": "list",
       "deprecated": false,
       "method": "GET",
       "path": "/org/webhooks",
@@ -6754,8 +6754,8 @@
     {
       "resource": "webhooks",
       "publicResource": "webhooks",
-      "operation": "updateEndpoint",
-      "publicOperation": "updateEndpoint",
+      "operation": "update",
+      "publicOperation": "update",
       "deprecated": false,
       "method": "POST",
       "path": "/org/webhooks/{webhook_id}",
@@ -6813,7 +6813,7 @@
       "publicCookieParams": [],
       "cookieParamDetails": [],
       "paramsModel": {
-        "publicName": "WebhookUpdateEndpointParams"
+        "publicName": "WebhookUpdateParams"
       },
       "requestBody": {
         "contentType": "application/json",
@@ -6896,8 +6896,8 @@
     {
       "resource": "webhooks",
       "publicResource": "webhooks",
-      "operation": "deleteEndpoint",
-      "publicOperation": "deleteEndpoint",
+      "operation": "delete",
+      "publicOperation": "delete",
       "deprecated": false,
       "method": "DELETE",
       "path": "/org/webhooks/{webhook_id}",
@@ -6928,7 +6928,7 @@
       "publicCookieParams": [],
       "cookieParamDetails": [],
       "paramsModel": {
-        "publicName": "WebhookDeleteEndpointParams"
+        "publicName": "WebhookDeleteParams"
       },
       "response": {
         "status": "204",

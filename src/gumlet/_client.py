@@ -41,7 +41,7 @@ if TYPE_CHECKING:
         multipart_upload,
         video_profiles,
         video_playlists,
-        webhooks,
+        webhook_endpoints,
         image_sources,
         image_usage_analytics,
         live_stream_assets,
@@ -57,6 +57,7 @@ if TYPE_CHECKING:
         live_stream_workspaces,
         live_stream_analytics,
         global_search,
+        webhooks,
     )
     from .resources.video_assets import VideoAssetsResource, AsyncVideoAssetsResource
     from .resources.subtitle_upload import SubtitleUploadResource, AsyncSubtitleUploadResource
@@ -65,7 +66,7 @@ if TYPE_CHECKING:
     from .resources.multipart_upload import MultipartUploadResource, AsyncMultipartUploadResource
     from .resources.video_profiles import VideoProfilesResource, AsyncVideoProfilesResource
     from .resources.video_playlists import VideoPlaylistsResource, AsyncVideoPlaylistsResource
-    from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
+    from .resources.webhook_endpoints import WebhookEndpointsResource, AsyncWebhookEndpointsResource
     from .resources.image_sources import ImageSourcesResource, AsyncImageSourcesResource
     from .resources.image_usage_analytics import ImageUsageAnalyticsResource, AsyncImageUsageAnalyticsResource
     from .resources.live_stream_assets import LiveStreamAssetsResource, AsyncLiveStreamAssetsResource
@@ -81,6 +82,7 @@ if TYPE_CHECKING:
     from .resources.live_stream_workspaces import LiveStreamWorkspacesResource, AsyncLiveStreamWorkspacesResource
     from .resources.live_stream_analytics import LiveStreamAnalyticsResource, AsyncLiveStreamAnalyticsResource
     from .resources.global_search import GlobalSearchResource, AsyncGlobalSearchResource
+    from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
 
 # Serializes lazy resource imports so concurrent cold access from multiple
 # threads cannot deadlock on CPython import locks (see CPython 3.14).
@@ -202,10 +204,10 @@ class Gumlet(SyncAPIClient):
         return VideoPlaylistsResource(self)
 
     @cached_property
-    def webhooks(self) -> "WebhooksResource":
+    def webhook_endpoints(self) -> "WebhookEndpointsResource":
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.webhooks import WebhooksResource
-        return WebhooksResource(self)
+            from .resources.webhook_endpoints import WebhookEndpointsResource
+        return WebhookEndpointsResource(self)
 
     @cached_property
     def image_sources(self) -> "ImageSourcesResource":
@@ -296,6 +298,12 @@ class Gumlet(SyncAPIClient):
         with _RESOURCE_IMPORT_LOCK:
             from .resources.global_search import GlobalSearchResource
         return GlobalSearchResource(self)
+
+    @cached_property
+    def webhooks(self) -> "WebhooksResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.webhooks import WebhooksResource
+        return WebhooksResource(self)
 
     @cached_property
     def with_raw_response(self) -> GumletWithRawResponse:
@@ -539,10 +547,10 @@ class AsyncGumlet(AsyncAPIClient):
         return AsyncVideoPlaylistsResource(self)
 
     @cached_property
-    def webhooks(self) -> "AsyncWebhooksResource":
+    def webhook_endpoints(self) -> "AsyncWebhookEndpointsResource":
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.webhooks import AsyncWebhooksResource
-        return AsyncWebhooksResource(self)
+            from .resources.webhook_endpoints import AsyncWebhookEndpointsResource
+        return AsyncWebhookEndpointsResource(self)
 
     @cached_property
     def image_sources(self) -> "AsyncImageSourcesResource":
@@ -633,6 +641,12 @@ class AsyncGumlet(AsyncAPIClient):
         with _RESOURCE_IMPORT_LOCK:
             from .resources.global_search import AsyncGlobalSearchResource
         return AsyncGlobalSearchResource(self)
+
+    @cached_property
+    def webhooks(self) -> "AsyncWebhooksResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.webhooks import AsyncWebhooksResource
+        return AsyncWebhooksResource(self)
 
     @cached_property
     def with_raw_response(self) -> AsyncGumletWithRawResponse:
@@ -812,10 +826,10 @@ class GumletWithRawResponse:
         return VideoPlaylistsResourceWithRawResponse(self._client.video_playlists)
 
     @cached_property
-    def webhooks(self) -> webhooks.WebhooksResourceWithRawResponse:
+    def webhook_endpoints(self) -> webhook_endpoints.WebhookEndpointsResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.webhooks import WebhooksResourceWithRawResponse
-        return WebhooksResourceWithRawResponse(self._client.webhooks)
+            from .resources.webhook_endpoints import WebhookEndpointsResourceWithRawResponse
+        return WebhookEndpointsResourceWithRawResponse(self._client.webhook_endpoints)
 
     @cached_property
     def image_sources(self) -> image_sources.ImageSourcesResourceWithRawResponse:
@@ -957,10 +971,10 @@ class AsyncGumletWithRawResponse:
         return AsyncVideoPlaylistsResourceWithRawResponse(self._client.video_playlists)
 
     @cached_property
-    def webhooks(self) -> webhooks.AsyncWebhooksResourceWithRawResponse:
+    def webhook_endpoints(self) -> webhook_endpoints.AsyncWebhookEndpointsResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.webhooks import AsyncWebhooksResourceWithRawResponse
-        return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
+            from .resources.webhook_endpoints import AsyncWebhookEndpointsResourceWithRawResponse
+        return AsyncWebhookEndpointsResourceWithRawResponse(self._client.webhook_endpoints)
 
     @cached_property
     def image_sources(self) -> image_sources.AsyncImageSourcesResourceWithRawResponse:
@@ -1102,10 +1116,10 @@ class GumletWithStreamedResponse:
         return VideoPlaylistsResourceWithStreamingResponse(self._client.video_playlists)
 
     @cached_property
-    def webhooks(self) -> webhooks.WebhooksResourceWithStreamingResponse:
+    def webhook_endpoints(self) -> webhook_endpoints.WebhookEndpointsResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.webhooks import WebhooksResourceWithStreamingResponse
-        return WebhooksResourceWithStreamingResponse(self._client.webhooks)
+            from .resources.webhook_endpoints import WebhookEndpointsResourceWithStreamingResponse
+        return WebhookEndpointsResourceWithStreamingResponse(self._client.webhook_endpoints)
 
     @cached_property
     def image_sources(self) -> image_sources.ImageSourcesResourceWithStreamingResponse:
@@ -1247,10 +1261,10 @@ class AsyncGumletWithStreamedResponse:
         return AsyncVideoPlaylistsResourceWithStreamingResponse(self._client.video_playlists)
 
     @cached_property
-    def webhooks(self) -> webhooks.AsyncWebhooksResourceWithStreamingResponse:
+    def webhook_endpoints(self) -> webhook_endpoints.AsyncWebhookEndpointsResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
-        return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)
+            from .resources.webhook_endpoints import AsyncWebhookEndpointsResourceWithStreamingResponse
+        return AsyncWebhookEndpointsResourceWithStreamingResponse(self._client.webhook_endpoints)
 
     @cached_property
     def image_sources(self) -> image_sources.AsyncImageSourcesResourceWithStreamingResponse:

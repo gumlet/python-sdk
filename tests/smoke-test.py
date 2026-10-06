@@ -683,7 +683,7 @@ def _smoke_case_50() -> None:
     webhook = client.webhooks.create(
         url="",
         secret_token="",
-        triggers=[""],
+        triggers=["status"],
         sources=[""],
     )
 
@@ -703,7 +703,7 @@ def _smoke_case_53() -> None:
         webhook_id="webhookId",
         url="",
         secret_token="",
-        triggers="",
+        triggers=["status"],
         sources="",
     )
 

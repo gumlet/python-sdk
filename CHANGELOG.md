@@ -1,5 +1,47 @@
 # Changelog
 
+## [1.0.14](https://github.com/gumlet/python-sdk/compare/v1.0.12...v1.0.14) (2026-10-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 11 breaking changes to the SDK surface.
+    - Removed schema `webhook_error_detail`.
+    - Removed schema `webhook_warning`.
+    - Removed schema `video_webhook_transformations`.
+    - Removed schema `video_webhook_input`.
+    - Removed schema `video_webhook_output`.
+    - Removed schema `video_webhook_payload`.
+    - Removed schema `live_video_webhook_input`.
+    - Removed schema `live_video_webhook_output`.
+    - Removed schema `live_video_webhook_payload`.
+    - Removed schema `event_webhook_payload`.
+    - Removed webhook `Unwrap` (`productEvent`).
+* **api:** 4 breaking changes to the SDK surface.
+    - Removed operation `webhooks.createEndpoint` (`POST /org/webhooks`).
+    - Removed operation `webhooks.listEndpoints` (`GET /org/webhooks`).
+    - Removed operation `webhooks.updateEndpoint` (`POST /org/webhooks/{webhook_id}`).
+    - Removed operation `webhooks.deleteEndpoint` (`DELETE /org/webhooks/{webhook_id}`).
+* **api:** 4 breaking changes to the SDK surface.
+    - Removed operation `webhooks.create` (`POST /org/webhooks`).
+    - Removed operation `webhooks.list` (`GET /org/webhooks`).
+    - Removed operation `webhooks.update` (`POST /org/webhooks/{webhook_id}`).
+    - Removed operation `webhooks.delete` (`DELETE /org/webhooks/{webhook_id}`).
+
+### Features
+
+* **api:** add schema webhook_error_detail (+10 more changes) ([7e05ce0](https://github.com/gumlet/python-sdk/commit/7e05ce0f11b4fe47cc3d200471851f95cb00f4cb))
+* **api:** remove operation webhooks.create (+7 more changes) ([07ce05b](https://github.com/gumlet/python-sdk/commit/07ce05b33f2570b36b492e2f870e0f1cefc0a6e6))
+* **api:** remove operation webhooks.createEndpoint (+7 more changes) ([ce441c2](https://github.com/gumlet/python-sdk/commit/ce441c24780956bba3be0bae19a04ee83f89c682))
+* **api:** remove schema webhook_error_detail (+10 more changes) ([34942d1](https://github.com/gumlet/python-sdk/commit/34942d14c13f338426a54e8a4f2134c21538f88e))
+
+
+### Chores
+
+* **api:** regenerate SDK ([5495053](https://github.com/gumlet/python-sdk/commit/5495053df9b90cfc78c4997c98ea0ccb5980ceba))
+* release 1.0.14 ([cd404b5](https://github.com/gumlet/python-sdk/commit/cd404b53963792f4ca5e457547fc2da035aaf0f6))
+* release 1.0.14 ([f640a8f](https://github.com/gumlet/python-sdk/commit/f640a8f0f9a2492f3dde9b00417e47b2fc6959fd))
+
 ## [1.0.12](https://github.com/gumlet/python-sdk/compare/v1.0.11...v1.0.12) (2026-10-01)
 
 

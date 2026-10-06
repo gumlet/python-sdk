@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+from .video_asset_status_webhook_event import VideoAssetStatusWebhookEvent as VideoAssetStatusWebhookEvent
+from .live_video_status_webhook_event import LiveVideoStatusWebhookEvent as LiveVideoStatusWebhookEvent
+from .product_event_webhook_event import ProductEventWebhookEvent as ProductEventWebhookEvent
+from .parsed_webhook_event import ParsedWebhookEvent as ParsedWebhookEvent
 from .video_asset_create_response import VideoAssetCreateResponse as VideoAssetCreateResponse
 from .video_asset_create_params import VideoAssetCreateParams as VideoAssetCreateParams
 from .video_asset_upload_response import VideoAssetUploadResponse as VideoAssetUploadResponse

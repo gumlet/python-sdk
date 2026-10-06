@@ -2,20 +2,15 @@
 
 from __future__ import annotations
 
-import json
 import httpx
 
 from typing import List
 from typing_extensions import Literal
 from .._types import SequenceNotStr
-from typing import Mapping, cast
 
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
-from .._models import construct_type
-from .._exceptions import GumletError
-from ..types.parsed_webhook_event import ParsedWebhookEvent
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
     to_raw_response_wrapper,
@@ -42,32 +37,6 @@ class WebhooksResource(SyncAPIResource):
     @cached_property
     def with_streaming_response(self) -> WebhooksResourceWithStreamingResponse:
         return WebhooksResourceWithStreamingResponse(self)
-
-    def unwrap(self, payload: str, *, headers: Mapping[str, str], key: str | bytes | None = None) -> ParsedWebhookEvent:
-        try:
-            from standardwebhooks import Webhook
-        except ImportError as exc:
-            raise GumletError("You need to install `gumlet[webhooks]` to use this method") from exc
-
-        if key is None:
-            key = self._client.webhook_secret
-            if key is None:
-                raise ValueError(
-                    "Cannot verify a webhook without a key on either the client's webhook_secret or passed in as an argument"
-                )
-
-        if not isinstance(headers, dict):
-            headers = dict(headers)
-
-        Webhook(key).verify(payload, headers)
-
-        return cast(
-            ParsedWebhookEvent,
-            construct_type(
-                type_=ParsedWebhookEvent,
-                value=json.loads(payload),
-            ),
-        )
 
     def create(
         self,
@@ -375,32 +344,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
     @cached_property
     def with_streaming_response(self) -> AsyncWebhooksResourceWithStreamingResponse:
         return AsyncWebhooksResourceWithStreamingResponse(self)
-
-    def unwrap(self, payload: str, *, headers: Mapping[str, str], key: str | bytes | None = None) -> ParsedWebhookEvent:
-        try:
-            from standardwebhooks import Webhook
-        except ImportError as exc:
-            raise GumletError("You need to install `gumlet[webhooks]` to use this method") from exc
-
-        if key is None:
-            key = self._client.webhook_secret
-            if key is None:
-                raise ValueError(
-                    "Cannot verify a webhook without a key on either the client's webhook_secret or passed in as an argument"
-                )
-
-        if not isinstance(headers, dict):
-            headers = dict(headers)
-
-        Webhook(key).verify(payload, headers)
-
-        return cast(
-            ParsedWebhookEvent,
-            construct_type(
-                type_=ParsedWebhookEvent,
-                value=json.loads(payload),
-            ),
-        )
 
     async def create(
         self,

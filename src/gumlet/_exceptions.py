@@ -15,7 +15,6 @@ __all__ = [
     "UnprocessableEntityError",
     "RateLimitError",
     "InternalServerError",
-    "APIWebhookValidationError",
     "WebSocketConnectionClosedError",
     "WebSocketQueueFullError",
 ]
@@ -55,10 +54,6 @@ class APIResponseValidationError(APIError):
         super().__init__(message or "Data returned by API invalid for expected schema.", response.request, body=body)
         self.response = response
         self.status_code = response.status_code
-
-
-class APIWebhookValidationError(APIError):
-    pass
 
 
 class APIStatusError(APIError):

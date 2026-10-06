@@ -92,13 +92,11 @@ __all__ = ["Gumlet", "AsyncGumlet", "Client", "AsyncClient", "Timeout", "Transpo
 class Gumlet(SyncAPIClient):
     # client options
     api_key: str
-    webhook_secret: str | None
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        webhook_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -122,7 +120,6 @@ class Gumlet(SyncAPIClient):
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `api_key` from `API_KEY`
-        - `webhook_secret` from `GUMLET_WEBHOOK_SECRET`
         """
         if api_key is None:
             api_key = os.environ.get("API_KEY")
@@ -131,9 +128,6 @@ class Gumlet(SyncAPIClient):
                 "The api_key client option must be set either by passing api_key to the client or by setting the API_KEY environment variable"
             )
         self.api_key = api_key
-        if webhook_secret is None:
-            webhook_secret = os.environ.get("GUMLET_WEBHOOK_SECRET")
-        self.webhook_secret = webhook_secret
         if base_url is None:
             base_url = os.environ.get("GUMLET_BASE_URL")
         if base_url is None:
@@ -363,7 +357,6 @@ class Gumlet(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        webhook_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -392,7 +385,6 @@ class Gumlet(SyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
-            webhook_secret=webhook_secret or self.webhook_secret,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -429,13 +421,11 @@ class Gumlet(SyncAPIClient):
 class AsyncGumlet(AsyncAPIClient):
     # client options
     api_key: str
-    webhook_secret: str | None
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        webhook_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -459,7 +449,6 @@ class AsyncGumlet(AsyncAPIClient):
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `api_key` from `API_KEY`
-        - `webhook_secret` from `GUMLET_WEBHOOK_SECRET`
         """
         if api_key is None:
             api_key = os.environ.get("API_KEY")
@@ -468,9 +457,6 @@ class AsyncGumlet(AsyncAPIClient):
                 "The api_key client option must be set either by passing api_key to the client or by setting the API_KEY environment variable"
             )
         self.api_key = api_key
-        if webhook_secret is None:
-            webhook_secret = os.environ.get("GUMLET_WEBHOOK_SECRET")
-        self.webhook_secret = webhook_secret
         if base_url is None:
             base_url = os.environ.get("GUMLET_BASE_URL")
         if base_url is None:
@@ -700,7 +686,6 @@ class AsyncGumlet(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        webhook_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
@@ -729,7 +714,6 @@ class AsyncGumlet(AsyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
-            webhook_secret=webhook_secret or self.webhook_secret,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,

@@ -25,6 +25,7 @@ from ._exceptions import (
     PermissionDeniedError,
     UnprocessableEntityError,
     APIResponseValidationError,
+    APIWebhookValidationError,
 )
 from ._base_client import DefaultHttpxClient, DefaultAioHttpClient, DefaultAsyncHttpxClient
 from ._utils._logs import setup_logging as _setup_logging
@@ -47,6 +48,7 @@ __all__ = [
     "APITimeoutError",
     "APIConnectionError",
     "APIResponseValidationError",
+    "APIWebhookValidationError",
     "BadRequestError",
     "AuthenticationError",
     "PermissionDeniedError",

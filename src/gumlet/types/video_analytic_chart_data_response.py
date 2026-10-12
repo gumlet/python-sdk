@@ -45,3 +45,5 @@ class VideoAnalyticChartDataResponse(BaseModel):
     unique_views: Optional[List[UniqueView]] = None
 
     analytics_data: Optional[AnalyticsData] = None
+
+    breakdowns: Optional[object] = None

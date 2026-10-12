@@ -815,7 +815,7 @@ def _smoke_case_61() -> None:
         cdn_cache_time=0,
         is_active=False,
         cname=[""],
-        fallback_origins=[{"name": "", "type": "dostorage", "replace_operation": {}}],
+        fallback_origins=[{"name": "", "type": "dostorage"}],
         secure_urls=False,
     )
 

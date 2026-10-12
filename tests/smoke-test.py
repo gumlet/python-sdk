@@ -816,6 +816,7 @@ def _smoke_case_61() -> None:
         is_active=False,
         cname=[""],
         fallback_origins=[{"conditions": [""], "name": "", "type": "dostorage", "replace_operation": {}}],
+        secure_urls=False,
     )
 
 
@@ -1203,7 +1204,6 @@ def _smoke_case_100() -> None:
 def _smoke_case_101() -> None:
     video_analytic = client.video_analytics.chart_data(
         metrics=[""],
-        workspace_id="",
         date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
         group_by="daily",
     )
@@ -1217,6 +1217,7 @@ def _smoke_case_102() -> None:
         filters=[{"name": "meta_browser", "value": "", "operator": "equals"}],
         group_by="daily",
         chart_dimension={"group_by": [{}]},
+        download=False,
     )
 
 

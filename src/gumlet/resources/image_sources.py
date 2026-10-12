@@ -246,6 +246,7 @@ class ImageSourcesResource(SyncAPIResource):
             "linode",
             "backblaze",
             "cloudflare",
+            "imgix",
         ]
         | Omit = omit,
         webfolder: image_source_update_params.Webfolder | Omit = omit,
@@ -269,6 +270,7 @@ class ImageSourcesResource(SyncAPIResource):
         is_active: bool | Omit = omit,
         cname: SequenceNotStr[str] | Omit = omit,
         fallback_origins: Iterable[image_source_update_params.FallbackOrigin] | Omit = omit,
+        secure_urls: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -303,6 +305,7 @@ class ImageSourcesResource(SyncAPIResource):
             is_active: Enable / disable source.
             cname: List of verified CNAMEs
             fallback_origins: List of fallback origins
+            secure_urls: Whether the URL signing is enabled
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -353,6 +356,7 @@ class ImageSourcesResource(SyncAPIResource):
                     "is_active": is_active,
                     "cname": cname,
                     "fallback_origins": fallback_origins,
+                    "secure_urls": secure_urls,
                 },
                 image_source_update_params.ImageSourceUpdateParams,
             ),
@@ -713,6 +717,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             "linode",
             "backblaze",
             "cloudflare",
+            "imgix",
         ]
         | Omit = omit,
         webfolder: image_source_update_params.Webfolder | Omit = omit,
@@ -736,6 +741,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         is_active: bool | Omit = omit,
         cname: SequenceNotStr[str] | Omit = omit,
         fallback_origins: Iterable[image_source_update_params.FallbackOrigin] | Omit = omit,
+        secure_urls: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -770,6 +776,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             is_active: Enable / disable source.
             cname: List of verified CNAMEs
             fallback_origins: List of fallback origins
+            secure_urls: Whether the URL signing is enabled
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -820,6 +827,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
                     "is_active": is_active,
                     "cname": cname,
                     "fallback_origins": fallback_origins,
+                    "secure_urls": secure_urls,
                 },
                 image_source_update_params.ImageSourceUpdateParams,
             ),

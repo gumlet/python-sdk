@@ -1446,7 +1446,6 @@ This endpoint retrieves viewer analytics data. This endpoint is use for deep ins
 ```python
 video_analytic = client.video_analytics.chart_data(
     metrics=[""],
-    workspace_id="",
     date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     group_by="daily",
 )

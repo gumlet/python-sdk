@@ -16,8 +16,8 @@ class VideoAnalyticChartDataParams(TypedDict, total=False):
     metrics: Required[SequenceNotStr[str]]
     """Get data for one or more `metrics` in the same request. Please add any of these metrics. `views`, `unique_views`, `impressions`. `completion_percent_by_views`, `playing_time`, `concurrent_users`, `widget_form_submitted`, `cta_clicks`"""
 
-    workspace_id: Required[str]
-    """The five to ten character unique identifier of the Gumlet workspace ID available on the Video Workspaces."""
+    workspace_id: str
+    """Gumlet workspace ID"""
 
     date_range: Required[DateRange]
     """
@@ -33,6 +33,9 @@ class VideoAnalyticChartDataParams(TypedDict, total=False):
 
     chart_dimension: ChartDimension
     """Group metrics by the selected dimension. You can select up to 3 dimensions for nested category results; results follow the selection order."""
+
+    download: bool
+    """Whether the request is to download the chart data"""
 
 
 class ChartDimensionGroupBy(TypedDict, total=False):

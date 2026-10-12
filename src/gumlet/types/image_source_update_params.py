@@ -49,6 +49,7 @@ class ImageSourceUpdateParams(TypedDict, total=False):
         "linode",
         "backblaze",
         "cloudflare",
+        "imgix",
     ]
 
     webfolder: Webfolder
@@ -109,6 +110,9 @@ class ImageSourceUpdateParams(TypedDict, total=False):
 
     fallback_origins: Iterable[FallbackOrigin]
     """List of fallback origins"""
+
+    secure_urls: bool
+    """Whether the URL signing is enabled"""
 
 
 class FallbackOriginAzure(TypedDict, total=False):

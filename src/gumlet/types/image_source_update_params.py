@@ -244,7 +244,7 @@ class FallbackOriginCondition(TypedDict, total=False):
 
 
 class FallbackOrigin(TypedDict, total=False):
-    conditions: Required[Iterable[FallbackOriginCondition]]
+    conditions: Iterable[FallbackOriginCondition]
 
     name: Required[str]
     """Name of fallback"""

@@ -269,7 +269,7 @@ class FallbackOrigin(TypedDict, total=False):
     ]
     """Type of fallback origin"""
 
-    replace_operation: Required[FallbackOriginReplaceOperation]
+    replace_operation: FallbackOriginReplaceOperation
 
     webfolder: FallbackOriginWebfolder
     """This is a required field if source type is webfolder."""

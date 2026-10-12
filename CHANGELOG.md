@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/gumlet/python-sdk/compare/v1.1.0...v1.2.0) (2026-10-12)
+
+
+### Features
+
+* **api:** update SDK surface (2 changes) ([83d7f9f](https://github.com/gumlet/python-sdk/commit/83d7f9f5fe6e2cb5c5c746103ad9337bf9293dc2))
+
+
+### Chores
+
+* **api:** update generated SDK content ([cf74657](https://github.com/gumlet/python-sdk/commit/cf74657cc215aba1a2e3c90f1d11b3d2b0c7ebc0))
+
 ## [1.1.0](https://github.com/gumlet/python-sdk/compare/v1.0.14...v1.1.0) (2026-10-06)
 
 

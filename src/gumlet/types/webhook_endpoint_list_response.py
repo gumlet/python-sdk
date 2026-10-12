@@ -11,7 +11,7 @@ __all__ = ["WebhookEndpointListResponse", "AllWebhook"]
 
 
 class AllWebhook(BaseModel):
-    id: Optional[str] = None
+    id: str
     """Webhook ID"""
 
     url: Optional[str] = None

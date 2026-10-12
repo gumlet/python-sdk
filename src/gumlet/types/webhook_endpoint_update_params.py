@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import List
 from typing_extensions import Literal, TypedDict
+from .._types import SequenceNotStr
 
 __all__ = ["WebhookEndpointUpdateParams"]
 
@@ -50,5 +51,5 @@ class WebhookEndpointUpdateParams(TypedDict, total=False):
     ]
     """Events that invoke this webhook. `status` subscribes to every video asset status event. `live-video-status` subscribes to every live video status event. Any other value subscribes to that event only."""
 
-    sources: str
+    sources: SequenceNotStr[str]
     """List of video collection identifiers for which webhooks are needed to be invoked."""

@@ -66,6 +66,8 @@ class AllWebhook(BaseModel):
     secret_token: Optional[str] = None
     """Secret you supplied when creating the webhook. Gumlet sends this value in the `x-gumlet-token` header of each webhook POST."""
 
+    live_sources: Optional[List[str]] = None
+
 
 class WebhookEndpointListResponse(BaseModel):
     all_webhooks: List[AllWebhook]

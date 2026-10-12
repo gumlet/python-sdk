@@ -704,7 +704,7 @@ def _smoke_case_53() -> None:
         url="",
         secret_token="",
         triggers=["status"],
-        sources="",
+        sources=[""],
     )
 
 
@@ -815,7 +815,9 @@ def _smoke_case_61() -> None:
         cdn_cache_time=0,
         is_active=False,
         cname=[""],
-        fallback_origins=[{"conditions": [""], "name": "", "type": "dostorage", "replace_operation": {}}],
+        fallback_origins=[
+            {"conditions": [{"function": "", "value": ""}], "name": "", "type": "dostorage", "replace_operation": {}}
+        ],
         secure_urls=False,
     )
 

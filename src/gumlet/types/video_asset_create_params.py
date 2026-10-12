@@ -27,7 +27,7 @@ class VideoAssetCreateParams(TypedDict, total=False):
     profile_id: str
     """Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile."""
 
-    format: Required[Literal["ABR", "MP4"]]
+    format: Literal["ABR", "MP4"]
     """Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`."""
 
     tag: SequenceNotStr[str]

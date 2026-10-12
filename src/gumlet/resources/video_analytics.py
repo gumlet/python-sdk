@@ -44,11 +44,12 @@ class VideoAnalyticsResource(SyncAPIResource):
         self,
         *,
         metrics: SequenceNotStr[str],
-        workspace_id: str,
+        workspace_id: str | Omit = omit,
         date_range: video_analytic_chart_data_params.DateRange,
         filters: Iterable[video_analytic_chart_data_params.Filter] | Omit = omit,
         group_by: Literal["daily", "weekly", "monthly"] | Omit = omit,
         chart_dimension: video_analytic_chart_data_params.ChartDimension | Omit = omit,
+        download: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -61,11 +62,12 @@ class VideoAnalyticsResource(SyncAPIResource):
 
         Args:
             metrics: Get data for one or more `metrics` in the same request. Please add any of these metrics. `views`, `unique_views`, `impressions`. `completion_percent_by_views`, `playing_time`, `concurrent_users`, `widget_form_submitted`, `cta_clicks`
-            workspace_id: The five to ten character unique identifier of the Gumlet workspace ID available on the Video Workspaces.
+            workspace_id: Gumlet workspace ID
             date_range: The timeframe to get the data for.
             filters: Build *segments* of users using multiple filters on the data, `value` should be an *exact match*
             group_by: Data can be grouped by `daily`, `weekly` or `monthly`.
             chart_dimension: Group metrics by the selected dimension. You can select up to 3 dimensions for nested category results; results follow the selection order.
+            download: Whether the request is to download the chart data
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -78,7 +80,6 @@ class VideoAnalyticsResource(SyncAPIResource):
             ```python
             video_analytic = client.video_analytics.chart_data(
                 metrics=[""],
-                workspace_id="",
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
             )
@@ -94,6 +95,7 @@ class VideoAnalyticsResource(SyncAPIResource):
                     "filters": filters,
                     "group_by": group_by,
                     "chart_dimension": chart_dimension,
+                    "download": download,
                 },
                 video_analytic_chart_data_params.VideoAnalyticChartDataParams,
             ),
@@ -233,11 +235,12 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
         self,
         *,
         metrics: SequenceNotStr[str],
-        workspace_id: str,
+        workspace_id: str | Omit = omit,
         date_range: video_analytic_chart_data_params.DateRange,
         filters: Iterable[video_analytic_chart_data_params.Filter] | Omit = omit,
         group_by: Literal["daily", "weekly", "monthly"] | Omit = omit,
         chart_dimension: video_analytic_chart_data_params.ChartDimension | Omit = omit,
+        download: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -250,11 +253,12 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
 
         Args:
             metrics: Get data for one or more `metrics` in the same request. Please add any of these metrics. `views`, `unique_views`, `impressions`. `completion_percent_by_views`, `playing_time`, `concurrent_users`, `widget_form_submitted`, `cta_clicks`
-            workspace_id: The five to ten character unique identifier of the Gumlet workspace ID available on the Video Workspaces.
+            workspace_id: Gumlet workspace ID
             date_range: The timeframe to get the data for.
             filters: Build *segments* of users using multiple filters on the data, `value` should be an *exact match*
             group_by: Data can be grouped by `daily`, `weekly` or `monthly`.
             chart_dimension: Group metrics by the selected dimension. You can select up to 3 dimensions for nested category results; results follow the selection order.
+            download: Whether the request is to download the chart data
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -267,7 +271,6 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
             ```python
             video_analytic = await client.video_analytics.chart_data(
                 metrics=[""],
-                workspace_id="",
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
             )
@@ -283,6 +286,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
                     "filters": filters,
                     "group_by": group_by,
                     "chart_dimension": chart_dimension,
+                    "download": download,
                 },
                 video_analytic_chart_data_params.VideoAnalyticChartDataParams,
             ),

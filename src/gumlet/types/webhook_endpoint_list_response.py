@@ -11,7 +11,7 @@ __all__ = ["WebhookEndpointListResponse", "AllWebhook"]
 
 
 class AllWebhook(BaseModel):
-    id: Optional[str] = None
+    id: str
     """Webhook ID"""
 
     url: Optional[str] = None
@@ -65,6 +65,8 @@ class AllWebhook(BaseModel):
 
     secret_token: Optional[str] = None
     """Secret you supplied when creating the webhook. Gumlet sends this value in the `x-gumlet-token` header of each webhook POST."""
+
+    live_sources: Optional[List[str]] = None
 
 
 class WebhookEndpointListResponse(BaseModel):

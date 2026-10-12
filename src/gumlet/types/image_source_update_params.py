@@ -20,6 +20,7 @@ __all__ = [
     "Cloudinary",
     "Azure",
     "FallbackOrigin",
+    "FallbackOriginCondition",
     "FallbackOriginReplaceOperation",
     "FallbackOriginWebfolder",
     "FallbackOriginAws",
@@ -50,6 +51,8 @@ class ImageSourceUpdateParams(TypedDict, total=False):
         "backblaze",
         "cloudflare",
         "imgix",
+        "wordpress",
+        "hetzner",
     ]
 
     webfolder: Webfolder
@@ -234,8 +237,14 @@ class FallbackOriginReplaceOperation(_FallbackOriginReplaceOperationReservedKeyw
     to: str
 
 
+class FallbackOriginCondition(TypedDict, total=False):
+    function: Required[str]
+
+    value: Required[str]
+
+
 class FallbackOrigin(TypedDict, total=False):
-    conditions: Required[SequenceNotStr[str]]
+    conditions: Iterable[FallbackOriginCondition]
 
     name: Required[str]
     """Name of fallback"""
@@ -260,7 +269,7 @@ class FallbackOrigin(TypedDict, total=False):
     ]
     """Type of fallback origin"""
 
-    replace_operation: Required[FallbackOriginReplaceOperation]
+    replace_operation: FallbackOriginReplaceOperation
 
     webfolder: FallbackOriginWebfolder
     """This is a required field if source type is webfolder."""

@@ -409,3 +409,5 @@ class ImageSourceUpdateResponse(BaseModel):
     response_headers: Optional[List[object]] = None
 
     imgix: Optional[object] = None
+
+    temp_cname: Optional[List[str]] = None

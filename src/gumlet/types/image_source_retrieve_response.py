@@ -24,6 +24,7 @@ __all__ = [
     "Cloudinary",
     "Azure",
     "FallbackOrigin",
+    "FallbackOriginCondition",
     "FallbackOriginReplaceOperation",
     "FallbackOriginWebfolder",
     "FallbackOriginAws",
@@ -156,6 +157,12 @@ class FallbackOriginReplaceOperation(BaseModel):
     to: Optional[str] = None
 
 
+class FallbackOriginCondition(BaseModel):
+    function: str
+
+    value: str
+
+
 class FallbackOrigin(BaseModel):
     name: str
 
@@ -176,7 +183,7 @@ class FallbackOrigin(BaseModel):
         "linode",
     ]
 
-    conditions: Optional[List[str]] = None
+    conditions: Optional[List[FallbackOriginCondition]] = None
 
     replace_operation: Optional[FallbackOriginReplaceOperation] = None
 
@@ -422,3 +429,5 @@ class ImageSourceRetrieveResponse(BaseModel):
     wordpress: Optional[Wordpress] = None
 
     response_headers: Optional[List[object]] = None
+
+    temp_cname: Optional[List[str]] = None

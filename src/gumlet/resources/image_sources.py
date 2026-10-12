@@ -248,6 +248,7 @@ class ImageSourcesResource(SyncAPIResource):
             "cloudflare",
             "imgix",
             "wordpress",
+            "hetzner",
         ]
         | Omit = omit,
         webfolder: image_source_update_params.Webfolder | Omit = omit,
@@ -720,6 +721,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             "cloudflare",
             "imgix",
             "wordpress",
+            "hetzner",
         ]
         | Omit = omit,
         webfolder: image_source_update_params.Webfolder | Omit = omit,

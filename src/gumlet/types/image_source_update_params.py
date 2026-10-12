@@ -52,6 +52,7 @@ class ImageSourceUpdateParams(TypedDict, total=False):
         "cloudflare",
         "imgix",
         "wordpress",
+        "hetzner",
     ]
 
     webfolder: Webfolder

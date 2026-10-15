@@ -44,7 +44,7 @@ class VideoAssetAnalyticsParams(TypedDict, total=False):
 
 class DateRange(TypedDict, total=False):
     start_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
-    """ISO 8601 start timestamp"""
+    """Date in yyyy-MM-dd format"""
 
     end_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
-    """ISO 8601 end timestamp"""
+    """Date in yyyy-MM-dd format"""

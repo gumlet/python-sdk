@@ -19,7 +19,7 @@ class VideoAnalyticAggregatedDataParams(TypedDict, total=False):
     """The unique identifier of the Gumlet workspace ID available on the Video Workspaces."""
 
     timeframe: Required[Timeframe]
-    """The timeframe to get the data for. Currently we only support maximum difference between `start_at` and `end_at` to be *60 days*"""
+    """The timeframe to get the data for. The maximum range between start_at and end_at is 60 days."""
 
     filters: Iterable[Filter]
     """Get aggregations for metrics with multiple filters, `value` should be an exact match"""
@@ -73,11 +73,11 @@ class Filter(TypedDict, total=False):
 
 
 class Timeframe(TypedDict, total=False):
-    start_at: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
-    """Use <b>yyyy-MM-dd</b> format"""
+    start_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
+    """Date in yyyy-MM-dd format"""
 
-    end_at: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
-    """Use <b>yyyy-MM-dd</b> format"""
+    end_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
+    """Date in yyyy-MM-dd format"""
 
 
 class Aggregate(TypedDict, total=False):

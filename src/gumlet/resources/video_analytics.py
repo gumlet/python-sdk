@@ -4,9 +4,8 @@ from __future__ import annotations
 
 import httpx
 
-from typing import Iterable
+from typing import Iterable, List
 from typing_extensions import Literal
-from .._types import SequenceNotStr
 
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
@@ -43,7 +42,18 @@ class VideoAnalyticsResource(SyncAPIResource):
     def chart_data(
         self,
         *,
-        metrics: SequenceNotStr[str],
+        metrics: List[
+            Literal[
+                "views",
+                "unique_views",
+                "impressions",
+                "completion_percent_by_views",
+                "playing_time",
+                "concurrent_users",
+                "widget_form_submitted",
+                "cta_clicks",
+            ]
+        ],
         workspace_id: str | Omit = omit,
         date_range: video_analytic_chart_data_params.DateRange,
         filters: Iterable[video_analytic_chart_data_params.Filter] | Omit = omit,
@@ -61,9 +71,9 @@ class VideoAnalyticsResource(SyncAPIResource):
         This endpoint retrieves viewer analytics data. This endpoint is use for deep insights on the analytics data.
 
         Args:
-            metrics: Get data for one or more `metrics` in the same request. Please add any of these metrics. `views`, `unique_views`, `impressions`. `completion_percent_by_views`, `playing_time`, `concurrent_users`, `widget_form_submitted`, `cta_clicks`
+            metrics: Get data for one or more metrics in the same request. Supported values: `views`, `unique_views`, `impressions`, `completion_percent_by_views`, `playing_time`, `concurrent_users`, `widget_form_submitted`, and `cta_clicks`.
             workspace_id: Gumlet workspace ID
-            date_range: The timeframe to get the data for.
+            date_range: The timeframe to get the data for. The maximum range between start_at and end_at is 60 days.
             filters: Build *segments* of users using multiple filters on the data, `value` should be an *exact match*
             group_by: Data can be grouped by `daily`, `weekly` or `monthly`.
             chart_dimension: Group metrics by the selected dimension. You can select up to 3 dimensions for nested category results; results follow the selection order.
@@ -79,7 +89,7 @@ class VideoAnalyticsResource(SyncAPIResource):
         Example:
             ```python
             video_analytic = client.video_analytics.chart_data(
-                metrics=[""],
+                metrics=["views"],
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
             )
@@ -123,7 +133,7 @@ class VideoAnalyticsResource(SyncAPIResource):
         This endpoint retrieves breakdown data of the given metrics by given breakdown field
 
         Args:
-            date_range: The timeframe to get the data for.
+            date_range: The timeframe to get the data for. The maximum range between start_at and end_at is 60 days.
             filters: Build *segments* of users using multiple filters on the data, `value` should be an *exact match*
             breakdowns: Breakdown fields and metrics to retrieve data for. Supports 1 to 3 breakdowns per request.
             workspace_id: The five to ten character unique identifier of the Gumlet workspace ID available on the Video Workspaces.
@@ -185,7 +195,7 @@ class VideoAnalyticsResource(SyncAPIResource):
         Args:
             aggregate: Aggregate multiple metrics at the same time
             workspace_id: The unique identifier of the Gumlet workspace ID available on the Video Workspaces.
-            timeframe: The timeframe to get the data for. Currently we only support maximum difference between `start_at` and `end_at` to be *60 days*
+            timeframe: The timeframe to get the data for. The maximum range between start_at and end_at is 60 days.
             filters: Get aggregations for metrics with multiple filters, `value` should be an exact match
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
@@ -200,7 +210,7 @@ class VideoAnalyticsResource(SyncAPIResource):
             video_analytic = client.video_analytics.aggregated_data(
                 aggregate=[{"metric": "views", "function": "sum"}],
                 workspace_id="",
-                timeframe={},
+                timeframe={"start_at": "2024-01-01", "end_at": "2024-01-01"},
             )
             ```
         """
@@ -234,7 +244,18 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
     async def chart_data(
         self,
         *,
-        metrics: SequenceNotStr[str],
+        metrics: List[
+            Literal[
+                "views",
+                "unique_views",
+                "impressions",
+                "completion_percent_by_views",
+                "playing_time",
+                "concurrent_users",
+                "widget_form_submitted",
+                "cta_clicks",
+            ]
+        ],
         workspace_id: str | Omit = omit,
         date_range: video_analytic_chart_data_params.DateRange,
         filters: Iterable[video_analytic_chart_data_params.Filter] | Omit = omit,
@@ -252,9 +273,9 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
         This endpoint retrieves viewer analytics data. This endpoint is use for deep insights on the analytics data.
 
         Args:
-            metrics: Get data for one or more `metrics` in the same request. Please add any of these metrics. `views`, `unique_views`, `impressions`. `completion_percent_by_views`, `playing_time`, `concurrent_users`, `widget_form_submitted`, `cta_clicks`
+            metrics: Get data for one or more metrics in the same request. Supported values: `views`, `unique_views`, `impressions`, `completion_percent_by_views`, `playing_time`, `concurrent_users`, `widget_form_submitted`, and `cta_clicks`.
             workspace_id: Gumlet workspace ID
-            date_range: The timeframe to get the data for.
+            date_range: The timeframe to get the data for. The maximum range between start_at and end_at is 60 days.
             filters: Build *segments* of users using multiple filters on the data, `value` should be an *exact match*
             group_by: Data can be grouped by `daily`, `weekly` or `monthly`.
             chart_dimension: Group metrics by the selected dimension. You can select up to 3 dimensions for nested category results; results follow the selection order.
@@ -270,7 +291,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
         Example:
             ```python
             video_analytic = await client.video_analytics.chart_data(
-                metrics=[""],
+                metrics=["views"],
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
             )
@@ -314,7 +335,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
         This endpoint retrieves breakdown data of the given metrics by given breakdown field
 
         Args:
-            date_range: The timeframe to get the data for.
+            date_range: The timeframe to get the data for. The maximum range between start_at and end_at is 60 days.
             filters: Build *segments* of users using multiple filters on the data, `value` should be an *exact match*
             breakdowns: Breakdown fields and metrics to retrieve data for. Supports 1 to 3 breakdowns per request.
             workspace_id: The five to ten character unique identifier of the Gumlet workspace ID available on the Video Workspaces.
@@ -376,7 +397,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
         Args:
             aggregate: Aggregate multiple metrics at the same time
             workspace_id: The unique identifier of the Gumlet workspace ID available on the Video Workspaces.
-            timeframe: The timeframe to get the data for. Currently we only support maximum difference between `start_at` and `end_at` to be *60 days*
+            timeframe: The timeframe to get the data for. The maximum range between start_at and end_at is 60 days.
             filters: Get aggregations for metrics with multiple filters, `value` should be an exact match
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
@@ -391,7 +412,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
             video_analytic = await client.video_analytics.aggregated_data(
                 aggregate=[{"metric": "views", "function": "sum"}],
                 workspace_id="",
-                timeframe={},
+                timeframe={"start_at": "2024-01-01", "end_at": "2024-01-01"},
             )
             ```
         """

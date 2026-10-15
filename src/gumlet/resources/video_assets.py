@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import httpx
 
-from typing import Dict, Iterable, List
+from typing import Dict, Iterable, List, Union
+from datetime import date
 from typing_extensions import Literal
 from .._types import SequenceNotStr
 
@@ -630,8 +631,8 @@ class VideoAssetsResource(SyncAPIResource):
         status: str | Omit = omit,
         tag: str | Omit = omit,
         playlist_id: str | Omit = omit,
-        start_date: str | Omit = omit,
-        end_date: str | Omit = omit,
+        start_date: Union[str, date] | Omit = omit,
+        end_date: Union[str, date] | Omit = omit,
         min_duration: float | Omit = omit,
         max_duration: float | Omit = omit,
         sort_by: Literal["title", "duration", "uploaded_at", "created_at"] | Omit = omit,
@@ -658,8 +659,8 @@ class VideoAssetsResource(SyncAPIResource):
             status: Comma-separated asset status values.
             tag: Comma-separated asset tags.
             playlist_id: Filter assets to a playlist.
-            start_date: Asset created_at lower bound.
-            end_date: Asset created_at upper bound.
+            start_date: Asset created_at lower bound. Date in yyyy-MM-dd format.
+            end_date: Asset created_at upper bound. Date in yyyy-MM-dd format.
             min_duration: Minimum asset duration in seconds.
             max_duration: Maximum asset duration in seconds.
             sort_by: Sort assets by a supported field.
@@ -1571,8 +1572,8 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         status: str | Omit = omit,
         tag: str | Omit = omit,
         playlist_id: str | Omit = omit,
-        start_date: str | Omit = omit,
-        end_date: str | Omit = omit,
+        start_date: Union[str, date] | Omit = omit,
+        end_date: Union[str, date] | Omit = omit,
         min_duration: float | Omit = omit,
         max_duration: float | Omit = omit,
         sort_by: Literal["title", "duration", "uploaded_at", "created_at"] | Omit = omit,
@@ -1599,8 +1600,8 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             status: Comma-separated asset status values.
             tag: Comma-separated asset tags.
             playlist_id: Filter assets to a playlist.
-            start_date: Asset created_at lower bound.
-            end_date: Asset created_at upper bound.
+            start_date: Asset created_at lower bound. Date in yyyy-MM-dd format.
+            end_date: Asset created_at upper bound. Date in yyyy-MM-dd format.
             min_duration: Minimum asset duration in seconds.
             max_duration: Maximum asset duration in seconds.
             sort_by: Sort assets by a supported field.

@@ -1445,7 +1445,7 @@ This endpoint retrieves viewer analytics data. This endpoint is use for deep ins
 
 ```python
 video_analytic = client.video_analytics.chart_data(
-    metrics=[""],
+    metrics=["views"],
     date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     group_by="daily",
 )
@@ -1485,7 +1485,7 @@ This endpoint retrieves aggregated data of the given metrics.
 video_analytic = client.video_analytics.aggregated_data(
     aggregate=[{"metric": "views", "function": "sum"}],
     workspace_id="",
-    timeframe={},
+    timeframe={"start_at": "2024-01-01", "end_at": "2024-01-01"},
 )
 ```
 

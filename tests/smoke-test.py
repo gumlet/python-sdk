@@ -1203,7 +1203,7 @@ def _smoke_case_100() -> None:
 
 def _smoke_case_101() -> None:
     video_analytic = client.video_analytics.chart_data(
-        metrics=[""],
+        metrics=["views"],
         date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
         group_by="daily",
     )
@@ -1211,7 +1211,7 @@ def _smoke_case_101() -> None:
 
 def _smoke_case_102() -> None:
     video_analytic = client.video_analytics.chart_data(
-        metrics=[""],
+        metrics=["views"],
         workspace_id="",
         date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
         filters=[{"name": "meta_browser", "value": "", "operator": "equals"}],
@@ -1237,7 +1237,7 @@ def _smoke_case_104() -> None:
     video_analytic = client.video_analytics.aggregated_data(
         aggregate=[{"metric": "views", "function": "sum"}],
         workspace_id="",
-        timeframe={},
+        timeframe={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     )
 
 

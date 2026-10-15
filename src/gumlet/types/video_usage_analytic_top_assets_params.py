@@ -2,17 +2,21 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing import Union
+from datetime import date
+from typing_extensions import Annotated, Required, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["VideoUsageAnalyticTopAssetsParams"]
 
 
 class VideoUsageAnalyticTopAssetsParams(TypedDict, total=False):
-    start_at: Required[str]
-    """Date string in "yyyy-mm-dd" format"""
+    start_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
+    """Date in yyyy-MM-dd format"""
 
-    end_at: Required[str]
-    """Date string in "yyyy-mm-dd" format"""
+    end_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
+    """Date in yyyy-MM-dd format"""
 
     collection_id: str
     """Gumlet workspace ID"""

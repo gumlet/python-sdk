@@ -52,7 +52,7 @@ class Filters(TypedDict, total=False):
 
 class DateRange(TypedDict, total=False):
     start_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
-    """The starting date to consider"""
+    """Date in yyyy-MM-dd format"""
 
     end_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
-    """The ending date to consider"""
+    """Date in yyyy-MM-dd format"""

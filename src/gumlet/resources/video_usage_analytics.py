@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import httpx
 
-from typing import List
+from typing import List, Union
+from datetime import date
 from typing_extensions import Literal
 
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -111,8 +112,8 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
     def top_assets(
         self,
         *,
-        start_at: str,
-        end_at: str,
+        start_at: Union[str, date],
+        end_at: Union[str, date],
         collection_id: str | Omit = omit,
         page: str | Omit = omit,
         page_size: str | Omit = omit,
@@ -127,8 +128,8 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
         This endpoint lists top streamed assets in a video collection
 
         Args:
-            start_at: Date string in "yyyy-mm-dd" format
-            end_at: Date string in "yyyy-mm-dd" format
+            start_at: Date in yyyy-MM-dd format
+            end_at: Date in yyyy-MM-dd format
             collection_id: Gumlet workspace ID
             page: Page number of the response.
             page_size: Assets to list per page.
@@ -258,8 +259,8 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
     async def top_assets(
         self,
         *,
-        start_at: str,
-        end_at: str,
+        start_at: Union[str, date],
+        end_at: Union[str, date],
         collection_id: str | Omit = omit,
         page: str | Omit = omit,
         page_size: str | Omit = omit,
@@ -274,8 +275,8 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
         This endpoint lists top streamed assets in a video collection
 
         Args:
-            start_at: Date string in "yyyy-mm-dd" format
-            end_at: Date string in "yyyy-mm-dd" format
+            start_at: Date in yyyy-MM-dd format
+            end_at: Date in yyyy-MM-dd format
             collection_id: Gumlet workspace ID
             page: Page number of the response.
             page_size: Assets to list per page.

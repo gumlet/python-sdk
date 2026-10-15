@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
-from typing import List
-from typing_extensions import Literal, Required, TypedDict
+from typing import List, Union
+from datetime import date
+from typing_extensions import Annotated, Literal, Required, TypedDict
 from .._types import SequenceNotStr
+
+from .._utils import PropertyInfo
 
 __all__ = ["AuditLogFetchParams", "DateRange"]
 
@@ -70,8 +73,8 @@ class AuditLogFetchParams(TypedDict, total=False):
 
 
 class DateRange(TypedDict, total=False):
-    start_at: Required[str]
-    """Starting date for audit logs. It's a string in YYYY-MM-DD format."""
+    start_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
+    """Date in yyyy-MM-dd format"""
 
-    end_at: Required[str]
-    """Ending date for audit logs. It's a string in YYYY-MM-DD format."""
+    end_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
+    """Date in yyyy-MM-dd format"""

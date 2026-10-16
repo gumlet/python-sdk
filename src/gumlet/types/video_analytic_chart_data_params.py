@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Union
+from typing import Iterable, List, Union
 from datetime import date
 from typing_extensions import Annotated, Literal, Required, TypedDict
-from .._types import SequenceNotStr
 
 from .._utils import PropertyInfo
 
@@ -13,17 +12,27 @@ __all__ = ["VideoAnalyticChartDataParams", "DateRange", "Filter", "ChartDimensio
 
 
 class VideoAnalyticChartDataParams(TypedDict, total=False):
-    metrics: Required[SequenceNotStr[str]]
-    """Get data for one or more `metrics` in the same request. Please add any of these metrics. `views`, `unique_views`, `impressions`. `completion_percent_by_views`, `playing_time`, `concurrent_users`, `widget_form_submitted`, `cta_clicks`"""
+    metrics: Required[
+        List[
+            Literal[
+                "views",
+                "unique_views",
+                "impressions",
+                "completion_percent_by_views",
+                "playing_time",
+                "concurrent_users",
+                "widget_form_submitted",
+                "cta_clicks",
+            ]
+        ]
+    ]
+    """Get data for one or more metrics in the same request. Supported values: `views`, `unique_views`, `impressions`, `completion_percent_by_views`, `playing_time`, `concurrent_users`, `widget_form_submitted`, and `cta_clicks`."""
 
     workspace_id: str
     """Gumlet workspace ID"""
 
     date_range: Required[DateRange]
-    """
-    The timeframe to get the data for.
-    Currently, we only support a maximum of *60 days* between `start_at` and `end_at`.
-    """
+    """The timeframe to get the data for. The maximum range between start_at and end_at is 60 days."""
 
     filters: Iterable[Filter]
     """Build *segments* of users using multiple filters on the data, `value` should be an *exact match*"""
@@ -116,7 +125,7 @@ class Filter(TypedDict, total=False):
 
 class DateRange(TypedDict, total=False):
     start_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
-    """Use <b>yyyy-MM-dd</b> format"""
+    """Date in yyyy-MM-dd format"""
 
     end_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
-    """Use <b>yyyy-MM-dd</b> format"""
+    """Date in yyyy-MM-dd format"""

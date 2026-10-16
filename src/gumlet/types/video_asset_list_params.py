@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Union
+from datetime import date
 from typing_extensions import Annotated, Literal, TypedDict
 
 from .._utils import PropertyInfo
@@ -28,11 +30,11 @@ class VideoAssetListParams(TypedDict, total=False):
     playlist_id: str
     """Filter assets to a playlist."""
 
-    start_date: str
-    """Asset created_at lower bound."""
+    start_date: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
+    """Asset created_at lower bound. Date in yyyy-MM-dd format."""
 
-    end_date: str
-    """Asset created_at upper bound."""
+    end_date: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
+    """Asset created_at upper bound. Date in yyyy-MM-dd format."""
 
     min_duration: float
     """Minimum asset duration in seconds."""

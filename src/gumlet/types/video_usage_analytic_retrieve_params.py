@@ -25,7 +25,7 @@ class VideoUsageAnalyticRetrieveParams(TypedDict, total=False):
             ]
         ]
     ]
-    """Define the metric you need the data for. Currently we only support `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `bandwidth_consumption_by_collection`, `errored_videos` and `widget_data`"""
+    """Define the metric you need the data for. Supported values: `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `drm_requests`, `ai_credit_usage`, and `errored_videos`."""
 
     date_range: Required[DateRange]
     """The timeframe to get the data for. Currently we only support a maximum of 60 days between `start_at` and `end_at`."""
@@ -52,7 +52,7 @@ class Filters(TypedDict, total=False):
 
 class DateRange(TypedDict, total=False):
     start_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
-    """The starting date to consider"""
+    """Date in yyyy-MM-dd format"""
 
     end_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
-    """The ending date to consider"""
+    """Date in yyyy-MM-dd format"""

@@ -281,7 +281,7 @@ class ImageSourcesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ImageSourceUpdateResponse:
         """
-        This endpoint allows users to update image source that has previously been created.
+        Update settings on an image source that already exists. This does not create a source or purge cached images.
 
         Args:
             image_source_id: image source id which you want to update
@@ -754,7 +754,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ImageSourceUpdateResponse:
         """
-        This endpoint allows users to update image source that has previously been created.
+        Update settings on an image source that already exists. This does not create a source or purge cached images.
 
         Args:
             image_source_id: image source id which you want to update

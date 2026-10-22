@@ -60,6 +60,9 @@ class VideoProfileUpdateParams(TypedDict, total=False):
     generate_subtitles: GenerateSubtitles
     """Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). You can remove this object if you don't want to generate AI subtitles."""
 
+    transcribe: bool
+    """To generate the subtitles in the native audio."""
+
     mp4_access: bool
     """Creates `mp4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**"""
 
@@ -88,9 +91,6 @@ class VideoProfileUpdateParams(TypedDict, total=False):
 class GenerateSubtitles(TypedDict, total=False):
     subtitle_languages: SequenceNotStr[str]
     """Array of string of language codes for which subtitle needs to be generated. Maximum four language codes are allowed."""
-
-    transcribe: bool
-    """This is by default true to generate the subtitles in the native audio."""
 
 
 class AnimatedGif(TypedDict, total=False):

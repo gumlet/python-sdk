@@ -52,6 +52,7 @@ class VideoProfilesResource(SyncAPIResource):
         text_overlay: video_profile_create_params.TextOverlay | Omit = omit,
         animated_gif: video_profile_create_params.AnimatedGif | Omit = omit,
         generate_subtitles: video_profile_create_params.GenerateSubtitles | Omit = omit,
+        transcribe: bool | Omit = omit,
         mp4_access: bool | Omit = omit,
         per_title_encoding: bool | Omit = omit,
         process_low_resolution_input: bool | Omit = omit,
@@ -80,6 +81,7 @@ class VideoProfilesResource(SyncAPIResource):
             text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
             animated_gif: Create an animated GIF from a video.
             generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). Remove this object if you do not want to generate AI subtitles.
+            transcribe: This will generate the subtitles in the native audio.
             mp4_access: Creates `mp4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
             per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
             process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
@@ -98,6 +100,7 @@ class VideoProfilesResource(SyncAPIResource):
             video_profile = client.video_profiles.create(
                 name="Gumlet-Profile-1",
                 format="ABR",
+                transcribe=False,
             )
             ```
         """
@@ -117,6 +120,7 @@ class VideoProfilesResource(SyncAPIResource):
                     "text_overlay": text_overlay,
                     "animated_gif": animated_gif,
                     "generate_subtitles": generate_subtitles,
+                    "transcribe": transcribe,
                     "mp4_access": mp4_access,
                     "per_title_encoding": per_title_encoding,
                     "process_low_resolution_input": process_low_resolution_input,
@@ -193,6 +197,7 @@ class VideoProfilesResource(SyncAPIResource):
         text_overlay: video_profile_update_params.TextOverlay | Omit = omit,
         animated_gif: video_profile_update_params.AnimatedGif | Omit = omit,
         generate_subtitles: video_profile_update_params.GenerateSubtitles | Omit = omit,
+        transcribe: bool | Omit = omit,
         mp4_access: bool | Omit = omit,
         per_title_encoding: bool | Omit = omit,
         process_low_resolution_input: bool | Omit = omit,
@@ -226,6 +231,7 @@ class VideoProfilesResource(SyncAPIResource):
             text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
             animated_gif: Create an animated GIF from a video.
             generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). You can remove this object if you don't want to generate AI subtitles.
+            transcribe: To generate the subtitles in the native audio.
             mp4_access: Creates `mp4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
             per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
             process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
@@ -248,6 +254,7 @@ class VideoProfilesResource(SyncAPIResource):
                 path_profile_id="profileId",
                 body_profile_id="",
                 format="ABR",
+                transcribe=False,
                 vc=["libx264"],
             )
             ```
@@ -271,6 +278,7 @@ class VideoProfilesResource(SyncAPIResource):
                     "text_overlay": text_overlay,
                     "animated_gif": animated_gif,
                     "generate_subtitles": generate_subtitles,
+                    "transcribe": transcribe,
                     "mp4_access": mp4_access,
                     "per_title_encoding": per_title_encoding,
                     "process_low_resolution_input": process_low_resolution_input,
@@ -395,6 +403,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
         text_overlay: video_profile_create_params.TextOverlay | Omit = omit,
         animated_gif: video_profile_create_params.AnimatedGif | Omit = omit,
         generate_subtitles: video_profile_create_params.GenerateSubtitles | Omit = omit,
+        transcribe: bool | Omit = omit,
         mp4_access: bool | Omit = omit,
         per_title_encoding: bool | Omit = omit,
         process_low_resolution_input: bool | Omit = omit,
@@ -423,6 +432,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
             animated_gif: Create an animated GIF from a video.
             generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). Remove this object if you do not want to generate AI subtitles.
+            transcribe: This will generate the subtitles in the native audio.
             mp4_access: Creates `mp4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
             per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
             process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
@@ -441,6 +451,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             video_profile = await client.video_profiles.create(
                 name="Gumlet-Profile-1",
                 format="ABR",
+                transcribe=False,
             )
             ```
         """
@@ -460,6 +471,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
                     "text_overlay": text_overlay,
                     "animated_gif": animated_gif,
                     "generate_subtitles": generate_subtitles,
+                    "transcribe": transcribe,
                     "mp4_access": mp4_access,
                     "per_title_encoding": per_title_encoding,
                     "process_low_resolution_input": process_low_resolution_input,
@@ -536,6 +548,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
         text_overlay: video_profile_update_params.TextOverlay | Omit = omit,
         animated_gif: video_profile_update_params.AnimatedGif | Omit = omit,
         generate_subtitles: video_profile_update_params.GenerateSubtitles | Omit = omit,
+        transcribe: bool | Omit = omit,
         mp4_access: bool | Omit = omit,
         per_title_encoding: bool | Omit = omit,
         process_low_resolution_input: bool | Omit = omit,
@@ -569,6 +582,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
             animated_gif: Create an animated GIF from a video.
             generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes). You can remove this object if you don't want to generate AI subtitles.
+            transcribe: To generate the subtitles in the native audio.
             mp4_access: Creates `mp4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
             per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
             process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
@@ -591,6 +605,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
                 path_profile_id="profileId",
                 body_profile_id="",
                 format="ABR",
+                transcribe=False,
                 vc=["libx264"],
             )
             ```
@@ -614,6 +629,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
                     "text_overlay": text_overlay,
                     "animated_gif": animated_gif,
                     "generate_subtitles": generate_subtitles,
+                    "transcribe": transcribe,
                     "mp4_access": mp4_access,
                     "per_title_encoding": per_title_encoding,
                     "process_low_resolution_input": process_low_resolution_input,

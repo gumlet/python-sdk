@@ -448,6 +448,7 @@ def _smoke_case_32() -> None:
     video_profile = client.video_profiles.create(
         name="Gumlet-Profile-1",
         format="ABR",
+        transcribe=False,
     )
 
 
@@ -486,7 +487,8 @@ def _smoke_case_33() -> None:
             "box_border": "",
         },
         animated_gif={"start_offset": "", "end_offset": "", "width": "", "height": "", "fps": ""},
-        generate_subtitles={"transcribe": True, "subtitle_languages": ""},
+        generate_subtitles={"subtitle_languages": ""},
+        transcribe=False,
         mp4_access=False,
         per_title_encoding=False,
         process_low_resolution_input=False,
@@ -511,6 +513,7 @@ def _smoke_case_36() -> None:
         path_profile_id="profileId",
         body_profile_id="",
         format="ABR",
+        transcribe=False,
         vc=["libx264"],
     )
 
@@ -552,7 +555,8 @@ def _smoke_case_37() -> None:
             "box_border": "",
         },
         animated_gif={"start_offset": "", "end_offset": "", "width": "", "height": "", "fps": ""},
-        generate_subtitles={"subtitle_languages": [""], "transcribe": True},
+        generate_subtitles={"subtitle_languages": [""]},
+        transcribe=False,
         mp4_access=False,
         per_title_encoding=False,
         process_low_resolution_input=False,

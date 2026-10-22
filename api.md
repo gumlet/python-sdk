@@ -565,6 +565,7 @@ Gumlet provides the functionality of creating multiple video assets using the sa
 video_profile = client.video_profiles.create(
     name="Gumlet-Profile-1",
     format="ABR",
+    transcribe=False,
 )
 ```
 
@@ -595,6 +596,7 @@ video_profile = client.video_profiles.update(
     path_profile_id="profileId",
     body_profile_id="",
     format="ABR",
+    transcribe=False,
     vc=["libx264"],
 )
 ```

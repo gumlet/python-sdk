@@ -130,7 +130,7 @@ class VideoAnalyticsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> VideoAnalyticBreakdownDataResponse:
         """
-        This endpoint retrieves breakdown data of the given metrics by given breakdown field
+        Read viewer metrics for one workspace, grouped by a breakdown field, for a date range of at most 60 days. This does not change assets or delivery.
 
         Args:
             date_range: The timeframe to get the data for. The maximum range between start_at and end_at is 60 days.
@@ -332,7 +332,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> VideoAnalyticBreakdownDataResponse:
         """
-        This endpoint retrieves breakdown data of the given metrics by given breakdown field
+        Read viewer metrics for one workspace, grouped by a breakdown field, for a date range of at most 60 days. This does not change assets or delivery.
 
         Args:
             date_range: The timeframe to get the data for. The maximum range between start_at and end_at is 60 days.

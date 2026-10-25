@@ -589,16 +589,12 @@ def _smoke_case_40() -> None:
 
 
 def _smoke_case_41() -> None:
-    video_playlist = client.video_playlists.list_all()
-
-
-def _smoke_case_42() -> None:
     video_playlist = client.video_playlists.list_all(
         collection_id="collection_id",
     )
 
 
-def _smoke_case_43() -> None:
+def _smoke_case_42() -> None:
     video_playlist = client.video_playlists.create_asset(
         playlist_id="playlistId",
         asset_list=[
@@ -611,14 +607,14 @@ def _smoke_case_43() -> None:
     )
 
 
-def _smoke_case_44() -> None:
+def _smoke_case_43() -> None:
     video_playlist = client.video_playlists.delete_asset(
         playlist_id="playlistId",
         delete_list=["6508790783e4d606118467a3"],
     )
 
 
-def _smoke_case_45() -> None:
+def _smoke_case_44() -> None:
     video_playlist = client.video_playlists.update(
         playlist_id="playlistId",
         title="Playlist-Title-Updated",
@@ -648,13 +644,13 @@ def _smoke_case_45() -> None:
     )
 
 
-def _smoke_case_46() -> None:
+def _smoke_case_45() -> None:
     client.video_playlists.delete(
         playlist_id="playlistId",
     )
 
 
-def _smoke_case_47() -> None:
+def _smoke_case_46() -> None:
     video_playlist = client.video_playlists.list_assets(
         playlist_id="playlistId",
         sort_order=1,
@@ -663,7 +659,7 @@ def _smoke_case_47() -> None:
     )
 
 
-def _smoke_case_48() -> None:
+def _smoke_case_47() -> None:
     video_playlist = client.video_playlists.list_assets(
         playlist_id="playlistId",
         sort_by="sort_by",
@@ -673,7 +669,7 @@ def _smoke_case_48() -> None:
     )
 
 
-def _smoke_case_49() -> None:
+def _smoke_case_48() -> None:
     video_playlist = client.video_playlists.reorder_asset(
         playlist_id="playlistId",
         asset_id="6e82bf783e88be000ab45ed2",
@@ -683,7 +679,7 @@ def _smoke_case_49() -> None:
     )
 
 
-def _smoke_case_50() -> None:
+def _smoke_case_49() -> None:
     webhook_endpoint = client.webhook_endpoints.create(
         url="",
         secret_token="",
@@ -692,17 +688,17 @@ def _smoke_case_50() -> None:
     )
 
 
-def _smoke_case_51() -> None:
+def _smoke_case_50() -> None:
     webhook_endpoint = client.webhook_endpoints.list()
 
 
-def _smoke_case_52() -> None:
+def _smoke_case_51() -> None:
     webhook_endpoint = client.webhook_endpoints.update(
         webhook_id="webhookId",
     )
 
 
-def _smoke_case_53() -> None:
+def _smoke_case_52() -> None:
     webhook_endpoint = client.webhook_endpoints.update(
         webhook_id="webhookId",
         url="",
@@ -712,19 +708,19 @@ def _smoke_case_53() -> None:
     )
 
 
-def _smoke_case_54() -> None:
+def _smoke_case_53() -> None:
     webhook_endpoint = client.webhook_endpoints.delete(
         webhook_id="webhookId",
     )
 
 
-def _smoke_case_55() -> None:
+def _smoke_case_54() -> None:
     webhook_endpoint = client.webhook_endpoints.history(
         webhook_id="webhookId",
     )
 
 
-def _smoke_case_56() -> None:
+def _smoke_case_55() -> None:
     image_source = client.image_sources.create(
         namespace="google-demo",
         type="webfolder",
@@ -732,7 +728,7 @@ def _smoke_case_56() -> None:
     )
 
 
-def _smoke_case_57() -> None:
+def _smoke_case_56() -> None:
     image_source = client.image_sources.create(
         namespace="google-demo",
         type="webfolder",
@@ -757,20 +753,20 @@ def _smoke_case_57() -> None:
     )
 
 
-def _smoke_case_58() -> None:
+def _smoke_case_57() -> None:
     image_source = client.image_sources.list(
         offset=0,
         size=20,
     )
 
 
-def _smoke_case_59() -> None:
+def _smoke_case_58() -> None:
     image_source = client.image_sources.retrieve(
         image_source_id="imageSourceId",
     )
 
 
-def _smoke_case_60() -> None:
+def _smoke_case_59() -> None:
     image_source = client.image_sources.update(
         image_source_id="imageSourceId",
         type="aws",
@@ -783,7 +779,7 @@ def _smoke_case_60() -> None:
     )
 
 
-def _smoke_case_61() -> None:
+def _smoke_case_60() -> None:
     image_source = client.image_sources.update(
         image_source_id="imageSourceId",
         type="aws",
@@ -824,23 +820,31 @@ def _smoke_case_61() -> None:
     )
 
 
-def _smoke_case_62() -> None:
+def _smoke_case_61() -> None:
     image_source = client.image_sources.delete(
         image_source_id="imageSourceId",
     )
 
 
-def _smoke_case_63() -> None:
+def _smoke_case_62() -> None:
     image_source = client.image_sources.purge_cache(
         subdomain="subdomain",
         paths=["image.jpeg", "image2.png"],
     )
 
 
-def _smoke_case_64() -> None:
+def _smoke_case_63() -> None:
     image_source = client.image_sources.purge(
         source_id="sourceId",
         paths=["image.jpeg", "image2.png"],
+    )
+
+
+def _smoke_case_64() -> None:
+    image_usage_analytic = client.image_usage_analytics.retrieve(
+        metrics=["bandwidth_consumption"],
+        date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
+        group_by="daily",
     )
 
 
@@ -849,26 +853,18 @@ def _smoke_case_65() -> None:
         metrics=["bandwidth_consumption"],
         date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
         group_by="daily",
-    )
-
-
-def _smoke_case_66() -> None:
-    image_usage_analytic = client.image_usage_analytics.retrieve(
-        metrics=["bandwidth_consumption"],
-        date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
-        group_by="daily",
         filters={"source_id": ""},
     )
 
 
-def _smoke_case_67() -> None:
+def _smoke_case_66() -> None:
     live_stream_asset = client.live_stream_assets.create(
         live_source_id="",
         resolution="",
     )
 
 
-def _smoke_case_68() -> None:
+def _smoke_case_67() -> None:
     live_stream_asset = client.live_stream_assets.create(
         live_source_id="",
         resolution="",
@@ -879,13 +875,13 @@ def _smoke_case_68() -> None:
     )
 
 
-def _smoke_case_69() -> None:
+def _smoke_case_68() -> None:
     live_stream_asset = client.live_stream_assets.update(
         live_asset_id="",
     )
 
 
-def _smoke_case_70() -> None:
+def _smoke_case_69() -> None:
     live_stream_asset = client.live_stream_assets.update(
         live_asset_id="",
         title="",
@@ -893,31 +889,31 @@ def _smoke_case_70() -> None:
     )
 
 
-def _smoke_case_71() -> None:
+def _smoke_case_70() -> None:
     live_stream_asset = client.live_stream_assets.retrieve_status(
         live_asset_id="liveAssetId",
     )
 
 
-def _smoke_case_72() -> None:
+def _smoke_case_71() -> None:
     live_stream_asset = client.live_stream_assets.delete(
         live_asset_id="liveAssetId",
     )
 
 
-def _smoke_case_73() -> None:
+def _smoke_case_72() -> None:
     live_stream_asset = client.live_stream_assets.complete(
         live_asset_id="liveAssetId",
     )
 
 
-def _smoke_case_74() -> None:
+def _smoke_case_73() -> None:
     live_stream_asset = client.live_stream_assets.filter(
         live_source_id="liveSourceId",
     )
 
 
-def _smoke_case_75() -> None:
+def _smoke_case_74() -> None:
     live_stream_asset = client.live_stream_assets.filter(
         live_source_id="liveSourceId",
         status="status",
@@ -926,39 +922,39 @@ def _smoke_case_75() -> None:
     )
 
 
-def _smoke_case_76() -> None:
+def _smoke_case_75() -> None:
     client.live_stream_assets.start(
         live_asset_id="liveAssetId",
     )
 
 
-def _smoke_case_77() -> None:
+def _smoke_case_76() -> None:
     live_stream_asset = client.live_stream_assets.upload(
         live_asset_id="68c406b147f9ad0c0d584ce2",
         statuses="preparing",
     )
 
 
-def _smoke_case_78() -> None:
+def _smoke_case_77() -> None:
     live_stream_asset = client.live_stream_assets.status_history(
         live_asset_id="liveAssetId",
     )
 
 
-def _smoke_case_79() -> None:
+def _smoke_case_78() -> None:
     client.recycle_bin.recover(
         asset_id="",
     )
 
 
-def _smoke_case_80() -> None:
+def _smoke_case_79() -> None:
     recycle_bin = client.recycle_bin.list(
         size=20,
         workspace_id="workspace_id",
     )
 
 
-def _smoke_case_81() -> None:
+def _smoke_case_80() -> None:
     recycle_bin = client.recycle_bin.list(
         offset=1,
         size=20,
@@ -966,24 +962,24 @@ def _smoke_case_81() -> None:
     )
 
 
-def _smoke_case_82() -> None:
+def _smoke_case_81() -> None:
     video_workspace = client.video_workspaces.list(
         offset="0",
         size="10",
     )
 
 
-def _smoke_case_83() -> None:
+def _smoke_case_82() -> None:
     video_workspace = client.video_workspaces.create(
-        name="zoom-workspace",
+        name="My Workspace",
         type="direct-upload",
-        zoom={"secret": "yourSecret"},
+        data_localization="us",
     )
 
 
-def _smoke_case_84() -> None:
+def _smoke_case_83() -> None:
     video_workspace = client.video_workspaces.create(
-        name="zoom-workspace",
+        name="My Workspace",
         type="direct-upload",
         default_profile_id="",
         insight_property_id="",
@@ -1010,11 +1006,12 @@ def _smoke_case_84() -> None:
             "base_path": "",
         },
         cloudflare={"bucket_name": "", "access_key": "", "account_id": "", "secret": "", "base_path": ""},
-        zoom={"secret": "yourSecret"},
+        zoom={"secret": ""},
+        data_localization="us",
     )
 
 
-def _smoke_case_85() -> None:
+def _smoke_case_84() -> None:
     video_workspace = client.video_workspaces.update(
         workspace_id="workspaceId",
         name="awsrename",
@@ -1029,7 +1026,7 @@ def _smoke_case_85() -> None:
     )
 
 
-def _smoke_case_86() -> None:
+def _smoke_case_85() -> None:
     video_workspace = client.video_workspaces.update(
         workspace_id="workspaceId",
         name="awsrename",
@@ -1100,19 +1097,19 @@ def _smoke_case_86() -> None:
     )
 
 
-def _smoke_case_87() -> None:
+def _smoke_case_86() -> None:
     video_workspace = client.video_workspaces.retrieve(
         workspace_id="workspaceId",
     )
 
 
-def _smoke_case_88() -> None:
+def _smoke_case_87() -> None:
     video_workspace = client.video_workspaces.delete(
         workspace_id="workspaceId",
     )
 
 
-def _smoke_case_89() -> None:
+def _smoke_case_88() -> None:
     folder = client.folders.create(
         workspace_id="workspaceId",
         name="Course Assets",
@@ -1120,27 +1117,27 @@ def _smoke_case_89() -> None:
     )
 
 
-def _smoke_case_90() -> None:
+def _smoke_case_89() -> None:
     folder = client.folders.list(
         workspace_id="workspaceId",
     )
 
 
-def _smoke_case_91() -> None:
+def _smoke_case_90() -> None:
     folder = client.folders.list(
         workspace_id="workspaceId",
         parent_id="parent_id",
     )
 
 
-def _smoke_case_92() -> None:
+def _smoke_case_91() -> None:
     folder = client.folders.retrieve(
         workspace_id="workspaceId",
         folder_id="folderId",
     )
 
 
-def _smoke_case_93() -> None:
+def _smoke_case_92() -> None:
     folder = client.folders.update(
         workspace_id="workspaceId",
         folder_id="folderId",
@@ -1148,7 +1145,7 @@ def _smoke_case_93() -> None:
     )
 
 
-def _smoke_case_94() -> None:
+def _smoke_case_93() -> None:
     folder = client.folders.update(
         workspace_id="workspaceId",
         folder_id="folderId",
@@ -1158,21 +1155,21 @@ def _smoke_case_94() -> None:
     )
 
 
-def _smoke_case_95() -> None:
+def _smoke_case_94() -> None:
     folder = client.folders.delete(
         workspace_id="workspaceId",
         folder_id="folderId",
     )
 
 
-def _smoke_case_96() -> None:
-    folder = client.folders.delete_assets(
+def _smoke_case_95() -> None:
+    folder = client.folders.remove_assets(
         workspace_id="workspaceId",
         asset_ids=["67e4f2b4403562dbea654301", "67e4f2bb403562dbea654302"],
     )
 
 
-def _smoke_case_97() -> None:
+def _smoke_case_96() -> None:
     channel_viewer = client.channel_viewers.invite(
         video_workspace_id="videoWorkspaceId",
         users=[
@@ -1183,21 +1180,21 @@ def _smoke_case_97() -> None:
     )
 
 
-def _smoke_case_98() -> None:
-    channel_viewer = client.channel_viewers.delete(
+def _smoke_case_97() -> None:
+    channel_viewer = client.channel_viewers.remove(
         video_workspace_id="videoWorkspaceId",
         emails=["test@gumlet.com", "test+2@gumlet.com"],
     )
 
 
-def _smoke_case_99() -> None:
+def _smoke_case_98() -> None:
     channel_viewer = client.channel_viewers.invite_csv(
         video_workspace_id="videoWorkspaceId",
         viewers_csv=b"viewers.csv",
     )
 
 
-def _smoke_case_100() -> None:
+def _smoke_case_99() -> None:
     channel_viewer = client.channel_viewers.list_subscribers(
         workspace_id="workspaceId",
         page_number=1,
@@ -1205,16 +1202,16 @@ def _smoke_case_100() -> None:
     )
 
 
-def _smoke_case_101() -> None:
-    video_analytic = client.video_analytics.chart_data(
+def _smoke_case_100() -> None:
+    video_analytic = client.video_analytics.viewer_data(
         metrics=["views"],
         date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
         group_by="daily",
     )
 
 
-def _smoke_case_102() -> None:
-    video_analytic = client.video_analytics.chart_data(
+def _smoke_case_101() -> None:
+    video_analytic = client.video_analytics.viewer_data(
         metrics=["views"],
         workspace_id="",
         date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
@@ -1225,7 +1222,7 @@ def _smoke_case_102() -> None:
     )
 
 
-def _smoke_case_103() -> None:
+def _smoke_case_102() -> None:
     video_analytic = client.video_analytics.breakdown_data(
         date_range={"start_at": "2026-07-20", "end_at": "2026-08-20"},
         filters=[],
@@ -1237,7 +1234,7 @@ def _smoke_case_103() -> None:
     )
 
 
-def _smoke_case_104() -> None:
+def _smoke_case_103() -> None:
     video_analytic = client.video_analytics.aggregated_data(
         aggregate=[{"metric": "views", "function": "sum"}],
         workspace_id="",
@@ -1245,7 +1242,7 @@ def _smoke_case_104() -> None:
     )
 
 
-def _smoke_case_105() -> None:
+def _smoke_case_104() -> None:
     video_analytic = client.video_analytics.aggregated_data(
         aggregate=[{"metric": "views", "function": "sum"}],
         workspace_id="",
@@ -1254,15 +1251,15 @@ def _smoke_case_105() -> None:
     )
 
 
-def _smoke_case_106() -> None:
+def _smoke_case_105() -> None:
     organization_data = client.organization_data.fetch_org()
 
 
-def _smoke_case_107() -> None:
+def _smoke_case_106() -> None:
     user_data = client.user_data.fetch()
 
 
-def _smoke_case_108() -> None:
+def _smoke_case_107() -> None:
     audit_log = client.audit_logs.fetch(
         date_range={"start_at": "2026-08-25", "end_at": "2026-08-29"},
         page_number=1,
@@ -1270,7 +1267,7 @@ def _smoke_case_108() -> None:
     )
 
 
-def _smoke_case_109() -> None:
+def _smoke_case_108() -> None:
     audit_log = client.audit_logs.fetch(
         date_range={"start_at": "2026-08-25", "end_at": "2026-08-29"},
         page_number=1,
@@ -1280,15 +1277,15 @@ def _smoke_case_109() -> None:
     )
 
 
-def _smoke_case_110() -> None:
+def _smoke_case_109() -> None:
     billing = client.billing.list_invoices()
 
 
-def _smoke_case_111() -> None:
+def _smoke_case_110() -> None:
     billing = client.billing.fetch_details()
 
 
-def _smoke_case_112() -> None:
+def _smoke_case_111() -> None:
     billing = client.billing.update_details(
         address_line="",
         city="",
@@ -1300,21 +1297,21 @@ def _smoke_case_112() -> None:
     )
 
 
-def _smoke_case_113() -> None:
+def _smoke_case_112() -> None:
     billing = client.billing.fetch_upcoming_invoice()
 
 
-def _smoke_case_114() -> None:
+def _smoke_case_113() -> None:
     live_stream_workspace = client.live_stream_workspaces.list()
 
 
-def _smoke_case_115() -> None:
+def _smoke_case_114() -> None:
     live_stream_workspace = client.live_stream_workspaces.create(
         name="",
     )
 
 
-def _smoke_case_116() -> None:
+def _smoke_case_115() -> None:
     live_stream_workspace = client.live_stream_workspaces.update(
         live_workspace_id="liveWorkspaceId",
         name="live-stream-collections",
@@ -1322,13 +1319,13 @@ def _smoke_case_116() -> None:
     )
 
 
-def _smoke_case_117() -> None:
+def _smoke_case_116() -> None:
     live_stream_workspace = client.live_stream_workspaces.delete(
         live_workspace_id="liveWorkspaceId",
     )
 
 
-def _smoke_case_118() -> None:
+def _smoke_case_117() -> None:
     live_stream_analytic = client.live_stream_analytics.usage(
         date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
         group_by="daily",
@@ -1336,7 +1333,7 @@ def _smoke_case_118() -> None:
     )
 
 
-def _smoke_case_119() -> None:
+def _smoke_case_118() -> None:
     global_search = client.global_search.search(
         search_query="search_query",
         size=20,
@@ -1347,7 +1344,7 @@ def _smoke_case_119() -> None:
     )
 
 
-def _smoke_case_120() -> None:
+def _smoke_case_119() -> None:
     global_search = client.global_search.search(
         search_query="search_query",
         collection_id="collection_id",
@@ -1634,517 +1631,509 @@ cases: list[SmokeCase] = [
         "operation": "listAll",
         "method": "GET",
         "path": "/video/playlist",
-        "label": "required params",
         "run": _smoke_case_41,
-    },
-    {
-        "operation": "listAll",
-        "method": "GET",
-        "path": "/video/playlist",
-        "label": "all params",
-        "run": _smoke_case_42,
     },
     {
         "operation": "createAsset",
         "method": "POST",
         "path": "/video/playlist/{playlist_id}/asset",
-        "run": _smoke_case_43,
+        "run": _smoke_case_42,
     },
     {
         "operation": "deleteAsset",
         "method": "DELETE",
         "path": "/video/playlist/{playlist_id}/asset",
-        "run": _smoke_case_44,
+        "run": _smoke_case_43,
     },
     {
         "operation": "update",
         "method": "POST",
         "path": "/video/playlist/{playlist_id}",
-        "run": _smoke_case_45,
+        "run": _smoke_case_44,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/video/playlist/{playlist_id}",
+        "run": _smoke_case_45,
+    },
+    {
+        "operation": "listAssets",
+        "method": "GET",
+        "path": "/video/playlist/{playlist_id}/assets",
+        "label": "required params",
         "run": _smoke_case_46,
     },
     {
         "operation": "listAssets",
         "method": "GET",
         "path": "/video/playlist/{playlist_id}/assets",
-        "label": "required params",
-        "run": _smoke_case_47,
-    },
-    {
-        "operation": "listAssets",
-        "method": "GET",
-        "path": "/video/playlist/{playlist_id}/assets",
         "label": "all params",
-        "run": _smoke_case_48,
+        "run": _smoke_case_47,
     },
     {
         "operation": "reorderAsset",
         "method": "POST",
         "path": "/video/playlists/{playlist_id}/reorder",
-        "run": _smoke_case_49,
+        "run": _smoke_case_48,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/org/webhooks",
-        "run": _smoke_case_50,
+        "run": _smoke_case_49,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/org/webhooks",
+        "run": _smoke_case_50,
+    },
+    {
+        "operation": "update",
+        "method": "POST",
+        "path": "/org/webhooks/{webhook_id}",
+        "label": "required params",
         "run": _smoke_case_51,
     },
     {
         "operation": "update",
         "method": "POST",
         "path": "/org/webhooks/{webhook_id}",
-        "label": "required params",
-        "run": _smoke_case_52,
-    },
-    {
-        "operation": "update",
-        "method": "POST",
-        "path": "/org/webhooks/{webhook_id}",
         "label": "all params",
-        "run": _smoke_case_53,
+        "run": _smoke_case_52,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/org/webhooks/{webhook_id}",
-        "run": _smoke_case_54,
+        "run": _smoke_case_53,
     },
     {
         "operation": "history",
         "method": "GET",
         "path": "/org/webhook/{webhook_id}/history",
+        "run": _smoke_case_54,
+    },
+    {
+        "operation": "create",
+        "method": "POST",
+        "path": "/image/sources",
+        "label": "required params",
         "run": _smoke_case_55,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/image/sources",
-        "label": "required params",
-        "run": _smoke_case_56,
-    },
-    {
-        "operation": "create",
-        "method": "POST",
-        "path": "/image/sources",
         "label": "all params",
-        "run": _smoke_case_57,
+        "run": _smoke_case_56,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/image/sources",
-        "run": _smoke_case_58,
+        "run": _smoke_case_57,
     },
     {
         "operation": "retrieve",
         "method": "GET",
         "path": "/image/sources/{image_source_id}",
+        "run": _smoke_case_58,
+    },
+    {
+        "operation": "update",
+        "method": "POST",
+        "path": "/image/sources/{image_source_id}",
+        "label": "required params",
         "run": _smoke_case_59,
     },
     {
         "operation": "update",
         "method": "POST",
         "path": "/image/sources/{image_source_id}",
-        "label": "required params",
-        "run": _smoke_case_60,
-    },
-    {
-        "operation": "update",
-        "method": "POST",
-        "path": "/image/sources/{image_source_id}",
         "label": "all params",
-        "run": _smoke_case_61,
+        "run": _smoke_case_60,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/image/sources/{image_source_id}",
-        "run": _smoke_case_62,
+        "run": _smoke_case_61,
     },
     {
         "operation": "purgeCache",
         "method": "POST",
         "path": "/purge/{subdomain}",
-        "run": _smoke_case_63,
+        "run": _smoke_case_62,
     },
     {
         "operation": "purge",
         "method": "POST",
         "path": "/image/purge/{source_id}",
+        "run": _smoke_case_63,
+    },
+    {
+        "operation": "retrieve",
+        "method": "POST",
+        "path": "/image/analytics",
+        "label": "required params",
         "run": _smoke_case_64,
     },
     {
         "operation": "retrieve",
         "method": "POST",
         "path": "/image/analytics",
-        "label": "required params",
+        "label": "all params",
         "run": _smoke_case_65,
     },
     {
-        "operation": "retrieve",
+        "operation": "create",
         "method": "POST",
-        "path": "/image/analytics",
-        "label": "all params",
+        "path": "/video/live/assets",
+        "label": "required params",
         "run": _smoke_case_66,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/video/live/assets",
-        "label": "required params",
+        "label": "all params",
         "run": _smoke_case_67,
     },
     {
-        "operation": "create",
+        "operation": "update",
         "method": "POST",
-        "path": "/video/live/assets",
-        "label": "all params",
+        "path": "/video/live/assets/update",
+        "label": "required params",
         "run": _smoke_case_68,
     },
     {
         "operation": "update",
         "method": "POST",
         "path": "/video/live/assets/update",
-        "label": "required params",
-        "run": _smoke_case_69,
-    },
-    {
-        "operation": "update",
-        "method": "POST",
-        "path": "/video/live/assets/update",
         "label": "all params",
-        "run": _smoke_case_70,
+        "run": _smoke_case_69,
     },
     {
         "operation": "retrieveStatus",
         "method": "GET",
         "path": "/video/live/assets/{live_asset_id}",
-        "run": _smoke_case_71,
+        "run": _smoke_case_70,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/video/live/assets/{live_asset_id}",
-        "run": _smoke_case_72,
+        "run": _smoke_case_71,
     },
     {
         "operation": "complete",
         "method": "POST",
         "path": "/video/live/assets/{live_asset_id}/complete",
+        "run": _smoke_case_72,
+    },
+    {
+        "operation": "filter",
+        "method": "GET",
+        "path": "/video/live/assets/list/{live_source_id}",
+        "label": "required params",
         "run": _smoke_case_73,
     },
     {
         "operation": "filter",
         "method": "GET",
         "path": "/video/live/assets/list/{live_source_id}",
-        "label": "required params",
-        "run": _smoke_case_74,
-    },
-    {
-        "operation": "filter",
-        "method": "GET",
-        "path": "/video/live/assets/list/{live_source_id}",
         "label": "all params",
-        "run": _smoke_case_75,
+        "run": _smoke_case_74,
     },
     {
         "operation": "start",
         "method": "POST",
         "path": "/video/live/assets/{live_asset_id}/start",
-        "run": _smoke_case_76,
+        "run": _smoke_case_75,
     },
     {
         "operation": "upload",
         "method": "POST",
         "path": "/video/live/assets/thumbnail/upload",
-        "run": _smoke_case_77,
+        "run": _smoke_case_76,
     },
     {
         "operation": "statusHistory",
         "method": "GET",
         "path": "/video/live/assets/{live_asset_id}/history",
-        "run": _smoke_case_78,
+        "run": _smoke_case_77,
     },
     {
         "operation": "recover",
         "method": "POST",
         "path": "/video/asset/recover",
+        "run": _smoke_case_78,
+    },
+    {
+        "operation": "list",
+        "method": "GET",
+        "path": "/video/asset/recoverable/list",
+        "label": "required params",
         "run": _smoke_case_79,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/video/asset/recoverable/list",
-        "label": "required params",
+        "label": "all params",
         "run": _smoke_case_80,
     },
     {
         "operation": "list",
         "method": "GET",
-        "path": "/video/asset/recoverable/list",
-        "label": "all params",
+        "path": "/video/workspaces",
         "run": _smoke_case_81,
     },
     {
-        "operation": "list",
-        "method": "GET",
+        "operation": "create",
+        "method": "POST",
         "path": "/video/workspaces",
+        "label": "required params",
         "run": _smoke_case_82,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/video/workspaces",
-        "label": "required params",
+        "label": "all params",
         "run": _smoke_case_83,
     },
     {
-        "operation": "create",
+        "operation": "update",
         "method": "POST",
-        "path": "/video/workspaces",
-        "label": "all params",
+        "path": "/video/workspaces/{workspace_id}",
+        "label": "required params",
         "run": _smoke_case_84,
     },
     {
         "operation": "update",
         "method": "POST",
         "path": "/video/workspaces/{workspace_id}",
-        "label": "required params",
-        "run": _smoke_case_85,
-    },
-    {
-        "operation": "update",
-        "method": "POST",
-        "path": "/video/workspaces/{workspace_id}",
         "label": "all params",
-        "run": _smoke_case_86,
+        "run": _smoke_case_85,
     },
     {
         "operation": "retrieve",
         "method": "GET",
         "path": "/video/workspaces/{workspace_id}",
-        "run": _smoke_case_87,
+        "run": _smoke_case_86,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/video/workspaces/{workspace_id}",
-        "run": _smoke_case_88,
+        "run": _smoke_case_87,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/video/workspaces/{workspace_id}/folders",
+        "run": _smoke_case_88,
+    },
+    {
+        "operation": "list",
+        "method": "GET",
+        "path": "/video/workspaces/{workspace_id}/folders",
+        "label": "required params",
         "run": _smoke_case_89,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/video/workspaces/{workspace_id}/folders",
-        "label": "required params",
-        "run": _smoke_case_90,
-    },
-    {
-        "operation": "list",
-        "method": "GET",
-        "path": "/video/workspaces/{workspace_id}/folders",
         "label": "all params",
-        "run": _smoke_case_91,
+        "run": _smoke_case_90,
     },
     {
         "operation": "retrieve",
         "method": "GET",
         "path": "/video/workspaces/{workspace_id}/folders/{folder_id}",
+        "run": _smoke_case_91,
+    },
+    {
+        "operation": "update",
+        "method": "POST",
+        "path": "/video/workspaces/{workspace_id}/folders/{folder_id}",
+        "label": "required params",
         "run": _smoke_case_92,
     },
     {
         "operation": "update",
         "method": "POST",
         "path": "/video/workspaces/{workspace_id}/folders/{folder_id}",
-        "label": "required params",
-        "run": _smoke_case_93,
-    },
-    {
-        "operation": "update",
-        "method": "POST",
-        "path": "/video/workspaces/{workspace_id}/folders/{folder_id}",
         "label": "all params",
-        "run": _smoke_case_94,
+        "run": _smoke_case_93,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/video/workspaces/{workspace_id}/folders/{folder_id}",
-        "run": _smoke_case_95,
+        "run": _smoke_case_94,
     },
     {
-        "operation": "deleteAssets",
+        "operation": "removeAssets",
         "method": "POST",
         "path": "/video/workspaces/{workspace_id}/remove-assets-from-folder",
-        "run": _smoke_case_96,
+        "run": _smoke_case_95,
     },
     {
         "operation": "invite",
         "method": "POST",
         "path": "/channel/{video_workspace_id}/viewers/invite",
-        "run": _smoke_case_97,
+        "run": _smoke_case_96,
     },
     {
-        "operation": "delete",
+        "operation": "remove",
         "method": "POST",
         "path": "/channel/{video_workspace_id}/viewers/remove",
-        "run": _smoke_case_98,
+        "run": _smoke_case_97,
     },
     {
         "operation": "inviteCsv",
         "method": "POST",
         "path": "/channel/{video_workspace_id}/viewers/invite/csv",
-        "run": _smoke_case_99,
+        "run": _smoke_case_98,
     },
     {
         "operation": "listSubscribers",
         "method": "GET",
         "path": "/channel/{workspace_id}/viewers",
-        "run": _smoke_case_100,
+        "run": _smoke_case_99,
     },
     {
-        "operation": "chartData",
+        "operation": "viewerData",
         "method": "POST",
         "path": "/insights/viewer-analytics",
         "label": "required params",
-        "run": _smoke_case_101,
+        "run": _smoke_case_100,
     },
     {
-        "operation": "chartData",
+        "operation": "viewerData",
         "method": "POST",
         "path": "/insights/viewer-analytics",
         "label": "all params",
-        "run": _smoke_case_102,
+        "run": _smoke_case_101,
     },
     {
         "operation": "breakdownData",
         "method": "POST",
         "path": "/insights/breakdown-data",
+        "run": _smoke_case_102,
+    },
+    {
+        "operation": "aggregatedData",
+        "method": "POST",
+        "path": "/insights/aggregated-data",
+        "label": "required params",
         "run": _smoke_case_103,
     },
     {
         "operation": "aggregatedData",
         "method": "POST",
         "path": "/insights/aggregated-data",
-        "label": "required params",
-        "run": _smoke_case_104,
-    },
-    {
-        "operation": "aggregatedData",
-        "method": "POST",
-        "path": "/insights/aggregated-data",
         "label": "all params",
-        "run": _smoke_case_105,
+        "run": _smoke_case_104,
     },
     {
         "operation": "fetchOrg",
         "method": "GET",
         "path": "/org/data",
-        "run": _smoke_case_106,
+        "run": _smoke_case_105,
     },
     {
         "operation": "fetch",
         "method": "GET",
         "path": "/user/data",
+        "run": _smoke_case_106,
+    },
+    {
+        "operation": "fetch",
+        "method": "POST",
+        "path": "/user/audit-log",
+        "label": "required params",
         "run": _smoke_case_107,
     },
     {
         "operation": "fetch",
         "method": "POST",
         "path": "/user/audit-log",
-        "label": "required params",
-        "run": _smoke_case_108,
-    },
-    {
-        "operation": "fetch",
-        "method": "POST",
-        "path": "/user/audit-log",
         "label": "all params",
-        "run": _smoke_case_109,
+        "run": _smoke_case_108,
     },
     {
         "operation": "listInvoices",
         "method": "GET",
         "path": "/mixed/billing/invoice/history",
-        "run": _smoke_case_110,
+        "run": _smoke_case_109,
     },
     {
         "operation": "fetchDetails",
         "method": "GET",
         "path": "/mixed/billing/details",
-        "run": _smoke_case_111,
+        "run": _smoke_case_110,
     },
     {
         "operation": "updateDetails",
         "method": "POST",
         "path": "/mixed/billing/details",
-        "run": _smoke_case_112,
+        "run": _smoke_case_111,
     },
     {
         "operation": "fetchUpcomingInvoice",
         "method": "GET",
         "path": "/mixed/billing/invoice/upcoming",
-        "run": _smoke_case_113,
+        "run": _smoke_case_112,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/video/sources/live",
-        "run": _smoke_case_114,
+        "run": _smoke_case_113,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/video/sources/live",
-        "run": _smoke_case_115,
+        "run": _smoke_case_114,
     },
     {
         "operation": "update",
         "method": "POST",
         "path": "/video/sources/live/{live_workspace_id}",
-        "run": _smoke_case_116,
+        "run": _smoke_case_115,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/video/sources/live/{live_workspace_id}",
-        "run": _smoke_case_117,
+        "run": _smoke_case_116,
     },
     {
         "operation": "usage",
         "method": "POST",
         "path": "/video/live/analytics",
+        "run": _smoke_case_117,
+    },
+    {
+        "operation": "search",
+        "method": "GET",
+        "path": "/entities/global-search",
+        "label": "required params",
         "run": _smoke_case_118,
     },
     {
         "operation": "search",
         "method": "GET",
         "path": "/entities/global-search",
-        "label": "required params",
-        "run": _smoke_case_119,
-    },
-    {
-        "operation": "search",
-        "method": "GET",
-        "path": "/entities/global-search",
         "label": "all params",
-        "run": _smoke_case_120,
+        "run": _smoke_case_119,
     },
 ]
 

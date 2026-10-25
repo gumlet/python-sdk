@@ -20,12 +20,12 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.folder_create_response import FolderCreateResponse
-from ..types import folder_create_params, folder_list_params, folder_update_params, folder_delete_assets_params
+from ..types import folder_create_params, folder_list_params, folder_update_params, folder_remove_assets_params
 from ..types.folder_list_response import FolderListResponse
 from ..types.folder_retrieve_response import FolderRetrieveResponse
 from ..types.folder_update_response import FolderUpdateResponse
 from ..types.folder_delete_response import FolderDeleteResponse
-from ..types.folder_delete_assets_response import FolderDeleteAssetsResponse
+from ..types.folder_remove_assets_response import FolderRemoveAssetsResponse
 
 __all__ = ["FoldersResource", "AsyncFoldersResource"]
 
@@ -337,7 +337,7 @@ class FoldersResource(SyncAPIResource):
             cast_to=FolderDeleteResponse,
         )
 
-    def delete_assets(
+    def remove_assets(
         self,
         workspace_id: str,
         *,
@@ -348,7 +348,7 @@ class FoldersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FolderDeleteAssetsResponse:
+    ) -> FolderRemoveAssetsResponse:
         """
         Remove one or more assets from their current folder assignment inside the workspace.
 
@@ -361,11 +361,11 @@ class FoldersResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            FolderDeleteAssetsResponse: 200
+            FolderRemoveAssetsResponse: 200
 
         Example:
             ```python
-            folder = client.folders.delete_assets(
+            folder = client.folders.remove_assets(
                 workspace_id="workspaceId",
                 asset_ids=["67e4f2b4403562dbea654301", "67e4f2bb403562dbea654302"],
             )
@@ -379,12 +379,12 @@ class FoldersResource(SyncAPIResource):
             ),
             body=maybe_transform(
                 {"asset_ids": asset_ids},
-                folder_delete_assets_params.FolderDeleteAssetsParams,
+                folder_remove_assets_params.FolderRemoveAssetsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=FolderDeleteAssetsResponse,
+            cast_to=FolderRemoveAssetsResponse,
         )
 
 
@@ -695,7 +695,7 @@ class AsyncFoldersResource(AsyncAPIResource):
             cast_to=FolderDeleteResponse,
         )
 
-    async def delete_assets(
+    async def remove_assets(
         self,
         workspace_id: str,
         *,
@@ -706,7 +706,7 @@ class AsyncFoldersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FolderDeleteAssetsResponse:
+    ) -> FolderRemoveAssetsResponse:
         """
         Remove one or more assets from their current folder assignment inside the workspace.
 
@@ -719,11 +719,11 @@ class AsyncFoldersResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            FolderDeleteAssetsResponse: 200
+            FolderRemoveAssetsResponse: 200
 
         Example:
             ```python
-            folder = await client.folders.delete_assets(
+            folder = await client.folders.remove_assets(
                 workspace_id="workspaceId",
                 asset_ids=["67e4f2b4403562dbea654301", "67e4f2bb403562dbea654302"],
             )
@@ -737,12 +737,12 @@ class AsyncFoldersResource(AsyncAPIResource):
             ),
             body=await async_maybe_transform(
                 {"asset_ids": asset_ids},
-                folder_delete_assets_params.FolderDeleteAssetsParams,
+                folder_remove_assets_params.FolderRemoveAssetsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=FolderDeleteAssetsResponse,
+            cast_to=FolderRemoveAssetsResponse,
         )
 
 
@@ -765,8 +765,8 @@ class FoldersResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             folders.delete,
         )
-        self.delete_assets = to_raw_response_wrapper(
-            folders.delete_assets,
+        self.remove_assets = to_raw_response_wrapper(
+            folders.remove_assets,
         )
 
 
@@ -789,8 +789,8 @@ class AsyncFoldersResourceWithRawResponse:
         self.delete = async_to_raw_response_wrapper(
             folders.delete,
         )
-        self.delete_assets = async_to_raw_response_wrapper(
-            folders.delete_assets,
+        self.remove_assets = async_to_raw_response_wrapper(
+            folders.remove_assets,
         )
 
 
@@ -813,8 +813,8 @@ class FoldersResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             folders.delete,
         )
-        self.delete_assets = to_streamed_response_wrapper(
-            folders.delete_assets,
+        self.remove_assets = to_streamed_response_wrapper(
+            folders.remove_assets,
         )
 
 
@@ -837,6 +837,6 @@ class AsyncFoldersResourceWithStreamingResponse:
         self.delete = async_to_streamed_response_wrapper(
             folders.delete,
         )
-        self.delete_assets = async_to_streamed_response_wrapper(
-            folders.delete_assets,
+        self.remove_assets = async_to_streamed_response_wrapper(
+            folders.remove_assets,
         )

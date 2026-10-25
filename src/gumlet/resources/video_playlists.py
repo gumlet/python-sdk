@@ -104,7 +104,7 @@ class VideoPlaylistsResource(SyncAPIResource):
     def list_all(
         self,
         *,
-        collection_id: str | Omit = omit,
+        collection_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -127,7 +127,9 @@ class VideoPlaylistsResource(SyncAPIResource):
 
         Example:
             ```python
-            video_playlist = client.video_playlists.list_all()
+            video_playlist = client.video_playlists.list_all(
+                collection_id="collection_id",
+            )
             ```
         """
         return self._get(
@@ -596,7 +598,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
     async def list_all(
         self,
         *,
-        collection_id: str | Omit = omit,
+        collection_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -619,7 +621,9 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
 
         Example:
             ```python
-            video_playlist = await client.video_playlists.list_all()
+            video_playlist = await client.video_playlists.list_all(
+                collection_id="collection_id",
+            )
             ```
         """
         return await self._get(

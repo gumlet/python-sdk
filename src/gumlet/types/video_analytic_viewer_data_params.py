@@ -8,10 +8,10 @@ from typing_extensions import Annotated, Literal, Required, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["VideoAnalyticChartDataParams", "DateRange", "Filter", "ChartDimension", "ChartDimensionGroupBy"]
+__all__ = ["VideoAnalyticViewerDataParams", "DateRange", "Filter", "ChartDimension", "ChartDimensionGroupBy"]
 
 
-class VideoAnalyticChartDataParams(TypedDict, total=False):
+class VideoAnalyticViewerDataParams(TypedDict, total=False):
     metrics: Required[
         List[
             Literal[

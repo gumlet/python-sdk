@@ -118,6 +118,7 @@ class VideoWorkspacesResource(SyncAPIResource):
         backblaze: video_workspace_create_params.Backblaze | Omit = omit,
         cloudflare: video_workspace_create_params.Cloudflare | Omit = omit,
         zoom: video_workspace_create_params.Zoom | Omit = omit,
+        data_localization: Literal["us", "in", "eu"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -145,6 +146,7 @@ class VideoWorkspacesResource(SyncAPIResource):
             backblaze: This is a required field if workspace type is backblaze.
             cloudflare: This is a required field if workspace type is cloudflare.
             zoom: This is a required field if workspace type is zoom.
+            data_localization: Data localization region
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -156,9 +158,9 @@ class VideoWorkspacesResource(SyncAPIResource):
         Example:
             ```python
             video_workspace = client.video_workspaces.create(
-                name="zoom-workspace",
+                name="My Workspace",
                 type="direct-upload",
-                zoom={"secret": "yourSecret"},
+                data_localization="us",
             )
             ```
         """
@@ -182,6 +184,7 @@ class VideoWorkspacesResource(SyncAPIResource):
                     "backblaze": backblaze,
                     "cloudflare": cloudflare,
                     "zoom": zoom,
+                    "data_localization": data_localization,
                 },
                 video_workspace_create_params.VideoWorkspaceCreateParams,
             ),
@@ -494,6 +497,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
         backblaze: video_workspace_create_params.Backblaze | Omit = omit,
         cloudflare: video_workspace_create_params.Cloudflare | Omit = omit,
         zoom: video_workspace_create_params.Zoom | Omit = omit,
+        data_localization: Literal["us", "in", "eu"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -521,6 +525,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
             backblaze: This is a required field if workspace type is backblaze.
             cloudflare: This is a required field if workspace type is cloudflare.
             zoom: This is a required field if workspace type is zoom.
+            data_localization: Data localization region
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -532,9 +537,9 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
         Example:
             ```python
             video_workspace = await client.video_workspaces.create(
-                name="zoom-workspace",
+                name="My Workspace",
                 type="direct-upload",
-                zoom={"secret": "yourSecret"},
+                data_localization="us",
             )
             ```
         """
@@ -558,6 +563,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
                     "backblaze": backblaze,
                     "cloudflare": cloudflare,
                     "zoom": zoom,
+                    "data_localization": data_localization,
                 },
                 video_workspace_create_params.VideoWorkspaceCreateParams,
             ),

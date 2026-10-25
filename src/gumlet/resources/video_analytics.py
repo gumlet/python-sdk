@@ -18,9 +18,9 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.video_analytic_chart_data_response import VideoAnalyticChartDataResponse
+from ..types.video_analytic_viewer_data_response import VideoAnalyticViewerDataResponse
 from ..types import (
-    video_analytic_chart_data_params,
+    video_analytic_viewer_data_params,
     video_analytic_breakdown_data_params,
     video_analytic_aggregated_data_params,
 )
@@ -39,7 +39,7 @@ class VideoAnalyticsResource(SyncAPIResource):
     def with_streaming_response(self) -> VideoAnalyticsResourceWithStreamingResponse:
         return VideoAnalyticsResourceWithStreamingResponse(self)
 
-    def chart_data(
+    def viewer_data(
         self,
         *,
         metrics: List[
@@ -55,10 +55,10 @@ class VideoAnalyticsResource(SyncAPIResource):
             ]
         ],
         workspace_id: str | Omit = omit,
-        date_range: video_analytic_chart_data_params.DateRange,
-        filters: Iterable[video_analytic_chart_data_params.Filter] | Omit = omit,
+        date_range: video_analytic_viewer_data_params.DateRange,
+        filters: Iterable[video_analytic_viewer_data_params.Filter] | Omit = omit,
         group_by: Literal["daily", "weekly", "monthly"] | Omit = omit,
-        chart_dimension: video_analytic_chart_data_params.ChartDimension | Omit = omit,
+        chart_dimension: video_analytic_viewer_data_params.ChartDimension | Omit = omit,
         download: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -66,7 +66,7 @@ class VideoAnalyticsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> VideoAnalyticChartDataResponse:
+    ) -> VideoAnalyticViewerDataResponse:
         """
         This endpoint retrieves viewer analytics data. This endpoint is use for deep insights on the analytics data.
 
@@ -84,11 +84,11 @@ class VideoAnalyticsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            VideoAnalyticChartDataResponse: 200
+            VideoAnalyticViewerDataResponse: 200
 
         Example:
             ```python
-            video_analytic = client.video_analytics.chart_data(
+            video_analytic = client.video_analytics.viewer_data(
                 metrics=["views"],
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
@@ -107,12 +107,12 @@ class VideoAnalyticsResource(SyncAPIResource):
                     "chart_dimension": chart_dimension,
                     "download": download,
                 },
-                video_analytic_chart_data_params.VideoAnalyticChartDataParams,
+                video_analytic_viewer_data_params.VideoAnalyticViewerDataParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=VideoAnalyticChartDataResponse,
+            cast_to=VideoAnalyticViewerDataResponse,
         )
 
     def breakdown_data(
@@ -241,7 +241,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncVideoAnalyticsResourceWithStreamingResponse:
         return AsyncVideoAnalyticsResourceWithStreamingResponse(self)
 
-    async def chart_data(
+    async def viewer_data(
         self,
         *,
         metrics: List[
@@ -257,10 +257,10 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
             ]
         ],
         workspace_id: str | Omit = omit,
-        date_range: video_analytic_chart_data_params.DateRange,
-        filters: Iterable[video_analytic_chart_data_params.Filter] | Omit = omit,
+        date_range: video_analytic_viewer_data_params.DateRange,
+        filters: Iterable[video_analytic_viewer_data_params.Filter] | Omit = omit,
         group_by: Literal["daily", "weekly", "monthly"] | Omit = omit,
-        chart_dimension: video_analytic_chart_data_params.ChartDimension | Omit = omit,
+        chart_dimension: video_analytic_viewer_data_params.ChartDimension | Omit = omit,
         download: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -268,7 +268,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> VideoAnalyticChartDataResponse:
+    ) -> VideoAnalyticViewerDataResponse:
         """
         This endpoint retrieves viewer analytics data. This endpoint is use for deep insights on the analytics data.
 
@@ -286,11 +286,11 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            VideoAnalyticChartDataResponse: 200
+            VideoAnalyticViewerDataResponse: 200
 
         Example:
             ```python
-            video_analytic = await client.video_analytics.chart_data(
+            video_analytic = await client.video_analytics.viewer_data(
                 metrics=["views"],
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
@@ -309,12 +309,12 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
                     "chart_dimension": chart_dimension,
                     "download": download,
                 },
-                video_analytic_chart_data_params.VideoAnalyticChartDataParams,
+                video_analytic_viewer_data_params.VideoAnalyticViewerDataParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=VideoAnalyticChartDataResponse,
+            cast_to=VideoAnalyticViewerDataResponse,
         )
 
     async def breakdown_data(
@@ -438,8 +438,8 @@ class VideoAnalyticsResourceWithRawResponse:
     def __init__(self, video_analytics: VideoAnalyticsResource) -> None:
         self._video_analytics = video_analytics
 
-        self.chart_data = to_raw_response_wrapper(
-            video_analytics.chart_data,
+        self.viewer_data = to_raw_response_wrapper(
+            video_analytics.viewer_data,
         )
         self.breakdown_data = to_raw_response_wrapper(
             video_analytics.breakdown_data,
@@ -453,8 +453,8 @@ class AsyncVideoAnalyticsResourceWithRawResponse:
     def __init__(self, video_analytics: AsyncVideoAnalyticsResource) -> None:
         self._video_analytics = video_analytics
 
-        self.chart_data = async_to_raw_response_wrapper(
-            video_analytics.chart_data,
+        self.viewer_data = async_to_raw_response_wrapper(
+            video_analytics.viewer_data,
         )
         self.breakdown_data = async_to_raw_response_wrapper(
             video_analytics.breakdown_data,
@@ -468,8 +468,8 @@ class VideoAnalyticsResourceWithStreamingResponse:
     def __init__(self, video_analytics: VideoAnalyticsResource) -> None:
         self._video_analytics = video_analytics
 
-        self.chart_data = to_streamed_response_wrapper(
-            video_analytics.chart_data,
+        self.viewer_data = to_streamed_response_wrapper(
+            video_analytics.viewer_data,
         )
         self.breakdown_data = to_streamed_response_wrapper(
             video_analytics.breakdown_data,
@@ -483,8 +483,8 @@ class AsyncVideoAnalyticsResourceWithStreamingResponse:
     def __init__(self, video_analytics: AsyncVideoAnalyticsResource) -> None:
         self._video_analytics = video_analytics
 
-        self.chart_data = async_to_streamed_response_wrapper(
-            video_analytics.chart_data,
+        self.viewer_data = async_to_streamed_response_wrapper(
+            video_analytics.viewer_data,
         )
         self.breakdown_data = async_to_streamed_response_wrapper(
             video_analytics.breakdown_data,

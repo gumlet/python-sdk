@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing_extensions import Required, TypedDict
 
 __all__ = ["VideoPlaylistListAllParams"]
 
 
 class VideoPlaylistListAllParams(TypedDict, total=False):
-    collection_id: str
+    collection_id: Required[str]
     """Workspace ID"""

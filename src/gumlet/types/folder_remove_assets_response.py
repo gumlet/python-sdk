@@ -6,10 +6,10 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["FolderDeleteAssetsResponse"]
+__all__ = ["FolderRemoveAssetsResponse"]
 
 
-class FolderDeleteAssetsResponse(BaseModel):
+class FolderRemoveAssetsResponse(BaseModel):
     message: Optional[str] = None
 
     removed_count: Optional[int] = FieldInfo(alias="removedCount", default=None)

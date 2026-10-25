@@ -6,7 +6,7 @@ from typing import List, Optional
 
 from .._models import BaseModel
 
-__all__ = ["VideoAnalyticChartDataResponse", "View", "UniqueView", "AnalyticsData", "AnalyticsDataView"]
+__all__ = ["VideoAnalyticViewerDataResponse", "View", "UniqueView", "AnalyticsData", "AnalyticsDataView"]
 
 
 class AnalyticsDataView(BaseModel):
@@ -39,7 +39,7 @@ class View(BaseModel):
     unit: Optional[str] = None
 
 
-class VideoAnalyticChartDataResponse(BaseModel):
+class VideoAnalyticViewerDataResponse(BaseModel):
     views: Optional[List[View]] = None
 
     unique_views: Optional[List[UniqueView]] = None

@@ -1350,11 +1350,11 @@ Remove one or more assets from their current folder assignment inside the worksp
 
 | Direction | Type |
 | --- | --- |
-| Request | [`FolderDeleteAssetsParams`](./src/gumlet/types/folder_delete_assets_params.py) |
-| Response | [`FolderDeleteAssetsResponse`](./src/gumlet/types/folder_delete_assets_response.py) |
+| Request | [`FolderRemoveAssetsParams`](./src/gumlet/types/folder_remove_assets_params.py) |
+| Response | [`FolderRemoveAssetsResponse`](./src/gumlet/types/folder_remove_assets_response.py) |
 
 ```python
-folder = client.folders.delete_assets(
+folder = client.folders.remove_assets(
     workspace_id="workspaceId",
     asset_ids=["67e4f2b4403562dbea654301", "67e4f2bb403562dbea654302"],
 )
@@ -1390,11 +1390,11 @@ Remove one or more viewers from a channel by email address.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`ChannelViewerDeleteParams`](./src/gumlet/types/channel_viewer_delete_params.py) |
-| Response | [`ChannelViewerDeleteResponse`](./src/gumlet/types/channel_viewer_delete_response.py) |
+| Request | [`ChannelViewerRemoveParams`](./src/gumlet/types/channel_viewer_remove_params.py) |
+| Response | [`ChannelViewerRemoveResponse`](./src/gumlet/types/channel_viewer_remove_response.py) |
 
 ```python
-channel_viewer = client.channel_viewers.delete(
+channel_viewer = client.channel_viewers.remove(
     video_workspace_id="videoWorkspaceId",
     emails=["test@gumlet.com", "test+2@gumlet.com"],
 )
@@ -1443,11 +1443,11 @@ This endpoint retrieves viewer analytics data. This endpoint is use for deep ins
 
 | Direction | Type |
 | --- | --- |
-| Request | [`VideoAnalyticChartDataParams`](./src/gumlet/types/video_analytic_chart_data_params.py) |
-| Response | [`VideoAnalyticChartDataResponse`](./src/gumlet/types/video_analytic_chart_data_response.py) |
+| Request | [`VideoAnalyticViewerDataParams`](./src/gumlet/types/video_analytic_viewer_data_params.py) |
+| Response | [`VideoAnalyticViewerDataResponse`](./src/gumlet/types/video_analytic_viewer_data_response.py) |
 
 ```python
-video_analytic = client.video_analytics.chart_data(
+video_analytic = client.video_analytics.viewer_data(
     metrics=["views"],
     date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     group_by="daily",

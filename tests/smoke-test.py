@@ -1163,7 +1163,7 @@ def _smoke_case_94() -> None:
 
 
 def _smoke_case_95() -> None:
-    folder = client.folders.delete_assets(
+    folder = client.folders.remove_assets(
         workspace_id="workspaceId",
         asset_ids=["67e4f2b4403562dbea654301", "67e4f2bb403562dbea654302"],
     )
@@ -1181,7 +1181,7 @@ def _smoke_case_96() -> None:
 
 
 def _smoke_case_97() -> None:
-    channel_viewer = client.channel_viewers.delete(
+    channel_viewer = client.channel_viewers.remove(
         video_workspace_id="videoWorkspaceId",
         emails=["test@gumlet.com", "test+2@gumlet.com"],
     )
@@ -1203,7 +1203,7 @@ def _smoke_case_99() -> None:
 
 
 def _smoke_case_100() -> None:
-    video_analytic = client.video_analytics.chart_data(
+    video_analytic = client.video_analytics.viewer_data(
         metrics=["views"],
         date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
         group_by="daily",
@@ -1211,7 +1211,7 @@ def _smoke_case_100() -> None:
 
 
 def _smoke_case_101() -> None:
-    video_analytic = client.video_analytics.chart_data(
+    video_analytic = client.video_analytics.viewer_data(
         metrics=["views"],
         workspace_id="",
         date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
@@ -1978,7 +1978,7 @@ cases: list[SmokeCase] = [
         "run": _smoke_case_94,
     },
     {
-        "operation": "deleteAssets",
+        "operation": "removeAssets",
         "method": "POST",
         "path": "/video/workspaces/{workspace_id}/remove-assets-from-folder",
         "run": _smoke_case_95,
@@ -1990,7 +1990,7 @@ cases: list[SmokeCase] = [
         "run": _smoke_case_96,
     },
     {
-        "operation": "delete",
+        "operation": "remove",
         "method": "POST",
         "path": "/channel/{video_workspace_id}/viewers/remove",
         "run": _smoke_case_97,
@@ -2008,14 +2008,14 @@ cases: list[SmokeCase] = [
         "run": _smoke_case_99,
     },
     {
-        "operation": "chartData",
+        "operation": "viewerData",
         "method": "POST",
         "path": "/insights/viewer-analytics",
         "label": "required params",
         "run": _smoke_case_100,
     },
     {
-        "operation": "chartData",
+        "operation": "viewerData",
         "method": "POST",
         "path": "/insights/viewer-analytics",
         "label": "all params",

@@ -5,9 +5,9 @@ from __future__ import annotations
 from typing_extensions import Required, TypedDict
 from .._types import SequenceNotStr
 
-__all__ = ["ChannelViewerDeleteParams"]
+__all__ = ["ChannelViewerRemoveParams"]
 
 
-class ChannelViewerDeleteParams(TypedDict, total=False):
+class ChannelViewerRemoveParams(TypedDict, total=False):
     emails: Required[SequenceNotStr[str]]
     """Email addresses of viewers to remove. A maximum of 200 viewers can be removed in one request."""

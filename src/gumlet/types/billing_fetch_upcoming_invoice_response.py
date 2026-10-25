@@ -29,7 +29,7 @@ class UpcomingInvoiceLines(BaseModel):
 
 class UpcomingInvoice(BaseModel):
     subtotal: str
-    """Upcoming invoice amount without tax"""
+    """Upcoming invoice amount excluding tax"""
 
     lines: UpcomingInvoiceLines
     """Invoice line items"""
@@ -49,7 +49,7 @@ class BillingFetchUpcomingInvoiceResponse(BaseModel):
     """Trial end date"""
 
     current_month_usage: str
-    """Current month total amount in given currency."""
+    """Current month total amount in given currency. This amount includes taxes."""
 
     upcoming_invoice: UpcomingInvoice
     """Upcoming invoice details"""

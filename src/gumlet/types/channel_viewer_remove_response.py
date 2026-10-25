@@ -4,8 +4,8 @@ from typing import Optional
 
 from .._models import BaseModel
 
-__all__ = ["ChannelViewerDeleteResponse"]
+__all__ = ["ChannelViewerRemoveResponse"]
 
 
-class ChannelViewerDeleteResponse(BaseModel):
+class ChannelViewerRemoveResponse(BaseModel):
     success: Optional[bool] = None

@@ -22,11 +22,11 @@ from .._base_client import make_request_options
 from ..types.channel_viewer_invite_response import ChannelViewerInviteResponse
 from ..types import (
     channel_viewer_invite_params,
-    channel_viewer_delete_params,
+    channel_viewer_remove_params,
     channel_viewer_invite_csv_params,
     channel_viewer_list_subscribers_params,
 )
-from ..types.channel_viewer_delete_response import ChannelViewerDeleteResponse
+from ..types.channel_viewer_remove_response import ChannelViewerRemoveResponse
 from ..types.channel_viewer_invite_csv_response import ChannelViewerInviteCsvResponse
 from ..types.channel_viewer_list_subscribers_response import ChannelViewerListSubscribersResponse
 
@@ -94,7 +94,7 @@ class ChannelViewersResource(SyncAPIResource):
             cast_to=ChannelViewerInviteResponse,
         )
 
-    def delete(
+    def remove(
         self,
         video_workspace_id: str,
         *,
@@ -105,7 +105,7 @@ class ChannelViewersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ChannelViewerDeleteResponse:
+    ) -> ChannelViewerRemoveResponse:
         """
         Remove one or more viewers from a channel by email address.
 
@@ -118,11 +118,11 @@ class ChannelViewersResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ChannelViewerDeleteResponse: 200
+            ChannelViewerRemoveResponse: 200
 
         Example:
             ```python
-            channel_viewer = client.channel_viewers.delete(
+            channel_viewer = client.channel_viewers.remove(
                 video_workspace_id="videoWorkspaceId",
                 emails=["test@gumlet.com", "test+2@gumlet.com"],
             )
@@ -134,12 +134,12 @@ class ChannelViewersResource(SyncAPIResource):
             path_template("/channel/{video_workspace_id}/viewers/remove", **{"video_workspace_id": video_workspace_id}),
             body=maybe_transform(
                 {"emails": emails},
-                channel_viewer_delete_params.ChannelViewerDeleteParams,
+                channel_viewer_remove_params.ChannelViewerRemoveParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ChannelViewerDeleteResponse,
+            cast_to=ChannelViewerRemoveResponse,
         )
 
     def invite_csv(
@@ -314,7 +314,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
             cast_to=ChannelViewerInviteResponse,
         )
 
-    async def delete(
+    async def remove(
         self,
         video_workspace_id: str,
         *,
@@ -325,7 +325,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ChannelViewerDeleteResponse:
+    ) -> ChannelViewerRemoveResponse:
         """
         Remove one or more viewers from a channel by email address.
 
@@ -338,11 +338,11 @@ class AsyncChannelViewersResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ChannelViewerDeleteResponse: 200
+            ChannelViewerRemoveResponse: 200
 
         Example:
             ```python
-            channel_viewer = await client.channel_viewers.delete(
+            channel_viewer = await client.channel_viewers.remove(
                 video_workspace_id="videoWorkspaceId",
                 emails=["test@gumlet.com", "test+2@gumlet.com"],
             )
@@ -354,12 +354,12 @@ class AsyncChannelViewersResource(AsyncAPIResource):
             path_template("/channel/{video_workspace_id}/viewers/remove", **{"video_workspace_id": video_workspace_id}),
             body=await async_maybe_transform(
                 {"emails": emails},
-                channel_viewer_delete_params.ChannelViewerDeleteParams,
+                channel_viewer_remove_params.ChannelViewerRemoveParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ChannelViewerDeleteResponse,
+            cast_to=ChannelViewerRemoveResponse,
         )
 
     async def invite_csv(
@@ -480,8 +480,8 @@ class ChannelViewersResourceWithRawResponse:
         self.invite = to_raw_response_wrapper(
             channel_viewers.invite,
         )
-        self.delete = to_raw_response_wrapper(
-            channel_viewers.delete,
+        self.remove = to_raw_response_wrapper(
+            channel_viewers.remove,
         )
         self.invite_csv = to_raw_response_wrapper(
             channel_viewers.invite_csv,
@@ -498,8 +498,8 @@ class AsyncChannelViewersResourceWithRawResponse:
         self.invite = async_to_raw_response_wrapper(
             channel_viewers.invite,
         )
-        self.delete = async_to_raw_response_wrapper(
-            channel_viewers.delete,
+        self.remove = async_to_raw_response_wrapper(
+            channel_viewers.remove,
         )
         self.invite_csv = async_to_raw_response_wrapper(
             channel_viewers.invite_csv,
@@ -516,8 +516,8 @@ class ChannelViewersResourceWithStreamingResponse:
         self.invite = to_streamed_response_wrapper(
             channel_viewers.invite,
         )
-        self.delete = to_streamed_response_wrapper(
-            channel_viewers.delete,
+        self.remove = to_streamed_response_wrapper(
+            channel_viewers.remove,
         )
         self.invite_csv = to_streamed_response_wrapper(
             channel_viewers.invite_csv,
@@ -534,8 +534,8 @@ class AsyncChannelViewersResourceWithStreamingResponse:
         self.invite = async_to_streamed_response_wrapper(
             channel_viewers.invite,
         )
-        self.delete = async_to_streamed_response_wrapper(
-            channel_viewers.delete,
+        self.remove = async_to_streamed_response_wrapper(
+            channel_viewers.remove,
         )
         self.invite_csv = async_to_streamed_response_wrapper(
             channel_viewers.invite_csv,

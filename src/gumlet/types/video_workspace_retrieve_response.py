@@ -232,3 +232,6 @@ class VideoWorkspaceRetrieveResponse(BaseModel):
     """`true` means the workspace is disabled for streaming. No videos will stream from this workspace."""
 
     storage_event_listener: Optional[List[StorageEventListener]] = None
+
+    data_localization: Optional[Literal["us", "in", "eu"]] = None
+    """Data storage region"""

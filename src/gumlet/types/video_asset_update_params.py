@@ -11,7 +11,7 @@ __all__ = ["VideoAssetUpdateParams", "CallToAction"]
 
 class VideoAssetUpdateParams(TypedDict, total=False):
     asset_id: Required[str]
-    """Asset Id"""
+    """Asset ID to update. This is a required parameter."""
 
     title: str
     """Specify a text string or identifier which can be used for filtering or searching the asset."""

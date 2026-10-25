@@ -429,7 +429,7 @@ class VideoAssetsResource(SyncAPIResource):
         This endpoint allows users to update video asset that has previously been created.
 
         Args:
-            asset_id: Asset Id
+            asset_id: Asset ID to update. This is a required parameter.
             title: Specify a text string or identifier which can be used for filtering or searching the asset.
             description: Attach some textual data with the asset. This field is neither searchable nor filterable.
             tag: Specify a text string or identifier which can identify an asset or bunch of assets later. You can pass multiple comma-separated values.
@@ -1370,7 +1370,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         This endpoint allows users to update video asset that has previously been created.
 
         Args:
-            asset_id: Asset Id
+            asset_id: Asset ID to update. This is a required parameter.
             title: Specify a text string or identifier which can be used for filtering or searching the asset.
             description: Attach some textual data with the asset. This field is neither searchable nor filterable.
             tag: Specify a text string or identifier which can identify an asset or bunch of assets later. You can pass multiple comma-separated values.

@@ -660,7 +660,9 @@ Get all playlists for given workspace
 | Response | [`VideoPlaylistListAllResponse`](./src/gumlet/types/video_playlist_list_all_response.py) |
 
 ```python
-video_playlist = client.video_playlists.list_all()
+video_playlist = client.video_playlists.list_all(
+    collection_id="collection_id",
+)
 ```
 
 ### Add asset to playlist
@@ -1201,9 +1203,9 @@ Video workspaces are top-level entities in Gumlet. You can use them to organize 
 
 ```python
 video_workspace = client.video_workspaces.create(
-    name="zoom-workspace",
+    name="My Workspace",
     type="direct-upload",
-    zoom={"secret": "yourSecret"},
+    data_localization="us",
 )
 ```
 

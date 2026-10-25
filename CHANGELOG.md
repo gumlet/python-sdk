@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.3.2](https://github.com/gumlet/python-sdk/compare/v1.3.0...v1.3.2) (2026-10-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 3 breaking changes to the SDK surface.
+    - Removed operation `folders.deleteAssets` (`POST /video/workspaces/{workspace_id}/remove-assets-from-folder`).
+    - Removed operation `channelViewers.delete` (`POST /channel/{video_workspace_id}/viewers/remove`).
+    - Removed operation `videoAnalytics.chartData` (`POST /insights/viewer-analytics`).
+* **api:** query param `collection_id` on `videoPlaylists.listAll` is now required.
+
+### Features
+
+* **api:** remove operation folders.deleteAssets (+5 more changes) ([a69343c](https://github.com/gumlet/python-sdk/commit/a69343c1e27cb114ca45dd6d80abb40a46d2c9cf))
+* **api:** update SDK surface (2 changes) ([2656fa1](https://github.com/gumlet/python-sdk/commit/2656fa1b5ddd304b8566482f3507a320dbcc4322))
+
+
+### Chores
+
+* **api:** regenerate SDK ([976363d](https://github.com/gumlet/python-sdk/commit/976363d4fdaed2ace3bf8d7b5df55fee6b0ac53e))
+* release 1.3.2 ([e9f52a8](https://github.com/gumlet/python-sdk/commit/e9f52a8c53e295c389d0e9958ae27e32c09bfab9))
+
 ## [1.3.0](https://github.com/gumlet/python-sdk/compare/v1.2.2...v1.3.0) (2026-10-22)
 
 

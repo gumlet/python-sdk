@@ -34,6 +34,7 @@ class GlobalSearchResource(SyncAPIResource):
         self,
         *,
         search_query: str,
+        workspace_id: str | Omit = omit,
         collection_id: str | Omit = omit,
         size: int | Omit = omit,
         assets_offset: int | Omit = omit,
@@ -52,7 +53,8 @@ class GlobalSearchResource(SyncAPIResource):
 
         Args:
             search_query: Search query term
-            collection_id: Workspace ID if you want to limit search to a specific workspace
+            workspace_id: Gumlet video workspace ID. Preferred. Provide `workspace_id`, or deprecated `collection_id` / `source_id` (same ID).
+            collection_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
             size: Number of results to return
             assets_offset: Offset for assets
             folders_offset: Offset for folders
@@ -88,6 +90,7 @@ class GlobalSearchResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "search_query": search_query,
+                        "workspace_id": workspace_id,
                         "collection_id": collection_id,
                         "size": size,
                         "assets_offset": assets_offset,
@@ -115,6 +118,7 @@ class AsyncGlobalSearchResource(AsyncAPIResource):
         self,
         *,
         search_query: str,
+        workspace_id: str | Omit = omit,
         collection_id: str | Omit = omit,
         size: int | Omit = omit,
         assets_offset: int | Omit = omit,
@@ -133,7 +137,8 @@ class AsyncGlobalSearchResource(AsyncAPIResource):
 
         Args:
             search_query: Search query term
-            collection_id: Workspace ID if you want to limit search to a specific workspace
+            workspace_id: Gumlet video workspace ID. Preferred. Provide `workspace_id`, or deprecated `collection_id` / `source_id` (same ID).
+            collection_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
             size: Number of results to return
             assets_offset: Offset for assets
             folders_offset: Offset for folders
@@ -169,6 +174,7 @@ class AsyncGlobalSearchResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "search_query": search_query,
+                        "workspace_id": workspace_id,
                         "collection_id": collection_id,
                         "size": size,
                         "assets_offset": assets_offset,

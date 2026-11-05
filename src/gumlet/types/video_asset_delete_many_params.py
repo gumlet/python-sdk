@@ -12,5 +12,8 @@ class VideoAssetDeleteManyParams(TypedDict, total=False):
     asset_list: Required[SequenceNotStr[str]]
     """LIst of asset ids to delete"""
 
-    source_id: Required[str]
-    """Workspace ID from which assets needs to be deleted."""
+    source_id: str
+    """Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility."""
+
+    workspace_id: Required[str]
+    """Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID)."""

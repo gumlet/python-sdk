@@ -44,10 +44,13 @@ class VideoUsageAnalyticRetrieveParams(TypedDict, total=False):
 
 class Filters(TypedDict, total=False):
     collection_id: str
-    """The ID of the `workspace` you want to filter the data for."""
+    """Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility."""
 
     source_id: str
-    """The ID of the `workspace` you want to filter the data for. Deprecated."""
+    """Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility."""
+
+    workspace_id: str
+    """Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID)."""
 
 
 class DateRange(TypedDict, total=False):

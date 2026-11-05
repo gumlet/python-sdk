@@ -51,9 +51,10 @@ class VideoPlaylistsResource(SyncAPIResource):
     def create(
         self,
         *,
-        collection_id: str,
+        collection_id: str | Omit = omit,
         title: str,
         description: str | Omit = omit,
+        workspace_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -65,9 +66,10 @@ class VideoPlaylistsResource(SyncAPIResource):
         Create new playlist inside video wprkspace
 
         Args:
-            collection_id: Workspace ID in which the playlist should be created
+            collection_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
             title: Playlist title
             description: Playlist description
+            workspace_id: Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID).
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -82,6 +84,7 @@ class VideoPlaylistsResource(SyncAPIResource):
                 collection_id="{{video-source-id}}",
                 title="Playlist-Title",
                 description="This is description for playlist.",
+                workspace_id="{{video-source-id}}",
             )
             ```
         """
@@ -92,6 +95,7 @@ class VideoPlaylistsResource(SyncAPIResource):
                     "collection_id": collection_id,
                     "title": title,
                     "description": description,
+                    "workspace_id": workspace_id,
                 },
                 video_playlist_create_params.VideoPlaylistCreateParams,
             ),
@@ -104,7 +108,8 @@ class VideoPlaylistsResource(SyncAPIResource):
     def list_all(
         self,
         *,
-        collection_id: str,
+        workspace_id: str | Omit = omit,
+        collection_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -116,7 +121,8 @@ class VideoPlaylistsResource(SyncAPIResource):
         Get all playlists for given workspace
 
         Args:
-            collection_id: Workspace ID
+            workspace_id: Gumlet video workspace ID. Preferred. Provide one of `workspace_id` or the deprecated aliases below (same ID).
+            collection_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -127,9 +133,7 @@ class VideoPlaylistsResource(SyncAPIResource):
 
         Example:
             ```python
-            video_playlist = client.video_playlists.list_all(
-                collection_id="collection_id",
-            )
+            video_playlist = client.video_playlists.list_all()
             ```
         """
         return self._get(
@@ -140,7 +144,8 @@ class VideoPlaylistsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"collection_id": collection_id}, video_playlist_list_all_params.VideoPlaylistListAllParams
+                    {"workspace_id": workspace_id, "collection_id": collection_id},
+                    video_playlist_list_all_params.VideoPlaylistListAllParams,
                 ),
             ),
             cast_to=VideoPlaylistListAllResponse,
@@ -545,9 +550,10 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        collection_id: str,
+        collection_id: str | Omit = omit,
         title: str,
         description: str | Omit = omit,
+        workspace_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -559,9 +565,10 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         Create new playlist inside video wprkspace
 
         Args:
-            collection_id: Workspace ID in which the playlist should be created
+            collection_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
             title: Playlist title
             description: Playlist description
+            workspace_id: Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID).
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -576,6 +583,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
                 collection_id="{{video-source-id}}",
                 title="Playlist-Title",
                 description="This is description for playlist.",
+                workspace_id="{{video-source-id}}",
             )
             ```
         """
@@ -586,6 +594,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
                     "collection_id": collection_id,
                     "title": title,
                     "description": description,
+                    "workspace_id": workspace_id,
                 },
                 video_playlist_create_params.VideoPlaylistCreateParams,
             ),
@@ -598,7 +607,8 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
     async def list_all(
         self,
         *,
-        collection_id: str,
+        workspace_id: str | Omit = omit,
+        collection_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -610,7 +620,8 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         Get all playlists for given workspace
 
         Args:
-            collection_id: Workspace ID
+            workspace_id: Gumlet video workspace ID. Preferred. Provide one of `workspace_id` or the deprecated aliases below (same ID).
+            collection_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -621,9 +632,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
 
         Example:
             ```python
-            video_playlist = await client.video_playlists.list_all(
-                collection_id="collection_id",
-            )
+            video_playlist = await client.video_playlists.list_all()
             ```
         """
         return await self._get(
@@ -634,7 +643,8 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"collection_id": collection_id}, video_playlist_list_all_params.VideoPlaylistListAllParams
+                    {"workspace_id": workspace_id, "collection_id": collection_id},
+                    video_playlist_list_all_params.VideoPlaylistListAllParams,
                 ),
             ),
             cast_to=VideoPlaylistListAllResponse,

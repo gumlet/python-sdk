@@ -11,8 +11,11 @@ class GlobalSearchSearchParams(TypedDict, total=False):
     search_query: Required[str]
     """Search query term"""
 
+    workspace_id: str
+    """Gumlet video workspace ID. Preferred. Provide `workspace_id`, or deprecated `collection_id` / `source_id` (same ID)."""
+
     collection_id: str
-    """Workspace ID if you want to limit search to a specific workspace"""
+    """Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility."""
 
     size: int
     """Number of results to return"""

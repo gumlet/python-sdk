@@ -17,7 +17,7 @@ class FolderListResponseItem(BaseModel):
     """Folder name"""
 
     video_source_id: Optional[str] = None
-    """Workspace ID"""
+    """Deprecated. Use `workspace_id` instead. Still returned for backwards compatibility."""
 
     parent_id: Optional[str] = None
     """Parent folder ID"""
@@ -41,6 +41,9 @@ class FolderListResponseItem(BaseModel):
 
     updated_at: Optional[datetime] = None
     """Folder update time in ISO 8601 format"""
+
+    workspace_id: Optional[str] = None
+    """Workspace ID"""
 
 
 FolderListResponse: TypeAlias = List[FolderListResponseItem]

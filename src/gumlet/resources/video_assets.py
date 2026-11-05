@@ -99,7 +99,7 @@ class VideoAssetsResource(SyncAPIResource):
 
         Args:
             input: URL or web address of a file that Gumlet should download to create a new asset.
-            profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile.
+            profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `workspace_id`) from the video profile.
             format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`.
             tag: Specify a text string or identifier which can identify an asset or bunch of assets later.
             title: Specify a text string or identifier which can be used for filtering or searching the asset.
@@ -186,7 +186,7 @@ class VideoAssetsResource(SyncAPIResource):
     def upload(
         self,
         *,
-        collection_id: str,
+        collection_id: str | Omit = omit,
         profile_id: str | Omit = omit,
         format: Literal["ABR", "MP4"] | Omit = omit,
         tag: SequenceNotStr[str] | Omit = omit,
@@ -212,6 +212,7 @@ class VideoAssetsResource(SyncAPIResource):
         call_to_actions: Iterable[video_asset_upload_params.CallToAction] | Omit = omit,
         playlist_id: str | Omit = omit,
         folder: str | Omit = omit,
+        workspace_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -223,8 +224,8 @@ class VideoAssetsResource(SyncAPIResource):
         This endpoint creates a video asset allowing upload of a video from the local file system and ingest media content into the Gumlet system for processing and delivery. Body parameters are the same as the Create Asset body parameters except for the `input` parameter, which this endpoint does not take. A successful response will be returned with `upload_url` field. You can make `PUT` request to that URL to upload video. To upload video using `upload_url` refer to [this](https://docs.gumlet.com/docs/direct-upload#2-use-the-url-to-upload-a-file).
 
         Args:
-            collection_id: Gumlet video workspace id.
-            profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile.
+            collection_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
+            profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `workspace_id`) from the video profile.
             format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`.
             tag: Specify a text string or identifier which can identify an asset or bunch of assets later.
             title: Specify a text string or identifier which can be used for filtering or searching the asset.
@@ -249,6 +250,7 @@ class VideoAssetsResource(SyncAPIResource):
             call_to_actions: A CTA is an explicit prompt within the video content encouraging viewers to take a particular action.
             playlist_id: Add this asset to a playlist.
             folder: Add this asset to an existing folder by `folder_id`.
+            workspace_id: Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID).
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -281,6 +283,7 @@ class VideoAssetsResource(SyncAPIResource):
                 ],
                 playlist_id="6597acd5ed6f26a9c5ca9633",
                 folder="697375fbfa2d1037283140e4",
+                workspace_id="646df1c9173a4a2fcac180b4",
             )
             ```
         """
@@ -314,6 +317,7 @@ class VideoAssetsResource(SyncAPIResource):
                     "call_to_actions": call_to_actions,
                     "playlist_id": playlist_id,
                     "folder": folder,
+                    "workspace_id": workspace_id,
                 },
                 video_asset_upload_params.VideoAssetUploadParams,
             ),
@@ -809,7 +813,8 @@ class VideoAssetsResource(SyncAPIResource):
         self,
         *,
         asset_list: SequenceNotStr[str],
-        source_id: str,
+        source_id: str | Omit = omit,
+        workspace_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -822,7 +827,8 @@ class VideoAssetsResource(SyncAPIResource):
 
         Args:
             asset_list: LIst of asset ids to delete
-            source_id: Workspace ID from which assets needs to be deleted.
+            source_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
+            workspace_id: Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID).
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -836,6 +842,7 @@ class VideoAssetsResource(SyncAPIResource):
             video_asset = client.video_assets.delete_many(
                 asset_list=["64249a8858fd3a208b987702", "64784bae843b155b829bbf84"],
                 source_id="60bd2ba353ff754d28179ee6",
+                workspace_id="60bd2ba353ff754d28179ee6",
             )
             ```
         """
@@ -845,6 +852,7 @@ class VideoAssetsResource(SyncAPIResource):
                 {
                     "asset_list": asset_list,
                     "source_id": source_id,
+                    "workspace_id": workspace_id,
                 },
                 video_asset_delete_many_params.VideoAssetDeleteManyParams,
             ),
@@ -858,9 +866,10 @@ class VideoAssetsResource(SyncAPIResource):
         self,
         *,
         asset_list: SequenceNotStr[str],
-        source_id: str,
+        source_id: str | Omit = omit,
         add_tags: SequenceNotStr[str],
         remove_tags: SequenceNotStr[str],
+        workspace_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -873,9 +882,10 @@ class VideoAssetsResource(SyncAPIResource):
 
         Args:
             asset_list: List of asset ids to update the tags for.
-            source_id: Workspace ID in which the videos needs the operation
+            source_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
             add_tags: List of tags to add to given assets.
             remove_tags: List of tags to remove from given assets. Pass empty array if nothing is to be removed.
+            workspace_id: Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID).
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -891,6 +901,7 @@ class VideoAssetsResource(SyncAPIResource):
                 source_id="60bd2ba353ff754d28179ee6",
                 add_tags=["tag-1"],
                 remove_tags=["playlist-1"],
+                workspace_id="60bd2ba353ff754d28179ee6",
             )
             ```
         """
@@ -902,6 +913,7 @@ class VideoAssetsResource(SyncAPIResource):
                     "source_id": source_id,
                     "add_tags": add_tags,
                     "remove_tags": remove_tags,
+                    "workspace_id": workspace_id,
                 },
                 video_asset_tag_many_params.VideoAssetTagManyParams,
             ),
@@ -1040,7 +1052,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
 
         Args:
             input: URL or web address of a file that Gumlet should download to create a new asset.
-            profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile.
+            profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `workspace_id`) from the video profile.
             format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`.
             tag: Specify a text string or identifier which can identify an asset or bunch of assets later.
             title: Specify a text string or identifier which can be used for filtering or searching the asset.
@@ -1127,7 +1139,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
     async def upload(
         self,
         *,
-        collection_id: str,
+        collection_id: str | Omit = omit,
         profile_id: str | Omit = omit,
         format: Literal["ABR", "MP4"] | Omit = omit,
         tag: SequenceNotStr[str] | Omit = omit,
@@ -1153,6 +1165,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         call_to_actions: Iterable[video_asset_upload_params.CallToAction] | Omit = omit,
         playlist_id: str | Omit = omit,
         folder: str | Omit = omit,
+        workspace_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1164,8 +1177,8 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         This endpoint creates a video asset allowing upload of a video from the local file system and ingest media content into the Gumlet system for processing and delivery. Body parameters are the same as the Create Asset body parameters except for the `input` parameter, which this endpoint does not take. A successful response will be returned with `upload_url` field. You can make `PUT` request to that URL to upload video. To upload video using `upload_url` refer to [this](https://docs.gumlet.com/docs/direct-upload#2-use-the-url-to-upload-a-file).
 
         Args:
-            collection_id: Gumlet video workspace id.
-            profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile.
+            collection_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
+            profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `workspace_id`) from the video profile.
             format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`.
             tag: Specify a text string or identifier which can identify an asset or bunch of assets later.
             title: Specify a text string or identifier which can be used for filtering or searching the asset.
@@ -1190,6 +1203,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             call_to_actions: A CTA is an explicit prompt within the video content encouraging viewers to take a particular action.
             playlist_id: Add this asset to a playlist.
             folder: Add this asset to an existing folder by `folder_id`.
+            workspace_id: Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID).
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -1222,6 +1236,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 ],
                 playlist_id="6597acd5ed6f26a9c5ca9633",
                 folder="697375fbfa2d1037283140e4",
+                workspace_id="646df1c9173a4a2fcac180b4",
             )
             ```
         """
@@ -1255,6 +1270,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                     "call_to_actions": call_to_actions,
                     "playlist_id": playlist_id,
                     "folder": folder,
+                    "workspace_id": workspace_id,
                 },
                 video_asset_upload_params.VideoAssetUploadParams,
             ),
@@ -1750,7 +1766,8 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         self,
         *,
         asset_list: SequenceNotStr[str],
-        source_id: str,
+        source_id: str | Omit = omit,
+        workspace_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1763,7 +1780,8 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
 
         Args:
             asset_list: LIst of asset ids to delete
-            source_id: Workspace ID from which assets needs to be deleted.
+            source_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
+            workspace_id: Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID).
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -1777,6 +1795,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             video_asset = await client.video_assets.delete_many(
                 asset_list=["64249a8858fd3a208b987702", "64784bae843b155b829bbf84"],
                 source_id="60bd2ba353ff754d28179ee6",
+                workspace_id="60bd2ba353ff754d28179ee6",
             )
             ```
         """
@@ -1786,6 +1805,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 {
                     "asset_list": asset_list,
                     "source_id": source_id,
+                    "workspace_id": workspace_id,
                 },
                 video_asset_delete_many_params.VideoAssetDeleteManyParams,
             ),
@@ -1799,9 +1819,10 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         self,
         *,
         asset_list: SequenceNotStr[str],
-        source_id: str,
+        source_id: str | Omit = omit,
         add_tags: SequenceNotStr[str],
         remove_tags: SequenceNotStr[str],
+        workspace_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1814,9 +1835,10 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
 
         Args:
             asset_list: List of asset ids to update the tags for.
-            source_id: Workspace ID in which the videos needs the operation
+            source_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
             add_tags: List of tags to add to given assets.
             remove_tags: List of tags to remove from given assets. Pass empty array if nothing is to be removed.
+            workspace_id: Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID).
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -1832,6 +1854,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 source_id="60bd2ba353ff754d28179ee6",
                 add_tags=["tag-1"],
                 remove_tags=["playlist-1"],
+                workspace_id="60bd2ba353ff754d28179ee6",
             )
             ```
         """
@@ -1843,6 +1866,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                     "source_id": source_id,
                     "add_tags": add_tags,
                     "remove_tags": remove_tags,
+                    "workspace_id": workspace_id,
                 },
                 video_asset_tag_many_params.VideoAssetTagManyParams,
             ),

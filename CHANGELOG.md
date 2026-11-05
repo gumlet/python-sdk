@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.4.0](https://github.com/gumlet/python-sdk/compare/v1.3.3...v1.4.0) (2026-11-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 4 breaking changes to the SDK surface.
+    - Added required body field `workspace_id` to `videoAssets.upload`.
+    - Added required body field `workspace_id` to `videoAssets.deleteMany`.
+    - Added required body field `workspace_id` to `videoAssets.tagMany`.
+    - Added required body field `workspace_id` to `videoPlaylists.create`.
+
+### Features
+
+* **api:** update SDK surface (8 changes) ([1380d95](https://github.com/gumlet/python-sdk/commit/1380d95c4d96245759dccdff50755915b8703c3f))
+
+
+### Chores
+
+* release 1.4.0 ([08ba2c0](https://github.com/gumlet/python-sdk/commit/08ba2c036f720e69bcb7962e529713a22ebb560a))
+
 ## [1.3.3](https://github.com/gumlet/python-sdk/compare/v1.3.2...v1.3.3) (2026-10-25)
 
 

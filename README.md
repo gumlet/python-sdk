@@ -186,5 +186,3 @@ The same resource also has:
 ## Requirements
 
 - Python 3.9 or newer
-
-Powered by Scalar.

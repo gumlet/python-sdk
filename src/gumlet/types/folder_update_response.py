@@ -22,6 +22,7 @@ class FolderUpdateResponse(BaseModel):
     name: Optional[str] = None
 
     video_source_id: Optional[str] = None
+    """Deprecated. Use `workspace_id` instead. Still returned for backwards compatibility."""
 
     parent_id: Optional[str] = None
 
@@ -40,6 +41,9 @@ class FolderUpdateResponse(BaseModel):
 
     updated_at: Optional[str] = None
     """ISO Timestamp"""
+
+    workspace_id: Optional[str] = None
+    """Workspace ID"""
 
 
 FolderUpdateResponse: TypeAlias = Union[FolderUpdateResponse, FolderUpdateResponse2]

@@ -92,10 +92,14 @@ class AllAsset(BaseModel):
     tag: Optional[str] = None
 
     source_id: Optional[str] = None
+    """Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility."""
 
     input: Optional[AllAssetInput] = None
 
     output: Optional[AllAssetOutput] = None
+
+    workspace_id: Optional[str] = None
+    """Workspace ID"""
 
 
 class VideoAssetListDeprecatedResponse(BaseModel):

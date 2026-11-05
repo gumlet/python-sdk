@@ -114,6 +114,7 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
         *,
         start_at: Union[str, date],
         end_at: Union[str, date],
+        workspace_id: str | Omit = omit,
         collection_id: str | Omit = omit,
         page: str | Omit = omit,
         page_size: str | Omit = omit,
@@ -130,7 +131,8 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
         Args:
             start_at: Date in yyyy-MM-dd format
             end_at: Date in yyyy-MM-dd format
-            collection_id: Gumlet workspace ID
+            workspace_id: Gumlet video workspace ID. Preferred. Provide `workspace_id`, or deprecated `collection_id` / `source_id` (same ID).
+            collection_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
             page: Page number of the response.
             page_size: Assets to list per page.
             extra_headers: Send extra headers with the request.
@@ -162,6 +164,7 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
                     {
                         "start_at": start_at,
                         "end_at": end_at,
+                        "workspace_id": workspace_id,
                         "collection_id": collection_id,
                         "page": page,
                         "page_size": page_size,
@@ -261,6 +264,7 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
         *,
         start_at: Union[str, date],
         end_at: Union[str, date],
+        workspace_id: str | Omit = omit,
         collection_id: str | Omit = omit,
         page: str | Omit = omit,
         page_size: str | Omit = omit,
@@ -277,7 +281,8 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
         Args:
             start_at: Date in yyyy-MM-dd format
             end_at: Date in yyyy-MM-dd format
-            collection_id: Gumlet workspace ID
+            workspace_id: Gumlet video workspace ID. Preferred. Provide `workspace_id`, or deprecated `collection_id` / `source_id` (same ID).
+            collection_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
             page: Page number of the response.
             page_size: Assets to list per page.
             extra_headers: Send extra headers with the request.
@@ -309,6 +314,7 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
                     {
                         "start_at": start_at,
                         "end_at": end_at,
+                        "workspace_id": workspace_id,
                         "collection_id": collection_id,
                         "page": page,
                         "page_size": page_size,

@@ -12,11 +12,14 @@ class VideoAssetTagManyParams(TypedDict, total=False):
     asset_list: Required[SequenceNotStr[str]]
     """List of asset ids to update the tags for."""
 
-    source_id: Required[str]
-    """Workspace ID in which the videos needs the operation"""
+    source_id: str
+    """Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility."""
 
     add_tags: Required[SequenceNotStr[str]]
     """List of tags to add to given assets."""
 
     remove_tags: Required[SequenceNotStr[str]]
     """List of tags to remove from given assets. Pass empty array if nothing is to be removed."""
+
+    workspace_id: Required[str]
+    """Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID)."""

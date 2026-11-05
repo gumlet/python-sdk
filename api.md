@@ -185,6 +185,7 @@ video_asset = client.video_assets.upload(
     ],
     playlist_id="6597acd5ed6f26a9c5ca9633",
     folder="697375fbfa2d1037283140e4",
+    workspace_id="646df1c9173a4a2fcac180b4",
 )
 ```
 
@@ -330,6 +331,7 @@ Delete multiple VOD assets at once.
 video_asset = client.video_assets.delete_many(
     asset_list=["64249a8858fd3a208b987702", "64784bae843b155b829bbf84"],
     source_id="60bd2ba353ff754d28179ee6",
+    workspace_id="60bd2ba353ff754d28179ee6",
 )
 ```
 
@@ -348,6 +350,7 @@ video_asset = client.video_assets.tag_many(
     source_id="60bd2ba353ff754d28179ee6",
     add_tags=["tag-1"],
     remove_tags=["playlist-1"],
+    workspace_id="60bd2ba353ff754d28179ee6",
 )
 ```
 
@@ -647,6 +650,7 @@ video_playlist = client.video_playlists.create(
     collection_id="{{video-source-id}}",
     title="Playlist-Title",
     description="This is description for playlist.",
+    workspace_id="{{video-source-id}}",
 )
 ```
 
@@ -660,9 +664,7 @@ Get all playlists for given workspace
 | Response | [`VideoPlaylistListAllResponse`](./src/gumlet/types/video_playlist_list_all_response.py) |
 
 ```python
-video_playlist = client.video_playlists.list_all(
-    collection_id="collection_id",
-)
+video_playlist = client.video_playlists.list_all()
 ```
 
 ### Add asset to playlist

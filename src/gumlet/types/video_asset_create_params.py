@@ -25,7 +25,7 @@ class VideoAssetCreateParams(TypedDict, total=False):
     """URL or web address of a file that Gumlet should download to create a new asset."""
 
     profile_id: str
-    """Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `collection_id`) from the video profile."""
+    """Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `workspace_id`) from the video profile."""
 
     format: Literal["ABR", "MP4"]
     """Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`."""

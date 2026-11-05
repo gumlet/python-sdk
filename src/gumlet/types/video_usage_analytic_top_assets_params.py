@@ -18,8 +18,11 @@ class VideoUsageAnalyticTopAssetsParams(TypedDict, total=False):
     end_at: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
     """Date in yyyy-MM-dd format"""
 
+    workspace_id: str
+    """Gumlet video workspace ID. Preferred. Provide `workspace_id`, or deprecated `collection_id` / `source_id` (same ID)."""
+
     collection_id: str
-    """Gumlet workspace ID"""
+    """Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility."""
 
     page: str
     """Page number of the response."""

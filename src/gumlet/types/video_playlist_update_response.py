@@ -52,7 +52,7 @@ class VideoPlaylistUpdateResponse(BaseModel):
     """Playlist ID"""
 
     collection_id: Optional[str] = None
-    """Workspace ID"""
+    """Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility."""
 
     title: Optional[str] = None
     """Updated playlist title"""
@@ -61,3 +61,6 @@ class VideoPlaylistUpdateResponse(BaseModel):
     """Updated playlist description"""
 
     player_config: Optional[PlayerConfig] = None
+
+    workspace_id: Optional[str] = None
+    """Workspace ID"""

@@ -13,7 +13,7 @@ class VideoPlaylistListAllResponseItem(BaseModel):
     """Playlist ID"""
 
     collection_id: Optional[str] = None
-    """Workspace ID"""
+    """Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility."""
 
     title: Optional[str] = None
     """Title of the playlist"""
@@ -23,6 +23,9 @@ class VideoPlaylistListAllResponseItem(BaseModel):
 
     player_config: Optional[object] = None
     """Player configuration for the playlist"""
+
+    workspace_id: Optional[str] = None
+    """Workspace ID"""
 
 
 VideoPlaylistListAllResponse: TypeAlias = List[VideoPlaylistListAllResponseItem]

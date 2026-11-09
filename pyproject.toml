@@ -16,8 +16,6 @@ dependencies = [
   "sniffio",
 ]
 
-keywords = ["gumlet", "api", "video"]
-
 [project.urls]
 homepage = "https://www.gumlet.com/"
 source = "https://github.com/gumlet/python-sdk"

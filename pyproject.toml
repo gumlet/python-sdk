@@ -1,12 +1,12 @@
 [project]
 name = "gumlet"
-version = "0.1.0" # x-release-please-version
+version = "1.4.0" # x-release-please-version
 description = "Gumlet helps developers deliver online video and images. This API encompasses Gumlet Video, Image and Video Analytics functionality to help you build your products better and faster than ever before."
 readme = "README.md"
 license = "Apache-2.0"
 keywords = ["gumlet", "api", "video"]
 authors = [
-  { name = "Gumlet", email = "support@gumlet.com" },
+  { name = "Gumlet", email = "support@gumlet.com"},
 ]
 requires-python = ">= 3.9"
 dependencies = [
@@ -17,11 +17,14 @@ dependencies = [
   "sniffio",
 ]
 
+keywords = ["gumlet", "api", "video"]
+
 [project.urls]
-Documentation = "https://docs.gumlet.com/reference"
-Source = "https://github.com/gumlet/python-sdk"
-Issues = "https://github.com/gumlet/python-sdk/issues"
-Changelog = "https://github.com/gumlet/python-sdk/blob/main/CHANGELOG.md"
+homepage = "https://www.gumlet.com/"
+source = "https://github.com/gumlet/python-sdk"
+issues = "https://github.com/gumlet/python-sdk/issues"
+changelog = "https://github.com/gumlet/python-sdk/blob/main/CHANGELOG.md"
+documentation = "https://docs.gumlet.com/reference"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]

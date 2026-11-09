@@ -2,7 +2,7 @@
 
 This library provides convenient access to the Gumlet REST API from Python.
 
-The full API of this library can be found in [api.md](./api.md).
+The REST API documentation can be found on [docs.gumlet.com](https://docs.gumlet.com/reference). The full API of this library can be found in [api.md](./api.md).
 
 <br />
 
@@ -186,5 +186,3 @@ The same resource also has:
 ## Requirements
 
 - Python 3.9 or newer
-
-Powered by Scalar.

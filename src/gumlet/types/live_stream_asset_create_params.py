@@ -24,6 +24,6 @@ class LiveStreamAssetCreateParams(TypedDict, total=False):
     mp4_access: bool
     """Creates <code>MP4</code> version for download purpose."""
 
-    orientation: Literal["landscape", "potrait"]
+    orientation: Literal["landscape", "portrait"]
 
     start_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/gumlet/python-sdk/compare/v1.4.1...v1.4.2) (2026-11-13)
+
+
+### Chores
+
+* **api:** update generated SDK content ([c981a09](https://github.com/gumlet/python-sdk/commit/c981a09b12e492de8eb6f44a9837cd0c846104b5))
+
 ## [1.4.1](https://github.com/gumlet/python-sdk/compare/v1.4.0...v1.4.1) (2026-11-09)
 
 

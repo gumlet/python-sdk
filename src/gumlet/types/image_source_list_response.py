@@ -142,3 +142,6 @@ class ImageSourceListResponse(BaseModel):
 
     page_size: Optional[int] = None
     """Page size used for this response when it differs from the default."""
+
+    total_count: Optional[int] = None
+    """Total number of image sources available"""

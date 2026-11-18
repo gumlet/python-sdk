@@ -49,16 +49,11 @@ class TestImageSources:
 
     @smoke_case("imageSources.list:required", operation="list", path="/image/sources")
     def test_method_list(self) -> None:
-        image_source = client.image_sources.list(
-            page_number=1,
-            page_size=20,
-        )
+        page = client.image_sources.list()
 
     @smoke_case("imageSources.list:all", operation="list", path="/image/sources")
     def test_method_list_with_all_params(self) -> None:
-        image_source = client.image_sources.list(
-            page_number=1,
-            page_size=20,
+        page = client.image_sources.list(
             next_page_token="next_page_token",
         )
 

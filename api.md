@@ -919,10 +919,7 @@ Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-ba
 | Response | [`ImageSourceListResponse`](./src/gumlet/types/image_source_list_response.py) |
 
 ```python
-image_source = client.image_sources.list(
-    page_number=1,
-    page_size=20,
-)
+page = client.image_sources.list()
 ```
 
 ### Get Image Source

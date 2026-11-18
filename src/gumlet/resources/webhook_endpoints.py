@@ -20,7 +20,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.webhook_endpoint_create_response import WebhookEndpointCreateResponse
-from ..types import webhook_endpoint_create_params, webhook_endpoint_update_params
+from ..types import webhook_endpoint_create_params, webhook_endpoint_update_params, webhook_endpoint_history_params
 from ..types.webhook_endpoint_list_response import WebhookEndpointListResponse
 from ..types.webhook_endpoint_update_response import WebhookEndpointUpdateResponse
 from ..types.webhook_endpoint_delete_response import WebhookEndpointDeleteResponse
@@ -298,6 +298,9 @@ class WebhookEndpointsResource(SyncAPIResource):
         self,
         webhook_id: str,
         *,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -308,8 +311,13 @@ class WebhookEndpointsResource(SyncAPIResource):
         """
         Get logs history for a given webhook.
 
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
         Args:
             webhook_id: Webhook ID. You can get it using list webhook endpoint.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -322,6 +330,8 @@ class WebhookEndpointsResource(SyncAPIResource):
             ```python
             webhook_endpoint = client.webhook_endpoints.history(
                 webhook_id="webhookId",
+                page_number=1,
+                page_size=20,
             )
             ```
         """
@@ -330,7 +340,14 @@ class WebhookEndpointsResource(SyncAPIResource):
         return self._get(
             path_template("/org/webhook/{webhook_id}/history", **{"webhook_id": webhook_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
+                    webhook_endpoint_history_params.WebhookEndpointHistoryParams,
+                ),
             ),
             cast_to=WebhookEndpointHistoryResponse,
         )
@@ -605,6 +622,9 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
         self,
         webhook_id: str,
         *,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -615,8 +635,13 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
         """
         Get logs history for a given webhook.
 
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
         Args:
             webhook_id: Webhook ID. You can get it using list webhook endpoint.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -629,6 +654,8 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
             ```python
             webhook_endpoint = await client.webhook_endpoints.history(
                 webhook_id="webhookId",
+                page_number=1,
+                page_size=20,
             )
             ```
         """
@@ -637,7 +664,14 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
         return await self._get(
             path_template("/org/webhook/{webhook_id}/history", **{"webhook_id": webhook_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
+                    webhook_endpoint_history_params.WebhookEndpointHistoryParams,
+                ),
             ),
             cast_to=WebhookEndpointHistoryResponse,
         )

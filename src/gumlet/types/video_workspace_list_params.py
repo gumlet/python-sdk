@@ -8,8 +8,11 @@ __all__ = ["VideoWorkspaceListParams"]
 
 
 class VideoWorkspaceListParams(TypedDict, total=False):
-    offset: str
-    """Number of workspaces to skip. For example if you need to list 11 to 20th workspaces, pass offset as 10 and size as 10."""
+    page_number: int
+    """Page number to retrieve. Starts at `1`."""
 
-    size: str
-    """Number of workspace to return in single response."""
+    page_size: int
+    """Number of items to return per page. **Default: `20`**. **Maximum: `200`**."""
+
+    next_page_token: str
+    """Cursor for the next page. Pass the `next_page_token` value returned in the previous response."""

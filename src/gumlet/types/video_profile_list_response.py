@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 from typing import List, Optional
+from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["VideoProfileListResponse", "AllProfile", "AllProfileTransformations"]
+__all__ = ["VideoProfileListResponse", "VideoProfileListResponse2", "Transformations"]
 
 
-class AllProfileTransformations(BaseModel):
+class Transformations(BaseModel):
     format: Optional[str] = None
 
     audio_codec: Optional[List[str]] = None
@@ -25,21 +26,16 @@ class AllProfileTransformations(BaseModel):
     per_title_encoding: Optional[bool] = None
 
 
-class AllProfile(BaseModel):
+class VideoProfileListResponse2(BaseModel):
     profile_id: Optional[str] = None
 
     name: Optional[str] = None
 
-    transformations: Optional[AllProfileTransformations] = None
+    transformations: Optional[Transformations] = None
 
     created_at: Optional[int] = None
 
     updated_at: Optional[int] = None
 
 
-class VideoProfileListResponse(BaseModel):
-    all_profiles: Optional[List[AllProfile]] = None
-
-    total_profile_count: Optional[int] = None
-
-    current_offset: Optional[int] = None
+VideoProfileListResponse: TypeAlias = VideoProfileListResponse2

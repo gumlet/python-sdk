@@ -145,8 +145,9 @@ class ImageSourcesResource(SyncAPIResource):
     def list(
         self,
         *,
-        offset: int | Omit = omit,
-        size: int | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -157,9 +158,12 @@ class ImageSourcesResource(SyncAPIResource):
         """
         This endpoint list image sources which are assigned to the user or token.
 
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
         Args:
-            offset: Skip number of items. Helpful for pagination.
-            size: Results per page.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -171,8 +175,8 @@ class ImageSourcesResource(SyncAPIResource):
         Example:
             ```python
             image_source = client.image_sources.list(
-                offset=0,
-                size=20,
+                page_number=1,
+                page_size=20,
             )
             ```
         """
@@ -183,7 +187,10 @@ class ImageSourcesResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"offset": offset, "size": size}, image_source_list_params.ImageSourceListParams),
+                query=maybe_transform(
+                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
+                    image_source_list_params.ImageSourceListParams,
+                ),
             ),
             cast_to=ImageSourceListResponse,
         )
@@ -616,8 +623,9 @@ class AsyncImageSourcesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        offset: int | Omit = omit,
-        size: int | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -628,9 +636,12 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         """
         This endpoint list image sources which are assigned to the user or token.
 
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
         Args:
-            offset: Skip number of items. Helpful for pagination.
-            size: Results per page.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -642,8 +653,8 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         Example:
             ```python
             image_source = await client.image_sources.list(
-                offset=0,
-                size=20,
+                page_number=1,
+                page_size=20,
             )
             ```
         """
@@ -655,7 +666,8 @@ class AsyncImageSourcesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"offset": offset, "size": size}, image_source_list_params.ImageSourceListParams
+                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
+                    image_source_list_params.ImageSourceListParams,
                 ),
             ),
             cast_to=ImageSourceListResponse,

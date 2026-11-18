@@ -8,8 +8,11 @@ __all__ = ["ImageSourceListParams"]
 
 
 class ImageSourceListParams(TypedDict, total=False):
-    offset: int
-    """Skip number of items. Helpful for pagination."""
+    page_number: int
+    """Page number to retrieve. Starts at `1`."""
 
-    size: int
-    """Results per page."""
+    page_size: int
+    """Number of items to return per page. **Default: `20`**. **Maximum: `100`**."""
+
+    next_page_token: str
+    """Cursor for the next page. Pass the `next_page_token` value returned in the previous response."""

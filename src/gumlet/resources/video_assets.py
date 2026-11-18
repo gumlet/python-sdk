@@ -27,8 +27,8 @@ from ..types import (
     video_asset_update_params,
     video_asset_thumbnail_select_params,
     video_asset_create_update_chapter_params,
+    video_asset_list_workspace_folders_and_deprecated_params,
     video_asset_list_params,
-    video_asset_list_deprecated_params,
     video_asset_delete_many_params,
     video_asset_tag_many_params,
     video_asset_analytics_params,
@@ -39,8 +39,10 @@ from ..types.video_asset_update_response import VideoAssetUpdateResponse
 from ..types.video_asset_thumbnail_select_response import VideoAssetThumbnailSelectResponse
 from ..types.video_asset_thumbnail_upload_response import VideoAssetThumbnailUploadResponse
 from ..types.video_asset_create_update_chapter_response import VideoAssetCreateUpdateChapterResponse
+from ..types.video_asset_list_workspace_folders_and_deprecated_response import (
+    VideoAssetListWorkspaceFoldersAndDeprecatedResponse,
+)
 from ..types.video_asset_list_response import VideoAssetListResponse
-from ..types.video_asset_list_deprecated_response import VideoAssetListDeprecatedResponse
 from ..types.video_asset_delete_many_response import VideoAssetDeleteManyResponse
 from ..types.video_asset_tag_many_response import VideoAssetTagManyResponse
 from ..types.video_asset_analytics_response import VideoAssetAnalyticsResponse
@@ -625,7 +627,7 @@ class VideoAssetsResource(SyncAPIResource):
             cast_to=VideoAssetCreateUpdateChapterResponse,
         )
 
-    def list(
+    def list_workspace_folders_and_deprecated(
         self,
         workspace_id: str,
         *,
@@ -651,8 +653,10 @@ class VideoAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> VideoAssetListResponse:
+    ) -> VideoAssetListWorkspaceFoldersAndDeprecatedResponse:
         """
+        [Deprecated] Combined folders + assets list for a workspace. Use `GET /video/assets/list/{workspace_id}` for assets and `GET /video/workspaces/{workspace_id}/folders` for folders instead.
+
         List folders and assets for a workspace in a single response. Use `parent_id` to browse a specific folder, or filters like `title`, `status`, and `playlist_id` to search assets.
 
         Args:
@@ -679,11 +683,11 @@ class VideoAssetsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            VideoAssetListResponse: 200
+            VideoAssetListWorkspaceFoldersAndDeprecatedResponse: 200
 
         Example:
             ```python
-            video_asset = client.video_assets.list(
+            video_asset = client.video_assets.list_workspace_folders_and_deprecated(
                 workspace_id="workspaceId",
                 type="all",
                 offset=0,
@@ -691,6 +695,8 @@ class VideoAssetsResource(SyncAPIResource):
                 signed_token="false",
             )
             ```
+
+        Deprecated: this method is deprecated.
         """
         if workspace_id is None or (isinstance(workspace_id, str) and not workspace_id):
             raise ValueError(f"Expected a non-empty value for `workspace_id` but received {workspace_id!r}")
@@ -720,66 +726,83 @@ class VideoAssetsResource(SyncAPIResource):
                         "size": size,
                         "signed_token": signed_token,
                     },
-                    video_asset_list_params.VideoAssetListParams,
+                    video_asset_list_workspace_folders_and_deprecated_params.VideoAssetListWorkspaceFoldersAndDeprecatedParams,
                 ),
             ),
-            cast_to=VideoAssetListResponse,
+            cast_to=VideoAssetListWorkspaceFoldersAndDeprecatedResponse,
         )
 
-    def list_deprecated(
+    def list(
         self,
         workspace_id: str,
         *,
-        status: Literal["queued", "processing", "ready", "errored", "deleted"] | Omit = omit,
+        status: str | Omit = omit,
         tag: str | Omit = omit,
         title: str | Omit = omit,
-        folder: str | Omit = omit,
-        offset: str | Omit = omit,
-        size: str | Omit = omit,
+        folder_id: str | Omit = omit,
         playlist_id: str | Omit = omit,
-        sort_by: Literal["title", "duration", "uploaded_at", "created_at"] | Omit = omit,
+        start_date: Union[str, date] | Omit = omit,
+        end_date: Union[str, date] | Omit = omit,
+        min_duration: int | Omit = omit,
+        max_duration: int | Omit = omit,
+        sort_by: Literal["title", "duration", "uploaded_at", "created_at", "status"] | Omit = omit,
         order_by: Literal["asc", "desc"] | Omit = omit,
-        type: str | Omit = omit,
+        signed_token: Literal["true", "false"] | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> VideoAssetListDeprecatedResponse:
+    ) -> VideoAssetListResponse:
         """
-        [Deprecated] This endpoint list assets in video workspace. You can also pass `status` and `tag` to filter assets.
+        List assets in a video workspace (local Mongo list; not Atlas Search).
+
+        Use `page_number` and `page_size` for page-based pagination. Use `next_page_token` for cursor-based pagination where supported.
+
+        `next_page_token` is supported only with the **default** sort or `sortBy=created_at` (and without a `title` search). It is **not** supported with other sort fields (for example `title`, `duration`, `status`, `playlist_order`, `custom`) or when `title` is set; in those cases use `page_number` / `page_size` only.
+
+        For folders, use `GET /video/workspaces/{workspace_id}/folders` and combine results in your client. The combined endpoint `GET /video/workspaces/{workspace_id}/list` is deprecated.
 
         Args:
-            workspace_id: Gumlet workspace ID. You can get it on Gumlet dashboard or retrieve it using list workspace API.
-            status: To filter assets on the basis of their current status. Can be specified as a single status value string or comma-separated status values. The status value can be one of `queued`, `processing`, `ready`, `errored`, and `deleted`.
-            tag: Input tag on the basis of which assets need to be filtered. To filter on multiple tags use comma-separated string.
-            title: Title on the basis of which assets need to be filtered.
-            folder: Folder name on the basis of which assets need to be filtered.
-            offset: Offset value for a paginated list of assets.
-            size: Page size for the paginated list. **Default: `10`** **Max Size: `100`**
-            playlist_id: filter assets from a playlist.
-            sort_by: assets will be sorted based on the provided field.
-            order_by: assets will be sorted in the specified order based on provided sortBy field or by default createAt field.
-            type: Search for folders, videos, or both. For videos, use `videos`. For folders, use `folders`. If you do not send this parameter, it will search for both.
+            workspace_id: Gumlet workspace ID. You can get it on the Gumlet dashboard or retrieve it using the list workspaces API.
+            status: Filter assets by status. Single value or comma-separated list (for example `ready` or `ready,errored`).
+            tag: Filter by asset tag(s). Use a comma-separated string for multiple tags.
+            title: Filter assets by title (text search). When `title` is set, `next_page_token` is not supported - use `page_number` / `page_size`.
+            folder_id: Filter assets by folder id. Send `null` or empty string for assets not in a folder.
+            playlist_id: Filter assets belonging to a playlist.
+            start_date: Asset `created_at` lower bound. Date in `yyyy-MM-dd` format.
+            end_date: Asset `created_at` upper bound. Date in `yyyy-MM-dd` format.
+            min_duration: Minimum asset duration in seconds.
+            max_duration: Maximum asset duration in seconds.
+            sort_by: Field to sort by. Default is `created_at`. `next_page_token` is only supported for the default sort or `created_at`.
+            order_by: Sort direction. Default is `desc`.
+            signed_token: Whether URLs should be pre-signed in the API response. Possible values: `true` and `false`. Default is `false`.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response. Supported only when sorting by default/`created_at` and when `title` is not set. Otherwise the API returns `400`.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            VideoAssetListDeprecatedResponse: 200
+            VideoAssetListResponse: 200
 
         Example:
             ```python
-            video_asset = client.video_assets.list_deprecated(
+            video_asset = client.video_assets.list(
                 workspace_id="workspaceId",
                 sort_by="created_at",
                 order_by="desc",
+                signed_token="false",
+                page_number=1,
+                page_size=20,
             )
             ```
-
-        Deprecated: this method is deprecated.
         """
         if workspace_id is None or (isinstance(workspace_id, str) and not workspace_id):
             raise ValueError(f"Expected a non-empty value for `workspace_id` but received {workspace_id!r}")
@@ -795,18 +818,23 @@ class VideoAssetsResource(SyncAPIResource):
                         "status": status,
                         "tag": tag,
                         "title": title,
-                        "folder": folder,
-                        "offset": offset,
-                        "size": size,
+                        "folder_id": folder_id,
                         "playlist_id": playlist_id,
+                        "start_date": start_date,
+                        "end_date": end_date,
+                        "min_duration": min_duration,
+                        "max_duration": max_duration,
                         "sort_by": sort_by,
                         "order_by": order_by,
-                        "type": type,
+                        "signed_token": signed_token,
+                        "page_number": page_number,
+                        "page_size": page_size,
+                        "next_page_token": next_page_token,
                     },
-                    video_asset_list_deprecated_params.VideoAssetListDeprecatedParams,
+                    video_asset_list_params.VideoAssetListParams,
                 ),
             ),
-            cast_to=VideoAssetListDeprecatedResponse,
+            cast_to=VideoAssetListResponse,
         )
 
     def delete_many(
@@ -1578,7 +1606,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             cast_to=VideoAssetCreateUpdateChapterResponse,
         )
 
-    async def list(
+    async def list_workspace_folders_and_deprecated(
         self,
         workspace_id: str,
         *,
@@ -1604,8 +1632,10 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> VideoAssetListResponse:
+    ) -> VideoAssetListWorkspaceFoldersAndDeprecatedResponse:
         """
+        [Deprecated] Combined folders + assets list for a workspace. Use `GET /video/assets/list/{workspace_id}` for assets and `GET /video/workspaces/{workspace_id}/folders` for folders instead.
+
         List folders and assets for a workspace in a single response. Use `parent_id` to browse a specific folder, or filters like `title`, `status`, and `playlist_id` to search assets.
 
         Args:
@@ -1632,11 +1662,11 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            VideoAssetListResponse: 200
+            VideoAssetListWorkspaceFoldersAndDeprecatedResponse: 200
 
         Example:
             ```python
-            video_asset = await client.video_assets.list(
+            video_asset = await client.video_assets.list_workspace_folders_and_deprecated(
                 workspace_id="workspaceId",
                 type="all",
                 offset=0,
@@ -1644,6 +1674,8 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 signed_token="false",
             )
             ```
+
+        Deprecated: this method is deprecated.
         """
         if workspace_id is None or (isinstance(workspace_id, str) and not workspace_id):
             raise ValueError(f"Expected a non-empty value for `workspace_id` but received {workspace_id!r}")
@@ -1673,66 +1705,83 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                         "size": size,
                         "signed_token": signed_token,
                     },
-                    video_asset_list_params.VideoAssetListParams,
+                    video_asset_list_workspace_folders_and_deprecated_params.VideoAssetListWorkspaceFoldersAndDeprecatedParams,
                 ),
             ),
-            cast_to=VideoAssetListResponse,
+            cast_to=VideoAssetListWorkspaceFoldersAndDeprecatedResponse,
         )
 
-    async def list_deprecated(
+    async def list(
         self,
         workspace_id: str,
         *,
-        status: Literal["queued", "processing", "ready", "errored", "deleted"] | Omit = omit,
+        status: str | Omit = omit,
         tag: str | Omit = omit,
         title: str | Omit = omit,
-        folder: str | Omit = omit,
-        offset: str | Omit = omit,
-        size: str | Omit = omit,
+        folder_id: str | Omit = omit,
         playlist_id: str | Omit = omit,
-        sort_by: Literal["title", "duration", "uploaded_at", "created_at"] | Omit = omit,
+        start_date: Union[str, date] | Omit = omit,
+        end_date: Union[str, date] | Omit = omit,
+        min_duration: int | Omit = omit,
+        max_duration: int | Omit = omit,
+        sort_by: Literal["title", "duration", "uploaded_at", "created_at", "status"] | Omit = omit,
         order_by: Literal["asc", "desc"] | Omit = omit,
-        type: str | Omit = omit,
+        signed_token: Literal["true", "false"] | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> VideoAssetListDeprecatedResponse:
+    ) -> VideoAssetListResponse:
         """
-        [Deprecated] This endpoint list assets in video workspace. You can also pass `status` and `tag` to filter assets.
+        List assets in a video workspace (local Mongo list; not Atlas Search).
+
+        Use `page_number` and `page_size` for page-based pagination. Use `next_page_token` for cursor-based pagination where supported.
+
+        `next_page_token` is supported only with the **default** sort or `sortBy=created_at` (and without a `title` search). It is **not** supported with other sort fields (for example `title`, `duration`, `status`, `playlist_order`, `custom`) or when `title` is set; in those cases use `page_number` / `page_size` only.
+
+        For folders, use `GET /video/workspaces/{workspace_id}/folders` and combine results in your client. The combined endpoint `GET /video/workspaces/{workspace_id}/list` is deprecated.
 
         Args:
-            workspace_id: Gumlet workspace ID. You can get it on Gumlet dashboard or retrieve it using list workspace API.
-            status: To filter assets on the basis of their current status. Can be specified as a single status value string or comma-separated status values. The status value can be one of `queued`, `processing`, `ready`, `errored`, and `deleted`.
-            tag: Input tag on the basis of which assets need to be filtered. To filter on multiple tags use comma-separated string.
-            title: Title on the basis of which assets need to be filtered.
-            folder: Folder name on the basis of which assets need to be filtered.
-            offset: Offset value for a paginated list of assets.
-            size: Page size for the paginated list. **Default: `10`** **Max Size: `100`**
-            playlist_id: filter assets from a playlist.
-            sort_by: assets will be sorted based on the provided field.
-            order_by: assets will be sorted in the specified order based on provided sortBy field or by default createAt field.
-            type: Search for folders, videos, or both. For videos, use `videos`. For folders, use `folders`. If you do not send this parameter, it will search for both.
+            workspace_id: Gumlet workspace ID. You can get it on the Gumlet dashboard or retrieve it using the list workspaces API.
+            status: Filter assets by status. Single value or comma-separated list (for example `ready` or `ready,errored`).
+            tag: Filter by asset tag(s). Use a comma-separated string for multiple tags.
+            title: Filter assets by title (text search). When `title` is set, `next_page_token` is not supported - use `page_number` / `page_size`.
+            folder_id: Filter assets by folder id. Send `null` or empty string for assets not in a folder.
+            playlist_id: Filter assets belonging to a playlist.
+            start_date: Asset `created_at` lower bound. Date in `yyyy-MM-dd` format.
+            end_date: Asset `created_at` upper bound. Date in `yyyy-MM-dd` format.
+            min_duration: Minimum asset duration in seconds.
+            max_duration: Maximum asset duration in seconds.
+            sort_by: Field to sort by. Default is `created_at`. `next_page_token` is only supported for the default sort or `created_at`.
+            order_by: Sort direction. Default is `desc`.
+            signed_token: Whether URLs should be pre-signed in the API response. Possible values: `true` and `false`. Default is `false`.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response. Supported only when sorting by default/`created_at` and when `title` is not set. Otherwise the API returns `400`.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            VideoAssetListDeprecatedResponse: 200
+            VideoAssetListResponse: 200
 
         Example:
             ```python
-            video_asset = await client.video_assets.list_deprecated(
+            video_asset = await client.video_assets.list(
                 workspace_id="workspaceId",
                 sort_by="created_at",
                 order_by="desc",
+                signed_token="false",
+                page_number=1,
+                page_size=20,
             )
             ```
-
-        Deprecated: this method is deprecated.
         """
         if workspace_id is None or (isinstance(workspace_id, str) and not workspace_id):
             raise ValueError(f"Expected a non-empty value for `workspace_id` but received {workspace_id!r}")
@@ -1748,18 +1797,23 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                         "status": status,
                         "tag": tag,
                         "title": title,
-                        "folder": folder,
-                        "offset": offset,
-                        "size": size,
+                        "folder_id": folder_id,
                         "playlist_id": playlist_id,
+                        "start_date": start_date,
+                        "end_date": end_date,
+                        "min_duration": min_duration,
+                        "max_duration": max_duration,
                         "sort_by": sort_by,
                         "order_by": order_by,
-                        "type": type,
+                        "signed_token": signed_token,
+                        "page_number": page_number,
+                        "page_size": page_size,
+                        "next_page_token": next_page_token,
                     },
-                    video_asset_list_deprecated_params.VideoAssetListDeprecatedParams,
+                    video_asset_list_params.VideoAssetListParams,
                 ),
             ),
-            cast_to=VideoAssetListDeprecatedResponse,
+            cast_to=VideoAssetListResponse,
         )
 
     async def delete_many(
@@ -1982,11 +2036,11 @@ class VideoAssetsResourceWithRawResponse:
         self.create_update_chapter = to_raw_response_wrapper(
             video_assets.create_update_chapter,
         )
+        self.list_workspace_folders_and_deprecated = to_raw_response_wrapper(
+            video_assets.list_workspace_folders_and_deprecated,
+        )
         self.list = to_raw_response_wrapper(
             video_assets.list,
-        )
-        self.list_deprecated = to_raw_response_wrapper(
-            video_assets.list_deprecated,
         )
         self.delete_many = to_raw_response_wrapper(
             video_assets.delete_many,
@@ -2027,11 +2081,11 @@ class AsyncVideoAssetsResourceWithRawResponse:
         self.create_update_chapter = async_to_raw_response_wrapper(
             video_assets.create_update_chapter,
         )
+        self.list_workspace_folders_and_deprecated = async_to_raw_response_wrapper(
+            video_assets.list_workspace_folders_and_deprecated,
+        )
         self.list = async_to_raw_response_wrapper(
             video_assets.list,
-        )
-        self.list_deprecated = async_to_raw_response_wrapper(
-            video_assets.list_deprecated,
         )
         self.delete_many = async_to_raw_response_wrapper(
             video_assets.delete_many,
@@ -2072,11 +2126,11 @@ class VideoAssetsResourceWithStreamingResponse:
         self.create_update_chapter = to_streamed_response_wrapper(
             video_assets.create_update_chapter,
         )
+        self.list_workspace_folders_and_deprecated = to_streamed_response_wrapper(
+            video_assets.list_workspace_folders_and_deprecated,
+        )
         self.list = to_streamed_response_wrapper(
             video_assets.list,
-        )
-        self.list_deprecated = to_streamed_response_wrapper(
-            video_assets.list_deprecated,
         )
         self.delete_many = to_streamed_response_wrapper(
             video_assets.delete_many,
@@ -2117,11 +2171,11 @@ class AsyncVideoAssetsResourceWithStreamingResponse:
         self.create_update_chapter = async_to_streamed_response_wrapper(
             video_assets.create_update_chapter,
         )
+        self.list_workspace_folders_and_deprecated = async_to_streamed_response_wrapper(
+            video_assets.list_workspace_folders_and_deprecated,
+        )
         self.list = async_to_streamed_response_wrapper(
             video_assets.list,
-        )
-        self.list_deprecated = async_to_streamed_response_wrapper(
-            video_assets.list_deprecated,
         )
         self.delete_many = async_to_streamed_response_wrapper(
             video_assets.delete_many,

@@ -8,8 +8,11 @@ __all__ = ["VideoProfileListParams"]
 
 
 class VideoProfileListParams(TypedDict, total=False):
-    offset: int
-    """Offset value for a paginated list of profiles. Can be zero for the first time and `current_offset` value received from the last request afterwards."""
+    page_number: int
+    """Page number to retrieve. Starts at `1`."""
 
-    size: int
-    """Page size for the paginated list. **Default: `10`**"""
+    page_size: int
+    """Number of items to return per page. **Default: `20`**. **Maximum: `100`**."""
+
+    next_page_token: str
+    """Cursor for the next page. Pass the `next_page_token` value returned in the previous response."""

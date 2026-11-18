@@ -74,9 +74,9 @@ class RecycleBinResource(SyncAPIResource):
     def list(
         self,
         *,
-        offset: int | Omit = omit,
-        size: int | Omit = omit,
         workspace_id: str,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -87,10 +87,12 @@ class RecycleBinResource(SyncAPIResource):
         """
         List all assets in a recycle bin for a given workspace. The deleted assets are available for 30 days. After that, assets are permanently deleted.
 
+        Pagination uses `page_number` / `page_size` only (no `next_page_token`).
+
         Args:
-            offset: Number of items to skip from start of page response.
-            size: Number of items to return for a single page.
             workspace_id: ID of workspace for which you want to list the recycle bin items.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -102,8 +104,9 @@ class RecycleBinResource(SyncAPIResource):
         Example:
             ```python
             recycle_bin = client.recycle_bin.list(
-                size=20,
                 workspace_id="workspace_id",
+                page_number=1,
+                page_size=20,
             )
             ```
         """
@@ -115,7 +118,7 @@ class RecycleBinResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"offset": offset, "size": size, "workspace_id": workspace_id},
+                    {"workspace_id": workspace_id, "page_number": page_number, "page_size": page_size},
                     recycle_bin_list_params.RecycleBinListParams,
                 ),
             ),
@@ -176,9 +179,9 @@ class AsyncRecycleBinResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        offset: int | Omit = omit,
-        size: int | Omit = omit,
         workspace_id: str,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -189,10 +192,12 @@ class AsyncRecycleBinResource(AsyncAPIResource):
         """
         List all assets in a recycle bin for a given workspace. The deleted assets are available for 30 days. After that, assets are permanently deleted.
 
+        Pagination uses `page_number` / `page_size` only (no `next_page_token`).
+
         Args:
-            offset: Number of items to skip from start of page response.
-            size: Number of items to return for a single page.
             workspace_id: ID of workspace for which you want to list the recycle bin items.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -204,8 +209,9 @@ class AsyncRecycleBinResource(AsyncAPIResource):
         Example:
             ```python
             recycle_bin = await client.recycle_bin.list(
-                size=20,
                 workspace_id="workspace_id",
+                page_number=1,
+                page_size=20,
             )
             ```
         """
@@ -217,7 +223,7 @@ class AsyncRecycleBinResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"offset": offset, "size": size, "workspace_id": workspace_id},
+                    {"workspace_id": workspace_id, "page_number": page_number, "page_size": page_size},
                     recycle_bin_list_params.RecycleBinListParams,
                 ),
             ),

@@ -40,8 +40,9 @@ class VideoWorkspacesResource(SyncAPIResource):
     def list(
         self,
         *,
-        offset: str | Omit = omit,
-        size: str | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -52,9 +53,12 @@ class VideoWorkspacesResource(SyncAPIResource):
         """
         This endpoint list video workspace which are assigned to the user or token.
 
+        Pagination uses `page_number` / `page_size` (max page size 200). Use `next_page_token` for cursor-based pagination.
+
         Args:
-            offset: Number of workspaces to skip. For example if you need to list 11 to 20th workspaces, pass offset as 10 and size as 10.
-            size: Number of workspace to return in single response.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `200`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -66,8 +70,8 @@ class VideoWorkspacesResource(SyncAPIResource):
         Example:
             ```python
             video_workspace = client.video_workspaces.list(
-                offset="0",
-                size="10",
+                page_number=1,
+                page_size=20,
             )
             ```
         """
@@ -79,7 +83,8 @@ class VideoWorkspacesResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"offset": offset, "size": size}, video_workspace_list_params.VideoWorkspaceListParams
+                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
+                    video_workspace_list_params.VideoWorkspaceListParams,
                 ),
             ),
             cast_to=VideoWorkspaceListResponse,
@@ -419,8 +424,9 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        offset: str | Omit = omit,
-        size: str | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -431,9 +437,12 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
         """
         This endpoint list video workspace which are assigned to the user or token.
 
+        Pagination uses `page_number` / `page_size` (max page size 200). Use `next_page_token` for cursor-based pagination.
+
         Args:
-            offset: Number of workspaces to skip. For example if you need to list 11 to 20th workspaces, pass offset as 10 and size as 10.
-            size: Number of workspace to return in single response.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `200`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -445,8 +454,8 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
         Example:
             ```python
             video_workspace = await client.video_workspaces.list(
-                offset="0",
-                size="10",
+                page_number=1,
+                page_size=20,
             )
             ```
         """
@@ -458,7 +467,8 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"offset": offset, "size": size}, video_workspace_list_params.VideoWorkspaceListParams
+                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
+                    video_workspace_list_params.VideoWorkspaceListParams,
                 ),
             ),
             cast_to=VideoWorkspaceListResponse,

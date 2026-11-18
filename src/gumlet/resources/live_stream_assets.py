@@ -286,8 +286,9 @@ class LiveStreamAssetsResource(SyncAPIResource):
         live_source_id: str,
         *,
         status: str | Omit = omit,
-        offset: int | Omit = omit,
-        size: int | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -298,11 +299,14 @@ class LiveStreamAssetsResource(SyncAPIResource):
         """
         This endpoint lists live assets on the basis of `status` for the given `live_source_id`.
 
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
         Args:
             live_source_id: Gumlet live source/collection id.
             status: To filter live assets on the basis of their current status. Can be specified as a single status value string or comma-separated status values. The status value can be one of `created`, `active`, `complete`, `disconnected`, `errored`, and `deleted`.
-            offset: Offset value for a paginated list of assets.
-            size: Page size for the paginated list.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -315,6 +319,8 @@ class LiveStreamAssetsResource(SyncAPIResource):
             ```python
             live_stream_asset = client.live_stream_assets.filter(
                 live_source_id="liveSourceId",
+                page_number=1,
+                page_size=20,
             )
             ```
         """
@@ -328,7 +334,12 @@ class LiveStreamAssetsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"status": status, "offset": offset, "size": size},
+                    {
+                        "status": status,
+                        "page_number": page_number,
+                        "page_size": page_size,
+                        "next_page_token": next_page_token,
+                    },
                     live_stream_asset_filter_params.LiveStreamAssetFilterParams,
                 ),
             ),
@@ -714,8 +725,9 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         live_source_id: str,
         *,
         status: str | Omit = omit,
-        offset: int | Omit = omit,
-        size: int | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -726,11 +738,14 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         """
         This endpoint lists live assets on the basis of `status` for the given `live_source_id`.
 
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
         Args:
             live_source_id: Gumlet live source/collection id.
             status: To filter live assets on the basis of their current status. Can be specified as a single status value string or comma-separated status values. The status value can be one of `created`, `active`, `complete`, `disconnected`, `errored`, and `deleted`.
-            offset: Offset value for a paginated list of assets.
-            size: Page size for the paginated list.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -743,6 +758,8 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             ```python
             live_stream_asset = await client.live_stream_assets.filter(
                 live_source_id="liveSourceId",
+                page_number=1,
+                page_size=20,
             )
             ```
         """
@@ -756,7 +773,12 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"status": status, "offset": offset, "size": size},
+                    {
+                        "status": status,
+                        "page_number": page_number,
+                        "page_size": page_size,
+                        "next_page_token": next_page_token,
+                    },
                     live_stream_asset_filter_params.LiveStreamAssetFilterParams,
                 ),
             ),

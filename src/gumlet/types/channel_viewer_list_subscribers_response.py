@@ -41,3 +41,9 @@ class ChannelViewerListSubscribersResponse(BaseModel):
 
     total_count: int
     """Number of total subscribers"""
+
+    next_page_token: Optional[str] = None
+    """Cursor for the next page when more results exist. Empty string when there is no next page."""
+
+    page_size: Optional[int] = None
+    """Page size used for this response when it differs from the default."""

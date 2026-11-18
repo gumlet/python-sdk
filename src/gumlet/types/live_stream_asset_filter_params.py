@@ -11,8 +11,11 @@ class LiveStreamAssetFilterParams(TypedDict, total=False):
     status: str
     """To filter live assets on the basis of their current status. Can be specified as a single status value string or comma-separated status values. The status value can be one of `created`, `active`, `complete`, `disconnected`, `errored`, and `deleted`."""
 
-    offset: int
-    """Offset value for a paginated list of assets."""
+    page_number: int
+    """Page number to retrieve. Starts at `1`."""
 
-    size: int
-    """Page size for the paginated list."""
+    page_size: int
+    """Number of items to return per page. **Default: `20`**. **Maximum: `100`**."""
+
+    next_page_token: str
+    """Cursor for the next page. Pass the `next_page_token` value returned in the previous response."""

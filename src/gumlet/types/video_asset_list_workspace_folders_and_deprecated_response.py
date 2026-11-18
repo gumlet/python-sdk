@@ -7,7 +7,8 @@ from typing import List, Optional
 from .._models import BaseModel
 
 __all__ = [
-    "VideoAssetListDeprecatedResponse",
+    "VideoAssetListWorkspaceFoldersAndDeprecatedResponse",
+    "Folder",
     "AllAsset",
     "AllAssetInput",
     "AllAssetInputTransformations",
@@ -79,6 +80,9 @@ class AllAssetInput(BaseModel):
 
     additional_tracks: Optional[List[AllAssetInputAdditionalTrack]] = None
 
+    title: Optional[str] = None
+    """Title of the asset."""
+
 
 class AllAsset(BaseModel):
     asset_id: Optional[str] = None
@@ -102,11 +106,43 @@ class AllAsset(BaseModel):
     """Workspace ID"""
 
 
-class VideoAssetListDeprecatedResponse(BaseModel):
-    all_assets: Optional[List[AllAsset]] = None
+class Folder(BaseModel):
+    id: Optional[str] = None
 
-    total_asset_count: Optional[int] = None
+    name: Optional[str] = None
+
+    video_source_id: Optional[str] = None
+    """Deprecated. Use `workspace_id` instead. Still returned for backwards compatibility."""
+
+    parent_id: Optional[str] = None
+
+    path: Optional[List[str]] = None
+
+    path_names: Optional[List[str]] = None
+
+    depth: Optional[int] = None
+
+    subdirectory_count: Optional[int] = None
+
+    asset_count: Optional[int] = None
+
+    created_at: Optional[str] = None
+
+    updated_at: Optional[str] = None
+
+    workspace_id: Optional[str] = None
+    """Workspace ID"""
+
+
+class VideoAssetListWorkspaceFoldersAndDeprecatedResponse(BaseModel):
+    folders: Optional[List[Folder]] = None
+
+    all_assets: List[AllAsset]
+
+    folder_count: Optional[int] = None
+
+    asset_count: Optional[int] = None
+
+    total_count: Optional[int] = None
 
     current_offset: Optional[int] = None
-
-    distinct_tags: Optional[List[str]] = None

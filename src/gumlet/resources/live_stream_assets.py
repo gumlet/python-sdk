@@ -18,7 +18,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
+from ..pagination import SyncPageNumberPage3, AsyncPageNumberPage3
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.live_stream_asset_create_response import LiveStreamAssetCreateResponse
 from ..types import (
     live_stream_asset_create_params,
@@ -295,7 +296,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> LiveStreamAssetFilterResponse:
+    ) -> SyncPageNumberPage3[LiveStreamAssetFilterResponse]:
         """
         This endpoint lists live assets on the basis of `status` for the given `live_source_id`.
 
@@ -313,21 +314,20 @@ class LiveStreamAssetsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            LiveStreamAssetFilterResponse: 200
+            SyncPageNumberPage3[LiveStreamAssetFilterResponse]: 200
 
         Example:
             ```python
-            live_stream_asset = client.live_stream_assets.filter(
+            page = client.live_stream_assets.filter(
                 live_source_id="liveSourceId",
-                page_number=1,
-                page_size=20,
             )
             ```
         """
         if live_source_id is None or (isinstance(live_source_id, str) and not live_source_id):
             raise ValueError(f"Expected a non-empty value for `live_source_id` but received {live_source_id!r}")
-        return self._get(
+        return self._get_api_list(
             path_template("/video/live/assets/list/{live_source_id}", **{"live_source_id": live_source_id}),
+            page=SyncPageNumberPage3[LiveStreamAssetFilterResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -343,7 +343,8 @@ class LiveStreamAssetsResource(SyncAPIResource):
                     live_stream_asset_filter_params.LiveStreamAssetFilterParams,
                 ),
             ),
-            cast_to=LiveStreamAssetFilterResponse,
+            model=LiveStreamAssetFilterResponse,
+            method="get",
         )
 
     def start(
@@ -720,7 +721,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             cast_to=LiveStreamAssetCompleteResponse,
         )
 
-    async def filter(
+    def filter(
         self,
         live_source_id: str,
         *,
@@ -734,7 +735,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> LiveStreamAssetFilterResponse:
+    ) -> AsyncPaginator[LiveStreamAssetFilterResponse, AsyncPageNumberPage3[LiveStreamAssetFilterResponse]]:
         """
         This endpoint lists live assets on the basis of `status` for the given `live_source_id`.
 
@@ -752,27 +753,26 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            LiveStreamAssetFilterResponse: 200
+            AsyncPaginator[LiveStreamAssetFilterResponse, AsyncPageNumberPage3[LiveStreamAssetFilterResponse]]: 200
 
         Example:
             ```python
-            live_stream_asset = await client.live_stream_assets.filter(
+            page = client.live_stream_assets.filter(
                 live_source_id="liveSourceId",
-                page_number=1,
-                page_size=20,
             )
             ```
         """
         if live_source_id is None or (isinstance(live_source_id, str) and not live_source_id):
             raise ValueError(f"Expected a non-empty value for `live_source_id` but received {live_source_id!r}")
-        return await self._get(
+        return self._get_api_list(
             path_template("/video/live/assets/list/{live_source_id}", **{"live_source_id": live_source_id}),
+            page=AsyncPageNumberPage3[LiveStreamAssetFilterResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "status": status,
                         "page_number": page_number,
@@ -782,7 +782,8 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
                     live_stream_asset_filter_params.LiveStreamAssetFilterParams,
                 ),
             ),
-            cast_to=LiveStreamAssetFilterResponse,
+            model=LiveStreamAssetFilterResponse,
+            method="get",
         )
 
     async def start(

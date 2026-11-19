@@ -1591,14 +1591,17 @@ Get / change all details about billing and invoices.
 
 ### List Invoices
 
-Liost all invoices that are generated so far.
+List all invoices that are generated so far.
 
 | Direction | Type |
 | --- | --- |
+| Request | [`BillingListInvoicesParams`](./src/gumlet/types/billing_list_invoices_params.py) |
 | Response | [`BillingListInvoicesResponse`](./src/gumlet/types/billing_list_invoices_response.py) |
 
 ```python
-billing = client.billing.list_invoices()
+billing = client.billing.list_invoices(
+    page_size=20,
+)
 ```
 
 ### Get Billing Details

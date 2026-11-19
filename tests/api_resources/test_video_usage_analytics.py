@@ -15,6 +15,8 @@ class TestVideoUsageAnalytics:
             top_assets_count="5",
             top_assets_page="0",
             group_by="hourly",
+            page_number=1,
+            page_size=20,
         )
 
     @smoke_case("videoUsageAnalytics.retrieve:all", operation="retrieve", path="/video/analytics")
@@ -26,6 +28,8 @@ class TestVideoUsageAnalytics:
             top_assets_count="5",
             top_assets_page="0",
             group_by="hourly",
+            page_number=1,
+            page_size=20,
         )
 
     @smoke_case("videoUsageAnalytics.topAssets:required", operation="topAssets", path="/video/streaming-duration")

@@ -54,6 +54,8 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
         top_assets_count: str | Omit = omit,
         top_assets_page: str | Omit = omit,
         group_by: Literal["hourly", "daily", "monthly"] | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -62,15 +64,19 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> VideoUsageAnalyticRetrieveResponse:
         """
-        This endpoint gives usage analytics data of your videos. Ex - top assets, bandwidth consumption
+        This endpoint gives usage analytics data of your videos. Ex - top assets, bandwidth consumption.
+
+        Pagination applies only to `top_assets` and `widget_data` metrics.
 
         Args:
-            metrics: Define the metric you need the data for. Supported values: `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `drm_requests`, `ai_credit_usage`, and `errored_videos`.
+            metrics: Define the metric you need the data for. Supported values: `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `widget_data`, `drm_requests`, `ai_credit_usage`, and `errored_videos`.
             date_range: The timeframe to get the data for. Currently we only support a maximum of 60 days between `start_at` and `end_at`.
             filters: Body parameter.
-            top_assets_count: Count of video assets that should be returned. Max assets count is 1000 per page.
-            top_assets_page: top_assets metric may get paginated response. Iterate this parameter to get more data.
+            top_assets_count: Deprecated. Use `page_size` instead.
+            top_assets_page: Deprecated. Use `page_number` instead.
             group_by: Group by hourly, daily or monthly. If you don't specify anything it's `hourly` by default.
+            page_number: Page number for paginated metrics. Used by `widget_data`, and by `top_assets` Starts at 1.
+            page_size: Page size for paginated metrics. Used by `widget_data`, and by `top_assets`
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -87,6 +93,8 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
                 top_assets_count="5",
                 top_assets_page="0",
                 group_by="hourly",
+                page_number=1,
+                page_size=20,
             )
             ```
         """
@@ -100,6 +108,8 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
                     "top_assets_count": top_assets_count,
                     "top_assets_page": top_assets_page,
                     "group_by": group_by,
+                    "page_number": page_number,
+                    "page_size": page_size,
                 },
                 video_usage_analytic_retrieve_params.VideoUsageAnalyticRetrieveParams,
             ),
@@ -204,6 +214,8 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
         top_assets_count: str | Omit = omit,
         top_assets_page: str | Omit = omit,
         group_by: Literal["hourly", "daily", "monthly"] | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -212,15 +224,19 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> VideoUsageAnalyticRetrieveResponse:
         """
-        This endpoint gives usage analytics data of your videos. Ex - top assets, bandwidth consumption
+        This endpoint gives usage analytics data of your videos. Ex - top assets, bandwidth consumption.
+
+        Pagination applies only to `top_assets` and `widget_data` metrics.
 
         Args:
-            metrics: Define the metric you need the data for. Supported values: `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `drm_requests`, `ai_credit_usage`, and `errored_videos`.
+            metrics: Define the metric you need the data for. Supported values: `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `widget_data`, `drm_requests`, `ai_credit_usage`, and `errored_videos`.
             date_range: The timeframe to get the data for. Currently we only support a maximum of 60 days between `start_at` and `end_at`.
             filters: Body parameter.
-            top_assets_count: Count of video assets that should be returned. Max assets count is 1000 per page.
-            top_assets_page: top_assets metric may get paginated response. Iterate this parameter to get more data.
+            top_assets_count: Deprecated. Use `page_size` instead.
+            top_assets_page: Deprecated. Use `page_number` instead.
             group_by: Group by hourly, daily or monthly. If you don't specify anything it's `hourly` by default.
+            page_number: Page number for paginated metrics. Used by `widget_data`, and by `top_assets` Starts at 1.
+            page_size: Page size for paginated metrics. Used by `widget_data`, and by `top_assets`
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -237,6 +253,8 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
                 top_assets_count="5",
                 top_assets_page="0",
                 group_by="hourly",
+                page_number=1,
+                page_size=20,
             )
             ```
         """
@@ -250,6 +268,8 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
                     "top_assets_count": top_assets_count,
                     "top_assets_page": top_assets_page,
                     "group_by": group_by,
+                    "page_number": page_number,
+                    "page_size": page_size,
                 },
                 video_usage_analytic_retrieve_params.VideoUsageAnalyticRetrieveParams,
             ),

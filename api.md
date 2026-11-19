@@ -463,7 +463,9 @@ Query video analytics and streaming duration usage data.
 
 ### Video Usage Analytics
 
-This endpoint gives usage analytics data of your videos. Ex - top assets, bandwidth consumption
+This endpoint gives usage analytics data of your videos. Ex - top assets, bandwidth consumption.
+
+Pagination applies only to `top_assets` and `widget_data` metrics.
 
 | Direction | Type |
 | --- | --- |
@@ -477,6 +479,8 @@ video_usage_analytic = client.video_usage_analytics.retrieve(
     top_assets_count="5",
     top_assets_page="0",
     group_by="hourly",
+    page_number=1,
+    page_size=20,
 )
 ```
 

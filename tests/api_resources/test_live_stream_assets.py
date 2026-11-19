@@ -63,19 +63,15 @@ class TestLiveStreamAssets:
 
     @smoke_case("liveStreamAssets.filter:required", operation="filter", path="/video/live/assets/list/{live_source_id}")
     def test_method_filter(self) -> None:
-        live_stream_asset = client.live_stream_assets.filter(
+        page = client.live_stream_assets.filter(
             live_source_id="liveSourceId",
-            page_number=1,
-            page_size=20,
         )
 
     @smoke_case("liveStreamAssets.filter:all", operation="filter", path="/video/live/assets/list/{live_source_id}")
     def test_method_filter_with_all_params(self) -> None:
-        live_stream_asset = client.live_stream_assets.filter(
+        page = client.live_stream_assets.filter(
             live_source_id="liveSourceId",
             status="status",
-            page_number=1,
-            page_size=20,
             next_page_token="next_page_token",
         )
 

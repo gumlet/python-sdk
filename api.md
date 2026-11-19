@@ -1118,10 +1118,8 @@ Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-ba
 | Response | [`LiveStreamAssetFilterResponse`](./src/gumlet/types/live_stream_asset_filter_response.py) |
 
 ```python
-live_stream_asset = client.live_stream_assets.filter(
+page = client.live_stream_assets.filter(
     live_source_id="liveSourceId",
-    page_number=1,
-    page_size=20,
 )
 ```
 

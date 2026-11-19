@@ -7,7 +7,14 @@ from typing_extensions import override
 from ._base_client import BasePage, PageInfo, BaseSyncPage, BaseAsyncPage
 from ._models import construct_type
 
-__all__ = ["SyncPageNumberPage", "AsyncPageNumberPage", "SyncPageNumberPage2", "AsyncPageNumberPage2"]
+__all__ = [
+    "SyncPageNumberPage",
+    "AsyncPageNumberPage",
+    "SyncPageNumberPage2",
+    "AsyncPageNumberPage2",
+    "SyncPageNumberPage3",
+    "AsyncPageNumberPage3",
+]
 
 _T = TypeVar("_T")
 
@@ -127,6 +134,60 @@ class AsyncPageNumberPage2(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
             return []
         # The item model is attached by the response post-parser after the page is parsed.
         return [cast(_T, construct_type(value=item, type_=self._model)) for item in all_sources]
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        current_page = _page_param_number(self._options.params.get("page_number"), 1)
+        if current_page is None:
+            return None
+
+        total_pages = None
+        if total_pages is not None and current_page >= total_pages:
+            return None
+
+        next_page = current_page + 1
+        return PageInfo(params={"page_number": next_page})
+
+
+class SyncPageNumberPage3(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    all_live_assets: List[_T]
+    total_live_asset_count: int
+    page_size: int
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        all_live_assets = self.all_live_assets
+        if not all_live_assets:
+            return []
+        # The item model is attached by the response post-parser after the page is parsed.
+        return [cast(_T, construct_type(value=item, type_=self._model)) for item in all_live_assets]
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        current_page = _page_param_number(self._options.params.get("page_number"), 1)
+        if current_page is None:
+            return None
+
+        total_pages = None
+        if total_pages is not None and current_page >= total_pages:
+            return None
+
+        next_page = current_page + 1
+        return PageInfo(params={"page_number": next_page})
+
+
+class AsyncPageNumberPage3(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    all_live_assets: List[_T]
+    total_live_asset_count: int
+    page_size: int
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        all_live_assets = self.all_live_assets
+        if not all_live_assets:
+            return []
+        # The item model is attached by the response post-parser after the page is parsed.
+        return [cast(_T, construct_type(value=item, type_=self._model)) for item in all_live_assets]
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:

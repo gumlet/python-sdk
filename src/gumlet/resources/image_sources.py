@@ -18,8 +18,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncPageNumberPage2, AsyncPageNumberPage2
-from .._base_client import AsyncPaginator, make_request_options
+from .._base_client import make_request_options
 from ..types.image_source_create_response import ImageSourceCreateResponse
 from ..types import (
     image_source_create_params,
@@ -155,7 +154,7 @@ class ImageSourcesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncPageNumberPage2[ImageSourceListResponse]:
+    ) -> ImageSourceListResponse:
         """
         This endpoint list image sources which are assigned to the user or token.
 
@@ -171,16 +170,18 @@ class ImageSourcesResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            SyncPageNumberPage2[ImageSourceListResponse]: List all image sources
+            ImageSourceListResponse: List all image sources
 
         Example:
             ```python
-            page = client.image_sources.list()
+            image_source = client.image_sources.list(
+                page_number=1,
+                page_size=20,
+            )
             ```
         """
-        return self._get_api_list(
+        return self._get(
             "/image/sources",
-            page=SyncPageNumberPage2[ImageSourceListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -191,8 +192,7 @@ class ImageSourcesResource(SyncAPIResource):
                     image_source_list_params.ImageSourceListParams,
                 ),
             ),
-            model=ImageSourceListResponse,
-            method="get",
+            cast_to=ImageSourceListResponse,
         )
 
     def retrieve(
@@ -620,7 +620,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             cast_to=ImageSourceCreateResponse,
         )
 
-    def list(
+    async def list(
         self,
         *,
         page_number: int | Omit = omit,
@@ -632,7 +632,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[ImageSourceListResponse, AsyncPageNumberPage2[ImageSourceListResponse]]:
+    ) -> ImageSourceListResponse:
         """
         This endpoint list image sources which are assigned to the user or token.
 
@@ -648,28 +648,29 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AsyncPaginator[ImageSourceListResponse, AsyncPageNumberPage2[ImageSourceListResponse]]: List all image sources
+            ImageSourceListResponse: List all image sources
 
         Example:
             ```python
-            page = client.image_sources.list()
+            image_source = await client.image_sources.list(
+                page_number=1,
+                page_size=20,
+            )
             ```
         """
-        return self._get_api_list(
+        return await self._get(
             "/image/sources",
-            page=AsyncPageNumberPage2[ImageSourceListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
                     image_source_list_params.ImageSourceListParams,
                 ),
             ),
-            model=ImageSourceListResponse,
-            method="get",
+            cast_to=ImageSourceListResponse,
         )
 
     async def retrieve(

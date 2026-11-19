@@ -17,7 +17,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncPageNumberPage, AsyncPageNumberPage
+from ..pagination import SyncProfilePage, AsyncProfilePage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.video_profile_create_response import VideoProfileCreateResponse
 from ..types import video_profile_create_params, video_profile_list_params, video_profile_update_params
@@ -148,7 +148,7 @@ class VideoProfilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncPageNumberPage[VideoProfileListResponse]:
+    ) -> SyncProfilePage[VideoProfileListResponse]:
         """
         This endpoint retrieves the details of all profiles that have previously been created.
 
@@ -164,7 +164,7 @@ class VideoProfilesResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            SyncPageNumberPage[VideoProfileListResponse]: 200
+            SyncProfilePage[VideoProfileListResponse]: 200
 
         Example:
             ```python
@@ -173,7 +173,7 @@ class VideoProfilesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/video/profiles",
-            page=SyncPageNumberPage[VideoProfileListResponse],
+            page=SyncProfilePage[VideoProfileListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -506,7 +506,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[VideoProfileListResponse, AsyncPageNumberPage[VideoProfileListResponse]]:
+    ) -> AsyncPaginator[VideoProfileListResponse, AsyncProfilePage[VideoProfileListResponse]]:
         """
         This endpoint retrieves the details of all profiles that have previously been created.
 
@@ -522,7 +522,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AsyncPaginator[VideoProfileListResponse, AsyncPageNumberPage[VideoProfileListResponse]]: 200
+            AsyncPaginator[VideoProfileListResponse, AsyncProfilePage[VideoProfileListResponse]]: 200
 
         Example:
             ```python
@@ -531,7 +531,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/video/profiles",
-            page=AsyncPageNumberPage[VideoProfileListResponse],
+            page=AsyncProfilePage[VideoProfileListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

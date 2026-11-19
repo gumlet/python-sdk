@@ -18,7 +18,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncPageNumberPage2, AsyncPageNumberPage2
+from ..pagination import SyncImageSourcePage, AsyncImageSourcePage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.image_source_create_response import ImageSourceCreateResponse
 from ..types import (
@@ -155,7 +155,7 @@ class ImageSourcesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncPageNumberPage2[ImageSourceListResponse]:
+    ) -> SyncImageSourcePage[ImageSourceListResponse]:
         """
         This endpoint list image sources which are assigned to the user or token.
 
@@ -171,7 +171,7 @@ class ImageSourcesResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            SyncPageNumberPage2[ImageSourceListResponse]: List all image sources
+            SyncImageSourcePage[ImageSourceListResponse]: List all image sources
 
         Example:
             ```python
@@ -180,7 +180,7 @@ class ImageSourcesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/image/sources",
-            page=SyncPageNumberPage2[ImageSourceListResponse],
+            page=SyncImageSourcePage[ImageSourceListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -632,7 +632,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[ImageSourceListResponse, AsyncPageNumberPage2[ImageSourceListResponse]]:
+    ) -> AsyncPaginator[ImageSourceListResponse, AsyncImageSourcePage[ImageSourceListResponse]]:
         """
         This endpoint list image sources which are assigned to the user or token.
 
@@ -648,7 +648,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AsyncPaginator[ImageSourceListResponse, AsyncPageNumberPage2[ImageSourceListResponse]]: List all image sources
+            AsyncPaginator[ImageSourceListResponse, AsyncImageSourcePage[ImageSourceListResponse]]: List all image sources
 
         Example:
             ```python
@@ -657,7 +657,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/image/sources",
-            page=AsyncPageNumberPage2[ImageSourceListResponse],
+            page=AsyncImageSourcePage[ImageSourceListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

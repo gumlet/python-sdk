@@ -8,12 +8,12 @@ from ._base_client import BasePage, PageInfo, BaseSyncPage, BaseAsyncPage
 from ._models import construct_type
 
 __all__ = [
-    "SyncPageNumberPage",
-    "AsyncPageNumberPage",
-    "SyncPageNumberPage2",
-    "AsyncPageNumberPage2",
-    "SyncPageNumberPage3",
-    "AsyncPageNumberPage3",
+    "SyncProfilePage",
+    "AsyncProfilePage",
+    "SyncImageSourcePage",
+    "AsyncImageSourcePage",
+    "SyncLiveAssetsPage",
+    "AsyncLiveAssetsPage",
 ]
 
 _T = TypeVar("_T")
@@ -41,7 +41,7 @@ def _page_param_number(value: object, default: int) -> Optional[int]:
     return default if value is None else _page_number(value)
 
 
-class SyncPageNumberPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+class SyncProfilePage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
     all_profiles: List[_T]
     total_profile_count: int
     page_size: int
@@ -68,7 +68,7 @@ class SyncPageNumberPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"page_number": next_page})
 
 
-class AsyncPageNumberPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+class AsyncProfilePage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
     all_profiles: List[_T]
     total_profile_count: int
     page_size: int
@@ -95,7 +95,7 @@ class AsyncPageNumberPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"page_number": next_page})
 
 
-class SyncPageNumberPage2(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+class SyncImageSourcePage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
     all_sources: List[_T]
     total_count: int
     page_size: int
@@ -122,7 +122,7 @@ class SyncPageNumberPage2(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"page_number": next_page})
 
 
-class AsyncPageNumberPage2(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+class AsyncImageSourcePage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
     all_sources: List[_T]
     total_count: int
     page_size: int
@@ -149,7 +149,7 @@ class AsyncPageNumberPage2(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"page_number": next_page})
 
 
-class SyncPageNumberPage3(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+class SyncLiveAssetsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
     all_live_assets: List[_T]
     total_live_asset_count: int
     page_size: int
@@ -176,7 +176,7 @@ class SyncPageNumberPage3(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"page_number": next_page})
 
 
-class AsyncPageNumberPage3(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+class AsyncLiveAssetsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
     all_live_assets: List[_T]
     total_live_asset_count: int
     page_size: int

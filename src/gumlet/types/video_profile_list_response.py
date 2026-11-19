@@ -3,14 +3,13 @@
 from __future__ import annotations
 
 from typing import List, Optional
-from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["VideoProfileListResponse", "VideoProfileListResponse2", "Transformations"]
+__all__ = ["VideoProfileListResponse", "AllProfile", "AllProfileTransformations"]
 
 
-class Transformations(BaseModel):
+class AllProfileTransformations(BaseModel):
     format: Optional[str] = None
 
     audio_codec: Optional[List[str]] = None
@@ -26,16 +25,27 @@ class Transformations(BaseModel):
     per_title_encoding: Optional[bool] = None
 
 
-class VideoProfileListResponse2(BaseModel):
+class AllProfile(BaseModel):
     profile_id: Optional[str] = None
 
     name: Optional[str] = None
 
-    transformations: Optional[Transformations] = None
+    transformations: Optional[AllProfileTransformations] = None
 
     created_at: Optional[int] = None
 
     updated_at: Optional[int] = None
 
 
-VideoProfileListResponse: TypeAlias = VideoProfileListResponse2
+class VideoProfileListResponse(BaseModel):
+    all_profiles: Optional[List[AllProfile]] = None
+
+    total_profile_count: Optional[int] = None
+
+    current_offset: Optional[int] = None
+
+    next_page_token: Optional[str] = None
+    """Cursor for the next page when more results exist. Empty string when there is no next page."""
+
+    page_size: Optional[int] = None
+    """Page size used for this response when it differs from the default."""

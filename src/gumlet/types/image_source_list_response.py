@@ -4,38 +4,37 @@ from __future__ import annotations
 
 from typing import List, Optional
 from datetime import datetime
-from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 
 __all__ = [
     "ImageSourceListResponse",
-    "ImageSourceListResponse2",
-    "Aws",
-    "Webfolder",
-    "Wasabi",
-    "Gcs",
-    "Wordpress",
-    "Backblaze",
-    "Hetzner",
-    "Dostorage",
-    "Azure",
-    "Linode",
-    "Cloudinary",
+    "AllSource",
+    "AllSourceAws",
+    "AllSourceWebfolder",
+    "AllSourceWasabi",
+    "AllSourceGcs",
+    "AllSourceWordpress",
+    "AllSourceBackblaze",
+    "AllSourceHetzner",
+    "AllSourceDostorage",
+    "AllSourceAzure",
+    "AllSourceLinode",
+    "AllSourceCloudinary",
 ]
 
 
-class Cloudinary(BaseModel):
+class AllSourceCloudinary(BaseModel):
     cloud_name: str
 
 
-class Linode(BaseModel):
+class AllSourceLinode(BaseModel):
     bucket_name: str
 
     bucket_region: str
 
 
-class Azure(BaseModel):
+class AllSourceAzure(BaseModel):
     azure_account_name: str
 
     azure_container_name: Optional[str] = None
@@ -43,45 +42,45 @@ class Azure(BaseModel):
     azure_path: str
 
 
-class Dostorage(BaseModel):
+class AllSourceDostorage(BaseModel):
     bucket_name: str
 
     base_path: Optional[str] = None
 
 
-class Hetzner(BaseModel):
+class AllSourceHetzner(BaseModel):
     bucket_name: Optional[str] = None
 
     base_path: Optional[str] = None
 
 
-class Backblaze(BaseModel):
+class AllSourceBackblaze(BaseModel):
     bucket_name: str
 
     base_path: Optional[str] = None
 
 
-class Wordpress(BaseModel):
+class AllSourceWordpress(BaseModel):
     website_url: str
 
 
-class Gcs(BaseModel):
+class AllSourceGcs(BaseModel):
     bucket_name: str
 
     base_path: Optional[str] = None
 
 
-class Wasabi(BaseModel):
+class AllSourceWasabi(BaseModel):
     bucket_name: str
 
     base_path: Optional[str] = None
 
 
-class Webfolder(BaseModel):
+class AllSourceWebfolder(BaseModel):
     base_url: str
 
 
-class Aws(BaseModel):
+class AllSourceAws(BaseModel):
     bucket_name: Optional[str] = None
 
     bucket_region: Optional[str] = None
@@ -93,7 +92,7 @@ class Aws(BaseModel):
     base_path: Optional[str] = None
 
 
-class ImageSourceListResponse2(BaseModel):
+class AllSource(BaseModel):
     id: str
     """Image source ID"""
 
@@ -106,33 +105,43 @@ class ImageSourceListResponse2(BaseModel):
     updated_at: Optional[datetime] = None
     """Updated at timestamo in ISO 8601"""
 
-    aws: Optional[Aws] = None
+    aws: Optional[AllSourceAws] = None
 
     namespace: str
     """Source namespace (i.e. subdomain of gumlet.io)"""
 
-    webfolder: Optional[Webfolder] = None
+    webfolder: Optional[AllSourceWebfolder] = None
 
     cname: Optional[List[str]] = None
     """Custom domains assigned to this source."""
 
-    wasabi: Optional[Wasabi] = None
+    wasabi: Optional[AllSourceWasabi] = None
 
-    gcs: Optional[Gcs] = None
+    gcs: Optional[AllSourceGcs] = None
 
-    wordpress: Optional[Wordpress] = None
+    wordpress: Optional[AllSourceWordpress] = None
 
-    backblaze: Optional[Backblaze] = None
+    backblaze: Optional[AllSourceBackblaze] = None
 
-    hetzner: Optional[Hetzner] = None
+    hetzner: Optional[AllSourceHetzner] = None
 
-    dostorage: Optional[Dostorage] = None
+    dostorage: Optional[AllSourceDostorage] = None
 
-    azure: Optional[Azure] = None
+    azure: Optional[AllSourceAzure] = None
 
-    linode: Optional[Linode] = None
+    linode: Optional[AllSourceLinode] = None
 
-    cloudinary: Optional[Cloudinary] = None
+    cloudinary: Optional[AllSourceCloudinary] = None
 
 
-ImageSourceListResponse: TypeAlias = ImageSourceListResponse2
+class ImageSourceListResponse(BaseModel):
+    all_sources: Optional[List[AllSource]] = None
+
+    next_page_token: Optional[str] = None
+    """Cursor for the next page when more results exist. Empty string when there is no next page."""
+
+    page_size: Optional[int] = None
+    """Page size used for this response when it differs from the default."""
+
+    total_count: Optional[int] = None
+    """Total number of image sources available"""

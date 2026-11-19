@@ -62,11 +62,16 @@ class TestVideoProfiles:
 
     @smoke_case("videoProfiles.list:required", operation="list", path="/video/profiles")
     def test_method_list(self) -> None:
-        page = client.video_profiles.list()
+        video_profile = client.video_profiles.list(
+            page_number=1,
+            page_size=20,
+        )
 
     @smoke_case("videoProfiles.list:all", operation="list", path="/video/profiles")
     def test_method_list_with_all_params(self) -> None:
-        page = client.video_profiles.list(
+        video_profile = client.video_profiles.list(
+            page_number=1,
+            page_size=20,
             next_page_token="next_page_token",
         )
 

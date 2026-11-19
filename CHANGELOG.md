@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.5.2](https://github.com/gumlet/python-sdk/compare/v1.5.0...v1.5.2) (2026-11-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 3 breaking changes to the SDK surface.
+    - Operation `videoProfiles.list` is no longer paginated.
+    - Operation `imageSources.list` is no longer paginated.
+    - Operation `liveStreamAssets.filter` is no longer paginated.
+
+### Features
+
+* **api:** remove pagination of videoProfiles.list (+2 more changes) ([86cbb92](https://github.com/gumlet/python-sdk/commit/86cbb929268954f59273f49f252c9c2ef44114a2))
+
+
+### Chores
+
+* **api:** update generated SDK content ([245b0c1](https://github.com/gumlet/python-sdk/commit/245b0c1084928c3638aa7a1fa23c722937230299))
+* release 1.5.2 ([0a40b9c](https://github.com/gumlet/python-sdk/commit/0a40b9c4c8059d264d015f318f2665472b673df4))
+
 ## [1.5.0](https://github.com/gumlet/python-sdk/compare/v1.4.2...v1.5.0) (2026-11-19)
 
 

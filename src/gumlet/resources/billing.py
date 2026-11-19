@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from .._types import Body, Query, Headers, NotGiven, not_given
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -16,9 +16,9 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.billing_list_invoices_response import BillingListInvoicesResponse
+from ..types import billing_list_invoices_params, billing_update_details_params
 from ..types.billing_fetch_details_response import BillingFetchDetailsResponse
 from ..types.billing_update_details_response import BillingUpdateDetailsResponse
-from ..types import billing_update_details_params
 from ..types.billing_fetch_upcoming_invoice_response import BillingFetchUpcomingInvoiceResponse
 
 __all__ = ["BillingResource", "AsyncBillingResource"]
@@ -36,6 +36,8 @@ class BillingResource(SyncAPIResource):
     def list_invoices(
         self,
         *,
+        page_size: int | Omit = omit,
+        last_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -44,9 +46,11 @@ class BillingResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BillingListInvoicesResponse:
         """
-        Liost all invoices that are generated so far.
+        List all invoices that are generated so far.
 
         Args:
+            page_size: Number of invoices to return per page. **Default: `20`**. **Maximum: `100`**.
+            last_id: Stripe invoice ID cursor for the next page. Pass the `id` of the last invoice from the previous response to fetch the next set of invoices.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -57,13 +61,21 @@ class BillingResource(SyncAPIResource):
 
         Example:
             ```python
-            billing = client.billing.list_invoices()
+            billing = client.billing.list_invoices(
+                page_size=20,
+            )
             ```
         """
         return self._get(
             "/mixed/billing/invoice/history",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"page_size": page_size, "last_id": last_id}, billing_list_invoices_params.BillingListInvoicesParams
+                ),
             ),
             cast_to=BillingListInvoicesResponse,
         )
@@ -220,6 +232,8 @@ class AsyncBillingResource(AsyncAPIResource):
     async def list_invoices(
         self,
         *,
+        page_size: int | Omit = omit,
+        last_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -228,9 +242,11 @@ class AsyncBillingResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BillingListInvoicesResponse:
         """
-        Liost all invoices that are generated so far.
+        List all invoices that are generated so far.
 
         Args:
+            page_size: Number of invoices to return per page. **Default: `20`**. **Maximum: `100`**.
+            last_id: Stripe invoice ID cursor for the next page. Pass the `id` of the last invoice from the previous response to fetch the next set of invoices.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -241,13 +257,21 @@ class AsyncBillingResource(AsyncAPIResource):
 
         Example:
             ```python
-            billing = await client.billing.list_invoices()
+            billing = await client.billing.list_invoices(
+                page_size=20,
+            )
             ```
         """
         return await self._get(
             "/mixed/billing/invoice/history",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"page_size": page_size, "last_id": last_id}, billing_list_invoices_params.BillingListInvoicesParams
+                ),
             ),
             cast_to=BillingListInvoicesResponse,
         )

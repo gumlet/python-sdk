@@ -33,7 +33,7 @@ from gumlet import Gumlet
 # Fingerprint of the case list the generator's smoke runner checks this suite against (written only
 # for generator tooling). The runner refuses a list whose digest differs, so a list left by an
 # earlier generation is never trusted.
-SMOKE_CASE_LIST_DIGEST = "60433bfc02b0eebb"
+SMOKE_CASE_LIST_DIGEST = "68aef1b66ab28e6b"
 
 _BASE_URL = os.environ.get("TEST_API_BASE_URL") or None
 

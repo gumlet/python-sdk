@@ -9,7 +9,10 @@ __all__ = ["ChannelViewerListSubscribersParams"]
 
 class ChannelViewerListSubscribersParams(TypedDict, total=False):
     page_number: int
-    """Page number to retrieve. Starts at 1."""
+    """Page number to retrieve. Starts at `1`."""
 
     page_size: int
-    """Number of items to return per page"""
+    """Number of items to return per page. **Default: `20`**. **Maximum: `100`**."""
+
+    next_page_token: str
+    """Cursor for the next page. Pass the `next_page_token` value returned in the previous response."""

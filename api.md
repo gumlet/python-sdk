@@ -13,8 +13,8 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [Update thumbnail from video](#update-thumbnail-from-video)
   - [Update thumbnail via upload](#update-thumbnail-via-upload)
   - [Create/Update Video Asset Chapters](#createupdate-video-asset-chapters)
+  - [List Assets (Deprecated)](#list-assets-deprecated)
   - [List Assets](#list-assets)
-  - [List Assets](#list-assets-1)
   - [Bulk Delete](#bulk-delete)
   - [Bulk Tag](#bulk-tag)
   - [Asset Analytics](#asset-analytics)
@@ -282,17 +282,19 @@ video_asset = client.video_assets.create_update_chapter(
 )
 ```
 
-### List Assets
+### List Assets (Deprecated)
+
+[Deprecated] Combined folders + assets list for a workspace. Use `GET /video/assets/list/{workspace_id}` for assets and `GET /video/workspaces/{workspace_id}/folders` for folders instead.
 
 List folders and assets for a workspace in a single response. Use `parent_id` to browse a specific folder, or filters like `title`, `status`, and `playlist_id` to search assets.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`VideoAssetListParams`](./src/gumlet/types/video_asset_list_params.py) |
-| Response | [`VideoAssetListResponse`](./src/gumlet/types/video_asset_list_response.py) |
+| Request | [`VideoAssetListWorkspaceFoldersAndDeprecatedParams`](./src/gumlet/types/video_asset_list_workspace_folders_and_deprecated_params.py) |
+| Response | [`VideoAssetListWorkspaceFoldersAndDeprecatedResponse`](./src/gumlet/types/video_asset_list_workspace_folders_and_deprecated_response.py) |
 
 ```python
-video_asset = client.video_assets.list(
+video_asset = client.video_assets.list_workspace_folders_and_deprecated(
     workspace_id="workspaceId",
     type="all",
     offset=0,
@@ -303,18 +305,27 @@ video_asset = client.video_assets.list(
 
 ### List Assets
 
-[Deprecated] This endpoint list assets in video workspace. You can also pass `status` and `tag` to filter assets.
+List assets in a video workspace (local Mongo list; not Atlas Search).
+
+Use `page_number` and `page_size` for page-based pagination. Use `next_page_token` for cursor-based pagination where supported.
+
+`next_page_token` is supported only with the **default** sort or `sortBy=created_at` (and without a `title` search). It is **not** supported with other sort fields (for example `title`, `duration`, `status`, `playlist_order`, `custom`) or when `title` is set; in those cases use `page_number` / `page_size` only.
+
+For folders, use `GET /video/workspaces/{workspace_id}/folders` and combine results in your client. The combined endpoint `GET /video/workspaces/{workspace_id}/list` is deprecated.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`VideoAssetListDeprecatedParams`](./src/gumlet/types/video_asset_list_deprecated_params.py) |
-| Response | [`VideoAssetListDeprecatedResponse`](./src/gumlet/types/video_asset_list_deprecated_response.py) |
+| Request | [`VideoAssetListParams`](./src/gumlet/types/video_asset_list_params.py) |
+| Response | [`VideoAssetListResponse`](./src/gumlet/types/video_asset_list_response.py) |
 
 ```python
-video_asset = client.video_assets.list_deprecated(
+video_asset = client.video_assets.list(
     workspace_id="workspaceId",
     sort_by="created_at",
     order_by="desc",
+    signed_token="false",
+    page_number=1,
+    page_size=20,
 )
 ```
 
@@ -452,7 +463,9 @@ Query video analytics and streaming duration usage data.
 
 ### Video Usage Analytics
 
-This endpoint gives usage analytics data of your videos. Ex - top assets, bandwidth consumption
+This endpoint gives usage analytics data of your videos. Ex - top assets, bandwidth consumption.
+
+Pagination applies only to `top_assets` and `widget_data` metrics.
 
 | Direction | Type |
 | --- | --- |
@@ -466,6 +479,8 @@ video_usage_analytic = client.video_usage_analytics.retrieve(
     top_assets_count="5",
     top_assets_page="0",
     group_by="hourly",
+    page_number=1,
+    page_size=20,
 )
 ```
 
@@ -576,13 +591,15 @@ video_profile = client.video_profiles.create(
 
 This endpoint retrieves the details of all profiles that have previously been created.
 
+Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
 | Direction | Type |
 | --- | --- |
 | Request | [`VideoProfileListParams`](./src/gumlet/types/video_profile_list_params.py) |
 | Response | [`VideoProfileListResponse`](./src/gumlet/types/video_profile_list_response.py) |
 
 ```python
-video_profile = client.video_profiles.list()
+page = client.video_profiles.list()
 ```
 
 ### Update Profile
@@ -858,13 +875,18 @@ webhook_endpoint = client.webhook_endpoints.delete(
 
 Get logs history for a given webhook.
 
+Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
 | Direction | Type |
 | --- | --- |
+| Request | [`WebhookEndpointHistoryParams`](./src/gumlet/types/webhook_endpoint_history_params.py) |
 | Response | [`WebhookEndpointHistoryResponse`](./src/gumlet/types/webhook_endpoint_history_response.py) |
 
 ```python
 webhook_endpoint = client.webhook_endpoints.history(
     webhook_id="webhookId",
+    page_number=1,
+    page_size=20,
 )
 ```
 
@@ -893,16 +915,15 @@ image_source = client.image_sources.create(
 
 This endpoint list image sources which are assigned to the user or token.
 
+Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
 | Direction | Type |
 | --- | --- |
 | Request | [`ImageSourceListParams`](./src/gumlet/types/image_source_list_params.py) |
 | Response | [`ImageSourceListResponse`](./src/gumlet/types/image_source_list_response.py) |
 
 ```python
-image_source = client.image_sources.list(
-    offset=0,
-    size=20,
-)
+page = client.image_sources.list()
 ```
 
 ### Get Image Source
@@ -1089,13 +1110,15 @@ live_stream_asset = client.live_stream_assets.complete(
 
 This endpoint lists live assets on the basis of `status` for the given `live_source_id`.
 
+Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
 | Direction | Type |
 | --- | --- |
 | Request | [`LiveStreamAssetFilterParams`](./src/gumlet/types/live_stream_asset_filter_params.py) |
 | Response | [`LiveStreamAssetFilterResponse`](./src/gumlet/types/live_stream_asset_filter_response.py) |
 
 ```python
-live_stream_asset = client.live_stream_assets.filter(
+page = client.live_stream_assets.filter(
     live_source_id="liveSourceId",
 )
 ```
@@ -1162,6 +1185,8 @@ client.recycle_bin.recover(
 
 List all assets in a recycle bin for a given workspace. The deleted assets are available for 30 days. After that, assets are permanently deleted.
 
+Pagination uses `page_number` / `page_size` only (no `next_page_token`).
+
 | Direction | Type |
 | --- | --- |
 | Request | [`RecycleBinListParams`](./src/gumlet/types/recycle_bin_list_params.py) |
@@ -1169,8 +1194,9 @@ List all assets in a recycle bin for a given workspace. The deleted assets are a
 
 ```python
 recycle_bin = client.recycle_bin.list(
-    size=20,
     workspace_id="workspace_id",
+    page_number=1,
+    page_size=20,
 )
 ```
 
@@ -1182,6 +1208,8 @@ Create and manage video workspaces.
 
 This endpoint list video workspace which are assigned to the user or token.
 
+Pagination uses `page_number` / `page_size` (max page size 200). Use `next_page_token` for cursor-based pagination.
+
 | Direction | Type |
 | --- | --- |
 | Request | [`VideoWorkspaceListParams`](./src/gumlet/types/video_workspace_list_params.py) |
@@ -1189,8 +1217,8 @@ This endpoint list video workspace which are assigned to the user or token.
 
 ```python
 video_workspace = client.video_workspaces.list(
-    offset="0",
-    size="10",
+    page_number=1,
+    page_size=20,
 )
 ```
 
@@ -1422,6 +1450,8 @@ channel_viewer = client.channel_viewers.invite_csv(
 
 List all channel subscribers.
 
+Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
 | Direction | Type |
 | --- | --- |
 | Request | [`ChannelViewerListSubscribersParams`](./src/gumlet/types/channel_viewer_list_subscribers_params.py) |
@@ -1431,7 +1461,7 @@ List all channel subscribers.
 channel_viewer = client.channel_viewers.list_subscribers(
     workspace_id="workspaceId",
     page_number=1,
-    page_size=10,
+    page_size=20,
 )
 ```
 

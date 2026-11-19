@@ -204,6 +204,7 @@ class ChannelViewersResource(SyncAPIResource):
         *,
         page_number: int | Omit = omit,
         page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -214,10 +215,13 @@ class ChannelViewersResource(SyncAPIResource):
         """
         List all channel subscribers.
 
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
         Args:
             workspace_id: Gumlet workspace ID. You can get it on Gumlet dashboard or retrieve it using list workspace API.
-            page_number: Page number to retrieve. Starts at 1.
-            page_size: Number of items to return per page
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -231,7 +235,7 @@ class ChannelViewersResource(SyncAPIResource):
             channel_viewer = client.channel_viewers.list_subscribers(
                 workspace_id="workspaceId",
                 page_number=1,
-                page_size=10,
+                page_size=20,
             )
             ```
         """
@@ -245,7 +249,7 @@ class ChannelViewersResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"page_number": page_number, "page_size": page_size},
+                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
                     channel_viewer_list_subscribers_params.ChannelViewerListSubscribersParams,
                 ),
             ),
@@ -424,6 +428,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
         *,
         page_number: int | Omit = omit,
         page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -434,10 +439,13 @@ class AsyncChannelViewersResource(AsyncAPIResource):
         """
         List all channel subscribers.
 
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
         Args:
             workspace_id: Gumlet workspace ID. You can get it on Gumlet dashboard or retrieve it using list workspace API.
-            page_number: Page number to retrieve. Starts at 1.
-            page_size: Number of items to return per page
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -451,7 +459,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
             channel_viewer = await client.channel_viewers.list_subscribers(
                 workspace_id="workspaceId",
                 page_number=1,
-                page_size=10,
+                page_size=20,
             )
             ```
         """
@@ -465,7 +473,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"page_number": page_number, "page_size": page_size},
+                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
                     channel_viewer_list_subscribers_params.ChannelViewerListSubscribersParams,
                 ),
             ),

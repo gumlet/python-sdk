@@ -1,6 +1,6 @@
 [project]
 name = "gumlet"
-version = "1.4.2" # x-release-please-version
+version = "1.5.0" # x-release-please-version
 description = "Gumlet helps developers deliver online video and images. This API encompasses Gumlet Video, Image and Video Analytics functionality to help you build your products better and faster than ever before."
 readme = "README.md"
 license = "Apache-2.0"
@@ -28,6 +28,9 @@ documentation = "https://docs.gumlet.com/reference"
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
 webhooks = []
 
+[dependency-groups]
+dev = ["pytest>=8.3.4"]
+
 [build-system]
 requires = ["hatchling>=1.18.0"]
 build-backend = "hatchling.build"
@@ -37,3 +40,6 @@ packages = ["src/gumlet"]
 
 [tool.ruff]
 line-length = 120
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

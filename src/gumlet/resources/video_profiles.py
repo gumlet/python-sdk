@@ -17,7 +17,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
+from ..pagination import SyncPageNumberPage, AsyncPageNumberPage
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.video_profile_create_response import VideoProfileCreateResponse
 from ..types import video_profile_create_params, video_profile_list_params, video_profile_update_params
 from ..types.video_profile_list_response import VideoProfileListResponse
@@ -138,46 +139,53 @@ class VideoProfilesResource(SyncAPIResource):
     def list(
         self,
         *,
-        offset: int | Omit = omit,
-        size: int | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> VideoProfileListResponse:
+    ) -> SyncPageNumberPage[VideoProfileListResponse]:
         """
         This endpoint retrieves the details of all profiles that have previously been created.
 
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
         Args:
-            offset: Offset value for a paginated list of profiles. Can be zero for the first time and `current_offset` value received from the last request afterwards.
-            size: Page size for the paginated list. **Default: `10`**
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            VideoProfileListResponse: 200
+            SyncPageNumberPage[VideoProfileListResponse]: 200
 
         Example:
             ```python
-            video_profile = client.video_profiles.list()
+            page = client.video_profiles.list()
             ```
         """
-        return self._get(
+        return self._get_api_list(
             "/video/profiles",
+            page=SyncPageNumberPage[VideoProfileListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"offset": offset, "size": size}, video_profile_list_params.VideoProfileListParams
+                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
+                    video_profile_list_params.VideoProfileListParams,
                 ),
             ),
-            cast_to=VideoProfileListResponse,
+            model=VideoProfileListResponse,
+            method="get",
         )
 
     def update(
@@ -486,49 +494,56 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             cast_to=VideoProfileCreateResponse,
         )
 
-    async def list(
+    def list(
         self,
         *,
-        offset: int | Omit = omit,
-        size: int | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> VideoProfileListResponse:
+    ) -> AsyncPaginator[VideoProfileListResponse, AsyncPageNumberPage[VideoProfileListResponse]]:
         """
         This endpoint retrieves the details of all profiles that have previously been created.
 
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
         Args:
-            offset: Offset value for a paginated list of profiles. Can be zero for the first time and `current_offset` value received from the last request afterwards.
-            size: Page size for the paginated list. **Default: `10`**
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            VideoProfileListResponse: 200
+            AsyncPaginator[VideoProfileListResponse, AsyncPageNumberPage[VideoProfileListResponse]]: 200
 
         Example:
             ```python
-            video_profile = await client.video_profiles.list()
+            page = client.video_profiles.list()
             ```
         """
-        return await self._get(
+        return self._get_api_list(
             "/video/profiles",
+            page=AsyncPageNumberPage[VideoProfileListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
-                    {"offset": offset, "size": size}, video_profile_list_params.VideoProfileListParams
+                query=maybe_transform(
+                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
+                    video_profile_list_params.VideoProfileListParams,
                 ),
             ),
-            cast_to=VideoProfileListResponse,
+            model=VideoProfileListResponse,
+            method="get",
         )
 
     async def update(

@@ -18,7 +18,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
+from ..pagination import SyncPageNumberPage3, AsyncPageNumberPage3
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.live_stream_asset_create_response import LiveStreamAssetCreateResponse
 from ..types import (
     live_stream_asset_create_params,
@@ -286,53 +287,64 @@ class LiveStreamAssetsResource(SyncAPIResource):
         live_source_id: str,
         *,
         status: str | Omit = omit,
-        offset: int | Omit = omit,
-        size: int | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> LiveStreamAssetFilterResponse:
+    ) -> SyncPageNumberPage3[LiveStreamAssetFilterResponse]:
         """
         This endpoint lists live assets on the basis of `status` for the given `live_source_id`.
+
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
 
         Args:
             live_source_id: Gumlet live source/collection id.
             status: To filter live assets on the basis of their current status. Can be specified as a single status value string or comma-separated status values. The status value can be one of `created`, `active`, `complete`, `disconnected`, `errored`, and `deleted`.
-            offset: Offset value for a paginated list of assets.
-            size: Page size for the paginated list.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            LiveStreamAssetFilterResponse: 200
+            SyncPageNumberPage3[LiveStreamAssetFilterResponse]: 200
 
         Example:
             ```python
-            live_stream_asset = client.live_stream_assets.filter(
+            page = client.live_stream_assets.filter(
                 live_source_id="liveSourceId",
             )
             ```
         """
         if live_source_id is None or (isinstance(live_source_id, str) and not live_source_id):
             raise ValueError(f"Expected a non-empty value for `live_source_id` but received {live_source_id!r}")
-        return self._get(
+        return self._get_api_list(
             path_template("/video/live/assets/list/{live_source_id}", **{"live_source_id": live_source_id}),
+            page=SyncPageNumberPage3[LiveStreamAssetFilterResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"status": status, "offset": offset, "size": size},
+                    {
+                        "status": status,
+                        "page_number": page_number,
+                        "page_size": page_size,
+                        "next_page_token": next_page_token,
+                    },
                     live_stream_asset_filter_params.LiveStreamAssetFilterParams,
                 ),
             ),
-            cast_to=LiveStreamAssetFilterResponse,
+            model=LiveStreamAssetFilterResponse,
+            method="get",
         )
 
     def start(
@@ -709,58 +721,69 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             cast_to=LiveStreamAssetCompleteResponse,
         )
 
-    async def filter(
+    def filter(
         self,
         live_source_id: str,
         *,
         status: str | Omit = omit,
-        offset: int | Omit = omit,
-        size: int | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> LiveStreamAssetFilterResponse:
+    ) -> AsyncPaginator[LiveStreamAssetFilterResponse, AsyncPageNumberPage3[LiveStreamAssetFilterResponse]]:
         """
         This endpoint lists live assets on the basis of `status` for the given `live_source_id`.
+
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
 
         Args:
             live_source_id: Gumlet live source/collection id.
             status: To filter live assets on the basis of their current status. Can be specified as a single status value string or comma-separated status values. The status value can be one of `created`, `active`, `complete`, `disconnected`, `errored`, and `deleted`.
-            offset: Offset value for a paginated list of assets.
-            size: Page size for the paginated list.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            LiveStreamAssetFilterResponse: 200
+            AsyncPaginator[LiveStreamAssetFilterResponse, AsyncPageNumberPage3[LiveStreamAssetFilterResponse]]: 200
 
         Example:
             ```python
-            live_stream_asset = await client.live_stream_assets.filter(
+            page = client.live_stream_assets.filter(
                 live_source_id="liveSourceId",
             )
             ```
         """
         if live_source_id is None or (isinstance(live_source_id, str) and not live_source_id):
             raise ValueError(f"Expected a non-empty value for `live_source_id` but received {live_source_id!r}")
-        return await self._get(
+        return self._get_api_list(
             path_template("/video/live/assets/list/{live_source_id}", **{"live_source_id": live_source_id}),
+            page=AsyncPageNumberPage3[LiveStreamAssetFilterResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
-                    {"status": status, "offset": offset, "size": size},
+                query=maybe_transform(
+                    {
+                        "status": status,
+                        "page_number": page_number,
+                        "page_size": page_size,
+                        "next_page_token": next_page_token,
+                    },
                     live_stream_asset_filter_params.LiveStreamAssetFilterParams,
                 ),
             ),
-            cast_to=LiveStreamAssetFilterResponse,
+            model=LiveStreamAssetFilterResponse,
+            method="get",
         )
 
     async def start(

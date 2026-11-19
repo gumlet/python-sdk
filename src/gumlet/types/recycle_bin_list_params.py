@@ -8,11 +8,11 @@ __all__ = ["RecycleBinListParams"]
 
 
 class RecycleBinListParams(TypedDict, total=False):
-    offset: int
-    """Number of items to skip from start of page response."""
-
-    size: int
-    """Number of items to return for a single page."""
-
     workspace_id: Required[str]
     """ID of workspace for which you want to list the recycle bin items."""
+
+    page_number: int
+    """Page number to retrieve. Starts at `1`."""
+
+    page_size: int
+    """Number of items to return per page. **Default: `20`**. **Maximum: `100`**."""

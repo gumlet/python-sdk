@@ -4,37 +4,38 @@ from __future__ import annotations
 
 from typing import List, Optional
 from datetime import datetime
+from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 
 __all__ = [
     "ImageSourceListResponse",
-    "AllSource",
-    "AllSourceAws",
-    "AllSourceWebfolder",
-    "AllSourceWasabi",
-    "AllSourceGcs",
-    "AllSourceWordpress",
-    "AllSourceBackblaze",
-    "AllSourceHetzner",
-    "AllSourceDostorage",
-    "AllSourceAzure",
-    "AllSourceLinode",
-    "AllSourceCloudinary",
+    "ImageSourceListResponse2",
+    "Aws",
+    "Webfolder",
+    "Wasabi",
+    "Gcs",
+    "Wordpress",
+    "Backblaze",
+    "Hetzner",
+    "Dostorage",
+    "Azure",
+    "Linode",
+    "Cloudinary",
 ]
 
 
-class AllSourceCloudinary(BaseModel):
+class Cloudinary(BaseModel):
     cloud_name: str
 
 
-class AllSourceLinode(BaseModel):
+class Linode(BaseModel):
     bucket_name: str
 
     bucket_region: str
 
 
-class AllSourceAzure(BaseModel):
+class Azure(BaseModel):
     azure_account_name: str
 
     azure_container_name: Optional[str] = None
@@ -42,45 +43,45 @@ class AllSourceAzure(BaseModel):
     azure_path: str
 
 
-class AllSourceDostorage(BaseModel):
+class Dostorage(BaseModel):
     bucket_name: str
 
     base_path: Optional[str] = None
 
 
-class AllSourceHetzner(BaseModel):
+class Hetzner(BaseModel):
     bucket_name: Optional[str] = None
 
     base_path: Optional[str] = None
 
 
-class AllSourceBackblaze(BaseModel):
+class Backblaze(BaseModel):
     bucket_name: str
 
     base_path: Optional[str] = None
 
 
-class AllSourceWordpress(BaseModel):
+class Wordpress(BaseModel):
     website_url: str
 
 
-class AllSourceGcs(BaseModel):
+class Gcs(BaseModel):
     bucket_name: str
 
     base_path: Optional[str] = None
 
 
-class AllSourceWasabi(BaseModel):
+class Wasabi(BaseModel):
     bucket_name: str
 
     base_path: Optional[str] = None
 
 
-class AllSourceWebfolder(BaseModel):
+class Webfolder(BaseModel):
     base_url: str
 
 
-class AllSourceAws(BaseModel):
+class Aws(BaseModel):
     bucket_name: Optional[str] = None
 
     bucket_region: Optional[str] = None
@@ -92,7 +93,7 @@ class AllSourceAws(BaseModel):
     base_path: Optional[str] = None
 
 
-class AllSource(BaseModel):
+class ImageSourceListResponse2(BaseModel):
     id: str
     """Image source ID"""
 
@@ -105,34 +106,33 @@ class AllSource(BaseModel):
     updated_at: Optional[datetime] = None
     """Updated at timestamo in ISO 8601"""
 
-    aws: Optional[AllSourceAws] = None
+    aws: Optional[Aws] = None
 
     namespace: str
     """Source namespace (i.e. subdomain of gumlet.io)"""
 
-    webfolder: Optional[AllSourceWebfolder] = None
+    webfolder: Optional[Webfolder] = None
 
     cname: Optional[List[str]] = None
     """Custom domains assigned to this source."""
 
-    wasabi: Optional[AllSourceWasabi] = None
+    wasabi: Optional[Wasabi] = None
 
-    gcs: Optional[AllSourceGcs] = None
+    gcs: Optional[Gcs] = None
 
-    wordpress: Optional[AllSourceWordpress] = None
+    wordpress: Optional[Wordpress] = None
 
-    backblaze: Optional[AllSourceBackblaze] = None
+    backblaze: Optional[Backblaze] = None
 
-    hetzner: Optional[AllSourceHetzner] = None
+    hetzner: Optional[Hetzner] = None
 
-    dostorage: Optional[AllSourceDostorage] = None
+    dostorage: Optional[Dostorage] = None
 
-    azure: Optional[AllSourceAzure] = None
+    azure: Optional[Azure] = None
 
-    linode: Optional[AllSourceLinode] = None
+    linode: Optional[Linode] = None
 
-    cloudinary: Optional[AllSourceCloudinary] = None
+    cloudinary: Optional[Cloudinary] = None
 
 
-class ImageSourceListResponse(BaseModel):
-    all_sources: Optional[List[AllSource]] = None
+ImageSourceListResponse: TypeAlias = ImageSourceListResponse2

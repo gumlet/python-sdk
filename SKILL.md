@@ -52,6 +52,14 @@ print(video_asset)
 
 Method names, parameter shapes, and response types are generated from the API description — do not guess them. Look up the exact call signature in [api.md](./api.md) before writing a call.
 
+## Pagination
+
+List endpoints return paginated results you can iterate directly; the SDK fetches subsequent pages for you.
+
+```python
+page = client.video_profiles.list()
+```
+
 ## Error handling
 
 Non-success responses throw generated API errors. Error objects expose status, headers, response body, and request metadata where the target runtime supports it.

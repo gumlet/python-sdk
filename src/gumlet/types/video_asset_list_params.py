@@ -12,52 +12,49 @@ __all__ = ["VideoAssetListParams"]
 
 
 class VideoAssetListParams(TypedDict, total=False):
-    type: Literal["folders", "videos", "all"]
-    """Return `folders`, `videos`, or `all`. Default is `all`."""
-
-    parent_id: str
-    """Parent folder id. Send `null` to browse the root level."""
-
-    title: str
-    """Search folders or assets by title or description."""
-
     status: str
-    """Comma-separated asset status values."""
+    """Filter assets by status. Single value or comma-separated list (for example `ready` or `ready,errored`)."""
 
     tag: str
-    """Comma-separated asset tags."""
+    """Filter by asset tag(s). Use a comma-separated string for multiple tags."""
+
+    title: str
+    """Filter assets by title (text search). When `title` is set, `next_page_token` is not supported - use `page_number` / `page_size`."""
+
+    folder_id: str
+    """Filter assets by folder id. Send `null` or empty string for assets not in a folder."""
 
     playlist_id: str
-    """Filter assets to a playlist."""
+    """Filter assets belonging to a playlist."""
 
     start_date: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
-    """Asset created_at lower bound. Date in yyyy-MM-dd format."""
+    """Asset `created_at` lower bound. Date in `yyyy-MM-dd` format."""
 
     end_date: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
-    """Asset created_at upper bound. Date in yyyy-MM-dd format."""
+    """Asset `created_at` upper bound. Date in `yyyy-MM-dd` format."""
 
-    min_duration: float
+    min_duration: int
     """Minimum asset duration in seconds."""
 
-    max_duration: float
+    max_duration: int
     """Maximum asset duration in seconds."""
 
-    sort_by: Annotated[Literal["title", "duration", "uploaded_at", "created_at"], PropertyInfo(alias="sortBy")]
-    """Sort assets by a supported field."""
+    sort_by: Annotated[
+        Literal["title", "duration", "uploaded_at", "created_at", "status"], PropertyInfo(alias="sortBy")
+    ]
+    """Field to sort by. Default is `created_at`. `next_page_token` is only supported for the default sort or `created_at`."""
 
     order_by: Annotated[Literal["asc", "desc"], PropertyInfo(alias="orderBy")]
-    """Asset sort order."""
-
-    search_index: Annotated[
-        Literal["search_index_for_asset_list", "cms-search", "cms-search-v2"], PropertyInfo(alias="searchIndex")
-    ]
-    """Search index used for asset title search."""
-
-    offset: int
-    """Offset for paginated results."""
-
-    size: int
-    """Page size. Maximum 100."""
+    """Sort direction. Default is `desc`."""
 
     signed_token: Literal["true", "false"]
     """Whether URLs should be pre-signed in the API response. Possible values: `true` and `false`. Default is `false`."""
+
+    page_number: int
+    """Page number to retrieve. Starts at `1`."""
+
+    page_size: int
+    """Number of items to return per page. **Default: `20`**. **Maximum: `100`**."""
+
+    next_page_token: str
+    """Cursor for the next page. Pass the `next_page_token` value returned in the previous response. Supported only when sorting by default/`created_at` and when `title` is not set. Otherwise the API returns `400`."""

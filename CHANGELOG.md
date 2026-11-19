@@ -1,5 +1,46 @@
 # Changelog
 
+## [1.5.0](https://github.com/gumlet/python-sdk/compare/v1.4.2...v1.5.0) (2026-11-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 21 breaking changes to the SDK surface.
+    - Operation `videoAssets.list` route changed from `GET /video/workspaces/{workspace_id}/list` to `GET /video/assets/list/{workspace_id}`.
+    - Serialization or defaults of query param `sortBy` on `videoAssets.list` changed.
+    - Serialization or defaults of query param `orderBy` on `videoAssets.list` changed.
+    - Removed query param `type` from `videoAssets.list`.
+    - Removed query param `parent_id` from `videoAssets.list`.
+    - Removed query param `searchIndex` from `videoAssets.list`.
+    - Removed query param `offset` from `videoAssets.list`.
+    - Removed query param `size` from `videoAssets.list`.
+    - `401` error response of `videoAssets.list` changed from `error` to `application/json`.
+    - Removed query param `offset` from `videoProfiles.list`.
+    - Removed query param `size` from `videoProfiles.list`.
+    - Removed query param `offset` from `imageSources.list`.
+    - Removed query param `size` from `imageSources.list`.
+    - Removed query param `offset` from `liveStreamAssets.filter`.
+    - Removed query param `size` from `liveStreamAssets.filter`.
+    - Removed query param `offset` from `recycleBin.list`.
+    - Removed query param `size` from `recycleBin.list`.
+    - Removed query param `offset` from `videoWorkspaces.list`.
+    - Removed query param `size` from `videoWorkspaces.list`.
+    - Serialization or defaults of query param `page_size` on `channelViewers.listSubscribers` changed.
+    - Removed operation `videoAssets.listDeprecated` (`GET /video/assets/list/{workspace_id}`).
+
+### Features
+
+* **api:** add pagination of imageSources.list ([bdbf10b](https://github.com/gumlet/python-sdk/commit/bdbf10b5de3684a3796a1ca7848bffc3d5f5be14))
+* **api:** add pagination of liveStreamAssets.filter ([1d196fb](https://github.com/gumlet/python-sdk/commit/1d196fb2ace4e1467bace69b480a556387dbeb62))
+* **api:** update operation videoAssets.list (+45 more changes) ([1e5ae21](https://github.com/gumlet/python-sdk/commit/1e5ae21b0408fce5989488ac7f54242ec2296eb2))
+* **api:** update SDK surface (2 changes) ([44b41f8](https://github.com/gumlet/python-sdk/commit/44b41f8db4f1a241ff424f354b0f8384014cc2e6))
+
+
+### Chores
+
+* **api:** update generated SDK content ([22416eb](https://github.com/gumlet/python-sdk/commit/22416eb09c435fa10422040567027ef900388f00))
+* release 1.5.0 ([c4bf7c6](https://github.com/gumlet/python-sdk/commit/c4bf7c61c0c8d7369bbe3f3e249b5a1c53899d3c))
+
 ## [1.4.2](https://github.com/gumlet/python-sdk/compare/v1.4.1...v1.4.2) (2026-11-13)
 
 

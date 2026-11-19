@@ -25,7 +25,7 @@ class VideoUsageAnalyticRetrieveParams(TypedDict, total=False):
             ]
         ]
     ]
-    """Define the metric you need the data for. Supported values: `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `drm_requests`, `ai_credit_usage`, and `errored_videos`."""
+    """Define the metric you need the data for. Supported values: `bandwidth_consumption`, `asset_duration`, `storage_unit`, `top_assets`, `widget_data`, `drm_requests`, `ai_credit_usage`, and `errored_videos`."""
 
     date_range: Required[DateRange]
     """The timeframe to get the data for. Currently we only support a maximum of 60 days between `start_at` and `end_at`."""
@@ -33,13 +33,19 @@ class VideoUsageAnalyticRetrieveParams(TypedDict, total=False):
     filters: Filters
 
     top_assets_count: str
-    """Count of video assets that should be returned. Max assets count is 1000 per page."""
+    """Deprecated. Use `page_size` instead."""
 
     top_assets_page: str
-    """top_assets metric may get paginated response. Iterate this parameter to get more data."""
+    """Deprecated. Use `page_number` instead."""
 
     group_by: Literal["hourly", "daily", "monthly"]
     """Group by hourly, daily or monthly. If you don't specify anything it's `hourly` by default."""
+
+    page_number: int
+    """Page number for paginated metrics. Used by `widget_data`, and by `top_assets` Starts at 1."""
+
+    page_size: int
+    """Page size for paginated metrics. Used by `widget_data`, and by `top_assets`"""
 
 
 class Filters(TypedDict, total=False):

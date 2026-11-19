@@ -18,7 +18,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
+from ..pagination import SyncPageNumberPage2, AsyncPageNumberPage2
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.image_source_create_response import ImageSourceCreateResponse
 from ..types import (
     image_source_create_params,
@@ -145,47 +146,53 @@ class ImageSourcesResource(SyncAPIResource):
     def list(
         self,
         *,
-        offset: int | Omit = omit,
-        size: int | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ImageSourceListResponse:
+    ) -> SyncPageNumberPage2[ImageSourceListResponse]:
         """
         This endpoint list image sources which are assigned to the user or token.
 
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
         Args:
-            offset: Skip number of items. Helpful for pagination.
-            size: Results per page.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ImageSourceListResponse: List all image sources
+            SyncPageNumberPage2[ImageSourceListResponse]: List all image sources
 
         Example:
             ```python
-            image_source = client.image_sources.list(
-                offset=0,
-                size=20,
-            )
+            page = client.image_sources.list()
             ```
         """
-        return self._get(
+        return self._get_api_list(
             "/image/sources",
+            page=SyncPageNumberPage2[ImageSourceListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"offset": offset, "size": size}, image_source_list_params.ImageSourceListParams),
+                query=maybe_transform(
+                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
+                    image_source_list_params.ImageSourceListParams,
+                ),
             ),
-            cast_to=ImageSourceListResponse,
+            model=ImageSourceListResponse,
+            method="get",
         )
 
     def retrieve(
@@ -613,52 +620,56 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             cast_to=ImageSourceCreateResponse,
         )
 
-    async def list(
+    def list(
         self,
         *,
-        offset: int | Omit = omit,
-        size: int | Omit = omit,
+        page_number: int | Omit = omit,
+        page_size: int | Omit = omit,
+        next_page_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ImageSourceListResponse:
+    ) -> AsyncPaginator[ImageSourceListResponse, AsyncPageNumberPage2[ImageSourceListResponse]]:
         """
         This endpoint list image sources which are assigned to the user or token.
 
+        Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
+
         Args:
-            offset: Skip number of items. Helpful for pagination.
-            size: Results per page.
+            page_number: Page number to retrieve. Starts at `1`.
+            page_size: Number of items to return per page. **Default: `20`**. **Maximum: `100`**.
+            next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ImageSourceListResponse: List all image sources
+            AsyncPaginator[ImageSourceListResponse, AsyncPageNumberPage2[ImageSourceListResponse]]: List all image sources
 
         Example:
             ```python
-            image_source = await client.image_sources.list(
-                offset=0,
-                size=20,
-            )
+            page = client.image_sources.list()
             ```
         """
-        return await self._get(
+        return self._get_api_list(
             "/image/sources",
+            page=AsyncPageNumberPage2[ImageSourceListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
-                    {"offset": offset, "size": size}, image_source_list_params.ImageSourceListParams
+                query=maybe_transform(
+                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
+                    image_source_list_params.ImageSourceListParams,
                 ),
             ),
-            cast_to=ImageSourceListResponse,
+            model=ImageSourceListResponse,
+            method="get",
         )
 
     async def retrieve(

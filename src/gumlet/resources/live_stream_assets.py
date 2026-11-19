@@ -18,7 +18,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncPageNumberPage3, AsyncPageNumberPage3
+from ..pagination import SyncLiveAssetsPage, AsyncLiveAssetsPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.live_stream_asset_create_response import LiveStreamAssetCreateResponse
 from ..types import (
@@ -296,7 +296,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncPageNumberPage3[LiveStreamAssetFilterResponse]:
+    ) -> SyncLiveAssetsPage[LiveStreamAssetFilterResponse]:
         """
         This endpoint lists live assets on the basis of `status` for the given `live_source_id`.
 
@@ -314,7 +314,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            SyncPageNumberPage3[LiveStreamAssetFilterResponse]: 200
+            SyncLiveAssetsPage[LiveStreamAssetFilterResponse]: 200
 
         Example:
             ```python
@@ -327,7 +327,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `live_source_id` but received {live_source_id!r}")
         return self._get_api_list(
             path_template("/video/live/assets/list/{live_source_id}", **{"live_source_id": live_source_id}),
-            page=SyncPageNumberPage3[LiveStreamAssetFilterResponse],
+            page=SyncLiveAssetsPage[LiveStreamAssetFilterResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -735,7 +735,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[LiveStreamAssetFilterResponse, AsyncPageNumberPage3[LiveStreamAssetFilterResponse]]:
+    ) -> AsyncPaginator[LiveStreamAssetFilterResponse, AsyncLiveAssetsPage[LiveStreamAssetFilterResponse]]:
         """
         This endpoint lists live assets on the basis of `status` for the given `live_source_id`.
 
@@ -753,7 +753,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AsyncPaginator[LiveStreamAssetFilterResponse, AsyncPageNumberPage3[LiveStreamAssetFilterResponse]]: 200
+            AsyncPaginator[LiveStreamAssetFilterResponse, AsyncLiveAssetsPage[LiveStreamAssetFilterResponse]]: 200
 
         Example:
             ```python
@@ -766,7 +766,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `live_source_id` but received {live_source_id!r}")
         return self._get_api_list(
             path_template("/video/live/assets/list/{live_source_id}", **{"live_source_id": live_source_id}),
-            page=AsyncPageNumberPage3[LiveStreamAssetFilterResponse],
+            page=AsyncLiveAssetsPage[LiveStreamAssetFilterResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

@@ -17,8 +17,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncProfilePage, AsyncProfilePage
-from .._base_client import AsyncPaginator, make_request_options
+from .._base_client import make_request_options
 from ..types.video_profile_create_response import VideoProfileCreateResponse
 from ..types import video_profile_create_params, video_profile_list_params, video_profile_update_params
 from ..types.video_profile_list_response import VideoProfileListResponse
@@ -148,7 +147,7 @@ class VideoProfilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncProfilePage[VideoProfileListResponse]:
+    ) -> VideoProfileListResponse:
         """
         This endpoint retrieves the details of all profiles that have previously been created.
 
@@ -164,16 +163,18 @@ class VideoProfilesResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            SyncProfilePage[VideoProfileListResponse]: 200
+            VideoProfileListResponse: 200
 
         Example:
             ```python
-            page = client.video_profiles.list()
+            video_profile = client.video_profiles.list(
+                page_number=1,
+                page_size=20,
+            )
             ```
         """
-        return self._get_api_list(
+        return self._get(
             "/video/profiles",
-            page=SyncProfilePage[VideoProfileListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -184,8 +185,7 @@ class VideoProfilesResource(SyncAPIResource):
                     video_profile_list_params.VideoProfileListParams,
                 ),
             ),
-            model=VideoProfileListResponse,
-            method="get",
+            cast_to=VideoProfileListResponse,
         )
 
     def update(
@@ -494,7 +494,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             cast_to=VideoProfileCreateResponse,
         )
 
-    def list(
+    async def list(
         self,
         *,
         page_number: int | Omit = omit,
@@ -506,7 +506,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[VideoProfileListResponse, AsyncProfilePage[VideoProfileListResponse]]:
+    ) -> VideoProfileListResponse:
         """
         This endpoint retrieves the details of all profiles that have previously been created.
 
@@ -522,28 +522,29 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AsyncPaginator[VideoProfileListResponse, AsyncProfilePage[VideoProfileListResponse]]: 200
+            VideoProfileListResponse: 200
 
         Example:
             ```python
-            page = client.video_profiles.list()
+            video_profile = await client.video_profiles.list(
+                page_number=1,
+                page_size=20,
+            )
             ```
         """
-        return self._get_api_list(
+        return await self._get(
             "/video/profiles",
-            page=AsyncProfilePage[VideoProfileListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
                     video_profile_list_params.VideoProfileListParams,
                 ),
             ),
-            model=VideoProfileListResponse,
-            method="get",
+            cast_to=VideoProfileListResponse,
         )
 
     async def update(

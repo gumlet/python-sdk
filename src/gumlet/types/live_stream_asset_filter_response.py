@@ -3,14 +3,19 @@
 from __future__ import annotations
 
 from typing import List, Optional
-from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["LiveStreamAssetFilterResponse", "LiveStreamAssetFilterResponse2", "Input", "Output", "Thumbnail"]
+__all__ = [
+    "LiveStreamAssetFilterResponse",
+    "AllLiveAsset",
+    "AllLiveAssetInput",
+    "AllLiveAssetOutput",
+    "AllLiveAssetThumbnail",
+]
 
 
-class Thumbnail(BaseModel):
+class AllLiveAssetThumbnail(BaseModel):
     preparing: Optional[str] = None
 
     disconnected: Optional[str] = None
@@ -18,7 +23,7 @@ class Thumbnail(BaseModel):
     end: Optional[str] = None
 
 
-class Output(BaseModel):
+class AllLiveAssetOutput(BaseModel):
     playback_url: Optional[str] = None
 
     recording_playback_url: Optional[str] = None
@@ -26,13 +31,13 @@ class Output(BaseModel):
     recording_dash_playback_url: Optional[str] = None
 
 
-class Input(BaseModel):
+class AllLiveAssetInput(BaseModel):
     resolution: Optional[List[str]] = None
 
     title: Optional[str] = None
 
 
-class LiveStreamAssetFilterResponse2(BaseModel):
+class AllLiveAsset(BaseModel):
     status: Optional[str] = None
 
     stream_key: Optional[str] = None
@@ -41,13 +46,13 @@ class LiveStreamAssetFilterResponse2(BaseModel):
 
     live_video_source_id: Optional[str] = None
 
-    input: Optional[Input] = None
+    input: Optional[AllLiveAssetInput] = None
 
     stream_url: Optional[str] = None
 
-    output: Optional[Output] = None
+    output: Optional[AllLiveAssetOutput] = None
 
-    thumbnail: Optional[Thumbnail] = None
+    thumbnail: Optional[AllLiveAssetThumbnail] = None
 
     created_at: Optional[int] = None
 
@@ -56,4 +61,15 @@ class LiveStreamAssetFilterResponse2(BaseModel):
     deleted_at: Optional[int] = None
 
 
-LiveStreamAssetFilterResponse: TypeAlias = LiveStreamAssetFilterResponse2
+class LiveStreamAssetFilterResponse(BaseModel):
+    all_live_assets: Optional[List[AllLiveAsset]] = None
+
+    total_live_asset_count: Optional[int] = None
+
+    current_offset: Optional[int] = None
+
+    next_page_token: Optional[str] = None
+    """Cursor for the next page when more results exist. Empty string when there is no next page."""
+
+    page_size: Optional[int] = None
+    """Page size used for this response when it differs from the default."""

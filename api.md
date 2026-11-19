@@ -599,7 +599,10 @@ Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-ba
 | Response | [`VideoProfileListResponse`](./src/gumlet/types/video_profile_list_response.py) |
 
 ```python
-page = client.video_profiles.list()
+video_profile = client.video_profiles.list(
+    page_number=1,
+    page_size=20,
+)
 ```
 
 ### Update Profile
@@ -923,7 +926,10 @@ Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-ba
 | Response | [`ImageSourceListResponse`](./src/gumlet/types/image_source_list_response.py) |
 
 ```python
-page = client.image_sources.list()
+image_source = client.image_sources.list(
+    page_number=1,
+    page_size=20,
+)
 ```
 
 ### Get Image Source
@@ -1118,8 +1124,10 @@ Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-ba
 | Response | [`LiveStreamAssetFilterResponse`](./src/gumlet/types/live_stream_asset_filter_response.py) |
 
 ```python
-page = client.live_stream_assets.filter(
+live_stream_asset = client.live_stream_assets.filter(
     live_source_id="liveSourceId",
+    page_number=1,
+    page_size=20,
 )
 ```
 

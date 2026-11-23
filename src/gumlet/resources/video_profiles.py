@@ -64,6 +64,7 @@ class VideoProfilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoProfileCreateResponse:
         """
         Gumlet provides the functionality of creating multiple video assets using the same set of parameters. A Video profile is a set of parameters that can be referenced/used while creating a video as a single parameter.
@@ -91,6 +92,7 @@ class VideoProfilesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoProfileCreateResponse: 200
@@ -101,6 +103,7 @@ class VideoProfilesResource(SyncAPIResource):
                 name="Gumlet-Profile-1",
                 format="ABR",
                 transcribe=False,
+                idempotency_key="",
             )
             ```
         """
@@ -130,7 +133,11 @@ class VideoProfilesResource(SyncAPIResource):
                 video_profile_create_params.VideoProfileCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoProfileCreateResponse,
         )
@@ -220,6 +227,7 @@ class VideoProfilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoProfileUpdateResponse:
         """
         Update an existing profile. Settings provided in body parameters will only be updated in the existing profile.
@@ -252,6 +260,7 @@ class VideoProfilesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoProfileUpdateResponse: 200
@@ -264,6 +273,7 @@ class VideoProfilesResource(SyncAPIResource):
                 format="ABR",
                 transcribe=False,
                 vc=["libx264"],
+                idempotency_key="",
             )
             ```
         """
@@ -299,7 +309,11 @@ class VideoProfilesResource(SyncAPIResource):
                 video_profile_update_params.VideoProfileUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoProfileUpdateResponse,
         )
@@ -355,6 +369,7 @@ class VideoProfilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoProfileDeleteResponse:
         """
         This endpoint removes a profile given its unique `profile_id`. The profile will be removed but video assets created using the profile will remain as it is.
@@ -365,6 +380,7 @@ class VideoProfilesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoProfileDeleteResponse: 204
@@ -373,6 +389,7 @@ class VideoProfilesResource(SyncAPIResource):
             ```python
             video_profile = client.video_profiles.delete(
                 profile_id="profileId",
+                idempotency_key="",
             )
             ```
         """
@@ -381,7 +398,11 @@ class VideoProfilesResource(SyncAPIResource):
         return self._delete(
             path_template("/video/profiles/{profile_id}", **{"profile_id": profile_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoProfileDeleteResponse,
         )
@@ -423,6 +444,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoProfileCreateResponse:
         """
         Gumlet provides the functionality of creating multiple video assets using the same set of parameters. A Video profile is a set of parameters that can be referenced/used while creating a video as a single parameter.
@@ -450,6 +472,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoProfileCreateResponse: 200
@@ -460,6 +483,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
                 name="Gumlet-Profile-1",
                 format="ABR",
                 transcribe=False,
+                idempotency_key="",
             )
             ```
         """
@@ -489,7 +513,11 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
                 video_profile_create_params.VideoProfileCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoProfileCreateResponse,
         )
@@ -579,6 +607,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoProfileUpdateResponse:
         """
         Update an existing profile. Settings provided in body parameters will only be updated in the existing profile.
@@ -611,6 +640,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoProfileUpdateResponse: 200
@@ -623,6 +653,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
                 format="ABR",
                 transcribe=False,
                 vc=["libx264"],
+                idempotency_key="",
             )
             ```
         """
@@ -658,7 +689,11 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
                 video_profile_update_params.VideoProfileUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoProfileUpdateResponse,
         )
@@ -714,6 +749,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoProfileDeleteResponse:
         """
         This endpoint removes a profile given its unique `profile_id`. The profile will be removed but video assets created using the profile will remain as it is.
@@ -724,6 +760,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoProfileDeleteResponse: 204
@@ -732,6 +769,7 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
             ```python
             video_profile = await client.video_profiles.delete(
                 profile_id="profileId",
+                idempotency_key="",
             )
             ```
         """
@@ -740,7 +778,11 @@ class AsyncVideoProfilesResource(AsyncAPIResource):
         return await self._delete(
             path_template("/video/profiles/{profile_id}", **{"profile_id": profile_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoProfileDeleteResponse,
         )

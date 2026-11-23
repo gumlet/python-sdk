@@ -12,6 +12,7 @@ class TestAudioUpload:
         audio_upload = client.audio_upload.upload(
             asset_id="assetId",
             language_codes=["en"],
+            idempotency_key="",
         )
 
     @smoke_case("audioUpload.complete:single", operation="complete", path="/video/assets/{asset_ID}/audio/upload/event")
@@ -19,4 +20,5 @@ class TestAudioUpload:
         audio_upload = client.audio_upload.complete(
             asset_id="assetId",
             upload_responses=[{"language_codes": ["en"], "uploaded": True}],
+            idempotency_key="",
         )

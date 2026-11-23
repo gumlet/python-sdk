@@ -13,6 +13,7 @@ class TestImageUsageAnalytics:
             metrics=["bandwidth_consumption"],
             date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
             group_by="daily",
+            idempotency_key="",
         )
 
     @smoke_case("imageUsageAnalytics.retrieve:all", operation="retrieve", path="/image/analytics")
@@ -22,4 +23,5 @@ class TestImageUsageAnalytics:
             date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
             group_by="daily",
             filters={"source_id": ""},
+            idempotency_key="",
         )

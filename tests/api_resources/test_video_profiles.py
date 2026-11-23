@@ -13,6 +13,7 @@ class TestVideoProfiles:
             name="Gumlet-Profile-1",
             format="ABR",
             transcribe=False,
+            idempotency_key="",
         )
 
     @smoke_case("videoProfiles.create:all", operation="create", path="/video/profiles")
@@ -58,6 +59,7 @@ class TestVideoProfiles:
             process_low_resolution_input=False,
             audio_only=False,
             enable_drm=False,
+            idempotency_key="",
         )
 
     @smoke_case("videoProfiles.list:required", operation="list", path="/video/profiles")
@@ -83,6 +85,7 @@ class TestVideoProfiles:
             format="ABR",
             transcribe=False,
             vc=["libx264"],
+            idempotency_key="",
         )
 
     @smoke_case("videoProfiles.update:all", operation="update", path="/video/profiles/{profile_id}")
@@ -133,6 +136,7 @@ class TestVideoProfiles:
             vc=["libx264"],
             generate_chapters=False,
             generate_description=False,
+            idempotency_key="",
         )
 
     @smoke_case("videoProfiles.retrieve:single", operation="retrieve", path="/video/profiles/{profile_id}")
@@ -145,4 +149,5 @@ class TestVideoProfiles:
     def test_method_delete(self) -> None:
         video_profile = client.video_profiles.delete(
             profile_id="profileId",
+            idempotency_key="",
         )

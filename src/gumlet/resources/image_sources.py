@@ -81,6 +81,7 @@ class ImageSourcesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ImageSourceCreateResponse:
         """
         This endpoint allows users to create image source.
@@ -103,6 +104,7 @@ class ImageSourcesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ImageSourceCreateResponse: 200
@@ -113,6 +115,7 @@ class ImageSourcesResource(SyncAPIResource):
                 namespace="google-demo",
                 type="webfolder",
                 webfolder={"base_url": "https://www.google.com"},
+                idempotency_key="",
             )
             ```
         """
@@ -137,7 +140,11 @@ class ImageSourcesResource(SyncAPIResource):
                 image_source_create_params.ImageSourceCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ImageSourceCreateResponse,
         )
@@ -286,6 +293,7 @@ class ImageSourcesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ImageSourceUpdateResponse:
         """
         Update settings on an image source that already exists. This does not create a source or purge cached images.
@@ -319,6 +327,7 @@ class ImageSourcesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ImageSourceUpdateResponse: 200
@@ -334,6 +343,7 @@ class ImageSourcesResource(SyncAPIResource):
                     "access_key": "BQUA6QFXVWHAAB6IO2X1",
                     "secret": "aws_secret",
                 },
+                idempotency_key="",
             )
             ```
         """
@@ -370,7 +380,11 @@ class ImageSourcesResource(SyncAPIResource):
                 image_source_update_params.ImageSourceUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ImageSourceUpdateResponse,
         )
@@ -385,6 +399,7 @@ class ImageSourcesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ImageSourceDeleteResponse:
         """
         This endpoint removes a image source. All image delivery using this subdomain will be stopped.
@@ -395,6 +410,7 @@ class ImageSourcesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ImageSourceDeleteResponse
@@ -403,6 +419,7 @@ class ImageSourcesResource(SyncAPIResource):
             ```python
             image_source = client.image_sources.delete(
                 image_source_id="imageSourceId",
+                idempotency_key="",
             )
             ```
         """
@@ -411,7 +428,11 @@ class ImageSourcesResource(SyncAPIResource):
         return self._delete(
             path_template("/image/sources/{image_source_id}", **{"image_source_id": image_source_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ImageSourceDeleteResponse,
         )
@@ -427,6 +448,7 @@ class ImageSourcesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ImageSourcePurgeCacheResponse:
         """
         You can purge cache for any image by using our cache purge API.
@@ -438,6 +460,7 @@ class ImageSourcesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ImageSourcePurgeCacheResponse: 200
@@ -447,6 +470,7 @@ class ImageSourcesResource(SyncAPIResource):
             image_source = client.image_sources.purge_cache(
                 subdomain="subdomain",
                 paths=["image.jpeg", "image2.png"],
+                idempotency_key="",
             )
             ```
 
@@ -461,7 +485,11 @@ class ImageSourcesResource(SyncAPIResource):
                 image_source_purge_cache_params.ImageSourcePurgeCacheParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ImageSourcePurgeCacheResponse,
         )
@@ -477,6 +505,7 @@ class ImageSourcesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ImageSourcePurgeResponse:
         """
         You can purge the cache for any image path by using this cache purge API.
@@ -488,6 +517,7 @@ class ImageSourcesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ImageSourcePurgeResponse: Successful response
@@ -497,6 +527,7 @@ class ImageSourcesResource(SyncAPIResource):
             image_source = client.image_sources.purge(
                 source_id="sourceId",
                 paths=["image.jpeg", "image2.png"],
+                idempotency_key="",
             )
             ```
         """
@@ -509,7 +540,11 @@ class ImageSourcesResource(SyncAPIResource):
                 image_source_purge_params.ImageSourcePurgeParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ImageSourcePurgeResponse,
         )
@@ -559,6 +594,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ImageSourceCreateResponse:
         """
         This endpoint allows users to create image source.
@@ -581,6 +617,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ImageSourceCreateResponse: 200
@@ -591,6 +628,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
                 namespace="google-demo",
                 type="webfolder",
                 webfolder={"base_url": "https://www.google.com"},
+                idempotency_key="",
             )
             ```
         """
@@ -615,7 +653,11 @@ class AsyncImageSourcesResource(AsyncAPIResource):
                 image_source_create_params.ImageSourceCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ImageSourceCreateResponse,
         )
@@ -764,6 +806,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ImageSourceUpdateResponse:
         """
         Update settings on an image source that already exists. This does not create a source or purge cached images.
@@ -797,6 +840,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ImageSourceUpdateResponse: 200
@@ -812,6 +856,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
                     "access_key": "BQUA6QFXVWHAAB6IO2X1",
                     "secret": "aws_secret",
                 },
+                idempotency_key="",
             )
             ```
         """
@@ -848,7 +893,11 @@ class AsyncImageSourcesResource(AsyncAPIResource):
                 image_source_update_params.ImageSourceUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ImageSourceUpdateResponse,
         )
@@ -863,6 +912,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ImageSourceDeleteResponse:
         """
         This endpoint removes a image source. All image delivery using this subdomain will be stopped.
@@ -873,6 +923,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ImageSourceDeleteResponse
@@ -881,6 +932,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             ```python
             image_source = await client.image_sources.delete(
                 image_source_id="imageSourceId",
+                idempotency_key="",
             )
             ```
         """
@@ -889,7 +941,11 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         return await self._delete(
             path_template("/image/sources/{image_source_id}", **{"image_source_id": image_source_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ImageSourceDeleteResponse,
         )
@@ -905,6 +961,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ImageSourcePurgeCacheResponse:
         """
         You can purge cache for any image by using our cache purge API.
@@ -916,6 +973,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ImageSourcePurgeCacheResponse: 200
@@ -925,6 +983,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             image_source = await client.image_sources.purge_cache(
                 subdomain="subdomain",
                 paths=["image.jpeg", "image2.png"],
+                idempotency_key="",
             )
             ```
 
@@ -939,7 +998,11 @@ class AsyncImageSourcesResource(AsyncAPIResource):
                 image_source_purge_cache_params.ImageSourcePurgeCacheParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ImageSourcePurgeCacheResponse,
         )
@@ -955,6 +1018,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ImageSourcePurgeResponse:
         """
         You can purge the cache for any image path by using this cache purge API.
@@ -966,6 +1030,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ImageSourcePurgeResponse: Successful response
@@ -975,6 +1040,7 @@ class AsyncImageSourcesResource(AsyncAPIResource):
             image_source = await client.image_sources.purge(
                 source_id="sourceId",
                 paths=["image.jpeg", "image2.png"],
+                idempotency_key="",
             )
             ```
         """
@@ -987,7 +1053,11 @@ class AsyncImageSourcesResource(AsyncAPIResource):
                 image_source_purge_params.ImageSourcePurgeParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ImageSourcePurgeResponse,
         )

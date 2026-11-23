@@ -64,6 +64,7 @@ class ImageUsageAnalyticsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ImageUsageAnalyticRetrieveResponse:
         """
         This endpoint helps you get image analytics data like bandwidth consumption, request count, CDN hit ratio, etc.
@@ -77,6 +78,7 @@ class ImageUsageAnalyticsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ImageUsageAnalyticRetrieveResponse: 200
@@ -87,6 +89,7 @@ class ImageUsageAnalyticsResource(SyncAPIResource):
                 metrics=["bandwidth_consumption"],
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
+                idempotency_key="",
             )
             ```
         """
@@ -102,7 +105,11 @@ class ImageUsageAnalyticsResource(SyncAPIResource):
                 image_usage_analytic_retrieve_params.ImageUsageAnalyticRetrieveParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ImageUsageAnalyticRetrieveResponse,
         )
@@ -148,6 +155,7 @@ class AsyncImageUsageAnalyticsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ImageUsageAnalyticRetrieveResponse:
         """
         This endpoint helps you get image analytics data like bandwidth consumption, request count, CDN hit ratio, etc.
@@ -161,6 +169,7 @@ class AsyncImageUsageAnalyticsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ImageUsageAnalyticRetrieveResponse: 200
@@ -171,6 +180,7 @@ class AsyncImageUsageAnalyticsResource(AsyncAPIResource):
                 metrics=["bandwidth_consumption"],
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
+                idempotency_key="",
             )
             ```
         """
@@ -186,7 +196,11 @@ class AsyncImageUsageAnalyticsResource(AsyncAPIResource):
                 image_usage_analytic_retrieve_params.ImageUsageAnalyticRetrieveParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ImageUsageAnalyticRetrieveResponse,
         )

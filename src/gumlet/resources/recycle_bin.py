@@ -40,6 +40,7 @@ class RecycleBinResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> None:
         """
         Recovers a deleted asset from the recycle bin.
@@ -50,11 +51,13 @@ class RecycleBinResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Example:
             ```python
             client.recycle_bin.recover(
                 asset_id="",
+                idempotency_key="",
             )
             ```
         """
@@ -66,7 +69,11 @@ class RecycleBinResource(SyncAPIResource):
                 recycle_bin_recover_params.RecycleBinRecoverParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
         )
@@ -145,6 +152,7 @@ class AsyncRecycleBinResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> None:
         """
         Recovers a deleted asset from the recycle bin.
@@ -155,11 +163,13 @@ class AsyncRecycleBinResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Example:
             ```python
             await client.recycle_bin.recover(
                 asset_id="",
+                idempotency_key="",
             )
             ```
         """
@@ -171,7 +181,11 @@ class AsyncRecycleBinResource(AsyncAPIResource):
                 recycle_bin_recover_params.RecycleBinRecoverParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
         )

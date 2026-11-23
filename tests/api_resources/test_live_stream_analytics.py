@@ -13,4 +13,5 @@ class TestLiveStreamAnalytics:
             date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
             group_by="daily",
             metrics=["bandwidth_consumption"],
+            idempotency_key="",
         )

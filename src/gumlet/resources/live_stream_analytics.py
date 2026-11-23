@@ -45,6 +45,7 @@ class LiveStreamAnalyticsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamAnalyticUsageResponse:
         """
         Get usage analytics for your live streams.
@@ -57,6 +58,7 @@ class LiveStreamAnalyticsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamAnalyticUsageResponse: Successful response
@@ -67,6 +69,7 @@ class LiveStreamAnalyticsResource(SyncAPIResource):
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
                 metrics=["bandwidth_consumption"],
+                idempotency_key="",
             )
             ```
         """
@@ -81,7 +84,11 @@ class LiveStreamAnalyticsResource(SyncAPIResource):
                 live_stream_analytic_usage_params.LiveStreamAnalyticUsageParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamAnalyticUsageResponse,
         )
@@ -108,6 +115,7 @@ class AsyncLiveStreamAnalyticsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamAnalyticUsageResponse:
         """
         Get usage analytics for your live streams.
@@ -120,6 +128,7 @@ class AsyncLiveStreamAnalyticsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamAnalyticUsageResponse: Successful response
@@ -130,6 +139,7 @@ class AsyncLiveStreamAnalyticsResource(AsyncAPIResource):
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
                 metrics=["bandwidth_consumption"],
+                idempotency_key="",
             )
             ```
         """
@@ -144,7 +154,11 @@ class AsyncLiveStreamAnalyticsResource(AsyncAPIResource):
                 live_stream_analytic_usage_params.LiveStreamAnalyticUsageParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamAnalyticUsageResponse,
         )

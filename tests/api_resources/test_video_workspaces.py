@@ -28,6 +28,7 @@ class TestVideoWorkspaces:
             name="My Workspace",
             type="direct-upload",
             data_localization="us",
+            idempotency_key="",
         )
 
     @smoke_case("videoWorkspaces.create:all", operation="create", path="/video/workspaces")
@@ -69,6 +70,7 @@ class TestVideoWorkspaces:
             cloudflare={"bucket_name": "", "access_key": "", "account_id": "", "secret": "", "base_path": ""},
             zoom={"secret": ""},
             data_localization="us",
+            idempotency_key="",
         )
 
     @smoke_case("videoWorkspaces.update:required", operation="update", path="/video/workspaces/{workspace_id}")
@@ -84,6 +86,7 @@ class TestVideoWorkspaces:
                 "access_key": "BQUA6QFXVWHAAB6IO2X1",
                 "secret": "aws_secret",
             },
+            idempotency_key="",
         )
 
     @smoke_case("videoWorkspaces.update:all", operation="update", path="/video/workspaces/{workspace_id}")
@@ -155,6 +158,7 @@ class TestVideoWorkspaces:
             cloudinary={"host_name": "", "cloud_name": ""},
             azure={"azure_account_name": "", "azure_container_name": "", "azure_shared_token": "", "azure_path": ""},
             zoom={"secret": ""},
+            idempotency_key="",
         )
 
     @smoke_case("videoWorkspaces.retrieve:single", operation="retrieve", path="/video/workspaces/{workspace_id}")
@@ -167,4 +171,5 @@ class TestVideoWorkspaces:
     def test_method_delete(self) -> None:
         video_workspace = client.video_workspaces.delete(
             workspace_id="workspaceId",
+            idempotency_key="",
         )

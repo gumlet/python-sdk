@@ -26,6 +26,7 @@ class TestMultipartUpload:
     def test_method_complete(self) -> None:
         multipart_upload = client.multipart_upload.complete(
             asset_id="assetId",
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -35,6 +36,7 @@ class TestMultipartUpload:
         multipart_upload = client.multipart_upload.complete(
             asset_id="assetId",
             parts=[{}],
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -43,10 +45,12 @@ class TestMultipartUpload:
     def test_method_abort(self) -> None:
         multipart_upload = client.multipart_upload.abort(
             asset_id="assetId",
+            idempotency_key="",
         )
 
     @smoke_case("multipartUpload.list:single", operation="list", path="/video/assets/{asset_id}/multipartupload/list")
     def test_method_list(self) -> None:
         multipart_upload = client.multipart_upload.list(
             asset_id="assetId",
+            idempotency_key="",
         )

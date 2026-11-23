@@ -83,6 +83,7 @@ class WebhookEndpointsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> WebhookEndpointCreateResponse:
         """
         Creates a new webhook listener. Gumlet POSTs JSON to `url` for each matching event and sends `secret_token` in the `x-gumlet-token` header. Payload schemas are documented in the webhooks section.
@@ -96,6 +97,7 @@ class WebhookEndpointsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             WebhookEndpointCreateResponse: 200
@@ -107,6 +109,7 @@ class WebhookEndpointsResource(SyncAPIResource):
                 secret_token="",
                 triggers=["status"],
                 sources=[""],
+                idempotency_key="",
             )
             ```
         """
@@ -122,7 +125,11 @@ class WebhookEndpointsResource(SyncAPIResource):
                 webhook_endpoint_create_params.WebhookEndpointCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=WebhookEndpointCreateResponse,
         )
@@ -209,6 +216,7 @@ class WebhookEndpointsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> WebhookEndpointUpdateResponse:
         """
         Update a webhook listener.
@@ -223,6 +231,7 @@ class WebhookEndpointsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             WebhookEndpointUpdateResponse: 200
@@ -231,6 +240,7 @@ class WebhookEndpointsResource(SyncAPIResource):
             ```python
             webhook_endpoint = client.webhook_endpoints.update(
                 webhook_id="webhookId",
+                idempotency_key="",
             )
             ```
         """
@@ -248,7 +258,11 @@ class WebhookEndpointsResource(SyncAPIResource):
                 webhook_endpoint_update_params.WebhookEndpointUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=WebhookEndpointUpdateResponse,
         )
@@ -263,6 +277,7 @@ class WebhookEndpointsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> WebhookEndpointDeleteResponse:
         """
         Delete webhook listener endpoint.
@@ -273,6 +288,7 @@ class WebhookEndpointsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             WebhookEndpointDeleteResponse: 204
@@ -281,6 +297,7 @@ class WebhookEndpointsResource(SyncAPIResource):
             ```python
             webhook_endpoint = client.webhook_endpoints.delete(
                 webhook_id="webhookId",
+                idempotency_key="",
             )
             ```
         """
@@ -289,7 +306,11 @@ class WebhookEndpointsResource(SyncAPIResource):
         return self._delete(
             path_template("/org/webhooks/{webhook_id}", **{"webhook_id": webhook_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=WebhookEndpointDeleteResponse,
         )
@@ -407,6 +428,7 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> WebhookEndpointCreateResponse:
         """
         Creates a new webhook listener. Gumlet POSTs JSON to `url` for each matching event and sends `secret_token` in the `x-gumlet-token` header. Payload schemas are documented in the webhooks section.
@@ -420,6 +442,7 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             WebhookEndpointCreateResponse: 200
@@ -431,6 +454,7 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
                 secret_token="",
                 triggers=["status"],
                 sources=[""],
+                idempotency_key="",
             )
             ```
         """
@@ -446,7 +470,11 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
                 webhook_endpoint_create_params.WebhookEndpointCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=WebhookEndpointCreateResponse,
         )
@@ -533,6 +561,7 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> WebhookEndpointUpdateResponse:
         """
         Update a webhook listener.
@@ -547,6 +576,7 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             WebhookEndpointUpdateResponse: 200
@@ -555,6 +585,7 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
             ```python
             webhook_endpoint = await client.webhook_endpoints.update(
                 webhook_id="webhookId",
+                idempotency_key="",
             )
             ```
         """
@@ -572,7 +603,11 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
                 webhook_endpoint_update_params.WebhookEndpointUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=WebhookEndpointUpdateResponse,
         )
@@ -587,6 +622,7 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> WebhookEndpointDeleteResponse:
         """
         Delete webhook listener endpoint.
@@ -597,6 +633,7 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             WebhookEndpointDeleteResponse: 204
@@ -605,6 +642,7 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
             ```python
             webhook_endpoint = await client.webhook_endpoints.delete(
                 webhook_id="webhookId",
+                idempotency_key="",
             )
             ```
         """
@@ -613,7 +651,11 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
         return await self._delete(
             path_template("/org/webhooks/{webhook_id}", **{"webhook_id": webhook_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=WebhookEndpointDeleteResponse,
         )

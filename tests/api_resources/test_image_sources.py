@@ -13,6 +13,7 @@ class TestImageSources:
             namespace="google-demo",
             type="webfolder",
             webfolder={"base_url": "https://www.google.com"},
+            idempotency_key="",
         )
 
     @smoke_case("imageSources.create:all", operation="create", path="/image/sources")
@@ -45,6 +46,7 @@ class TestImageSources:
             },
             cloudflare={"bucket_name": "", "access_key": "", "account_id": "", "secret": "", "base_path": ""},
             webfolder={"base_url": "https://www.google.com"},
+            idempotency_key="",
         )
 
     @smoke_case("imageSources.list:required", operation="list", path="/image/sources")
@@ -79,6 +81,7 @@ class TestImageSources:
                 "access_key": "BQUA6QFXVWHAAB6IO2X1",
                 "secret": "aws_secret",
             },
+            idempotency_key="",
         )
 
     @smoke_case("imageSources.update:all", operation="update", path="/image/sources/{image_source_id}")
@@ -120,12 +123,14 @@ class TestImageSources:
             cname=[""],
             fallback_origins=[{"name": "", "type": "dostorage"}],
             secure_urls=False,
+            idempotency_key="",
         )
 
     @smoke_case("imageSources.delete:single", operation="delete", path="/image/sources/{image_source_id}")
     def test_method_delete(self) -> None:
         image_source = client.image_sources.delete(
             image_source_id="imageSourceId",
+            idempotency_key="",
         )
 
     @smoke_case("imageSources.purgeCache:single", operation="purgeCache", path="/purge/{subdomain}")
@@ -133,6 +138,7 @@ class TestImageSources:
         image_source = client.image_sources.purge_cache(
             subdomain="subdomain",
             paths=["image.jpeg", "image2.png"],
+            idempotency_key="",
         )
 
     @smoke_case("imageSources.purge:single", operation="purge", path="/image/purge/{source_id}")
@@ -140,4 +146,5 @@ class TestImageSources:
         image_source = client.image_sources.purge(
             source_id="sourceId",
             paths=["image.jpeg", "image2.png"],
+            idempotency_key="",
         )

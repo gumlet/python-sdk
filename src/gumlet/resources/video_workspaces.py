@@ -130,6 +130,7 @@ class VideoWorkspacesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoWorkspaceCreateResponse:
         """
         Video workspaces are top-level entities in Gumlet. You can use them to organize videos for different teams/departments or use cases.
@@ -156,6 +157,7 @@ class VideoWorkspacesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoWorkspaceCreateResponse: 200
@@ -166,6 +168,7 @@ class VideoWorkspacesResource(SyncAPIResource):
                 name="My Workspace",
                 type="direct-upload",
                 data_localization="us",
+                idempotency_key="",
             )
             ```
         """
@@ -194,7 +197,11 @@ class VideoWorkspacesResource(SyncAPIResource):
                 video_workspace_create_params.VideoWorkspaceCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoWorkspaceCreateResponse,
         )
@@ -244,6 +251,7 @@ class VideoWorkspacesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoWorkspaceUpdateResponse:
         """
         This endpoint allows users to update video workspace that has previously been created.
@@ -274,6 +282,7 @@ class VideoWorkspacesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoWorkspaceUpdateResponse: 200
@@ -291,6 +300,7 @@ class VideoWorkspacesResource(SyncAPIResource):
                     "access_key": "BQUA6QFXVWHAAB6IO2X1",
                     "secret": "aws_secret",
                 },
+                idempotency_key="",
             )
             ```
         """
@@ -324,7 +334,11 @@ class VideoWorkspacesResource(SyncAPIResource):
                 video_workspace_update_params.VideoWorkspaceUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoWorkspaceUpdateResponse,
         )
@@ -380,6 +394,7 @@ class VideoWorkspacesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoWorkspaceDeleteResponse:
         """
         This endpoint removes a video workspace given its unique asset id. All the asset in workspace will be removed from storage as well, associated URLs will be inaccessible.
@@ -390,6 +405,7 @@ class VideoWorkspacesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoWorkspaceDeleteResponse: 200
@@ -398,6 +414,7 @@ class VideoWorkspacesResource(SyncAPIResource):
             ```python
             video_workspace = client.video_workspaces.delete(
                 workspace_id="workspaceId",
+                idempotency_key="",
             )
             ```
         """
@@ -406,7 +423,11 @@ class VideoWorkspacesResource(SyncAPIResource):
         return self._delete(
             path_template("/video/workspaces/{workspace_id}", **{"workspace_id": workspace_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoWorkspaceDeleteResponse,
         )
@@ -514,6 +535,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoWorkspaceCreateResponse:
         """
         Video workspaces are top-level entities in Gumlet. You can use them to organize videos for different teams/departments or use cases.
@@ -540,6 +562,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoWorkspaceCreateResponse: 200
@@ -550,6 +573,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
                 name="My Workspace",
                 type="direct-upload",
                 data_localization="us",
+                idempotency_key="",
             )
             ```
         """
@@ -578,7 +602,11 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
                 video_workspace_create_params.VideoWorkspaceCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoWorkspaceCreateResponse,
         )
@@ -628,6 +656,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoWorkspaceUpdateResponse:
         """
         This endpoint allows users to update video workspace that has previously been created.
@@ -658,6 +687,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoWorkspaceUpdateResponse: 200
@@ -675,6 +705,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
                     "access_key": "BQUA6QFXVWHAAB6IO2X1",
                     "secret": "aws_secret",
                 },
+                idempotency_key="",
             )
             ```
         """
@@ -708,7 +739,11 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
                 video_workspace_update_params.VideoWorkspaceUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoWorkspaceUpdateResponse,
         )
@@ -764,6 +799,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoWorkspaceDeleteResponse:
         """
         This endpoint removes a video workspace given its unique asset id. All the asset in workspace will be removed from storage as well, associated URLs will be inaccessible.
@@ -774,6 +810,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoWorkspaceDeleteResponse: 200
@@ -782,6 +819,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
             ```python
             video_workspace = await client.video_workspaces.delete(
                 workspace_id="workspaceId",
+                idempotency_key="",
             )
             ```
         """
@@ -790,7 +828,11 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
         return await self._delete(
             path_template("/video/workspaces/{workspace_id}", **{"workspace_id": workspace_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoWorkspaceDeleteResponse,
         )

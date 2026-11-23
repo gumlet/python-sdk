@@ -95,6 +95,7 @@ class MultipartUploadResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> MultipartUploadCompleteResponse:
         """
         Once you upload all parts to S3 bucket via pre-signed URL, use this endpoint to complete the multipart upload.
@@ -106,6 +107,7 @@ class MultipartUploadResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             MultipartUploadCompleteResponse: 200
@@ -114,6 +116,7 @@ class MultipartUploadResource(SyncAPIResource):
             ```python
             multipart_upload = client.multipart_upload.complete(
                 asset_id="assetId",
+                idempotency_key="",
             )
             ```
         """
@@ -126,7 +129,11 @@ class MultipartUploadResource(SyncAPIResource):
                 multipart_upload_complete_params.MultipartUploadCompleteParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=MultipartUploadCompleteResponse,
         )
@@ -141,6 +148,7 @@ class MultipartUploadResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> MultipartUploadAbortResponse:
         """
         This call aborts multi-part upload and deletes the already uploaded parts from the storage.
@@ -151,6 +159,7 @@ class MultipartUploadResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             MultipartUploadAbortResponse: Successful response
@@ -159,6 +168,7 @@ class MultipartUploadResource(SyncAPIResource):
             ```python
             multipart_upload = client.multipart_upload.abort(
                 asset_id="assetId",
+                idempotency_key="",
             )
             ```
         """
@@ -167,7 +177,11 @@ class MultipartUploadResource(SyncAPIResource):
         return self._post(
             path_template("/video/assets/{asset_id}/multipartupload/abort", **{"asset_id": asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=MultipartUploadAbortResponse,
         )
@@ -182,6 +196,7 @@ class MultipartUploadResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> MultipartUploadListResponse:
         """
         Lists all parts uploaded so far.
@@ -192,6 +207,7 @@ class MultipartUploadResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             MultipartUploadListResponse: Successful response
@@ -200,6 +216,7 @@ class MultipartUploadResource(SyncAPIResource):
             ```python
             multipart_upload = client.multipart_upload.list(
                 asset_id="assetId",
+                idempotency_key="",
             )
             ```
         """
@@ -208,7 +225,11 @@ class MultipartUploadResource(SyncAPIResource):
         return self._post(
             path_template("/video/assets/{asset_id}/multipartupload/list", **{"asset_id": asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=MultipartUploadListResponse,
         )
@@ -283,6 +304,7 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> MultipartUploadCompleteResponse:
         """
         Once you upload all parts to S3 bucket via pre-signed URL, use this endpoint to complete the multipart upload.
@@ -294,6 +316,7 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             MultipartUploadCompleteResponse: 200
@@ -302,6 +325,7 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
             ```python
             multipart_upload = await client.multipart_upload.complete(
                 asset_id="assetId",
+                idempotency_key="",
             )
             ```
         """
@@ -314,7 +338,11 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
                 multipart_upload_complete_params.MultipartUploadCompleteParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=MultipartUploadCompleteResponse,
         )
@@ -329,6 +357,7 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> MultipartUploadAbortResponse:
         """
         This call aborts multi-part upload and deletes the already uploaded parts from the storage.
@@ -339,6 +368,7 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             MultipartUploadAbortResponse: Successful response
@@ -347,6 +377,7 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
             ```python
             multipart_upload = await client.multipart_upload.abort(
                 asset_id="assetId",
+                idempotency_key="",
             )
             ```
         """
@@ -355,7 +386,11 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
         return await self._post(
             path_template("/video/assets/{asset_id}/multipartupload/abort", **{"asset_id": asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=MultipartUploadAbortResponse,
         )
@@ -370,6 +405,7 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> MultipartUploadListResponse:
         """
         Lists all parts uploaded so far.
@@ -380,6 +416,7 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             MultipartUploadListResponse: Successful response
@@ -388,6 +425,7 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
             ```python
             multipart_upload = await client.multipart_upload.list(
                 asset_id="assetId",
+                idempotency_key="",
             )
             ```
         """
@@ -396,7 +434,11 @@ class AsyncMultipartUploadResource(AsyncAPIResource):
         return await self._post(
             path_template("/video/assets/{asset_id}/multipartupload/list", **{"asset_id": asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=MultipartUploadListResponse,
         )

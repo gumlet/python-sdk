@@ -12,6 +12,7 @@ class TestLiveStreamAssets:
         live_stream_asset = client.live_stream_assets.create(
             live_source_id="",
             resolution="",
+            idempotency_key="",
         )
 
     @smoke_case("liveStreamAssets.create:all", operation="create", path="/video/live/assets")
@@ -23,12 +24,14 @@ class TestLiveStreamAssets:
             mp4_access=False,
             orientation="landscape",
             start_at="2024-01-01T00:00:00.000Z",
+            idempotency_key="",
         )
 
     @smoke_case("liveStreamAssets.update:required", operation="update", path="/video/live/assets/update")
     def test_method_update(self) -> None:
         live_stream_asset = client.live_stream_assets.update(
             live_asset_id="",
+            idempotency_key="",
         )
 
     @smoke_case("liveStreamAssets.update:all", operation="update", path="/video/live/assets/update")
@@ -37,6 +40,7 @@ class TestLiveStreamAssets:
             live_asset_id="",
             title="",
             start_at="2024-01-01T00:00:00.000Z",
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -51,6 +55,7 @@ class TestLiveStreamAssets:
     def test_method_delete(self) -> None:
         live_stream_asset = client.live_stream_assets.delete(
             live_asset_id="liveAssetId",
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -59,6 +64,7 @@ class TestLiveStreamAssets:
     def test_method_complete(self) -> None:
         live_stream_asset = client.live_stream_assets.complete(
             live_asset_id="liveAssetId",
+            idempotency_key="",
         )
 
     @smoke_case("liveStreamAssets.filter:required", operation="filter", path="/video/live/assets/list/{live_source_id}")
@@ -83,6 +89,7 @@ class TestLiveStreamAssets:
     def test_method_start(self) -> None:
         client.live_stream_assets.start(
             live_asset_id="liveAssetId",
+            idempotency_key="",
         )
 
     @smoke_case("liveStreamAssets.upload:single", operation="upload", path="/video/live/assets/thumbnail/upload")
@@ -90,6 +97,7 @@ class TestLiveStreamAssets:
         live_stream_asset = client.live_stream_assets.upload(
             live_asset_id="68c406b147f9ad0c0d584ce2",
             statuses="preparing",
+            idempotency_key="",
         )
 
     @smoke_case(

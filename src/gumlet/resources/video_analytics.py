@@ -66,6 +66,7 @@ class VideoAnalyticsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAnalyticViewerDataResponse:
         """
         This endpoint retrieves viewer analytics data. This endpoint is use for deep insights on the analytics data.
@@ -82,6 +83,7 @@ class VideoAnalyticsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAnalyticViewerDataResponse: 200
@@ -92,6 +94,7 @@ class VideoAnalyticsResource(SyncAPIResource):
                 metrics=["views"],
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
+                idempotency_key="",
             )
             ```
         """
@@ -110,7 +113,11 @@ class VideoAnalyticsResource(SyncAPIResource):
                 video_analytic_viewer_data_params.VideoAnalyticViewerDataParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAnalyticViewerDataResponse,
         )
@@ -128,6 +135,7 @@ class VideoAnalyticsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAnalyticBreakdownDataResponse:
         """
         Read viewer metrics for one workspace, grouped by a breakdown field, for a date range of at most 60 days. This does not change assets or delivery.
@@ -141,6 +149,7 @@ class VideoAnalyticsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAnalyticBreakdownDataResponse: 200
@@ -155,6 +164,7 @@ class VideoAnalyticsResource(SyncAPIResource):
                     {"name": "custom_video_title", "metric": "completion_percent_by_views", "page": 1, "page_size": 10},
                 ],
                 workspace_id="6694c405e63913eecf3cf5fb",
+                idempotency_key="",
             )
             ```
         """
@@ -170,7 +180,11 @@ class VideoAnalyticsResource(SyncAPIResource):
                 video_analytic_breakdown_data_params.VideoAnalyticBreakdownDataParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAnalyticBreakdownDataResponse,
         )
@@ -188,6 +202,7 @@ class VideoAnalyticsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAnalyticAggregatedDataResponse:
         """
         This endpoint retrieves aggregated data of the given metrics.
@@ -201,6 +216,7 @@ class VideoAnalyticsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAnalyticAggregatedDataResponse: 200
@@ -211,6 +227,7 @@ class VideoAnalyticsResource(SyncAPIResource):
                 aggregate=[{"metric": "views", "function": "sum"}],
                 workspace_id="",
                 timeframe={"start_at": "2024-01-01", "end_at": "2024-01-01"},
+                idempotency_key="",
             )
             ```
         """
@@ -226,7 +243,11 @@ class VideoAnalyticsResource(SyncAPIResource):
                 video_analytic_aggregated_data_params.VideoAnalyticAggregatedDataParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAnalyticAggregatedDataResponse,
         )
@@ -268,6 +289,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAnalyticViewerDataResponse:
         """
         This endpoint retrieves viewer analytics data. This endpoint is use for deep insights on the analytics data.
@@ -284,6 +306,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAnalyticViewerDataResponse: 200
@@ -294,6 +317,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
                 metrics=["views"],
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 group_by="daily",
+                idempotency_key="",
             )
             ```
         """
@@ -312,7 +336,11 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
                 video_analytic_viewer_data_params.VideoAnalyticViewerDataParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAnalyticViewerDataResponse,
         )
@@ -330,6 +358,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAnalyticBreakdownDataResponse:
         """
         Read viewer metrics for one workspace, grouped by a breakdown field, for a date range of at most 60 days. This does not change assets or delivery.
@@ -343,6 +372,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAnalyticBreakdownDataResponse: 200
@@ -357,6 +387,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
                     {"name": "custom_video_title", "metric": "completion_percent_by_views", "page": 1, "page_size": 10},
                 ],
                 workspace_id="6694c405e63913eecf3cf5fb",
+                idempotency_key="",
             )
             ```
         """
@@ -372,7 +403,11 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
                 video_analytic_breakdown_data_params.VideoAnalyticBreakdownDataParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAnalyticBreakdownDataResponse,
         )
@@ -390,6 +425,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAnalyticAggregatedDataResponse:
         """
         This endpoint retrieves aggregated data of the given metrics.
@@ -403,6 +439,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAnalyticAggregatedDataResponse: 200
@@ -413,6 +450,7 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
                 aggregate=[{"metric": "views", "function": "sum"}],
                 workspace_id="",
                 timeframe={"start_at": "2024-01-01", "end_at": "2024-01-01"},
+                idempotency_key="",
             )
             ```
         """
@@ -428,7 +466,11 @@ class AsyncVideoAnalyticsResource(AsyncAPIResource):
                 video_analytic_aggregated_data_params.VideoAnalyticAggregatedDataParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAnalyticAggregatedDataResponse,
         )

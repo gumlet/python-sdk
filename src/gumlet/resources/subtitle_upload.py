@@ -45,6 +45,7 @@ class SubtitleUploadResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> SubtitleUploadUploadResponse:
         """
         Upload `.srt` or `.vtt` file to the video asset. The response of this API call gives `upload_url` for each language specified. You need to send a `PUT` request of the subtitle files to those URLs. Once that's done, you need to call the subtitle upload complete API. Only after that, Gumlet will add subtitles to asset.
@@ -56,6 +57,7 @@ class SubtitleUploadResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             SubtitleUploadUploadResponse: 200
@@ -65,6 +67,7 @@ class SubtitleUploadResource(SyncAPIResource):
             subtitle_upload = client.subtitle_upload.upload(
                 asset_id="assetId",
                 language_codes=["en"],
+                idempotency_key="",
             )
             ```
         """
@@ -77,7 +80,11 @@ class SubtitleUploadResource(SyncAPIResource):
                 subtitle_upload_upload_params.SubtitleUploadUploadParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=SubtitleUploadUploadResponse,
         )
@@ -93,6 +100,7 @@ class SubtitleUploadResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> SubtitleUploadCompleteResponse:
         """
         This API must be called after adding subtitles; the add subtitle call gives you URLs to upload, and you complete a `PUT` request to those URLs.
@@ -105,6 +113,7 @@ class SubtitleUploadResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             SubtitleUploadCompleteResponse: 200
@@ -114,6 +123,7 @@ class SubtitleUploadResource(SyncAPIResource):
             subtitle_upload = client.subtitle_upload.complete(
                 asset_id="assetId",
                 upload_responses=[{"language_code": "en", "uploaded": True}],
+                idempotency_key="",
             )
             ```
         """
@@ -126,7 +136,11 @@ class SubtitleUploadResource(SyncAPIResource):
                 subtitle_upload_complete_params.SubtitleUploadCompleteParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=SubtitleUploadCompleteResponse,
         )
@@ -152,6 +166,7 @@ class AsyncSubtitleUploadResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> SubtitleUploadUploadResponse:
         """
         Upload `.srt` or `.vtt` file to the video asset. The response of this API call gives `upload_url` for each language specified. You need to send a `PUT` request of the subtitle files to those URLs. Once that's done, you need to call the subtitle upload complete API. Only after that, Gumlet will add subtitles to asset.
@@ -163,6 +178,7 @@ class AsyncSubtitleUploadResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             SubtitleUploadUploadResponse: 200
@@ -172,6 +188,7 @@ class AsyncSubtitleUploadResource(AsyncAPIResource):
             subtitle_upload = await client.subtitle_upload.upload(
                 asset_id="assetId",
                 language_codes=["en"],
+                idempotency_key="",
             )
             ```
         """
@@ -184,7 +201,11 @@ class AsyncSubtitleUploadResource(AsyncAPIResource):
                 subtitle_upload_upload_params.SubtitleUploadUploadParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=SubtitleUploadUploadResponse,
         )
@@ -200,6 +221,7 @@ class AsyncSubtitleUploadResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> SubtitleUploadCompleteResponse:
         """
         This API must be called after adding subtitles; the add subtitle call gives you URLs to upload, and you complete a `PUT` request to those URLs.
@@ -212,6 +234,7 @@ class AsyncSubtitleUploadResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             SubtitleUploadCompleteResponse: 200
@@ -221,6 +244,7 @@ class AsyncSubtitleUploadResource(AsyncAPIResource):
             subtitle_upload = await client.subtitle_upload.complete(
                 asset_id="assetId",
                 upload_responses=[{"language_code": "en", "uploaded": True}],
+                idempotency_key="",
             )
             ```
         """
@@ -233,7 +257,11 @@ class AsyncSubtitleUploadResource(AsyncAPIResource):
                 subtitle_upload_complete_params.SubtitleUploadCompleteParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=SubtitleUploadCompleteResponse,
         )

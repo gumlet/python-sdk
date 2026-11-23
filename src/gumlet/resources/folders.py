@@ -51,6 +51,7 @@ class FoldersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> FolderCreateResponse:
         """
         Create a folder inside a video workspace. Optionally provide `parent_id` to create a nested folder.
@@ -63,6 +64,7 @@ class FoldersResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             FolderCreateResponse: 200
@@ -73,6 +75,7 @@ class FoldersResource(SyncAPIResource):
                 workspace_id="workspaceId",
                 name="Course Assets",
                 parent_id="",
+                idempotency_key="",
             )
             ```
         """
@@ -88,7 +91,11 @@ class FoldersResource(SyncAPIResource):
                 folder_create_params.FolderCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=FolderCreateResponse,
         )
@@ -204,6 +211,7 @@ class FoldersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> FolderUpdateResponse: ...
 
     @overload
@@ -221,6 +229,7 @@ class FoldersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> FolderUpdateResponse: ...
 
     @required_args(["name"], ["asset_ids"])
@@ -238,6 +247,7 @@ class FoldersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> FolderUpdateResponse:
         """
         Rename a folder, move it to another parent folder, or move assets into the folder by sending `asset_ids`.
@@ -252,6 +262,7 @@ class FoldersResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             FolderUpdateResponse: 200
@@ -262,6 +273,7 @@ class FoldersResource(SyncAPIResource):
                 workspace_id="workspaceId",
                 folder_id="folderId",
                 name="Course Assets Updated",
+                idempotency_key="",
             )
             ```
         """
@@ -283,7 +295,11 @@ class FoldersResource(SyncAPIResource):
                 folder_update_params.FolderUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=FolderUpdateResponse,
         )
@@ -299,6 +315,7 @@ class FoldersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> FolderDeleteResponse:
         """
         Delete a folder. Descendant folders and assets inside them are deleted by the backend workflow.
@@ -310,6 +327,7 @@ class FoldersResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             FolderDeleteResponse: 200
@@ -319,6 +337,7 @@ class FoldersResource(SyncAPIResource):
             folder = client.folders.delete(
                 workspace_id="workspaceId",
                 folder_id="folderId",
+                idempotency_key="",
             )
             ```
         """
@@ -332,7 +351,11 @@ class FoldersResource(SyncAPIResource):
                 **{"workspace_id": workspace_id, "folder_id": folder_id},
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=FolderDeleteResponse,
         )
@@ -348,6 +371,7 @@ class FoldersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> FolderRemoveAssetsResponse:
         """
         Remove one or more assets from their current folder assignment inside the workspace.
@@ -359,6 +383,7 @@ class FoldersResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             FolderRemoveAssetsResponse: 200
@@ -368,6 +393,7 @@ class FoldersResource(SyncAPIResource):
             folder = client.folders.remove_assets(
                 workspace_id="workspaceId",
                 asset_ids=["67e4f2b4403562dbea654301", "67e4f2bb403562dbea654302"],
+                idempotency_key="",
             )
             ```
         """
@@ -382,7 +408,11 @@ class FoldersResource(SyncAPIResource):
                 folder_remove_assets_params.FolderRemoveAssetsParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=FolderRemoveAssetsResponse,
         )
@@ -409,6 +439,7 @@ class AsyncFoldersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> FolderCreateResponse:
         """
         Create a folder inside a video workspace. Optionally provide `parent_id` to create a nested folder.
@@ -421,6 +452,7 @@ class AsyncFoldersResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             FolderCreateResponse: 200
@@ -431,6 +463,7 @@ class AsyncFoldersResource(AsyncAPIResource):
                 workspace_id="workspaceId",
                 name="Course Assets",
                 parent_id="",
+                idempotency_key="",
             )
             ```
         """
@@ -446,7 +479,11 @@ class AsyncFoldersResource(AsyncAPIResource):
                 folder_create_params.FolderCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=FolderCreateResponse,
         )
@@ -562,6 +599,7 @@ class AsyncFoldersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> FolderUpdateResponse: ...
 
     @overload
@@ -579,6 +617,7 @@ class AsyncFoldersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> FolderUpdateResponse: ...
 
     @required_args(["name"], ["asset_ids"])
@@ -596,6 +635,7 @@ class AsyncFoldersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> FolderUpdateResponse:
         """
         Rename a folder, move it to another parent folder, or move assets into the folder by sending `asset_ids`.
@@ -610,6 +650,7 @@ class AsyncFoldersResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             FolderUpdateResponse: 200
@@ -620,6 +661,7 @@ class AsyncFoldersResource(AsyncAPIResource):
                 workspace_id="workspaceId",
                 folder_id="folderId",
                 name="Course Assets Updated",
+                idempotency_key="",
             )
             ```
         """
@@ -641,7 +683,11 @@ class AsyncFoldersResource(AsyncAPIResource):
                 folder_update_params.FolderUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=FolderUpdateResponse,
         )
@@ -657,6 +703,7 @@ class AsyncFoldersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> FolderDeleteResponse:
         """
         Delete a folder. Descendant folders and assets inside them are deleted by the backend workflow.
@@ -668,6 +715,7 @@ class AsyncFoldersResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             FolderDeleteResponse: 200
@@ -677,6 +725,7 @@ class AsyncFoldersResource(AsyncAPIResource):
             folder = await client.folders.delete(
                 workspace_id="workspaceId",
                 folder_id="folderId",
+                idempotency_key="",
             )
             ```
         """
@@ -690,7 +739,11 @@ class AsyncFoldersResource(AsyncAPIResource):
                 **{"workspace_id": workspace_id, "folder_id": folder_id},
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=FolderDeleteResponse,
         )
@@ -706,6 +759,7 @@ class AsyncFoldersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> FolderRemoveAssetsResponse:
         """
         Remove one or more assets from their current folder assignment inside the workspace.
@@ -717,6 +771,7 @@ class AsyncFoldersResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             FolderRemoveAssetsResponse: 200
@@ -726,6 +781,7 @@ class AsyncFoldersResource(AsyncAPIResource):
             folder = await client.folders.remove_assets(
                 workspace_id="workspaceId",
                 asset_ids=["67e4f2b4403562dbea654301", "67e4f2bb403562dbea654302"],
+                idempotency_key="",
             )
             ```
         """
@@ -740,7 +796,11 @@ class AsyncFoldersResource(AsyncAPIResource):
                 folder_remove_assets_params.FolderRemoveAssetsParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=FolderRemoveAssetsResponse,
         )

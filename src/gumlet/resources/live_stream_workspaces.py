@@ -78,6 +78,7 @@ class LiveStreamWorkspacesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamWorkspaceCreateResponse:
         """
         Create live stream workspace.
@@ -88,6 +89,7 @@ class LiveStreamWorkspacesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamWorkspaceCreateResponse: Successful response
@@ -96,6 +98,7 @@ class LiveStreamWorkspacesResource(SyncAPIResource):
             ```python
             live_stream_workspace = client.live_stream_workspaces.create(
                 name="",
+                idempotency_key="",
             )
             ```
         """
@@ -106,7 +109,11 @@ class LiveStreamWorkspacesResource(SyncAPIResource):
                 live_stream_workspace_create_params.LiveStreamWorkspaceCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamWorkspaceCreateResponse,
         )
@@ -123,6 +130,7 @@ class LiveStreamWorkspacesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamWorkspaceUpdateResponse:
         """
         Update live stream workspace.
@@ -135,6 +143,7 @@ class LiveStreamWorkspacesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamWorkspaceUpdateResponse: Get updated collection details.
@@ -145,6 +154,7 @@ class LiveStreamWorkspacesResource(SyncAPIResource):
                 live_workspace_id="liveWorkspaceId",
                 name="live-stream-collections",
                 video_source_id="67bea1d66ca0059a95bf7de9",
+                idempotency_key="",
             )
             ```
         """
@@ -160,7 +170,11 @@ class LiveStreamWorkspacesResource(SyncAPIResource):
                 live_stream_workspace_update_params.LiveStreamWorkspaceUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamWorkspaceUpdateResponse,
         )
@@ -175,6 +189,7 @@ class LiveStreamWorkspacesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamWorkspaceDeleteResponse:
         """
         Delete the live stream workspace.
@@ -185,6 +200,7 @@ class LiveStreamWorkspacesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamWorkspaceDeleteResponse: Successful response
@@ -193,6 +209,7 @@ class LiveStreamWorkspacesResource(SyncAPIResource):
             ```python
             live_stream_workspace = client.live_stream_workspaces.delete(
                 live_workspace_id="liveWorkspaceId",
+                idempotency_key="",
             )
             ```
         """
@@ -201,7 +218,11 @@ class LiveStreamWorkspacesResource(SyncAPIResource):
         return self._delete(
             path_template("/video/sources/live/{live_workspace_id}", **{"live_workspace_id": live_workspace_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamWorkspaceDeleteResponse,
         )
@@ -261,6 +282,7 @@ class AsyncLiveStreamWorkspacesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamWorkspaceCreateResponse:
         """
         Create live stream workspace.
@@ -271,6 +293,7 @@ class AsyncLiveStreamWorkspacesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamWorkspaceCreateResponse: Successful response
@@ -279,6 +302,7 @@ class AsyncLiveStreamWorkspacesResource(AsyncAPIResource):
             ```python
             live_stream_workspace = await client.live_stream_workspaces.create(
                 name="",
+                idempotency_key="",
             )
             ```
         """
@@ -289,7 +313,11 @@ class AsyncLiveStreamWorkspacesResource(AsyncAPIResource):
                 live_stream_workspace_create_params.LiveStreamWorkspaceCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamWorkspaceCreateResponse,
         )
@@ -306,6 +334,7 @@ class AsyncLiveStreamWorkspacesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamWorkspaceUpdateResponse:
         """
         Update live stream workspace.
@@ -318,6 +347,7 @@ class AsyncLiveStreamWorkspacesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamWorkspaceUpdateResponse: Get updated collection details.
@@ -328,6 +358,7 @@ class AsyncLiveStreamWorkspacesResource(AsyncAPIResource):
                 live_workspace_id="liveWorkspaceId",
                 name="live-stream-collections",
                 video_source_id="67bea1d66ca0059a95bf7de9",
+                idempotency_key="",
             )
             ```
         """
@@ -343,7 +374,11 @@ class AsyncLiveStreamWorkspacesResource(AsyncAPIResource):
                 live_stream_workspace_update_params.LiveStreamWorkspaceUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamWorkspaceUpdateResponse,
         )
@@ -358,6 +393,7 @@ class AsyncLiveStreamWorkspacesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamWorkspaceDeleteResponse:
         """
         Delete the live stream workspace.
@@ -368,6 +404,7 @@ class AsyncLiveStreamWorkspacesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamWorkspaceDeleteResponse: Successful response
@@ -376,6 +413,7 @@ class AsyncLiveStreamWorkspacesResource(AsyncAPIResource):
             ```python
             live_stream_workspace = await client.live_stream_workspaces.delete(
                 live_workspace_id="liveWorkspaceId",
+                idempotency_key="",
             )
             ```
         """
@@ -384,7 +422,11 @@ class AsyncLiveStreamWorkspacesResource(AsyncAPIResource):
         return await self._delete(
             path_template("/video/sources/live/{live_workspace_id}", **{"live_workspace_id": live_workspace_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamWorkspaceDeleteResponse,
         )

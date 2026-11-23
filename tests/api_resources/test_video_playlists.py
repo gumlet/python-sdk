@@ -14,6 +14,7 @@ class TestVideoPlaylists:
             title="Playlist-Title",
             description="This is description for playlist.",
             workspace_id="{{video-source-id}}",
+            idempotency_key="",
         )
 
     @smoke_case("videoPlaylists.listAll:required", operation="listAll", path="/video/playlist")
@@ -40,6 +41,7 @@ class TestVideoPlaylists:
                 {"position": 2, "asset_id": "650878d883e4d60611846757"},
                 {"position": 3, "asset_id": "65578dd87eebc22dcdd549a2"},
             ],
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -49,6 +51,7 @@ class TestVideoPlaylists:
         video_playlist = client.video_playlists.delete_asset(
             playlist_id="playlistId",
             delete_list=["6508790783e4d606118467a3"],
+            idempotency_key="",
         )
 
     @smoke_case("videoPlaylists.update:single", operation="update", path="/video/playlist/{playlist_id}")
@@ -79,12 +82,14 @@ class TestVideoPlaylists:
                 "watermark_interval": 1000,
             },
             channel_visibility=False,
+            idempotency_key="",
         )
 
     @smoke_case("videoPlaylists.delete:single", operation="delete", path="/video/playlist/{playlist_id}")
     def test_method_delete(self) -> None:
         client.video_playlists.delete(
             playlist_id="playlistId",
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -118,4 +123,5 @@ class TestVideoPlaylists:
             page_number=1,
             page_size=10,
             asset_position=0,
+            idempotency_key="",
         )

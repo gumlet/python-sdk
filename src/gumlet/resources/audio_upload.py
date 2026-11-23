@@ -45,6 +45,7 @@ class AudioUploadResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> AudioUploadUploadResponse:
         """
         Add any audio file to the video asset.
@@ -57,6 +58,7 @@ class AudioUploadResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             AudioUploadUploadResponse: 200
@@ -66,6 +68,7 @@ class AudioUploadResource(SyncAPIResource):
             audio_upload = client.audio_upload.upload(
                 asset_id="assetId",
                 language_codes=["en"],
+                idempotency_key="",
             )
             ```
         """
@@ -78,7 +81,11 @@ class AudioUploadResource(SyncAPIResource):
                 audio_upload_upload_params.AudioUploadUploadParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=AudioUploadUploadResponse,
         )
@@ -94,6 +101,7 @@ class AudioUploadResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> AudioUploadCompleteResponse:
         """
         Finish adding audio tracks to an existing video asset. Call this only after the audio files have been PUT to the upload URLs from the add-audio call. This attaches those tracks to the asset.
@@ -105,6 +113,7 @@ class AudioUploadResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             AudioUploadCompleteResponse: 200
@@ -114,6 +123,7 @@ class AudioUploadResource(SyncAPIResource):
             audio_upload = client.audio_upload.complete(
                 asset_id="assetId",
                 upload_responses=[{"language_codes": ["en"], "uploaded": True}],
+                idempotency_key="",
             )
             ```
         """
@@ -126,7 +136,11 @@ class AudioUploadResource(SyncAPIResource):
                 audio_upload_complete_params.AudioUploadCompleteParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=AudioUploadCompleteResponse,
         )
@@ -152,6 +166,7 @@ class AsyncAudioUploadResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> AudioUploadUploadResponse:
         """
         Add any audio file to the video asset.
@@ -164,6 +179,7 @@ class AsyncAudioUploadResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             AudioUploadUploadResponse: 200
@@ -173,6 +189,7 @@ class AsyncAudioUploadResource(AsyncAPIResource):
             audio_upload = await client.audio_upload.upload(
                 asset_id="assetId",
                 language_codes=["en"],
+                idempotency_key="",
             )
             ```
         """
@@ -185,7 +202,11 @@ class AsyncAudioUploadResource(AsyncAPIResource):
                 audio_upload_upload_params.AudioUploadUploadParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=AudioUploadUploadResponse,
         )
@@ -201,6 +222,7 @@ class AsyncAudioUploadResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> AudioUploadCompleteResponse:
         """
         Finish adding audio tracks to an existing video asset. Call this only after the audio files have been PUT to the upload URLs from the add-audio call. This attaches those tracks to the asset.
@@ -212,6 +234,7 @@ class AsyncAudioUploadResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             AudioUploadCompleteResponse: 200
@@ -221,6 +244,7 @@ class AsyncAudioUploadResource(AsyncAPIResource):
             audio_upload = await client.audio_upload.complete(
                 asset_id="assetId",
                 upload_responses=[{"language_codes": ["en"], "uploaded": True}],
+                idempotency_key="",
             )
             ```
         """
@@ -233,7 +257,11 @@ class AsyncAudioUploadResource(AsyncAPIResource):
                 audio_upload_complete_params.AudioUploadCompleteParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=AudioUploadCompleteResponse,
         )

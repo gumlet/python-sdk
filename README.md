@@ -47,6 +47,7 @@ video_asset = client.video_assets.create(
     format="ABR",
     title="Example Title",
     workspace_id="<your workspace id>",
+    idempotency_key="",
 )
 
 print(video_asset)
@@ -75,6 +76,7 @@ async def main() -> None:
         format="ABR",
         title="Example Title",
         workspace_id="<your workspace id>",
+        idempotency_key="",
     )
 
 
@@ -110,6 +112,7 @@ try:
         format="ABR",
         title="Example Title",
         workspace_id="<your workspace id>",
+        idempotency_key="",
     )
 except APIStatusError as err:
     print(err.status_code, err.message)

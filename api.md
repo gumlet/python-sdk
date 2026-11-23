@@ -150,6 +150,7 @@ video_asset = client.video_assets.create(
     format="ABR",
     title="Example Title",
     workspace_id="<your workspace id>",
+    idempotency_key="",
 )
 ```
 
@@ -186,6 +187,7 @@ video_asset = client.video_assets.upload(
     playlist_id="6597acd5ed6f26a9c5ca9633",
     folder="697375fbfa2d1037283140e4",
     workspace_id="646df1c9173a4a2fcac180b4",
+    idempotency_key="",
 )
 ```
 
@@ -210,6 +212,7 @@ This endpoint removes an asset given its unique asset id. The asset will be remo
 ```python
 client.video_assets.delete(
     asset_id="assetId",
+    idempotency_key="",
 )
 ```
 
@@ -226,6 +229,7 @@ This endpoint allows users to update video asset that has previously been create
 video_asset = client.video_assets.update(
     asset_id="<YOUR_ASSET_ID>",
     title="Updated Title",
+    idempotency_key="",
 )
 ```
 
@@ -242,6 +246,7 @@ Select frame from video to use as thumbnail.
 video_asset = client.video_assets.thumbnail_select(
     asset_id="assetId",
     frame_at_second=2,
+    idempotency_key="",
 )
 ```
 
@@ -263,6 +268,7 @@ curl --location --request PUT '<upload_url>' \
 ```python
 video_asset = client.video_assets.thumbnail_upload(
     asset_id="assetId",
+    idempotency_key="",
 )
 ```
 
@@ -279,6 +285,7 @@ This endpoint will create/update video asset chapters.
 video_asset = client.video_assets.create_update_chapter(
     asset_id="assetId",
     chapters=[{"label": "Chapter 1", "startTime": 0}, {"label": "Chapter 2", "startTime": 10}],
+    idempotency_key="",
 )
 ```
 
@@ -343,6 +350,7 @@ video_asset = client.video_assets.delete_many(
     asset_list=["64249a8858fd3a208b987702", "64784bae843b155b829bbf84"],
     source_id="60bd2ba353ff754d28179ee6",
     workspace_id="60bd2ba353ff754d28179ee6",
+    idempotency_key="",
 )
 ```
 
@@ -362,6 +370,7 @@ video_asset = client.video_assets.tag_many(
     add_tags=["tag-1"],
     remove_tags=["playlist-1"],
     workspace_id="60bd2ba353ff754d28179ee6",
+    idempotency_key="",
 )
 ```
 
@@ -380,6 +389,7 @@ video_asset = client.video_assets.analytics(
     group_by="daily",
     date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     metrics=["impressions"],
+    idempotency_key="",
 )
 ```
 
@@ -400,6 +410,7 @@ Upload `.srt` or `.vtt` file to the video asset. The response of this API call g
 subtitle_upload = client.subtitle_upload.upload(
     asset_id="assetId",
     language_codes=["en"],
+    idempotency_key="",
 )
 ```
 
@@ -417,6 +428,7 @@ Once that is done, calling this initiates the process to actually add the subtit
 subtitle_upload = client.subtitle_upload.complete(
     asset_id="assetId",
     upload_responses=[{"language_code": "en", "uploaded": True}],
+    idempotency_key="",
 )
 ```
 
@@ -438,6 +450,7 @@ The response of this API call gives `upload_url` for each language specified. Yo
 audio_upload = client.audio_upload.upload(
     asset_id="assetId",
     language_codes=["en"],
+    idempotency_key="",
 )
 ```
 
@@ -454,6 +467,7 @@ Finish adding audio tracks to an existing video asset. Call this only after the 
 audio_upload = client.audio_upload.complete(
     asset_id="assetId",
     upload_responses=[{"language_codes": ["en"], "uploaded": True}],
+    idempotency_key="",
 )
 ```
 
@@ -481,6 +495,7 @@ video_usage_analytic = client.video_usage_analytics.retrieve(
     group_by="hourly",
     page_number=1,
     page_size=20,
+    idempotency_key="",
 )
 ```
 
@@ -533,6 +548,7 @@ Once you upload all parts to S3 bucket via pre-signed URL, use this endpoint to 
 ```python
 multipart_upload = client.multipart_upload.complete(
     asset_id="assetId",
+    idempotency_key="",
 )
 ```
 
@@ -548,6 +564,7 @@ This call aborts multi-part upload and deletes the already uploaded parts from t
 ```python
 multipart_upload = client.multipart_upload.abort(
     asset_id="assetId",
+    idempotency_key="",
 )
 ```
 
@@ -563,6 +580,7 @@ Lists all parts uploaded so far.
 ```python
 multipart_upload = client.multipart_upload.list(
     asset_id="assetId",
+    idempotency_key="",
 )
 ```
 
@@ -584,6 +602,7 @@ video_profile = client.video_profiles.create(
     name="Gumlet-Profile-1",
     format="ABR",
     transcribe=False,
+    idempotency_key="",
 )
 ```
 
@@ -621,6 +640,7 @@ video_profile = client.video_profiles.update(
     format="ABR",
     transcribe=False,
     vc=["libx264"],
+    idempotency_key="",
 )
 ```
 
@@ -649,6 +669,7 @@ This endpoint removes a profile given its unique `profile_id`. The profile will 
 ```python
 video_profile = client.video_profiles.delete(
     profile_id="profileId",
+    idempotency_key="",
 )
 ```
 
@@ -671,6 +692,7 @@ video_playlist = client.video_playlists.create(
     title="Playlist-Title",
     description="This is description for playlist.",
     workspace_id="{{video-source-id}}",
+    idempotency_key="",
 )
 ```
 
@@ -706,6 +728,7 @@ video_playlist = client.video_playlists.create_asset(
         {"position": 2, "asset_id": "650878d883e4d60611846757"},
         {"position": 3, "asset_id": "65578dd87eebc22dcdd549a2"},
     ],
+    idempotency_key="",
 )
 ```
 
@@ -722,6 +745,7 @@ Removed an asset or list of assets from a given playlist.
 video_playlist = client.video_playlists.delete_asset(
     playlist_id="playlistId",
     delete_list=["6508790783e4d606118467a3"],
+    idempotency_key="",
 )
 ```
 
@@ -761,6 +785,7 @@ video_playlist = client.video_playlists.update(
         "watermark_interval": 1000,
     },
     channel_visibility=False,
+    idempotency_key="",
 )
 ```
 
@@ -771,6 +796,7 @@ Deletes a playlist by plalist ID.
 ```python
 client.video_playlists.delete(
     playlist_id="playlistId",
+    idempotency_key="",
 )
 ```
 
@@ -808,6 +834,7 @@ video_playlist = client.video_playlists.reorder_asset(
     page_number=1,
     page_size=10,
     asset_position=0,
+    idempotency_key="",
 )
 ```
 
@@ -830,6 +857,7 @@ webhook_endpoint = client.webhook_endpoints.create(
     secret_token="",
     triggers=["status"],
     sources=[""],
+    idempotency_key="",
 )
 ```
 
@@ -857,6 +885,7 @@ Update a webhook listener.
 ```python
 webhook_endpoint = client.webhook_endpoints.update(
     webhook_id="webhookId",
+    idempotency_key="",
 )
 ```
 
@@ -871,6 +900,7 @@ Delete webhook listener endpoint.
 ```python
 webhook_endpoint = client.webhook_endpoints.delete(
     webhook_id="webhookId",
+    idempotency_key="",
 )
 ```
 
@@ -911,6 +941,7 @@ image_source = client.image_sources.create(
     namespace="google-demo",
     type="webfolder",
     webfolder={"base_url": "https://www.google.com"},
+    idempotency_key="",
 )
 ```
 
@@ -965,6 +996,7 @@ image_source = client.image_sources.update(
         "access_key": "BQUA6QFXVWHAAB6IO2X1",
         "secret": "aws_secret",
     },
+    idempotency_key="",
 )
 ```
 
@@ -979,6 +1011,7 @@ This endpoint removes a image source. All image delivery using this subdomain wi
 ```python
 image_source = client.image_sources.delete(
     image_source_id="imageSourceId",
+    idempotency_key="",
 )
 ```
 
@@ -995,6 +1028,7 @@ You can purge cache for any image by using our cache purge API.
 image_source = client.image_sources.purge_cache(
     subdomain="subdomain",
     paths=["image.jpeg", "image2.png"],
+    idempotency_key="",
 )
 ```
 
@@ -1011,6 +1045,7 @@ You can purge the cache for any image path by using this cache purge API.
 image_source = client.image_sources.purge(
     source_id="sourceId",
     paths=["image.jpeg", "image2.png"],
+    idempotency_key="",
 )
 ```
 
@@ -1032,6 +1067,7 @@ image_usage_analytic = client.image_usage_analytics.retrieve(
     metrics=["bandwidth_consumption"],
     date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     group_by="daily",
+    idempotency_key="",
 )
 ```
 
@@ -1052,6 +1088,7 @@ A live asset refers to media content/video that is live-streamed through Gumlet.
 live_stream_asset = client.live_stream_assets.create(
     live_source_id="",
     resolution="",
+    idempotency_key="",
 )
 ```
 
@@ -1067,6 +1104,7 @@ A live asset refers to media content/video that is live-streamed through Gumlet.
 ```python
 live_stream_asset = client.live_stream_assets.update(
     live_asset_id="",
+    idempotency_key="",
 )
 ```
 
@@ -1095,6 +1133,7 @@ This endpoint removes a live asset given its unique live asset id. The live asse
 ```python
 live_stream_asset = client.live_stream_assets.delete(
     live_asset_id="liveAssetId",
+    idempotency_key="",
 )
 ```
 
@@ -1109,6 +1148,7 @@ This endpoint allows marking live assets complete. Once the live asset is marked
 ```python
 live_stream_asset = client.live_stream_assets.complete(
     live_asset_id="liveAssetId",
+    idempotency_key="",
 )
 ```
 
@@ -1138,6 +1178,7 @@ Start a live stream.
 ```python
 client.live_stream_assets.start(
     live_asset_id="liveAssetId",
+    idempotency_key="",
 )
 ```
 
@@ -1154,6 +1195,7 @@ Generate presigned upload URLs for live stream thumbnails. Supported thumbnail s
 live_stream_asset = client.live_stream_assets.upload(
     live_asset_id="68c406b147f9ad0c0d584ce2",
     statuses="preparing",
+    idempotency_key="",
 )
 ```
 
@@ -1186,6 +1228,7 @@ Recovers a deleted asset from the recycle bin.
 ```python
 client.recycle_bin.recover(
     asset_id="",
+    idempotency_key="",
 )
 ```
 
@@ -1244,6 +1287,7 @@ video_workspace = client.video_workspaces.create(
     name="My Workspace",
     type="direct-upload",
     data_localization="us",
+    idempotency_key="",
 )
 ```
 
@@ -1268,6 +1312,7 @@ video_workspace = client.video_workspaces.update(
         "access_key": "BQUA6QFXVWHAAB6IO2X1",
         "secret": "aws_secret",
     },
+    idempotency_key="",
 )
 ```
 
@@ -1296,6 +1341,7 @@ This endpoint removes a video workspace given its unique asset id. All the asset
 ```python
 video_workspace = client.video_workspaces.delete(
     workspace_id="workspaceId",
+    idempotency_key="",
 )
 ```
 
@@ -1317,6 +1363,7 @@ folder = client.folders.create(
     workspace_id="workspaceId",
     name="Course Assets",
     parent_id="",
+    idempotency_key="",
 )
 ```
 
@@ -1364,6 +1411,7 @@ folder = client.folders.update(
     workspace_id="workspaceId",
     folder_id="folderId",
     name="Course Assets Updated",
+    idempotency_key="",
 )
 ```
 
@@ -1379,6 +1427,7 @@ Delete a folder. Descendant folders and assets inside them are deleted by the ba
 folder = client.folders.delete(
     workspace_id="workspaceId",
     folder_id="folderId",
+    idempotency_key="",
 )
 ```
 
@@ -1395,6 +1444,7 @@ Remove one or more assets from their current folder assignment inside the worksp
 folder = client.folders.remove_assets(
     workspace_id="workspaceId",
     asset_ids=["67e4f2b4403562dbea654301", "67e4f2bb403562dbea654302"],
+    idempotency_key="",
 )
 ```
 
@@ -1419,6 +1469,7 @@ channel_viewer = client.channel_viewers.invite(
         {"email": "test+1@gumlet.com", "name": "Test User-1"},
         {"email": "test+2@gumlet.com", "name": "Test User-2"},
     ],
+    idempotency_key="",
 )
 ```
 
@@ -1435,6 +1486,7 @@ Remove one or more viewers from a channel by email address.
 channel_viewer = client.channel_viewers.remove(
     video_workspace_id="videoWorkspaceId",
     emails=["test@gumlet.com", "test+2@gumlet.com"],
+    idempotency_key="",
 )
 ```
 
@@ -1451,6 +1503,7 @@ Invite viewers to a channel by uploading a CSV file.
 channel_viewer = client.channel_viewers.invite_csv(
     video_workspace_id="videoWorkspaceId",
     viewers_csv=b"viewers.csv",
+    idempotency_key="",
 )
 ```
 
@@ -1491,6 +1544,7 @@ video_analytic = client.video_analytics.viewer_data(
     metrics=["views"],
     date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     group_by="daily",
+    idempotency_key="",
 )
 ```
 
@@ -1512,6 +1566,7 @@ video_analytic = client.video_analytics.breakdown_data(
         {"name": "custom_video_title", "metric": "completion_percent_by_views", "page": 1, "page_size": 10},
     ],
     workspace_id="6694c405e63913eecf3cf5fb",
+    idempotency_key="",
 )
 ```
 
@@ -1529,6 +1584,7 @@ video_analytic = client.video_analytics.aggregated_data(
     aggregate=[{"metric": "views", "function": "sum"}],
     workspace_id="",
     timeframe={"start_at": "2024-01-01", "end_at": "2024-01-01"},
+    idempotency_key="",
 )
 ```
 
@@ -1582,6 +1638,7 @@ audit_log = client.audit_logs.fetch(
     date_range={"start_at": "2026-08-25", "end_at": "2026-08-29"},
     page_number=1,
     page_size=100,
+    idempotency_key="",
 )
 ```
 
@@ -1591,14 +1648,17 @@ Get / change all details about billing and invoices.
 
 ### List Invoices
 
-Liost all invoices that are generated so far.
+List all invoices that are generated so far.
 
 | Direction | Type |
 | --- | --- |
+| Request | [`BillingListInvoicesParams`](./src/gumlet/types/billing_list_invoices_params.py) |
 | Response | [`BillingListInvoicesResponse`](./src/gumlet/types/billing_list_invoices_response.py) |
 
 ```python
-billing = client.billing.list_invoices()
+billing = client.billing.list_invoices(
+    page_size=20,
+)
 ```
 
 ### Get Billing Details
@@ -1631,6 +1691,7 @@ billing = client.billing.update_details(
     gst_number="",
     postal="",
     state_code="",
+    idempotency_key="",
 )
 ```
 
@@ -1674,6 +1735,7 @@ Create live stream workspace.
 ```python
 live_stream_workspace = client.live_stream_workspaces.create(
     name="",
+    idempotency_key="",
 )
 ```
 
@@ -1691,6 +1753,7 @@ live_stream_workspace = client.live_stream_workspaces.update(
     live_workspace_id="liveWorkspaceId",
     name="live-stream-collections",
     video_source_id="67bea1d66ca0059a95bf7de9",
+    idempotency_key="",
 )
 ```
 
@@ -1705,6 +1768,7 @@ Delete the live stream workspace.
 ```python
 live_stream_workspace = client.live_stream_workspaces.delete(
     live_workspace_id="liveWorkspaceId",
+    idempotency_key="",
 )
 ```
 
@@ -1726,6 +1790,7 @@ live_stream_analytic = client.live_stream_analytics.usage(
     date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     group_by="daily",
     metrics=["bandwidth_consumption"],
+    idempotency_key="",
 )
 ```
 

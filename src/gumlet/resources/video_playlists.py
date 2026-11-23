@@ -61,6 +61,7 @@ class VideoPlaylistsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistCreateResponse:
         """
         Create new playlist inside video wprkspace
@@ -74,6 +75,7 @@ class VideoPlaylistsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoPlaylistCreateResponse: 200
@@ -85,6 +87,7 @@ class VideoPlaylistsResource(SyncAPIResource):
                 title="Playlist-Title",
                 description="This is description for playlist.",
                 workspace_id="{{video-source-id}}",
+                idempotency_key="",
             )
             ```
         """
@@ -100,7 +103,11 @@ class VideoPlaylistsResource(SyncAPIResource):
                 video_playlist_create_params.VideoPlaylistCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoPlaylistCreateResponse,
         )
@@ -162,6 +169,7 @@ class VideoPlaylistsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistCreateAssetResponse:
         """
         This operation adds a single asset or a list of assets to a playlist.
@@ -173,6 +181,7 @@ class VideoPlaylistsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoPlaylistCreateAssetResponse: 200
@@ -188,6 +197,7 @@ class VideoPlaylistsResource(SyncAPIResource):
                     {"position": 2, "asset_id": "650878d883e4d60611846757"},
                     {"position": 3, "asset_id": "65578dd87eebc22dcdd549a2"},
                 ],
+                idempotency_key="",
             )
             ```
         """
@@ -200,7 +210,11 @@ class VideoPlaylistsResource(SyncAPIResource):
                 video_playlist_create_asset_params.VideoPlaylistCreateAssetParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoPlaylistCreateAssetResponse,
         )
@@ -216,6 +230,7 @@ class VideoPlaylistsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistDeleteAssetResponse:
         """
         Removed an asset or list of assets from a given playlist.
@@ -227,6 +242,7 @@ class VideoPlaylistsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoPlaylistDeleteAssetResponse: 200
@@ -236,6 +252,7 @@ class VideoPlaylistsResource(SyncAPIResource):
             video_playlist = client.video_playlists.delete_asset(
                 playlist_id="playlistId",
                 delete_list=["6508790783e4d606118467a3"],
+                idempotency_key="",
             )
             ```
         """
@@ -248,7 +265,11 @@ class VideoPlaylistsResource(SyncAPIResource):
                 video_playlist_delete_asset_params.VideoPlaylistDeleteAssetParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoPlaylistDeleteAssetResponse,
         )
@@ -268,6 +289,7 @@ class VideoPlaylistsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistUpdateResponse:
         """
         This endpoint allows you to update playlist name, channel visibility, or playlist order on a channel page.
@@ -283,6 +305,7 @@ class VideoPlaylistsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoPlaylistUpdateResponse: 200
@@ -315,6 +338,7 @@ class VideoPlaylistsResource(SyncAPIResource):
                     "watermark_interval": 1000,
                 },
                 channel_visibility=False,
+                idempotency_key="",
             )
             ```
         """
@@ -333,7 +357,11 @@ class VideoPlaylistsResource(SyncAPIResource):
                 video_playlist_update_params.VideoPlaylistUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoPlaylistUpdateResponse,
         )
@@ -348,6 +376,7 @@ class VideoPlaylistsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> None:
         """
         Deletes a playlist by plalist ID.
@@ -358,11 +387,13 @@ class VideoPlaylistsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Example:
             ```python
             client.video_playlists.delete(
                 playlist_id="playlistId",
+                idempotency_key="",
             )
             ```
         """
@@ -372,7 +403,11 @@ class VideoPlaylistsResource(SyncAPIResource):
         return self._delete(
             path_template("/video/playlist/{playlist_id}", **{"playlist_id": playlist_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
         )
@@ -451,6 +486,7 @@ class VideoPlaylistsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistReorderAssetResponse: ...
 
     @overload
@@ -466,6 +502,7 @@ class VideoPlaylistsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistReorderAssetResponse: ...
 
     @required_args(["asset_id", "asset_position", "page_number", "page_size"], ["sort_by", "sort_order"])
@@ -485,6 +522,7 @@ class VideoPlaylistsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistReorderAssetResponse:
         """
         Reorder videos inside a playlist either by moving a single asset to a position or by sorting the playlist by title or created date.
@@ -501,6 +539,7 @@ class VideoPlaylistsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoPlaylistReorderAssetResponse: 200
@@ -513,6 +552,7 @@ class VideoPlaylistsResource(SyncAPIResource):
                 page_number=1,
                 page_size=10,
                 asset_position=0,
+                idempotency_key="",
             )
             ```
         """
@@ -532,7 +572,11 @@ class VideoPlaylistsResource(SyncAPIResource):
                 video_playlist_reorder_asset_params.VideoPlaylistReorderAssetParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoPlaylistReorderAssetResponse,
         )
@@ -560,6 +604,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistCreateResponse:
         """
         Create new playlist inside video wprkspace
@@ -573,6 +618,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoPlaylistCreateResponse: 200
@@ -584,6 +630,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
                 title="Playlist-Title",
                 description="This is description for playlist.",
                 workspace_id="{{video-source-id}}",
+                idempotency_key="",
             )
             ```
         """
@@ -599,7 +646,11 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
                 video_playlist_create_params.VideoPlaylistCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoPlaylistCreateResponse,
         )
@@ -661,6 +712,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistCreateAssetResponse:
         """
         This operation adds a single asset or a list of assets to a playlist.
@@ -672,6 +724,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoPlaylistCreateAssetResponse: 200
@@ -687,6 +740,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
                     {"position": 2, "asset_id": "650878d883e4d60611846757"},
                     {"position": 3, "asset_id": "65578dd87eebc22dcdd549a2"},
                 ],
+                idempotency_key="",
             )
             ```
         """
@@ -699,7 +753,11 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
                 video_playlist_create_asset_params.VideoPlaylistCreateAssetParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoPlaylistCreateAssetResponse,
         )
@@ -715,6 +773,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistDeleteAssetResponse:
         """
         Removed an asset or list of assets from a given playlist.
@@ -726,6 +785,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoPlaylistDeleteAssetResponse: 200
@@ -735,6 +795,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
             video_playlist = await client.video_playlists.delete_asset(
                 playlist_id="playlistId",
                 delete_list=["6508790783e4d606118467a3"],
+                idempotency_key="",
             )
             ```
         """
@@ -747,7 +808,11 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
                 video_playlist_delete_asset_params.VideoPlaylistDeleteAssetParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoPlaylistDeleteAssetResponse,
         )
@@ -767,6 +832,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistUpdateResponse:
         """
         This endpoint allows you to update playlist name, channel visibility, or playlist order on a channel page.
@@ -782,6 +848,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoPlaylistUpdateResponse: 200
@@ -814,6 +881,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
                     "watermark_interval": 1000,
                 },
                 channel_visibility=False,
+                idempotency_key="",
             )
             ```
         """
@@ -832,7 +900,11 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
                 video_playlist_update_params.VideoPlaylistUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoPlaylistUpdateResponse,
         )
@@ -847,6 +919,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> None:
         """
         Deletes a playlist by plalist ID.
@@ -857,11 +930,13 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Example:
             ```python
             await client.video_playlists.delete(
                 playlist_id="playlistId",
+                idempotency_key="",
             )
             ```
         """
@@ -871,7 +946,11 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         return await self._delete(
             path_template("/video/playlist/{playlist_id}", **{"playlist_id": playlist_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
         )
@@ -950,6 +1029,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistReorderAssetResponse: ...
 
     @overload
@@ -965,6 +1045,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistReorderAssetResponse: ...
 
     @required_args(["asset_id", "asset_position", "page_number", "page_size"], ["sort_by", "sort_order"])
@@ -984,6 +1065,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoPlaylistReorderAssetResponse:
         """
         Reorder videos inside a playlist either by moving a single asset to a position or by sorting the playlist by title or created date.
@@ -1000,6 +1082,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoPlaylistReorderAssetResponse: 200
@@ -1012,6 +1095,7 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
                 page_number=1,
                 page_size=10,
                 asset_position=0,
+                idempotency_key="",
             )
             ```
         """
@@ -1031,7 +1115,11 @@ class AsyncVideoPlaylistsResource(AsyncAPIResource):
                 video_playlist_reorder_asset_params.VideoPlaylistReorderAssetParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoPlaylistReorderAssetResponse,
         )

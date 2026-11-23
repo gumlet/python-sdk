@@ -12,6 +12,7 @@ class TestSubtitleUpload:
         subtitle_upload = client.subtitle_upload.upload(
             asset_id="assetId",
             language_codes=["en"],
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -21,4 +22,5 @@ class TestSubtitleUpload:
         subtitle_upload = client.subtitle_upload.complete(
             asset_id="assetId",
             upload_responses=[{"language_code": "en", "uploaded": True}],
+            idempotency_key="",
         )

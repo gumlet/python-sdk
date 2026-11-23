@@ -7,9 +7,18 @@ from tests.smoke_support import client, smoke_case
 
 
 class TestBilling:
-    @smoke_case("billing.listInvoices:single", operation="listInvoices", path="/mixed/billing/invoice/history")
+    @smoke_case("billing.listInvoices:required", operation="listInvoices", path="/mixed/billing/invoice/history")
     def test_method_list_invoices(self) -> None:
-        billing = client.billing.list_invoices()
+        billing = client.billing.list_invoices(
+            page_size=20,
+        )
+
+    @smoke_case("billing.listInvoices:all", operation="listInvoices", path="/mixed/billing/invoice/history")
+    def test_method_list_invoices_with_all_params(self) -> None:
+        billing = client.billing.list_invoices(
+            page_size=20,
+            last_id="last_id",
+        )
 
     @smoke_case("billing.fetchDetails:single", operation="fetchDetails", path="/mixed/billing/details")
     def test_method_fetch_details(self) -> None:
@@ -25,6 +34,7 @@ class TestBilling:
             gst_number="",
             postal="",
             state_code="",
+            idempotency_key="",
         )
 
     @smoke_case(

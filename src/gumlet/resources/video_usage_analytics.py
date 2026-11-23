@@ -62,6 +62,7 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoUsageAnalyticRetrieveResponse:
         """
         This endpoint gives usage analytics data of your videos. Ex - top assets, bandwidth consumption.
@@ -81,6 +82,7 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoUsageAnalyticRetrieveResponse: 200
@@ -95,6 +97,7 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
                 group_by="hourly",
                 page_number=1,
                 page_size=20,
+                idempotency_key="",
             )
             ```
         """
@@ -114,7 +117,11 @@ class VideoUsageAnalyticsResource(SyncAPIResource):
                 video_usage_analytic_retrieve_params.VideoUsageAnalyticRetrieveParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoUsageAnalyticRetrieveResponse,
         )
@@ -222,6 +229,7 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoUsageAnalyticRetrieveResponse:
         """
         This endpoint gives usage analytics data of your videos. Ex - top assets, bandwidth consumption.
@@ -241,6 +249,7 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoUsageAnalyticRetrieveResponse: 200
@@ -255,6 +264,7 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
                 group_by="hourly",
                 page_number=1,
                 page_size=20,
+                idempotency_key="",
             )
             ```
         """
@@ -274,7 +284,11 @@ class AsyncVideoUsageAnalyticsResource(AsyncAPIResource):
                 video_usage_analytic_retrieve_params.VideoUsageAnalyticRetrieveParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoUsageAnalyticRetrieveResponse,
         )

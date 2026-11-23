@@ -61,6 +61,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamAssetCreateResponse:
         """
         A live asset refers to media content/video that is live-streamed through Gumlet. This endpoint creates a live streaming asset allowing users to live stream a video that will be pushed to Gumlet.
@@ -76,6 +77,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamAssetCreateResponse: 200
@@ -85,6 +87,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
             live_stream_asset = client.live_stream_assets.create(
                 live_source_id="",
                 resolution="",
+                idempotency_key="",
             )
             ```
         """
@@ -102,7 +105,11 @@ class LiveStreamAssetsResource(SyncAPIResource):
                 live_stream_asset_create_params.LiveStreamAssetCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamAssetCreateResponse,
         )
@@ -119,6 +126,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamAssetUpdateResponse:
         """
         A live asset refers to media content/video that is live-streamed through Gumlet. This endpoint allows users to update a live streaming asset.
@@ -131,6 +139,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamAssetUpdateResponse: 200
@@ -139,6 +148,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
             ```python
             live_stream_asset = client.live_stream_assets.update(
                 live_asset_id="",
+                idempotency_key="",
             )
             ```
         """
@@ -153,7 +163,11 @@ class LiveStreamAssetsResource(SyncAPIResource):
                 live_stream_asset_update_params.LiveStreamAssetUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamAssetUpdateResponse,
         )
@@ -209,6 +223,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamAssetDeleteResponse:
         """
         This endpoint removes a live asset given its unique live asset id. The live asset will be removed from storage as well, associated URLs will be inaccessible.
@@ -219,6 +234,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamAssetDeleteResponse: 204
@@ -227,6 +243,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
             ```python
             live_stream_asset = client.live_stream_assets.delete(
                 live_asset_id="liveAssetId",
+                idempotency_key="",
             )
             ```
         """
@@ -235,7 +252,11 @@ class LiveStreamAssetsResource(SyncAPIResource):
         return self._delete(
             path_template("/video/live/assets/{live_asset_id}", **{"live_asset_id": live_asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamAssetDeleteResponse,
         )
@@ -250,6 +271,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamAssetCompleteResponse:
         """
         This endpoint allows marking live assets complete. Once the live asset is marked complete, it can no longer be used to ingest the live stream on Gumlet.
@@ -260,6 +282,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamAssetCompleteResponse: 200
@@ -268,6 +291,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
             ```python
             live_stream_asset = client.live_stream_assets.complete(
                 live_asset_id="liveAssetId",
+                idempotency_key="",
             )
             ```
         """
@@ -276,7 +300,11 @@ class LiveStreamAssetsResource(SyncAPIResource):
         return self._post(
             path_template("/video/live/assets/{live_asset_id}/complete", **{"live_asset_id": live_asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamAssetCompleteResponse,
         )
@@ -356,6 +384,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> None:
         """
         Start a live stream.
@@ -366,11 +395,13 @@ class LiveStreamAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Example:
             ```python
             client.live_stream_assets.start(
                 live_asset_id="liveAssetId",
+                idempotency_key="",
             )
             ```
         """
@@ -380,7 +411,11 @@ class LiveStreamAssetsResource(SyncAPIResource):
         return self._post(
             path_template("/video/live/assets/{live_asset_id}/start", **{"live_asset_id": live_asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
         )
@@ -396,6 +431,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamAssetUploadResponse:
         """
         Generate presigned upload URLs for live stream thumbnails. Supported thumbnail states are `preparing`, `disconnected`, and `end`.
@@ -407,6 +443,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamAssetUploadResponse: 200
@@ -416,6 +453,7 @@ class LiveStreamAssetsResource(SyncAPIResource):
             live_stream_asset = client.live_stream_assets.upload(
                 live_asset_id="68c406b147f9ad0c0d584ce2",
                 statuses="preparing",
+                idempotency_key="",
             )
             ```
         """
@@ -429,7 +467,11 @@ class LiveStreamAssetsResource(SyncAPIResource):
                 live_stream_asset_upload_params.LiveStreamAssetUploadParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamAssetUploadResponse,
         )
@@ -500,6 +542,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamAssetCreateResponse:
         """
         A live asset refers to media content/video that is live-streamed through Gumlet. This endpoint creates a live streaming asset allowing users to live stream a video that will be pushed to Gumlet.
@@ -515,6 +558,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamAssetCreateResponse: 200
@@ -524,6 +568,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             live_stream_asset = await client.live_stream_assets.create(
                 live_source_id="",
                 resolution="",
+                idempotency_key="",
             )
             ```
         """
@@ -541,7 +586,11 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
                 live_stream_asset_create_params.LiveStreamAssetCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamAssetCreateResponse,
         )
@@ -558,6 +607,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamAssetUpdateResponse:
         """
         A live asset refers to media content/video that is live-streamed through Gumlet. This endpoint allows users to update a live streaming asset.
@@ -570,6 +620,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamAssetUpdateResponse: 200
@@ -578,6 +629,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             ```python
             live_stream_asset = await client.live_stream_assets.update(
                 live_asset_id="",
+                idempotency_key="",
             )
             ```
         """
@@ -592,7 +644,11 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
                 live_stream_asset_update_params.LiveStreamAssetUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamAssetUpdateResponse,
         )
@@ -648,6 +704,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamAssetDeleteResponse:
         """
         This endpoint removes a live asset given its unique live asset id. The live asset will be removed from storage as well, associated URLs will be inaccessible.
@@ -658,6 +715,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamAssetDeleteResponse: 204
@@ -666,6 +724,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             ```python
             live_stream_asset = await client.live_stream_assets.delete(
                 live_asset_id="liveAssetId",
+                idempotency_key="",
             )
             ```
         """
@@ -674,7 +733,11 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         return await self._delete(
             path_template("/video/live/assets/{live_asset_id}", **{"live_asset_id": live_asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamAssetDeleteResponse,
         )
@@ -689,6 +752,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamAssetCompleteResponse:
         """
         This endpoint allows marking live assets complete. Once the live asset is marked complete, it can no longer be used to ingest the live stream on Gumlet.
@@ -699,6 +763,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamAssetCompleteResponse: 200
@@ -707,6 +772,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             ```python
             live_stream_asset = await client.live_stream_assets.complete(
                 live_asset_id="liveAssetId",
+                idempotency_key="",
             )
             ```
         """
@@ -715,7 +781,11 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         return await self._post(
             path_template("/video/live/assets/{live_asset_id}/complete", **{"live_asset_id": live_asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamAssetCompleteResponse,
         )
@@ -795,6 +865,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> None:
         """
         Start a live stream.
@@ -805,11 +876,13 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Example:
             ```python
             await client.live_stream_assets.start(
                 live_asset_id="liveAssetId",
+                idempotency_key="",
             )
             ```
         """
@@ -819,7 +892,11 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         return await self._post(
             path_template("/video/live/assets/{live_asset_id}/start", **{"live_asset_id": live_asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
         )
@@ -835,6 +912,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> LiveStreamAssetUploadResponse:
         """
         Generate presigned upload URLs for live stream thumbnails. Supported thumbnail states are `preparing`, `disconnected`, and `end`.
@@ -846,6 +924,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             LiveStreamAssetUploadResponse: 200
@@ -855,6 +934,7 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
             live_stream_asset = await client.live_stream_assets.upload(
                 live_asset_id="68c406b147f9ad0c0d584ce2",
                 statuses="preparing",
+                idempotency_key="",
             )
             ```
         """
@@ -868,7 +948,11 @@ class AsyncLiveStreamAssetsResource(AsyncAPIResource):
                 live_stream_asset_upload_params.LiveStreamAssetUploadParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=LiveStreamAssetUploadResponse,
         )

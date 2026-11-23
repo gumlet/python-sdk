@@ -14,6 +14,7 @@ class TestVideoAssets:
             format="ABR",
             title="Example Title",
             workspace_id="<your workspace id>",
+            idempotency_key="",
         )
 
     @smoke_case("videoAssets.create:all", operation="create", path="/video/assets")
@@ -68,6 +69,7 @@ class TestVideoAssets:
             playlist_id="",
             folder="",
             workspace_id="<your workspace id>",
+            idempotency_key="",
         )
 
     @smoke_case("videoAssets.upload:required", operation="upload", path="/video/assets/upload")
@@ -95,6 +97,7 @@ class TestVideoAssets:
             playlist_id="6597acd5ed6f26a9c5ca9633",
             folder="697375fbfa2d1037283140e4",
             workspace_id="646df1c9173a4a2fcac180b4",
+            idempotency_key="",
         )
 
     @smoke_case("videoAssets.upload:all", operation="upload", path="/video/assets/upload")
@@ -161,6 +164,7 @@ class TestVideoAssets:
             playlist_id="6597acd5ed6f26a9c5ca9633",
             folder="697375fbfa2d1037283140e4",
             workspace_id="646df1c9173a4a2fcac180b4",
+            idempotency_key="",
         )
 
     @smoke_case("videoAssets.retrieveDetails:single", operation="retrieveDetails", path="/video/assets/{asset_id}")
@@ -173,6 +177,7 @@ class TestVideoAssets:
     def test_method_delete(self) -> None:
         client.video_assets.delete(
             asset_id="assetId",
+            idempotency_key="",
         )
 
     @smoke_case("videoAssets.update:required", operation="update", path="/video/assets/update")
@@ -180,6 +185,7 @@ class TestVideoAssets:
         video_asset = client.video_assets.update(
             asset_id="<YOUR_ASSET_ID>",
             title="Updated Title",
+            idempotency_key="",
         )
 
     @smoke_case("videoAssets.update:all", operation="update", path="/video/assets/update")
@@ -194,6 +200,7 @@ class TestVideoAssets:
             remove_subtitles=[""],
             input="",
             reprocess=False,
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -205,6 +212,7 @@ class TestVideoAssets:
         video_asset = client.video_assets.thumbnail_select(
             asset_id="assetId",
             frame_at_second=2,
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -213,6 +221,7 @@ class TestVideoAssets:
     def test_method_thumbnail_upload(self) -> None:
         video_asset = client.video_assets.thumbnail_upload(
             asset_id="assetId",
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -224,6 +233,7 @@ class TestVideoAssets:
         video_asset = client.video_assets.create_update_chapter(
             asset_id="assetId",
             chapters=[{"label": "Chapter 1", "startTime": 0}, {"label": "Chapter 2", "startTime": 10}],
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -304,6 +314,7 @@ class TestVideoAssets:
             asset_list=["64249a8858fd3a208b987702", "64784bae843b155b829bbf84"],
             source_id="60bd2ba353ff754d28179ee6",
             workspace_id="60bd2ba353ff754d28179ee6",
+            idempotency_key="",
         )
 
     @smoke_case("videoAssets.tagMany:single", operation="tagMany", path="/video/assets/bulk/tag")
@@ -314,6 +325,7 @@ class TestVideoAssets:
             add_tags=["tag-1"],
             remove_tags=["playlist-1"],
             workspace_id="60bd2ba353ff754d28179ee6",
+            idempotency_key="",
         )
 
     @smoke_case("videoAssets.analytics:required", operation="analytics", path="/video/assets/{asset_id}/analytics")
@@ -323,6 +335,7 @@ class TestVideoAssets:
             group_by="daily",
             date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
             metrics=["impressions"],
+            idempotency_key="",
         )
 
     @smoke_case("videoAssets.analytics:all", operation="analytics", path="/video/assets/{asset_id}/analytics")
@@ -334,4 +347,5 @@ class TestVideoAssets:
             metrics=["impressions"],
             page_number=0,
             page_size=0,
+            idempotency_key="",
         )

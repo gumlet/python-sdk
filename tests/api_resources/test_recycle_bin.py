@@ -11,6 +11,7 @@ class TestRecycleBin:
     def test_method_recover(self) -> None:
         client.recycle_bin.recover(
             asset_id="",
+            idempotency_key="",
         )
 
     @smoke_case("recycleBin.list:single", operation="list", path="/video/asset/recoverable/list")

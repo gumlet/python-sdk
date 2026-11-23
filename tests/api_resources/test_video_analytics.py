@@ -13,6 +13,7 @@ class TestVideoAnalytics:
             metrics=["views"],
             date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
             group_by="daily",
+            idempotency_key="",
         )
 
     @smoke_case("videoAnalytics.viewerData:all", operation="viewerData", path="/insights/viewer-analytics")
@@ -25,6 +26,7 @@ class TestVideoAnalytics:
             group_by="daily",
             chart_dimension={"group_by": [{}]},
             download=False,
+            idempotency_key="",
         )
 
     @smoke_case("videoAnalytics.breakdownData:single", operation="breakdownData", path="/insights/breakdown-data")
@@ -37,6 +39,7 @@ class TestVideoAnalytics:
                 {"name": "custom_video_title", "metric": "completion_percent_by_views", "page": 1, "page_size": 10},
             ],
             workspace_id="6694c405e63913eecf3cf5fb",
+            idempotency_key="",
         )
 
     @smoke_case("videoAnalytics.aggregatedData:required", operation="aggregatedData", path="/insights/aggregated-data")
@@ -45,6 +48,7 @@ class TestVideoAnalytics:
             aggregate=[{"metric": "views", "function": "sum"}],
             workspace_id="",
             timeframe={"start_at": "2024-01-01", "end_at": "2024-01-01"},
+            idempotency_key="",
         )
 
     @smoke_case("videoAnalytics.aggregatedData:all", operation="aggregatedData", path="/insights/aggregated-data")
@@ -54,4 +58,5 @@ class TestVideoAnalytics:
             workspace_id="",
             timeframe={"start_at": "2024-01-01", "end_at": "2024-01-01"},
             filters=[{"name": "meta_browser", "value": "", "operator": "equals"}],
+            idempotency_key="",
         )

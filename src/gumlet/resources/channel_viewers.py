@@ -53,6 +53,7 @@ class ChannelViewersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ChannelViewerInviteResponse:
         """
         Invite one or more viewers to a members-only channel.
@@ -64,6 +65,7 @@ class ChannelViewersResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ChannelViewerInviteResponse: 200
@@ -77,6 +79,7 @@ class ChannelViewersResource(SyncAPIResource):
                     {"email": "test+1@gumlet.com", "name": "Test User-1"},
                     {"email": "test+2@gumlet.com", "name": "Test User-2"},
                 ],
+                idempotency_key="",
             )
             ```
         """
@@ -89,7 +92,11 @@ class ChannelViewersResource(SyncAPIResource):
                 channel_viewer_invite_params.ChannelViewerInviteParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ChannelViewerInviteResponse,
         )
@@ -105,6 +112,7 @@ class ChannelViewersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ChannelViewerRemoveResponse:
         """
         Remove one or more viewers from a channel by email address.
@@ -116,6 +124,7 @@ class ChannelViewersResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ChannelViewerRemoveResponse: 200
@@ -125,6 +134,7 @@ class ChannelViewersResource(SyncAPIResource):
             channel_viewer = client.channel_viewers.remove(
                 video_workspace_id="videoWorkspaceId",
                 emails=["test@gumlet.com", "test+2@gumlet.com"],
+                idempotency_key="",
             )
             ```
         """
@@ -137,7 +147,11 @@ class ChannelViewersResource(SyncAPIResource):
                 channel_viewer_remove_params.ChannelViewerRemoveParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ChannelViewerRemoveResponse,
         )
@@ -153,6 +167,7 @@ class ChannelViewersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ChannelViewerInviteCsvResponse:
         """
         Invite viewers to a channel by uploading a CSV file.
@@ -164,6 +179,7 @@ class ChannelViewersResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ChannelViewerInviteCsvResponse: 200
@@ -173,6 +189,7 @@ class ChannelViewersResource(SyncAPIResource):
             channel_viewer = client.channel_viewers.invite_csv(
                 video_workspace_id="videoWorkspaceId",
                 viewers_csv=b"viewers.csv",
+                idempotency_key="",
             )
             ```
         """
@@ -193,7 +210,11 @@ class ChannelViewersResource(SyncAPIResource):
             body=maybe_transform(body, channel_viewer_invite_csv_params.ChannelViewerInviteCsvParams),
             files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ChannelViewerInviteCsvResponse,
         )
@@ -277,6 +298,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ChannelViewerInviteResponse:
         """
         Invite one or more viewers to a members-only channel.
@@ -288,6 +310,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ChannelViewerInviteResponse: 200
@@ -301,6 +324,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
                     {"email": "test+1@gumlet.com", "name": "Test User-1"},
                     {"email": "test+2@gumlet.com", "name": "Test User-2"},
                 ],
+                idempotency_key="",
             )
             ```
         """
@@ -313,7 +337,11 @@ class AsyncChannelViewersResource(AsyncAPIResource):
                 channel_viewer_invite_params.ChannelViewerInviteParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ChannelViewerInviteResponse,
         )
@@ -329,6 +357,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ChannelViewerRemoveResponse:
         """
         Remove one or more viewers from a channel by email address.
@@ -340,6 +369,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ChannelViewerRemoveResponse: 200
@@ -349,6 +379,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
             channel_viewer = await client.channel_viewers.remove(
                 video_workspace_id="videoWorkspaceId",
                 emails=["test@gumlet.com", "test+2@gumlet.com"],
+                idempotency_key="",
             )
             ```
         """
@@ -361,7 +392,11 @@ class AsyncChannelViewersResource(AsyncAPIResource):
                 channel_viewer_remove_params.ChannelViewerRemoveParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ChannelViewerRemoveResponse,
         )
@@ -377,6 +412,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> ChannelViewerInviteCsvResponse:
         """
         Invite viewers to a channel by uploading a CSV file.
@@ -388,6 +424,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             ChannelViewerInviteCsvResponse: 200
@@ -397,6 +434,7 @@ class AsyncChannelViewersResource(AsyncAPIResource):
             channel_viewer = await client.channel_viewers.invite_csv(
                 video_workspace_id="videoWorkspaceId",
                 viewers_csv=b"viewers.csv",
+                idempotency_key="",
             )
             ```
         """
@@ -417,7 +455,11 @@ class AsyncChannelViewersResource(AsyncAPIResource):
             body=await async_maybe_transform(body, channel_viewer_invite_csv_params.ChannelViewerInviteCsvParams),
             files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ChannelViewerInviteCsvResponse,
         )

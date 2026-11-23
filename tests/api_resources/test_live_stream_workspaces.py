@@ -15,6 +15,7 @@ class TestLiveStreamWorkspaces:
     def test_method_create(self) -> None:
         live_stream_workspace = client.live_stream_workspaces.create(
             name="",
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -25,6 +26,7 @@ class TestLiveStreamWorkspaces:
             live_workspace_id="liveWorkspaceId",
             name="live-stream-collections",
             video_source_id="67bea1d66ca0059a95bf7de9",
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -33,4 +35,5 @@ class TestLiveStreamWorkspaces:
     def test_method_delete(self) -> None:
         live_stream_workspace = client.live_stream_workspaces.delete(
             live_workspace_id="liveWorkspaceId",
+            idempotency_key="",
         )

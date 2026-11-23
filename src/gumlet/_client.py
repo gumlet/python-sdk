@@ -162,7 +162,7 @@ class Gumlet(SyncAPIClient):
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
-        self._idempotency_header = None
+        self._idempotency_header = "Idempotency-Key"
         self._default_stream_cls = Stream
 
     @cached_property
@@ -520,7 +520,7 @@ class AsyncGumlet(AsyncAPIClient):
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
-        self._idempotency_header = None
+        self._idempotency_header = "Idempotency-Key"
         self._default_stream_cls = AsyncStream
 
     @cached_property

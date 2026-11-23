@@ -94,6 +94,7 @@ class AuditLogsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> AuditLogFetchResponse:
         """
         Get audit logs for the user activity in your organisation. Please note that this endpoint can only be accessed by `owner` and `admin` role users.
@@ -108,6 +109,7 @@ class AuditLogsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             AuditLogFetchResponse: Successful response
@@ -118,6 +120,7 @@ class AuditLogsResource(SyncAPIResource):
                 date_range={"start_at": "2026-08-25", "end_at": "2026-08-29"},
                 page_number=1,
                 page_size=100,
+                idempotency_key="",
             )
             ```
         """
@@ -134,7 +137,11 @@ class AuditLogsResource(SyncAPIResource):
                 audit_log_fetch_params.AuditLogFetchParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=AuditLogFetchResponse,
         )
@@ -209,6 +216,7 @@ class AsyncAuditLogsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> AuditLogFetchResponse:
         """
         Get audit logs for the user activity in your organisation. Please note that this endpoint can only be accessed by `owner` and `admin` role users.
@@ -223,6 +231,7 @@ class AsyncAuditLogsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             AuditLogFetchResponse: Successful response
@@ -233,6 +242,7 @@ class AsyncAuditLogsResource(AsyncAPIResource):
                 date_range={"start_at": "2026-08-25", "end_at": "2026-08-29"},
                 page_number=1,
                 page_size=100,
+                idempotency_key="",
             )
             ```
         """
@@ -249,7 +259,11 @@ class AsyncAuditLogsResource(AsyncAPIResource):
                 audit_log_fetch_params.AuditLogFetchParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=AuditLogFetchResponse,
         )

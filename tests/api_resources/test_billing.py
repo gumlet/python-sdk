@@ -34,6 +34,7 @@ class TestBilling:
             gst_number="",
             postal="",
             state_code="",
+            idempotency_key="",
         )
 
     @smoke_case(

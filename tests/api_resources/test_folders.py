@@ -13,6 +13,7 @@ class TestFolders:
             workspace_id="workspaceId",
             name="Course Assets",
             parent_id="",
+            idempotency_key="",
         )
 
     @smoke_case("folders.list:required", operation="list", path="/video/workspaces/{workspace_id}/folders")
@@ -45,6 +46,7 @@ class TestFolders:
             workspace_id="workspaceId",
             folder_id="folderId",
             name="Course Assets Updated",
+            idempotency_key="",
         )
 
     @smoke_case("folders.update:all", operation="update", path="/video/workspaces/{workspace_id}/folders/{folder_id}")
@@ -55,6 +57,7 @@ class TestFolders:
             name="Course Assets Updated",
             parent_id="",
             asset_ids=[""],
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -64,6 +67,7 @@ class TestFolders:
         folder = client.folders.delete(
             workspace_id="workspaceId",
             folder_id="folderId",
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -75,4 +79,5 @@ class TestFolders:
         folder = client.folders.remove_assets(
             workspace_id="workspaceId",
             asset_ids=["67e4f2b4403562dbea654301", "67e4f2bb403562dbea654302"],
+            idempotency_key="",
         )

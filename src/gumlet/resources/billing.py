@@ -131,6 +131,7 @@ class BillingResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> BillingUpdateDetailsResponse:
         """
         Update billing details
@@ -147,6 +148,7 @@ class BillingResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             BillingUpdateDetailsResponse: Successful response
@@ -161,6 +163,7 @@ class BillingResource(SyncAPIResource):
                 gst_number="",
                 postal="",
                 state_code="",
+                idempotency_key="",
             )
             ```
         """
@@ -179,7 +182,11 @@ class BillingResource(SyncAPIResource):
                 billing_update_details_params.BillingUpdateDetailsParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=BillingUpdateDetailsResponse,
         )
@@ -327,6 +334,7 @@ class AsyncBillingResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> BillingUpdateDetailsResponse:
         """
         Update billing details
@@ -343,6 +351,7 @@ class AsyncBillingResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             BillingUpdateDetailsResponse: Successful response
@@ -357,6 +366,7 @@ class AsyncBillingResource(AsyncAPIResource):
                 gst_number="",
                 postal="",
                 state_code="",
+                idempotency_key="",
             )
             ```
         """
@@ -375,7 +385,11 @@ class AsyncBillingResource(AsyncAPIResource):
                 billing_update_details_params.BillingUpdateDetailsParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=BillingUpdateDetailsResponse,
         )

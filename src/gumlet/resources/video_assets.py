@@ -95,6 +95,7 @@ class VideoAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetCreateResponse:
         """
         An asset refers to media content/video that is processed, stored, and delivered through Gumlet. This endpoint creates an asset allowing users to ingest media content into the Gumlet system for processing and delivery.
@@ -131,6 +132,7 @@ class VideoAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetCreateResponse: 200
@@ -142,6 +144,7 @@ class VideoAssetsResource(SyncAPIResource):
                 format="ABR",
                 title="Example Title",
                 workspace_id="<your workspace id>",
+                idempotency_key="",
             )
             ```
         """
@@ -180,7 +183,11 @@ class VideoAssetsResource(SyncAPIResource):
                 video_asset_create_params.VideoAssetCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetCreateResponse,
         )
@@ -221,6 +228,7 @@ class VideoAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetUploadResponse:
         """
         This endpoint creates a video asset allowing upload of a video from the local file system and ingest media content into the Gumlet system for processing and delivery. Body parameters are the same as the Create Asset body parameters except for the `input` parameter, which this endpoint does not take. A successful response will be returned with `upload_url` field. You can make `PUT` request to that URL to upload video. To upload video using `upload_url` refer to [this](https://docs.gumlet.com/docs/direct-upload#2-use-the-url-to-upload-a-file).
@@ -257,6 +265,7 @@ class VideoAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetUploadResponse: 200
@@ -286,6 +295,7 @@ class VideoAssetsResource(SyncAPIResource):
                 playlist_id="6597acd5ed6f26a9c5ca9633",
                 folder="697375fbfa2d1037283140e4",
                 workspace_id="646df1c9173a4a2fcac180b4",
+                idempotency_key="",
             )
             ```
         """
@@ -324,7 +334,11 @@ class VideoAssetsResource(SyncAPIResource):
                 video_asset_upload_params.VideoAssetUploadParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetUploadResponse,
         )
@@ -380,6 +394,7 @@ class VideoAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> None:
         """
         This endpoint removes an asset given its unique asset id. The asset will be removed from storage as well, associated URLs will be inaccessible.
@@ -390,6 +405,7 @@ class VideoAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             204
@@ -398,6 +414,7 @@ class VideoAssetsResource(SyncAPIResource):
             ```python
             client.video_assets.delete(
                 asset_id="assetId",
+                idempotency_key="",
             )
             ```
         """
@@ -407,7 +424,11 @@ class VideoAssetsResource(SyncAPIResource):
         return self._delete(
             path_template("/video/assets/{asset_id}", **{"asset_id": asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
         )
@@ -430,6 +451,7 @@ class VideoAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetUpdateResponse:
         """
         This endpoint allows users to update video asset that has previously been created.
@@ -448,6 +470,7 @@ class VideoAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetUpdateResponse: 200
@@ -457,6 +480,7 @@ class VideoAssetsResource(SyncAPIResource):
             video_asset = client.video_assets.update(
                 asset_id="<YOUR_ASSET_ID>",
                 title="Updated Title",
+                idempotency_key="",
             )
             ```
         """
@@ -477,7 +501,11 @@ class VideoAssetsResource(SyncAPIResource):
                 video_asset_update_params.VideoAssetUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetUpdateResponse,
         )
@@ -493,6 +521,7 @@ class VideoAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetThumbnailSelectResponse:
         """
         Select frame from video to use as thumbnail.
@@ -504,6 +533,7 @@ class VideoAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetThumbnailSelectResponse: 200
@@ -513,6 +543,7 @@ class VideoAssetsResource(SyncAPIResource):
             video_asset = client.video_assets.thumbnail_select(
                 asset_id="assetId",
                 frame_at_second=2,
+                idempotency_key="",
             )
             ```
         """
@@ -526,7 +557,11 @@ class VideoAssetsResource(SyncAPIResource):
                 video_asset_thumbnail_select_params.VideoAssetThumbnailSelectParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetThumbnailSelectResponse,
         )
@@ -541,6 +576,7 @@ class VideoAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetThumbnailUploadResponse:
         """
         Use any image file to use as thumbnail. Once you use the API, you will get `upload_url` in the response, and that can be used to upload the image file.
@@ -558,6 +594,7 @@ class VideoAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
         
         Returns:
             VideoAssetThumbnailUploadResponse
@@ -566,6 +603,7 @@ class VideoAssetsResource(SyncAPIResource):
             ```python
             video_asset = client.video_assets.thumbnail_upload(
                 asset_id="assetId",
+                idempotency_key="",
             )
             ```
         """
@@ -574,7 +612,11 @@ class VideoAssetsResource(SyncAPIResource):
         return self._post(
             path_template("/video/assets/{asset_ID}/thumbnail", **{"asset_ID": asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetThumbnailUploadResponse,
         )
@@ -590,6 +632,7 @@ class VideoAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetCreateUpdateChapterResponse:
         """
         This endpoint will create/update video asset chapters.
@@ -601,6 +644,7 @@ class VideoAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetCreateUpdateChapterResponse: 200
@@ -610,6 +654,7 @@ class VideoAssetsResource(SyncAPIResource):
             video_asset = client.video_assets.create_update_chapter(
                 asset_id="assetId",
                 chapters=[{"label": "Chapter 1", "startTime": 0}, {"label": "Chapter 2", "startTime": 10}],
+                idempotency_key="",
             )
             ```
         """
@@ -622,7 +667,11 @@ class VideoAssetsResource(SyncAPIResource):
                 video_asset_create_update_chapter_params.VideoAssetCreateUpdateChapterParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetCreateUpdateChapterResponse,
         )
@@ -849,6 +898,7 @@ class VideoAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetDeleteManyResponse:
         """
         Delete multiple VOD assets at once.
@@ -861,6 +911,7 @@ class VideoAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetDeleteManyResponse: Successful response
@@ -871,6 +922,7 @@ class VideoAssetsResource(SyncAPIResource):
                 asset_list=["64249a8858fd3a208b987702", "64784bae843b155b829bbf84"],
                 source_id="60bd2ba353ff754d28179ee6",
                 workspace_id="60bd2ba353ff754d28179ee6",
+                idempotency_key="",
             )
             ```
         """
@@ -885,7 +937,11 @@ class VideoAssetsResource(SyncAPIResource):
                 video_asset_delete_many_params.VideoAssetDeleteManyParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetDeleteManyResponse,
         )
@@ -904,6 +960,7 @@ class VideoAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetTagManyResponse:
         """
         Add / remove tags from multiple assets at once.
@@ -918,6 +975,7 @@ class VideoAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetTagManyResponse: Successful response
@@ -930,6 +988,7 @@ class VideoAssetsResource(SyncAPIResource):
                 add_tags=["tag-1"],
                 remove_tags=["playlist-1"],
                 workspace_id="60bd2ba353ff754d28179ee6",
+                idempotency_key="",
             )
             ```
         """
@@ -946,7 +1005,11 @@ class VideoAssetsResource(SyncAPIResource):
                 video_asset_tag_many_params.VideoAssetTagManyParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetTagManyResponse,
         )
@@ -979,6 +1042,7 @@ class VideoAssetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetAnalyticsResponse:
         """
         Get video analytics for a single asset.
@@ -994,6 +1058,7 @@ class VideoAssetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetAnalyticsResponse: Successful response
@@ -1005,6 +1070,7 @@ class VideoAssetsResource(SyncAPIResource):
                 group_by="daily",
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 metrics=["impressions"],
+                idempotency_key="",
             )
             ```
         """
@@ -1023,7 +1089,11 @@ class VideoAssetsResource(SyncAPIResource):
                 video_asset_analytics_params.VideoAssetAnalyticsParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetAnalyticsResponse,
         )
@@ -1074,6 +1144,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetCreateResponse:
         """
         An asset refers to media content/video that is processed, stored, and delivered through Gumlet. This endpoint creates an asset allowing users to ingest media content into the Gumlet system for processing and delivery.
@@ -1110,6 +1181,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetCreateResponse: 200
@@ -1121,6 +1193,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 format="ABR",
                 title="Example Title",
                 workspace_id="<your workspace id>",
+                idempotency_key="",
             )
             ```
         """
@@ -1159,7 +1232,11 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 video_asset_create_params.VideoAssetCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetCreateResponse,
         )
@@ -1200,6 +1277,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetUploadResponse:
         """
         This endpoint creates a video asset allowing upload of a video from the local file system and ingest media content into the Gumlet system for processing and delivery. Body parameters are the same as the Create Asset body parameters except for the `input` parameter, which this endpoint does not take. A successful response will be returned with `upload_url` field. You can make `PUT` request to that URL to upload video. To upload video using `upload_url` refer to [this](https://docs.gumlet.com/docs/direct-upload#2-use-the-url-to-upload-a-file).
@@ -1236,6 +1314,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetUploadResponse: 200
@@ -1265,6 +1344,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 playlist_id="6597acd5ed6f26a9c5ca9633",
                 folder="697375fbfa2d1037283140e4",
                 workspace_id="646df1c9173a4a2fcac180b4",
+                idempotency_key="",
             )
             ```
         """
@@ -1303,7 +1383,11 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 video_asset_upload_params.VideoAssetUploadParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetUploadResponse,
         )
@@ -1359,6 +1443,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> None:
         """
         This endpoint removes an asset given its unique asset id. The asset will be removed from storage as well, associated URLs will be inaccessible.
@@ -1369,6 +1454,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             204
@@ -1377,6 +1463,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             ```python
             await client.video_assets.delete(
                 asset_id="assetId",
+                idempotency_key="",
             )
             ```
         """
@@ -1386,7 +1473,11 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         return await self._delete(
             path_template("/video/assets/{asset_id}", **{"asset_id": asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
         )
@@ -1409,6 +1500,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetUpdateResponse:
         """
         This endpoint allows users to update video asset that has previously been created.
@@ -1427,6 +1519,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetUpdateResponse: 200
@@ -1436,6 +1529,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             video_asset = await client.video_assets.update(
                 asset_id="<YOUR_ASSET_ID>",
                 title="Updated Title",
+                idempotency_key="",
             )
             ```
         """
@@ -1456,7 +1550,11 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 video_asset_update_params.VideoAssetUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetUpdateResponse,
         )
@@ -1472,6 +1570,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetThumbnailSelectResponse:
         """
         Select frame from video to use as thumbnail.
@@ -1483,6 +1582,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetThumbnailSelectResponse: 200
@@ -1492,6 +1592,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             video_asset = await client.video_assets.thumbnail_select(
                 asset_id="assetId",
                 frame_at_second=2,
+                idempotency_key="",
             )
             ```
         """
@@ -1505,7 +1606,11 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 video_asset_thumbnail_select_params.VideoAssetThumbnailSelectParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetThumbnailSelectResponse,
         )
@@ -1520,6 +1625,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetThumbnailUploadResponse:
         """
         Use any image file to use as thumbnail. Once you use the API, you will get `upload_url` in the response, and that can be used to upload the image file.
@@ -1537,6 +1643,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
         
         Returns:
             VideoAssetThumbnailUploadResponse
@@ -1545,6 +1652,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             ```python
             video_asset = await client.video_assets.thumbnail_upload(
                 asset_id="assetId",
+                idempotency_key="",
             )
             ```
         """
@@ -1553,7 +1661,11 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         return await self._post(
             path_template("/video/assets/{asset_ID}/thumbnail", **{"asset_ID": asset_id}),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetThumbnailUploadResponse,
         )
@@ -1569,6 +1681,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetCreateUpdateChapterResponse:
         """
         This endpoint will create/update video asset chapters.
@@ -1580,6 +1693,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetCreateUpdateChapterResponse: 200
@@ -1589,6 +1703,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             video_asset = await client.video_assets.create_update_chapter(
                 asset_id="assetId",
                 chapters=[{"label": "Chapter 1", "startTime": 0}, {"label": "Chapter 2", "startTime": 10}],
+                idempotency_key="",
             )
             ```
         """
@@ -1601,7 +1716,11 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 video_asset_create_update_chapter_params.VideoAssetCreateUpdateChapterParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetCreateUpdateChapterResponse,
         )
@@ -1828,6 +1947,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetDeleteManyResponse:
         """
         Delete multiple VOD assets at once.
@@ -1840,6 +1960,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetDeleteManyResponse: Successful response
@@ -1850,6 +1971,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 asset_list=["64249a8858fd3a208b987702", "64784bae843b155b829bbf84"],
                 source_id="60bd2ba353ff754d28179ee6",
                 workspace_id="60bd2ba353ff754d28179ee6",
+                idempotency_key="",
             )
             ```
         """
@@ -1864,7 +1986,11 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 video_asset_delete_many_params.VideoAssetDeleteManyParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetDeleteManyResponse,
         )
@@ -1883,6 +2009,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetTagManyResponse:
         """
         Add / remove tags from multiple assets at once.
@@ -1897,6 +2024,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetTagManyResponse: Successful response
@@ -1909,6 +2037,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 add_tags=["tag-1"],
                 remove_tags=["playlist-1"],
                 workspace_id="60bd2ba353ff754d28179ee6",
+                idempotency_key="",
             )
             ```
         """
@@ -1925,7 +2054,11 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 video_asset_tag_many_params.VideoAssetTagManyParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetTagManyResponse,
         )
@@ -1958,6 +2091,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> VideoAssetAnalyticsResponse:
         """
         Get video analytics for a single asset.
@@ -1973,6 +2107,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
             VideoAssetAnalyticsResponse: Successful response
@@ -1984,6 +2119,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 group_by="daily",
                 date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
                 metrics=["impressions"],
+                idempotency_key="",
             )
             ```
         """
@@ -2002,7 +2138,11 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 video_asset_analytics_params.VideoAssetAnalyticsParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=VideoAssetAnalyticsResponse,
         )

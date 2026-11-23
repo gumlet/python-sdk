@@ -17,6 +17,7 @@ class TestVideoUsageAnalytics:
             group_by="hourly",
             page_number=1,
             page_size=20,
+            idempotency_key="",
         )
 
     @smoke_case("videoUsageAnalytics.retrieve:all", operation="retrieve", path="/video/analytics")
@@ -30,6 +31,7 @@ class TestVideoUsageAnalytics:
             group_by="hourly",
             page_number=1,
             page_size=20,
+            idempotency_key="",
         )
 
     @smoke_case("videoUsageAnalytics.topAssets:required", operation="topAssets", path="/video/streaming-duration")

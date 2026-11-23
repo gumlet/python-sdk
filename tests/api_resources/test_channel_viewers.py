@@ -16,6 +16,7 @@ class TestChannelViewers:
                 {"email": "test+1@gumlet.com", "name": "Test User-1"},
                 {"email": "test+2@gumlet.com", "name": "Test User-2"},
             ],
+            idempotency_key="",
         )
 
     @smoke_case("channelViewers.remove:single", operation="remove", path="/channel/{video_workspace_id}/viewers/remove")
@@ -23,6 +24,7 @@ class TestChannelViewers:
         channel_viewer = client.channel_viewers.remove(
             video_workspace_id="videoWorkspaceId",
             emails=["test@gumlet.com", "test+2@gumlet.com"],
+            idempotency_key="",
         )
 
     @smoke_case(
@@ -34,6 +36,7 @@ class TestChannelViewers:
         channel_viewer = client.channel_viewers.invite_csv(
             video_workspace_id="videoWorkspaceId",
             viewers_csv=b"viewers.csv",
+            idempotency_key="",
         )
 
     @smoke_case(

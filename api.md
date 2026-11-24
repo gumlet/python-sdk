@@ -167,27 +167,6 @@ This endpoint creates a video asset allowing upload of a video from the local fi
 
 ```python
 video_asset = client.video_assets.upload(
-    collection_id="646df1c9173a4a2fcac180b4",
-    profile_id="646df1c9173a4a2fcac180b7",
-    format="ABR",
-    tag=["ball"],
-    description="some description",
-    metadata={"headermeta": "metavalue"},
-    call_to_actions=[
-        {
-            "start_time": 1,
-            "end_time": 90,
-            "text": "some test",
-            "url": "https://some-url.com",
-            "position_from_top": 11,
-            "position_from_right": 23,
-            "border_radius": "11",
-            "font_color": "#000001",
-            "background_color": "#ffffff",
-        }
-    ],
-    playlist_id="6597acd5ed6f26a9c5ca9633",
-    folder="697375fbfa2d1037283140e4",
     workspace_id="646df1c9173a4a2fcac180b4",
     idempotency_key="",
 )
@@ -407,27 +386,6 @@ This endpoint creates a video asset allowing upload of a video from the local fi
 ```python
 video_asset = client.video_assets.upload_file(
     file=open("path/to/file", "rb"),
-    collection_id="646df1c9173a4a2fcac180b4",
-    profile_id="646df1c9173a4a2fcac180b7",
-    format="ABR",
-    tag=["ball"],
-    description="some description",
-    metadata={"headermeta": "metavalue"},
-    call_to_actions=[
-        {
-            "start_time": 1,
-            "end_time": 90,
-            "text": "some test",
-            "url": "https://some-url.com",
-            "position_from_top": 11,
-            "position_from_right": 23,
-            "border_radius": "11",
-            "font_color": "#000001",
-            "background_color": "#ffffff",
-        }
-    ],
-    playlist_id="6597acd5ed6f26a9c5ca9633",
-    folder="697375fbfa2d1037283140e4",
     workspace_id="646df1c9173a4a2fcac180b4",
     idempotency_key="",
 )

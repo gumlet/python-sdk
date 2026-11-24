@@ -19,9 +19,6 @@ from .video_asset_thumbnail_select_response import (
     VideoAssetThumbnailSelectResponse as VideoAssetThumbnailSelectResponse,
 )
 from .video_asset_thumbnail_select_params import VideoAssetThumbnailSelectParams as VideoAssetThumbnailSelectParams
-from .video_asset_thumbnail_upload_response import (
-    VideoAssetThumbnailUploadResponse as VideoAssetThumbnailUploadResponse,
-)
 from .video_asset_create_update_chapter_response import (
     VideoAssetCreateUpdateChapterResponse as VideoAssetCreateUpdateChapterResponse,
 )
@@ -42,6 +39,9 @@ from .video_asset_tag_many_response import VideoAssetTagManyResponse as VideoAss
 from .video_asset_tag_many_params import VideoAssetTagManyParams as VideoAssetTagManyParams
 from .video_asset_analytics_response import VideoAssetAnalyticsResponse as VideoAssetAnalyticsResponse
 from .video_asset_analytics_params import VideoAssetAnalyticsParams as VideoAssetAnalyticsParams
+from .video_asset_upload_thumbnail_file_response import (
+    VideoAssetUploadThumbnailFileResponse as VideoAssetUploadThumbnailFileResponse,
+)
 from .subtitle_upload_upload_response import SubtitleUploadUploadResponse as SubtitleUploadUploadResponse
 from .subtitle_upload_upload_params import SubtitleUploadUploadParams as SubtitleUploadUploadParams
 from .subtitle_upload_complete_response import SubtitleUploadCompleteResponse as SubtitleUploadCompleteResponse

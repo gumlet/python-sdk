@@ -28,9 +28,11 @@ from ._exceptions import (
     APIWebhookValidationError,
     WebhookVerificationError,
     WebhookMissingHeadersError,
+    EmptyWebhookSecretError,
 )
 from ._base_client import DefaultHttpxClient, DefaultAioHttpClient, DefaultAsyncHttpxClient
 from ._utils._logs import setup_logging as _setup_logging
+from ._signed_upload import SignedUploadTransport
 
 __all__ = [
     "types",
@@ -53,6 +55,7 @@ __all__ = [
     "APIWebhookValidationError",
     "WebhookVerificationError",
     "WebhookMissingHeadersError",
+    "EmptyWebhookSecretError",
     "BadRequestError",
     "AuthenticationError",
     "PermissionDeniedError",
@@ -77,6 +80,7 @@ __all__ = [
     "DefaultHttpxClient",
     "DefaultAsyncHttpxClient",
     "DefaultAioHttpClient",
+    "SignedUploadTransport",
 ]
 
 if not _t.TYPE_CHECKING:

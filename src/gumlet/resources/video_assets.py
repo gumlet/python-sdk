@@ -7,9 +7,15 @@ import httpx
 from typing import Dict, Iterable, List, Union
 from datetime import date
 from typing_extensions import Literal
-from .._types import SequenceNotStr
+from .._types import FileTypes, SequenceNotStr
 
 from .._types import Body, Omit, Query, Headers, NotGiven, NoneType, omit, not_given
+from .._signed_upload import (
+    upload_to_signed_url,
+    async_upload_to_signed_url,
+    read_signed_upload_file,
+    async_read_signed_upload_file,
+)
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -37,7 +43,6 @@ from ..types.video_asset_upload_response import VideoAssetUploadResponse
 from ..types.video_asset_retrieve_details_response import VideoAssetRetrieveDetailsResponse
 from ..types.video_asset_update_response import VideoAssetUpdateResponse
 from ..types.video_asset_thumbnail_select_response import VideoAssetThumbnailSelectResponse
-from ..types.video_asset_thumbnail_upload_response import VideoAssetThumbnailUploadResponse
 from ..types.video_asset_create_update_chapter_response import VideoAssetCreateUpdateChapterResponse
 from ..types.video_asset_list_workspace_folders_and_deprecated_response import (
     VideoAssetListWorkspaceFoldersAndDeprecatedResponse,
@@ -46,6 +51,7 @@ from ..types.video_asset_list_response import VideoAssetListResponse
 from ..types.video_asset_delete_many_response import VideoAssetDeleteManyResponse
 from ..types.video_asset_tag_many_response import VideoAssetTagManyResponse
 from ..types.video_asset_analytics_response import VideoAssetAnalyticsResponse
+from ..types.video_asset_upload_thumbnail_file_response import VideoAssetUploadThumbnailFileResponse
 
 __all__ = ["VideoAssetsResource", "AsyncVideoAssetsResource"]
 
@@ -566,61 +572,6 @@ class VideoAssetsResource(SyncAPIResource):
             cast_to=VideoAssetThumbnailSelectResponse,
         )
 
-    def thumbnail_upload(
-        self,
-        asset_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-        idempotency_key: str | None = None,
-    ) -> VideoAssetThumbnailUploadResponse:
-        """
-        Use any image file to use as thumbnail. Once you use the API, you will get `upload_url` in the response, and that can be used to upload the image file.
-        
-        Here is the sample curl request.
-        
-        ```bash
-        curl --location --request PUT '<upload_url>' \\
-        --data '<YOUR_FILE_PATH>'
-        ```
-        
-        Args:
-            asset_id: An asset id for the previously created asset.
-            extra_headers: Send extra headers with the request.
-            extra_query: Send extra query parameters with the request.
-            extra_body: Send extra JSON properties with the request.
-            timeout: Override the client-level default timeout for this request, in seconds.
-            idempotency_key: Override or provide the idempotency key for this request.
-        
-        Returns:
-            VideoAssetThumbnailUploadResponse
-        
-        Example:
-            ```python
-            video_asset = client.video_assets.thumbnail_upload(
-                asset_id="assetId",
-                idempotency_key="",
-            )
-            ```
-        """
-        if asset_id is None or (isinstance(asset_id, str) and not asset_id):
-            raise ValueError(f"Expected a non-empty value for `asset_id` but received {asset_id!r}")
-        return self._post(
-            path_template("/video/assets/{asset_ID}/thumbnail", **{"asset_ID": asset_id}),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
-            ),
-            cast_to=VideoAssetThumbnailUploadResponse,
-        )
-
     def create_update_chapter(
         self,
         asset_id: str,
@@ -1097,6 +1048,66 @@ class VideoAssetsResource(SyncAPIResource):
             ),
             cast_to=VideoAssetAnalyticsResponse,
         )
+
+    def upload_thumbnail_file(
+        self,
+        asset_id: str,
+        file: FileTypes,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
+    ) -> VideoAssetUploadThumbnailFileResponse:
+        """
+        Requests a thumbnail upload URL for the asset and PUTs the file to it.
+
+        Args:
+            asset_id: An asset id for the previously created asset.
+            file: The file to upload. It is sent to the pre-signed URL the request returns, without the client's credentials. A custom `http_client`'s transport carries it only when that is httpx's own `HTTPTransport` (`AsyncHTTPTransport` on the async client) or inherits `SignedUploadTransport`.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
+
+        Returns:
+            VideoAssetUploadThumbnailFileResponse
+
+        Example:
+            ```python
+            video_asset = client.video_assets.upload_thumbnail_file(
+                asset_id="assetId",
+                file=open("path/to/file", "rb"),
+                idempotency_key="",
+            )
+            ```
+        """
+        _signed_upload_file = read_signed_upload_file(file)
+        if asset_id is None or (isinstance(asset_id, str) and not asset_id):
+            raise ValueError(f"Expected a non-empty value for `asset_id` but received {asset_id!r}")
+        initiated = self._post(
+            path_template("/video/assets/{asset_ID}/thumbnail", **{"asset_ID": asset_id}),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=VideoAssetUploadThumbnailFileResponse,
+        )
+        upload_to_signed_url(
+            self._client,
+            initiated,
+            {"url_field": ["upload_url"], "method": "PUT", "body": "binary"},
+            _signed_upload_file,
+            timeout=timeout,
+        )
+        return initiated
 
 
 class AsyncVideoAssetsResource(AsyncAPIResource):
@@ -1615,61 +1626,6 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             cast_to=VideoAssetThumbnailSelectResponse,
         )
 
-    async def thumbnail_upload(
-        self,
-        asset_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-        idempotency_key: str | None = None,
-    ) -> VideoAssetThumbnailUploadResponse:
-        """
-        Use any image file to use as thumbnail. Once you use the API, you will get `upload_url` in the response, and that can be used to upload the image file.
-        
-        Here is the sample curl request.
-        
-        ```bash
-        curl --location --request PUT '<upload_url>' \\
-        --data '<YOUR_FILE_PATH>'
-        ```
-        
-        Args:
-            asset_id: An asset id for the previously created asset.
-            extra_headers: Send extra headers with the request.
-            extra_query: Send extra query parameters with the request.
-            extra_body: Send extra JSON properties with the request.
-            timeout: Override the client-level default timeout for this request, in seconds.
-            idempotency_key: Override or provide the idempotency key for this request.
-        
-        Returns:
-            VideoAssetThumbnailUploadResponse
-        
-        Example:
-            ```python
-            video_asset = await client.video_assets.thumbnail_upload(
-                asset_id="assetId",
-                idempotency_key="",
-            )
-            ```
-        """
-        if asset_id is None or (isinstance(asset_id, str) and not asset_id):
-            raise ValueError(f"Expected a non-empty value for `asset_id` but received {asset_id!r}")
-        return await self._post(
-            path_template("/video/assets/{asset_ID}/thumbnail", **{"asset_ID": asset_id}),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
-            ),
-            cast_to=VideoAssetThumbnailUploadResponse,
-        )
-
     async def create_update_chapter(
         self,
         asset_id: str,
@@ -2147,6 +2103,66 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             cast_to=VideoAssetAnalyticsResponse,
         )
 
+    async def upload_thumbnail_file(
+        self,
+        asset_id: str,
+        file: FileTypes,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
+    ) -> VideoAssetUploadThumbnailFileResponse:
+        """
+        Requests a thumbnail upload URL for the asset and PUTs the file to it.
+
+        Args:
+            asset_id: An asset id for the previously created asset.
+            file: The file to upload. It is sent to the pre-signed URL the request returns, without the client's credentials. A custom `http_client`'s transport carries it only when that is httpx's own `HTTPTransport` (`AsyncHTTPTransport` on the async client) or inherits `SignedUploadTransport`.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
+
+        Returns:
+            VideoAssetUploadThumbnailFileResponse
+
+        Example:
+            ```python
+            video_asset = await client.video_assets.upload_thumbnail_file(
+                asset_id="assetId",
+                file=open("path/to/file", "rb"),
+                idempotency_key="",
+            )
+            ```
+        """
+        _signed_upload_file = await async_read_signed_upload_file(file)
+        if asset_id is None or (isinstance(asset_id, str) and not asset_id):
+            raise ValueError(f"Expected a non-empty value for `asset_id` but received {asset_id!r}")
+        initiated = await self._post(
+            path_template("/video/assets/{asset_ID}/thumbnail", **{"asset_ID": asset_id}),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=VideoAssetUploadThumbnailFileResponse,
+        )
+        await async_upload_to_signed_url(
+            self._client,
+            initiated,
+            {"url_field": ["upload_url"], "method": "PUT", "body": "binary"},
+            _signed_upload_file,
+            timeout=timeout,
+        )
+        return initiated
+
 
 class VideoAssetsResourceWithRawResponse:
     def __init__(self, video_assets: VideoAssetsResource) -> None:
@@ -2169,9 +2185,6 @@ class VideoAssetsResourceWithRawResponse:
         )
         self.thumbnail_select = to_raw_response_wrapper(
             video_assets.thumbnail_select,
-        )
-        self.thumbnail_upload = to_raw_response_wrapper(
-            video_assets.thumbnail_upload,
         )
         self.create_update_chapter = to_raw_response_wrapper(
             video_assets.create_update_chapter,
@@ -2215,9 +2228,6 @@ class AsyncVideoAssetsResourceWithRawResponse:
         self.thumbnail_select = async_to_raw_response_wrapper(
             video_assets.thumbnail_select,
         )
-        self.thumbnail_upload = async_to_raw_response_wrapper(
-            video_assets.thumbnail_upload,
-        )
         self.create_update_chapter = async_to_raw_response_wrapper(
             video_assets.create_update_chapter,
         )
@@ -2260,9 +2270,6 @@ class VideoAssetsResourceWithStreamingResponse:
         self.thumbnail_select = to_streamed_response_wrapper(
             video_assets.thumbnail_select,
         )
-        self.thumbnail_upload = to_streamed_response_wrapper(
-            video_assets.thumbnail_upload,
-        )
         self.create_update_chapter = to_streamed_response_wrapper(
             video_assets.create_update_chapter,
         )
@@ -2304,9 +2311,6 @@ class AsyncVideoAssetsResourceWithStreamingResponse:
         )
         self.thumbnail_select = async_to_streamed_response_wrapper(
             video_assets.thumbnail_select,
-        )
-        self.thumbnail_upload = async_to_streamed_response_wrapper(
-            video_assets.thumbnail_upload,
         )
         self.create_update_chapter = async_to_streamed_response_wrapper(
             video_assets.create_update_chapter,

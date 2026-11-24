@@ -11,13 +11,13 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [Delete Asset](#delete-asset)
   - [Update Asset](#update-asset)
   - [Update thumbnail from video](#update-thumbnail-from-video)
-  - [Update thumbnail via upload](#update-thumbnail-via-upload)
   - [Create/Update Video Asset Chapters](#createupdate-video-asset-chapters)
   - [List Assets (Deprecated)](#list-assets-deprecated)
   - [List Assets](#list-assets)
   - [Bulk Delete](#bulk-delete)
   - [Bulk Tag](#bulk-tag)
   - [Asset Analytics](#asset-analytics)
+  - [Upload a thumbnail file](#upload-a-thumbnail-file)
 - [`SubtitleUpload`](#subtitleupload)
   - [Upload Subtitles](#upload-subtitles)
   - [Complete Subtitle Upload](#complete-subtitle-upload)
@@ -250,28 +250,6 @@ video_asset = client.video_assets.thumbnail_select(
 )
 ```
 
-### Update thumbnail via upload
-
-Use any image file to use as thumbnail. Once you use the API, you will get `upload_url` in the response, and that can be used to upload the image file.
-
-Here is the sample curl request.
-
-```bash
-curl --location --request PUT '<upload_url>' \
---data '<YOUR_FILE_PATH>'
-```
-
-| Direction | Type |
-| --- | --- |
-| Response | [`VideoAssetThumbnailUploadResponse`](./src/gumlet/types/video_asset_thumbnail_upload_response.py) |
-
-```python
-video_asset = client.video_assets.thumbnail_upload(
-    asset_id="assetId",
-    idempotency_key="",
-)
-```
-
 ### Create/Update Video Asset Chapters
 
 This endpoint will create/update video asset chapters.
@@ -389,6 +367,22 @@ video_asset = client.video_assets.analytics(
     group_by="daily",
     date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     metrics=["impressions"],
+    idempotency_key="",
+)
+```
+
+### Upload a thumbnail file
+
+Requests a thumbnail upload URL for the asset and PUTs the file to it.
+
+| Direction | Type |
+| --- | --- |
+| Response | [`VideoAssetUploadThumbnailFileResponse`](./src/gumlet/types/video_asset_upload_thumbnail_file_response.py) |
+
+```python
+video_asset = client.video_assets.upload_thumbnail_file(
+    asset_id="assetId",
+    file=open("path/to/file", "rb"),
     idempotency_key="",
 )
 ```

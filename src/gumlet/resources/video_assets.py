@@ -54,7 +54,7 @@ from ..types.video_asset_delete_many_response import VideoAssetDeleteManyRespons
 from ..types.video_asset_tag_many_response import VideoAssetTagManyResponse
 from ..types.video_asset_analytics_response import VideoAssetAnalyticsResponse
 from ..types.video_asset_upload_file_response import VideoAssetUploadFileResponse
-from ..types.video_asset_upload_thumbnail_response import VideoAssetUploadThumbnailResponse
+from ..types.video_asset_upload_thumbnail_file_response import VideoAssetUploadThumbnailFileResponse
 
 __all__ = ["VideoAssetsResource", "AsyncVideoAssetsResource"]
 
@@ -1228,7 +1228,7 @@ class VideoAssetsResource(SyncAPIResource):
         )
         return initiated
 
-    def upload_thumbnail(
+    def upload_thumbnail_file(
         self,
         asset_id: str,
         file: FileTypes,
@@ -1240,7 +1240,7 @@ class VideoAssetsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
         idempotency_key: str | None = None,
-    ) -> VideoAssetUploadThumbnailResponse:
+    ) -> VideoAssetUploadThumbnailFileResponse:
         """
         Requests a thumbnail upload URL for the asset and PUTs the file to it.
 
@@ -1254,11 +1254,11 @@ class VideoAssetsResource(SyncAPIResource):
             idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
-            VideoAssetUploadThumbnailResponse
+            VideoAssetUploadThumbnailFileResponse
 
         Example:
             ```python
-            video_asset = client.video_assets.upload_thumbnail(
+            video_asset = client.video_assets.upload_thumbnail_file(
                 asset_id="assetId",
                 file=open("path/to/file", "rb"),
                 idempotency_key="",
@@ -1277,7 +1277,7 @@ class VideoAssetsResource(SyncAPIResource):
                 timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
-            cast_to=VideoAssetUploadThumbnailResponse,
+            cast_to=VideoAssetUploadThumbnailFileResponse,
         )
         upload_to_signed_url(
             self._client,
@@ -2458,7 +2458,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         )
         return initiated
 
-    async def upload_thumbnail(
+    async def upload_thumbnail_file(
         self,
         asset_id: str,
         file: FileTypes,
@@ -2470,7 +2470,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
         idempotency_key: str | None = None,
-    ) -> VideoAssetUploadThumbnailResponse:
+    ) -> VideoAssetUploadThumbnailFileResponse:
         """
         Requests a thumbnail upload URL for the asset and PUTs the file to it.
 
@@ -2484,11 +2484,11 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             idempotency_key: Override or provide the idempotency key for this request.
 
         Returns:
-            VideoAssetUploadThumbnailResponse
+            VideoAssetUploadThumbnailFileResponse
 
         Example:
             ```python
-            video_asset = await client.video_assets.upload_thumbnail(
+            video_asset = await client.video_assets.upload_thumbnail_file(
                 asset_id="assetId",
                 file=open("path/to/file", "rb"),
                 idempotency_key="",
@@ -2507,7 +2507,7 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
                 timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
-            cast_to=VideoAssetUploadThumbnailResponse,
+            cast_to=VideoAssetUploadThumbnailFileResponse,
         )
         await async_upload_to_signed_url(
             self._client,

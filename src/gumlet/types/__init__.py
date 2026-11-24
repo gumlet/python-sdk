@@ -44,8 +44,8 @@ from .video_asset_analytics_response import VideoAssetAnalyticsResponse as Video
 from .video_asset_analytics_params import VideoAssetAnalyticsParams as VideoAssetAnalyticsParams
 from .video_asset_upload_file_response import VideoAssetUploadFileResponse as VideoAssetUploadFileResponse
 from .video_asset_upload_file_params import VideoAssetUploadFileParams as VideoAssetUploadFileParams
-from .video_asset_upload_thumbnail_response import (
-    VideoAssetUploadThumbnailResponse as VideoAssetUploadThumbnailResponse,
+from .video_asset_upload_thumbnail_file_response import (
+    VideoAssetUploadThumbnailFileResponse as VideoAssetUploadThumbnailFileResponse,
 )
 from .subtitle_upload_upload_response import SubtitleUploadUploadResponse as SubtitleUploadUploadResponse
 from .subtitle_upload_upload_params import SubtitleUploadUploadParams as SubtitleUploadUploadParams

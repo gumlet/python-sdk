@@ -216,6 +216,15 @@ class TestVideoAssets:
         )
 
     @smoke_case(
+        "videoAssets.thumbnailUpload:single", operation="thumbnailUpload", path="/video/assets/{asset_ID}/thumbnail"
+    )
+    def test_method_thumbnail_upload(self) -> None:
+        video_asset = client.video_assets.thumbnail_upload(
+            asset_id="assetId",
+            idempotency_key="",
+        )
+
+    @smoke_case(
         "videoAssets.createUpdateChapter:single",
         operation="createUpdateChapter",
         path="/video/assets/{asset_id}/chapters",

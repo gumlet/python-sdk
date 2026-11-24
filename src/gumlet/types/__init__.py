@@ -19,6 +19,9 @@ from .video_asset_thumbnail_select_response import (
     VideoAssetThumbnailSelectResponse as VideoAssetThumbnailSelectResponse,
 )
 from .video_asset_thumbnail_select_params import VideoAssetThumbnailSelectParams as VideoAssetThumbnailSelectParams
+from .video_asset_thumbnail_upload_response import (
+    VideoAssetThumbnailUploadResponse as VideoAssetThumbnailUploadResponse,
+)
 from .video_asset_create_update_chapter_response import (
     VideoAssetCreateUpdateChapterResponse as VideoAssetCreateUpdateChapterResponse,
 )

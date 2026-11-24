@@ -11,6 +11,7 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [Delete Asset](#delete-asset)
   - [Update Asset](#update-asset)
   - [Update thumbnail from video](#update-thumbnail-from-video)
+  - [Update thumbnail via upload](#update-thumbnail-via-upload)
   - [Create/Update Video Asset Chapters](#createupdate-video-asset-chapters)
   - [List Assets (Deprecated)](#list-assets-deprecated)
   - [List Assets](#list-assets)
@@ -246,6 +247,28 @@ Select frame from video to use as thumbnail.
 video_asset = client.video_assets.thumbnail_select(
     asset_id="assetId",
     frame_at_second=2,
+    idempotency_key="",
+)
+```
+
+### Update thumbnail via upload
+
+Use any image file to use as thumbnail. Once you use the API, you will get `upload_url` in the response, and that can be used to upload the image file.
+
+Here is the sample curl request.
+
+```bash
+curl --location --request PUT '<upload_url>' \
+--data '<YOUR_FILE_PATH>'
+```
+
+| Direction | Type |
+| --- | --- |
+| Response | [`VideoAssetThumbnailUploadResponse`](./src/gumlet/types/video_asset_thumbnail_upload_response.py) |
+
+```python
+video_asset = client.video_assets.thumbnail_upload(
+    asset_id="assetId",
     idempotency_key="",
 )
 ```

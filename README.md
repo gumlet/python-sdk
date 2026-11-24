@@ -12,6 +12,7 @@ The REST API documentation can be found on [docs.gumlet.com](https://docs.gumlet
 - [Usage](#usage)
 - [API Reference](./api.md)
 - [Async](#async)
+- [File uploads](#file-uploads)
 - [Authentication](#authentication)
 - [Errors](#errors)
 - [Client Options](#client-options)
@@ -82,6 +83,20 @@ async def main() -> None:
 
 asyncio.run(main())
 ```
+
+<br />
+
+## File uploads
+
+Some methods upload a file to a pre-signed URL the API returns, usually on another host, then confirm the upload where the API asks for that. The upload goes out on a short-lived HTTP client of its own, carrying only the file, its content type and the headers the API named for it: none of the client's credentials, default headers, default query or cookies, and none of the `auth`, headers, cookies, params or event hooks of a custom `http_client`. The client's retries and timeout apply. The upload URL must be `https:` (plain `http:` only to this machine), and a redirect from the upload host is refused rather than followed.
+
+Without an `http_client`, the upload goes out on httpx's defaults: it takes its proxy and CA settings from the environment (`HTTPS_PROXY`, `SSL_CERT_FILE` and the like) when it is sent. With one you pass, the upload uses that client's proxy and TLS settings — `proxy=`, `mounts=`, `verify=` (`verify=False` included) and `cert=`, so a corporate proxy or a private CA works for uploads too, and a client certificate is presented to the upload host — when the transport the client would send the upload URL through is httpx's own `httpx.HTTPTransport` (`httpx.AsyncHTTPTransport` on the async client). Any other transport class, such as a subclass of your own or `DefaultAioHttpClient`'s, sends the request itself and could add headers, credentials or cookies, so with one the upload falls back to httpx's defaults as if no `http_client` were passed. So does an httpx transport bound to a Unix socket (`uds=`).
+
+When your proxy or TLS setup lives only in a transport class of your own, opt that transport in by inheriting `SignedUploadTransport` (`from gumlet import SignedUploadTransport`), as in `class CorporateTransport(SignedUploadTransport, httpx.HTTPTransport)`. Inheriting it declares that the transport sends a request as handed over: it adds no credentials, cookies or headers of its own, keeps no session or cookie jar that would, is bound to no Unix socket, follows no redirects and honours the timeout httpx hands it with each request, which is the only way the upload's timeout reaches it. The upload then goes through it, still carrying only the file, its type and the headers the API named. The SDK checks the marker, not what it promises, and reads it off the transport the client routes the upload URL to, so a wrapper around another transport has to inherit it itself.
+
+The same goes the other way: an `http_client` that trusts only a private CA, or whose proxy reaches only the API, applies that to the upload host too. Mount the transport the upload host needs, such as `mounts={"https://uploads.example.com": httpx.HTTPTransport()}` (`httpx.AsyncHTTPTransport()` on the async client) for httpx's default CA bundle and no proxy, and the upload uses that mount.
+
+A transport the upload borrows this way is used as the client built it. Its proxy routing and its trusted CAs are the ones the client settled on when it was created, environment variables included, as for its API calls, so a change to `HTTPS_PROXY`, `NO_PROXY`, `SSL_CERT_FILE` or `SSL_CERT_DIR` after that does not reach the upload. The upload also takes a connection from the client's pool, so it counts against the client's `limits` and, when the pool is full, waits for a free connection within its timeout like any other request. The timeout counts time without progress while the file goes out, but once the operating system has accepted the last of it, the wait for the upload host's answer is a single read. On a slow link that read can include the seconds the system still needs to send what it buffered, so keep an upload's timeout well above a few seconds.
 
 <br />
 

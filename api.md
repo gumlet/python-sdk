@@ -18,6 +18,8 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [Bulk Delete](#bulk-delete)
   - [Bulk Tag](#bulk-tag)
   - [Asset Analytics](#asset-analytics)
+  - [Create Asset Direct Upload](#create-asset-direct-upload-1)
+  - [Upload a thumbnail file](#upload-a-thumbnail-file)
 - [`SubtitleUpload`](#subtitleupload)
   - [Upload Subtitles](#upload-subtitles)
   - [Complete Subtitle Upload](#complete-subtitle-upload)
@@ -165,27 +167,6 @@ This endpoint creates a video asset allowing upload of a video from the local fi
 
 ```python
 video_asset = client.video_assets.upload(
-    collection_id="646df1c9173a4a2fcac180b4",
-    profile_id="646df1c9173a4a2fcac180b7",
-    format="ABR",
-    tag=["ball"],
-    description="some description",
-    metadata={"headermeta": "metavalue"},
-    call_to_actions=[
-        {
-            "start_time": 1,
-            "end_time": 90,
-            "text": "some test",
-            "url": "https://some-url.com",
-            "position_from_top": 11,
-            "position_from_right": 23,
-            "border_radius": "11",
-            "font_color": "#000001",
-            "background_color": "#ffffff",
-        }
-    ],
-    playlist_id="6597acd5ed6f26a9c5ca9633",
-    folder="697375fbfa2d1037283140e4",
     workspace_id="646df1c9173a4a2fcac180b4",
     idempotency_key="",
 )
@@ -389,6 +370,39 @@ video_asset = client.video_assets.analytics(
     group_by="daily",
     date_range={"start_at": "2024-01-01", "end_at": "2024-01-01"},
     metrics=["impressions"],
+    idempotency_key="",
+)
+```
+
+### Create Asset Direct Upload
+
+This endpoint creates a video asset allowing upload of a video from the local file system and ingest media content into the Gumlet system for processing and delivery. Body parameters are the same as the Create Asset body parameters except for the `input` parameter, which this endpoint does not take. A successful response will be returned with `upload_url` field. You can make `PUT` request to that URL to upload video. To upload video using `upload_url` refer to [this](https://docs.gumlet.com/docs/direct-upload#2-use-the-url-to-upload-a-file).
+
+| Direction | Type |
+| --- | --- |
+| Request | [`VideoAssetUploadFileParams`](./src/gumlet/types/video_asset_upload_file_params.py) |
+| Response | [`VideoAssetUploadFileResponse`](./src/gumlet/types/video_asset_upload_file_response.py) |
+
+```python
+video_asset = client.video_assets.upload_file(
+    file=open("path/to/file", "rb"),
+    workspace_id="646df1c9173a4a2fcac180b4",
+    idempotency_key="",
+)
+```
+
+### Upload a thumbnail file
+
+Requests a thumbnail upload URL for the asset and PUTs the file to it.
+
+| Direction | Type |
+| --- | --- |
+| Response | [`VideoAssetUploadThumbnailResponse`](./src/gumlet/types/video_asset_upload_thumbnail_response.py) |
+
+```python
+video_asset = client.video_assets.upload_thumbnail(
+    asset_id="assetId",
+    file=open("path/to/file", "rb"),
     idempotency_key="",
 )
 ```

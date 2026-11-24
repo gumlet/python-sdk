@@ -75,27 +75,6 @@ class TestVideoAssets:
     @smoke_case("videoAssets.upload:required", operation="upload", path="/video/assets/upload")
     def test_method_upload(self) -> None:
         video_asset = client.video_assets.upload(
-            collection_id="646df1c9173a4a2fcac180b4",
-            profile_id="646df1c9173a4a2fcac180b7",
-            format="ABR",
-            tag=["ball"],
-            description="some description",
-            metadata={"headermeta": "metavalue"},
-            call_to_actions=[
-                {
-                    "start_time": 1,
-                    "end_time": 90,
-                    "text": "some test",
-                    "url": "https://some-url.com",
-                    "position_from_top": 11,
-                    "position_from_right": 23,
-                    "border_radius": "11",
-                    "font_color": "#000001",
-                    "background_color": "#ffffff",
-                }
-            ],
-            playlist_id="6597acd5ed6f26a9c5ca9633",
-            folder="697375fbfa2d1037283140e4",
             workspace_id="646df1c9173a4a2fcac180b4",
             idempotency_key="",
         )
@@ -103,13 +82,13 @@ class TestVideoAssets:
     @smoke_case("videoAssets.upload:all", operation="upload", path="/video/assets/upload")
     def test_method_upload_with_all_params(self) -> None:
         video_asset = client.video_assets.upload(
-            collection_id="646df1c9173a4a2fcac180b4",
-            profile_id="646df1c9173a4a2fcac180b7",
+            collection_id="",
+            profile_id="",
             format="ABR",
-            tag=["ball"],
+            tag=[""],
             title="",
-            description="some description",
-            metadata={"headermeta": "metavalue"},
+            description="",
+            metadata={},
             width="",
             height="",
             resolution="",
@@ -148,21 +127,9 @@ class TestVideoAssets:
             process_low_resolution_input=False,
             audio_only=False,
             enable_drm=False,
-            call_to_actions=[
-                {
-                    "start_time": 1,
-                    "end_time": 90,
-                    "text": "some test",
-                    "url": "https://some-url.com",
-                    "position_from_top": 11,
-                    "position_from_right": 23,
-                    "border_radius": "11",
-                    "font_color": "#000001",
-                    "background_color": "#ffffff",
-                }
-            ],
-            playlist_id="6597acd5ed6f26a9c5ca9633",
-            folder="697375fbfa2d1037283140e4",
+            call_to_actions=[{}],
+            playlist_id="",
+            folder="",
             workspace_id="646df1c9173a4a2fcac180b4",
             idempotency_key="",
         )

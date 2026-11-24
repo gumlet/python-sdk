@@ -1,5 +1,38 @@
 # Changelog
 
+## [1.6.1](https://github.com/gumlet/python-sdk/compare/v1.6.0...v1.6.1) (2026-11-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 3 breaking changes to the SDK surface.
+    - method-name POST video/assets/upload — method names differ (breaking: renamed; the old spelling no longer resolves)
+    - path-params POST video/assets/upload — path parameter missing on one side (breaking: changed in a way existing callers can observe)
+    - request-shape POST video/assets/upload.file — field only in after (breaking: new required request member; existing calls lack it)
+* **api:** 3 breaking changes to the SDK surface.
+    - method-name POST video/assets/{p}/thumbnail — method names differ (breaking: renamed; the old spelling no longer resolves)
+    - types-files types/video_asset_upload_thumbnail_file_response.py — type file only in before (1 member: 0 matched by name and kind elsewhere in after, 1 not found) (breaking: removed; video_asset_upload_thumbnail_response.py appeared in its place, likely a rename)
+    - types-classes types/__init__.py:VideoAssetUploadThumbnailFileResponse — reexport only in before (breaking: removed; VideoAssetUploadThumbnailResponse appeared in its place, likely a rename)
+* **api:** 5 breaking changes to the SDK surface.
+    - method-name POST video/assets/{p}/thumbnail — method names differ (breaking: renamed; the old spelling no longer resolves)
+    - path-params POST video/assets/{p}/thumbnail — path parameter missing on one side (breaking: changed in a way existing callers can observe)
+    - request-shape POST video/assets/{p}/thumbnail.file — field only in after (breaking: new required request member; existing calls lack it)
+    - types-files types/video_asset_thumbnail_upload_response.py — type file only in before (1 member: 0 matched by name and kind elsewhere in after, 1 not found) (breaking: removed; video_asset_upload_thumbnail_file_response.py appeared in its place, likely a rename)
+    - types-classes types/__init__.py:VideoAssetThumbnailUploadResponse — reexport only in before (breaking: removed; VideoAssetUploadThumbnailFileResponse appeared in its place, likely a rename)
+
+### Features
+
+* **api:** update SDK surface (2 changes) ([de6129e](https://github.com/gumlet/python-sdk/commit/de6129ef4f205fffeed9d90f71ff46e06b460331))
+* **api:** update SDK surface (5 changes) ([8a894b8](https://github.com/gumlet/python-sdk/commit/8a894b820c9c57d565378060f9c3f9cf2f94aaaf))
+* **api:** update SDK surface (7 changes) ([b667221](https://github.com/gumlet/python-sdk/commit/b667221b3a612844112fe3e862e1221b245910d6))
+* **api:** update SDK surface (7 changes) ([34b2533](https://github.com/gumlet/python-sdk/commit/34b25338de94f693b44becff3c643689ea230f42))
+
+
+### Chores
+
+* **api:** update generated SDK content ([b8d812d](https://github.com/gumlet/python-sdk/commit/b8d812d61ddc9adeff26c8718602e0bdca9baf3a))
+* release 1.6.1 ([a3ac8bb](https://github.com/gumlet/python-sdk/commit/a3ac8bbb6a8d7efe7e7a210988e48671e22173f9))
+
 ## [1.6.0](https://github.com/gumlet/python-sdk/compare/v1.5.2...v1.6.0) (2026-11-23)
 
 

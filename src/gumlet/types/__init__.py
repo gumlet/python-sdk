@@ -39,8 +39,8 @@ from .video_asset_tag_many_response import VideoAssetTagManyResponse as VideoAss
 from .video_asset_tag_many_params import VideoAssetTagManyParams as VideoAssetTagManyParams
 from .video_asset_analytics_response import VideoAssetAnalyticsResponse as VideoAssetAnalyticsResponse
 from .video_asset_analytics_params import VideoAssetAnalyticsParams as VideoAssetAnalyticsParams
-from .video_asset_upload_thumbnail_file_response import (
-    VideoAssetUploadThumbnailFileResponse as VideoAssetUploadThumbnailFileResponse,
+from .video_asset_upload_thumbnail_response import (
+    VideoAssetUploadThumbnailResponse as VideoAssetUploadThumbnailResponse,
 )
 from .subtitle_upload_upload_response import SubtitleUploadUploadResponse as SubtitleUploadUploadResponse
 from .subtitle_upload_upload_params import SubtitleUploadUploadParams as SubtitleUploadUploadParams

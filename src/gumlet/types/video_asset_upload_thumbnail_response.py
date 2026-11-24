@@ -4,10 +4,10 @@ from typing import Optional
 
 from .._models import BaseModel
 
-__all__ = ["VideoAssetUploadThumbnailFileResponse"]
+__all__ = ["VideoAssetUploadThumbnailResponse"]
 
 
-class VideoAssetUploadThumbnailFileResponse(BaseModel):
+class VideoAssetUploadThumbnailResponse(BaseModel):
     upload_url: Optional[str] = None
     """Upload URL on which new thumbnail must be uploaded using a PUT request"""
 

@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.6.2](https://github.com/gumlet/python-sdk/compare/v1.6.1...v1.6.2) (2026-11-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 3 breaking changes to the SDK surface.
+    - method-name POST video/assets/{p}/thumbnail — method names differ (breaking: renamed; the old spelling no longer resolves)
+    - types-files types/video_asset_upload_thumbnail_response.py — type file only in before (1 member: 0 matched by name and kind elsewhere in after, 1 not found) (breaking: removed; video_asset_upload_thumbnail_file_response.py appeared in its place, likely a rename)
+    - types-classes types/__init__.py:VideoAssetUploadThumbnailResponse — reexport only in before (breaking: removed; VideoAssetUploadThumbnailFileResponse appeared in its place, likely a rename)
+
+### Features
+
+* **api:** update SDK surface (5 changes) ([ecbb04d](https://github.com/gumlet/python-sdk/commit/ecbb04d908b7232a4c5465cff1a81f225c2ca895))
+
+
+### Chores
+
+* **api:** update generated SDK content ([5924b2d](https://github.com/gumlet/python-sdk/commit/5924b2d8d2e1d241b9b6e5fc2c88e8151109ccca))
+* release 1.6.2 ([b7b08c7](https://github.com/gumlet/python-sdk/commit/b7b08c7f45943a977a71766d588740f2f5587abc))
+
 ## [1.6.1](https://github.com/gumlet/python-sdk/compare/v1.6.0...v1.6.1) (2026-11-24)
 
 

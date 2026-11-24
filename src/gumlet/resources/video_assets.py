@@ -38,6 +38,7 @@ from ..types import (
     video_asset_delete_many_params,
     video_asset_tag_many_params,
     video_asset_analytics_params,
+    video_asset_upload_file_params,
 )
 from ..types.video_asset_upload_response import VideoAssetUploadResponse
 from ..types.video_asset_retrieve_details_response import VideoAssetRetrieveDetailsResponse
@@ -52,6 +53,7 @@ from ..types.video_asset_list_response import VideoAssetListResponse
 from ..types.video_asset_delete_many_response import VideoAssetDeleteManyResponse
 from ..types.video_asset_tag_many_response import VideoAssetTagManyResponse
 from ..types.video_asset_analytics_response import VideoAssetAnalyticsResponse
+from ..types.video_asset_upload_file_response import VideoAssetUploadFileResponse
 from ..types.video_asset_upload_thumbnail_response import VideoAssetUploadThumbnailResponse
 
 __all__ = ["VideoAssetsResource", "AsyncVideoAssetsResource"]
@@ -1104,6 +1106,169 @@ class VideoAssetsResource(SyncAPIResource):
             ),
             cast_to=VideoAssetAnalyticsResponse,
         )
+
+    def upload_file(
+        self,
+        file: FileTypes,
+        *,
+        collection_id: str | Omit = omit,
+        profile_id: str | Omit = omit,
+        format: Literal["ABR", "MP4"] | Omit = omit,
+        tag: SequenceNotStr[str] | Omit = omit,
+        title: str | Omit = omit,
+        description: str | Omit = omit,
+        metadata: Dict[str, object] | Omit = omit,
+        width: str | Omit = omit,
+        height: str | Omit = omit,
+        resolution: str | Omit = omit,
+        crop: video_asset_upload_file_params.Crop | Omit = omit,
+        pad: video_asset_upload_file_params.Pad | Omit = omit,
+        trim: video_asset_upload_file_params.Trim | Omit = omit,
+        image_overlay: video_asset_upload_file_params.ImageOverlay | Omit = omit,
+        text_overlay: video_asset_upload_file_params.TextOverlay | Omit = omit,
+        animated_gif: video_asset_upload_file_params.AnimatedGif | Omit = omit,
+        additional_tracks: Iterable[video_asset_upload_file_params.AdditionalTrack] | Omit = omit,
+        generate_subtitles: video_asset_upload_file_params.GenerateSubtitles | Omit = omit,
+        mp4_access: bool | Omit = omit,
+        per_title_encoding: bool | Omit = omit,
+        process_low_resolution_input: bool | Omit = omit,
+        audio_only: bool | Omit = omit,
+        enable_drm: bool | Omit = omit,
+        call_to_actions: Iterable[video_asset_upload_file_params.CallToAction] | Omit = omit,
+        playlist_id: str | Omit = omit,
+        folder: str | Omit = omit,
+        workspace_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
+    ) -> VideoAssetUploadFileResponse:
+        """
+        This endpoint creates a video asset allowing upload of a video from the local file system and ingest media content into the Gumlet system for processing and delivery. Body parameters are the same as the Create Asset body parameters except for the `input` parameter, which this endpoint does not take. A successful response will be returned with `upload_url` field. You can make `PUT` request to that URL to upload video. To upload video using `upload_url` refer to [this](https://docs.gumlet.com/docs/direct-upload#2-use-the-url-to-upload-a-file).
+
+        Args:
+            file: The file to upload. It is sent to the pre-signed URL the request returns, without the client's credentials. A custom `http_client`'s transport carries it only when that is httpx's own `HTTPTransport` (`AsyncHTTPTransport` on the async client) or inherits `SignedUploadTransport`.
+            collection_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
+            profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `workspace_id`) from the video profile.
+            format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`.
+            tag: Specify a text string or identifier which can identify an asset or bunch of assets later.
+            title: Specify a text string or identifier which can be used for filtering or searching the asset.
+            description: Attach some textual data with the asset. This field is neither searchable nor filterable.
+            metadata: Add your metadata you want to associate with this asset.<br/> Example: <br/> <code>  {  "internal_video_id" : "123Abc"  }  </code>
+            width: Resize video with the given width. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset width will be ignored. Applicable only when specified format is `MP4`.
+            height: Resize video with the given height. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset height will be ignored. Applicable only when specified format is `MP4`.
+            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma-separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Resized rendition will retain the input aspect ratio.
+            crop: This transformation can be used to crop the video by defining a rectangular area within the dimensions of the output video.
+            pad: This transformation can be used to add padding to the video.
+            trim: Trim transformation can be used to trim videos based on time duration.
+            image_overlay: Image overlay can be used to brand a video or add a visual label in the form of an image.
+            text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
+            animated_gif: Create an animated GIF from the video.
+            additional_tracks: Add additional Audio / Subtitle tracks to Gumlet for transcoding and delivery along with video asset track.
+            generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
+            mp4_access: Creates `MP4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
+            per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
+            process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
+            audio_only: This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case, video transformation and thumbnails/animated GIFs would not be created. **Default: `false`**
+            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and FairPlay DRMs.
+            call_to_actions: A CTA is an explicit prompt within the video content encouraging viewers to take a particular action.
+            playlist_id: Add this asset to a playlist.
+            folder: Add this asset to an existing folder by `folder_id`.
+            workspace_id: Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID).
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
+
+        Returns:
+            VideoAssetUploadFileResponse: 200
+
+        Example:
+            ```python
+            video_asset = client.video_assets.upload_file(
+                file=open("path/to/file", "rb"),
+                collection_id="646df1c9173a4a2fcac180b4",
+                profile_id="646df1c9173a4a2fcac180b7",
+                format="ABR",
+                tag=["ball"],
+                description="some description",
+                metadata={"headermeta": "metavalue"},
+                call_to_actions=[
+                    {
+                        "start_time": 1,
+                        "end_time": 90,
+                        "text": "some test",
+                        "url": "https://some-url.com",
+                        "position_from_top": 11,
+                        "position_from_right": 23,
+                        "border_radius": "11",
+                        "font_color": "#000001",
+                        "background_color": "#ffffff",
+                    }
+                ],
+                playlist_id="6597acd5ed6f26a9c5ca9633",
+                folder="697375fbfa2d1037283140e4",
+                workspace_id="646df1c9173a4a2fcac180b4",
+                idempotency_key="",
+            )
+            ```
+        """
+        _signed_upload_file = read_signed_upload_file(file)
+        initiated = self._post(
+            "/video/assets/upload",
+            body=maybe_transform(
+                {
+                    "collection_id": collection_id,
+                    "profile_id": profile_id,
+                    "format": format,
+                    "tag": tag,
+                    "title": title,
+                    "description": description,
+                    "metadata": metadata,
+                    "width": width,
+                    "height": height,
+                    "resolution": resolution,
+                    "crop": crop,
+                    "pad": pad,
+                    "trim": trim,
+                    "image_overlay": image_overlay,
+                    "text_overlay": text_overlay,
+                    "animated_gif": animated_gif,
+                    "additional_tracks": additional_tracks,
+                    "generate_subtitles": generate_subtitles,
+                    "mp4_access": mp4_access,
+                    "per_title_encoding": per_title_encoding,
+                    "process_low_resolution_input": process_low_resolution_input,
+                    "audio_only": audio_only,
+                    "enable_drm": enable_drm,
+                    "call_to_actions": call_to_actions,
+                    "playlist_id": playlist_id,
+                    "folder": folder,
+                    "workspace_id": workspace_id,
+                },
+                video_asset_upload_file_params.VideoAssetUploadFileParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=VideoAssetUploadFileResponse,
+        )
+        upload_to_signed_url(
+            self._client,
+            initiated,
+            {"url_field": ["upload_url"], "method": "PUT", "body": "binary"},
+            _signed_upload_file,
+            timeout=timeout,
+        )
+        return initiated
 
     def upload_thumbnail(
         self,
@@ -2213,6 +2378,169 @@ class AsyncVideoAssetsResource(AsyncAPIResource):
             ),
             cast_to=VideoAssetAnalyticsResponse,
         )
+
+    async def upload_file(
+        self,
+        file: FileTypes,
+        *,
+        collection_id: str | Omit = omit,
+        profile_id: str | Omit = omit,
+        format: Literal["ABR", "MP4"] | Omit = omit,
+        tag: SequenceNotStr[str] | Omit = omit,
+        title: str | Omit = omit,
+        description: str | Omit = omit,
+        metadata: Dict[str, object] | Omit = omit,
+        width: str | Omit = omit,
+        height: str | Omit = omit,
+        resolution: str | Omit = omit,
+        crop: video_asset_upload_file_params.Crop | Omit = omit,
+        pad: video_asset_upload_file_params.Pad | Omit = omit,
+        trim: video_asset_upload_file_params.Trim | Omit = omit,
+        image_overlay: video_asset_upload_file_params.ImageOverlay | Omit = omit,
+        text_overlay: video_asset_upload_file_params.TextOverlay | Omit = omit,
+        animated_gif: video_asset_upload_file_params.AnimatedGif | Omit = omit,
+        additional_tracks: Iterable[video_asset_upload_file_params.AdditionalTrack] | Omit = omit,
+        generate_subtitles: video_asset_upload_file_params.GenerateSubtitles | Omit = omit,
+        mp4_access: bool | Omit = omit,
+        per_title_encoding: bool | Omit = omit,
+        process_low_resolution_input: bool | Omit = omit,
+        audio_only: bool | Omit = omit,
+        enable_drm: bool | Omit = omit,
+        call_to_actions: Iterable[video_asset_upload_file_params.CallToAction] | Omit = omit,
+        playlist_id: str | Omit = omit,
+        folder: str | Omit = omit,
+        workspace_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
+    ) -> VideoAssetUploadFileResponse:
+        """
+        This endpoint creates a video asset allowing upload of a video from the local file system and ingest media content into the Gumlet system for processing and delivery. Body parameters are the same as the Create Asset body parameters except for the `input` parameter, which this endpoint does not take. A successful response will be returned with `upload_url` field. You can make `PUT` request to that URL to upload video. To upload video using `upload_url` refer to [this](https://docs.gumlet.com/docs/direct-upload#2-use-the-url-to-upload-a-file).
+
+        Args:
+            file: The file to upload. It is sent to the pre-signed URL the request returns, without the client's credentials. A custom `http_client`'s transport carries it only when that is httpx's own `HTTPTransport` (`AsyncHTTPTransport` on the async client) or inherits `SignedUploadTransport`.
+            collection_id: Deprecated. Use `workspace_id` instead. Still accepted for backwards compatibility.
+            profile_id: Provide `profile_id` of the previously created video profile. This parameter will override all the parameters (except `input` and `workspace_id`) from the video profile.
+            format: Transcode and deliver the asset in the requested format. The options can be one of `ABR` (HLS + DASH) and `MP4`.
+            tag: Specify a text string or identifier which can identify an asset or bunch of assets later.
+            title: Specify a text string or identifier which can be used for filtering or searching the asset.
+            description: Attach some textual data with the asset. This field is neither searchable nor filterable.
+            metadata: Add your metadata you want to associate with this asset.<br/> Example: <br/> <code>  {  "internal_video_id" : "123Abc"  }  </code>
+            width: Resize video with the given width. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset width will be ignored. Applicable only when specified format is `MP4`.
+            height: Resize video with the given height. Can be an absolute value in pixels or a percentage value with the `%` suffix. Specified values greater than the original asset height will be ignored. Applicable only when specified format is `MP4`.
+            resolution: Required resolutions of the transformed asset in case of HLS or MPEG-DASH delivery format. Can be a comma-separated string out of the following values: `240p`, `360p`, `480p`, `540p`, `720p`, and `1080p`. Resized rendition will retain the input aspect ratio.
+            crop: This transformation can be used to crop the video by defining a rectangular area within the dimensions of the output video.
+            pad: This transformation can be used to add padding to the video.
+            trim: Trim transformation can be used to trim videos based on time duration.
+            image_overlay: Image overlay can be used to brand a video or add a visual label in the form of an image.
+            text_overlay: Text overlay can be used to brand a video or add a label in the form of text.
+            animated_gif: Create an animated GIF from the video.
+            additional_tracks: Add additional Audio / Subtitle tracks to Gumlet for transcoding and delivery along with video asset track.
+            generate_subtitles: Gumlet allows you to generate subtitles from the audio stream (use <a href='https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes'> ISO 639-1 </a> Language Codes)
+            mp4_access: Creates `MP4` version for download purpose in case of `MPEG-DASH` or `HLS` delivery format. **Default: `false`**
+            per_title_encoding: Gumlet analyzes each input video on a wide range of visual aspects. Based on the analysis, it chooses a unique set of transcoding options for processing the video. This ensures that the output video is of optimal size and best quality. **Default: `true`**
+            process_low_resolution_input: Currently, the minimum supported frame size is `57600` (`240x240`) pixels for `HLS/DASH` and `21025` (`145x145`) pixels for `MP4` format. However, enabling this flag will allow Gumlet to simply put your video asset into the specified delivery format without transcoding and optimization. Enabling this flag will cause any kind of specified video transformation to be ignored if you input video asset frame size is lower than the minimum supported frame size for the specified format. **Default: `false`**
+            audio_only: This flag allows Gumlet to transcode and deliver audio-only in the specified format. In this case, video transformation and thumbnails/animated GIFs would not be created. **Default: `false`**
+            enable_drm: Enable DRM encryption for transcoded videos. Gumlet supports Widevine and FairPlay DRMs.
+            call_to_actions: A CTA is an explicit prompt within the video content encouraging viewers to take a particular action.
+            playlist_id: Add this asset to a playlist.
+            folder: Add this asset to an existing folder by `folder_id`.
+            workspace_id: Gumlet video workspace ID. Preferred over deprecated `collection_id` / `source_id` (same ID).
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+            idempotency_key: Override or provide the idempotency key for this request.
+
+        Returns:
+            VideoAssetUploadFileResponse: 200
+
+        Example:
+            ```python
+            video_asset = await client.video_assets.upload_file(
+                file=open("path/to/file", "rb"),
+                collection_id="646df1c9173a4a2fcac180b4",
+                profile_id="646df1c9173a4a2fcac180b7",
+                format="ABR",
+                tag=["ball"],
+                description="some description",
+                metadata={"headermeta": "metavalue"},
+                call_to_actions=[
+                    {
+                        "start_time": 1,
+                        "end_time": 90,
+                        "text": "some test",
+                        "url": "https://some-url.com",
+                        "position_from_top": 11,
+                        "position_from_right": 23,
+                        "border_radius": "11",
+                        "font_color": "#000001",
+                        "background_color": "#ffffff",
+                    }
+                ],
+                playlist_id="6597acd5ed6f26a9c5ca9633",
+                folder="697375fbfa2d1037283140e4",
+                workspace_id="646df1c9173a4a2fcac180b4",
+                idempotency_key="",
+            )
+            ```
+        """
+        _signed_upload_file = await async_read_signed_upload_file(file)
+        initiated = await self._post(
+            "/video/assets/upload",
+            body=await async_maybe_transform(
+                {
+                    "collection_id": collection_id,
+                    "profile_id": profile_id,
+                    "format": format,
+                    "tag": tag,
+                    "title": title,
+                    "description": description,
+                    "metadata": metadata,
+                    "width": width,
+                    "height": height,
+                    "resolution": resolution,
+                    "crop": crop,
+                    "pad": pad,
+                    "trim": trim,
+                    "image_overlay": image_overlay,
+                    "text_overlay": text_overlay,
+                    "animated_gif": animated_gif,
+                    "additional_tracks": additional_tracks,
+                    "generate_subtitles": generate_subtitles,
+                    "mp4_access": mp4_access,
+                    "per_title_encoding": per_title_encoding,
+                    "process_low_resolution_input": process_low_resolution_input,
+                    "audio_only": audio_only,
+                    "enable_drm": enable_drm,
+                    "call_to_actions": call_to_actions,
+                    "playlist_id": playlist_id,
+                    "folder": folder,
+                    "workspace_id": workspace_id,
+                },
+                video_asset_upload_file_params.VideoAssetUploadFileParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=VideoAssetUploadFileResponse,
+        )
+        await async_upload_to_signed_url(
+            self._client,
+            initiated,
+            {"url_field": ["upload_url"], "method": "PUT", "body": "binary"},
+            _signed_upload_file,
+            timeout=timeout,
+        )
+        return initiated
 
     async def upload_thumbnail(
         self,

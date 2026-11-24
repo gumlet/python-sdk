@@ -377,10 +377,10 @@ Requests a thumbnail upload URL for the asset and PUTs the file to it.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`VideoAssetUploadThumbnailFileResponse`](./src/gumlet/types/video_asset_upload_thumbnail_file_response.py) |
+| Response | [`VideoAssetUploadThumbnailResponse`](./src/gumlet/types/video_asset_upload_thumbnail_response.py) |
 
 ```python
-video_asset = client.video_assets.upload_thumbnail_file(
+video_asset = client.video_assets.upload_thumbnail(
     asset_id="assetId",
     file=open("path/to/file", "rb"),
     idempotency_key="",

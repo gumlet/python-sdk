@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["VideoWorkspaceListParams"]
 
@@ -16,3 +16,6 @@ class VideoWorkspaceListParams(TypedDict, total=False):
 
     next_page_token: str
     """Cursor for the next page. Pass the `next_page_token` value returned in the previous response."""
+
+    order_by: Literal["asc", "desc"]
+    """Sort direction for the workspace list (`asc` or `desc`). **Default: `asc`**."""

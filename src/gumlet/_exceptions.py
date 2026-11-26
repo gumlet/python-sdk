@@ -68,12 +68,12 @@ try:
     from standardwebhooks.webhooks import WebhookVerificationError as _StandardWebhooksVerificationError  # type: ignore
 except ImportError:
 
-    class WebhookVerificationError(GumletError):
+    class WebhookVerificationError(Exception):
         """Raised when a webhook delivery's signature, timestamp or signed headers do not verify, or its helper is signed with an algorithm this SDK cannot verify."""
 
 else:
 
-    class WebhookVerificationError(GumletError, _StandardWebhooksVerificationError):  # type: ignore
+    class WebhookVerificationError(_StandardWebhooksVerificationError):  # type: ignore
         """Raised when a webhook delivery's signature, timestamp or signed headers do not verify, or its helper is signed with an algorithm this SDK cannot verify."""
 
 
@@ -85,12 +85,12 @@ try:
     from standardwebhooks.webhooks import EmptyWebhookSecretError as _StandardWebhooksEmptySecretError  # type: ignore
 except ImportError:
 
-    class EmptyWebhookSecretError(GumletError, ValueError):
+    class EmptyWebhookSecretError(ValueError):
         """Raised when a webhook signing key decodes to nothing; it is also a `ValueError`, so `except ValueError` handlers catch it."""
 
 else:
 
-    class EmptyWebhookSecretError(GumletError, ValueError, _StandardWebhooksEmptySecretError):  # type: ignore
+    class EmptyWebhookSecretError(ValueError, _StandardWebhooksEmptySecretError):  # type: ignore
         """Raised when a webhook signing key decodes to nothing; it is also a `ValueError`, so `except ValueError` handlers catch it."""
 
 

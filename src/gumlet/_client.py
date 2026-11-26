@@ -107,7 +107,7 @@ class Gumlet(SyncAPIClient):
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
-        default_headers: Mapping[str, str] | None = None,
+        default_headers: Mapping[str, str | Omit] | None = None,
         default_query: Mapping[str, object] | None = None,
         # Configure a custom httpx client.
         # We provide a `DefaultHttpxClient` class that you can pass to retain the default values we use for `limits` & `timeout`.
@@ -151,7 +151,9 @@ class Gumlet(SyncAPIClient):
                 colon = line.find(":")
                 if colon >= 0:
                     parsed[line[:colon].strip()] = line[colon + 1 :].strip()
-            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+            given = default_headers if is_mapping_t(default_headers) else {}
+            given_names = {name.lower() for name in given}
+            default_headers = {**{k: v for k, v in parsed.items() if k.lower() not in given_names}, **given}
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -351,7 +353,9 @@ class Gumlet(SyncAPIClient):
     @property
     @override
     def _auth_locations(self) -> AuthLocations:
-        return AuthLocations(headers=frozenset({"authorization"}))
+        return AuthLocations(
+            headers=frozenset({"authorization"}), scheme_headers={"API_KEY": frozenset({"authorization"})}
+        )
 
     @property
     def _api_key_header_auth(self) -> dict[str, str]:
@@ -377,9 +381,7 @@ class Gumlet(SyncAPIClient):
         params: Mapping[str, object],
         cookies: Mapping[str, str],
     ) -> None:
-        if headers.get("Authorization"):
-            return
-        if isinstance(custom_headers.get("Authorization"), Omit):
+        if self._header_given("Authorization", headers, custom_headers):
             return
         raise TypeError(
             '"Could not resolve authentication method. Expected the api_key to be set. Or for the `Authorization` headers to be explicitly omitted"'
@@ -394,8 +396,8 @@ class Gumlet(SyncAPIClient):
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
         max_retries: int | NotGiven = not_given,
-        default_headers: Mapping[str, str] | None = None,
-        set_default_headers: Mapping[str, str] | None = None,
+        default_headers: Mapping[str, str | Omit] | None = None,
+        set_default_headers: Mapping[str, str | Omit] | None = None,
         default_query: Mapping[str, object] | None = None,
         set_default_query: Mapping[str, object] | None = None,
         _extra_kwargs: Mapping[str, Any] = {},
@@ -407,7 +409,8 @@ class Gumlet(SyncAPIClient):
             raise ValueError("The `default_query` and `set_default_query` arguments are mutually exclusive")
         headers = self._custom_headers
         if default_headers is not None:
-            headers = {**headers, **default_headers}
+            replaced = {name.lower() for name in default_headers}
+            headers = {**{k: v for k, v in headers.items() if k.lower() not in replaced}, **default_headers}
         elif set_default_headers is not None:
             headers = set_default_headers
         params = self._custom_query
@@ -465,7 +468,7 @@ class AsyncGumlet(AsyncAPIClient):
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
-        default_headers: Mapping[str, str] | None = None,
+        default_headers: Mapping[str, str | Omit] | None = None,
         default_query: Mapping[str, object] | None = None,
         # Configure a custom httpx client.
         # We provide a `DefaultAsyncHttpxClient` class that you can pass to retain the default values we use for `limits` & `timeout`.
@@ -509,7 +512,9 @@ class AsyncGumlet(AsyncAPIClient):
                 colon = line.find(":")
                 if colon >= 0:
                     parsed[line[:colon].strip()] = line[colon + 1 :].strip()
-            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+            given = default_headers if is_mapping_t(default_headers) else {}
+            given_names = {name.lower() for name in given}
+            default_headers = {**{k: v for k, v in parsed.items() if k.lower() not in given_names}, **given}
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -709,7 +714,9 @@ class AsyncGumlet(AsyncAPIClient):
     @property
     @override
     def _auth_locations(self) -> AuthLocations:
-        return AuthLocations(headers=frozenset({"authorization"}))
+        return AuthLocations(
+            headers=frozenset({"authorization"}), scheme_headers={"API_KEY": frozenset({"authorization"})}
+        )
 
     @property
     def _api_key_header_auth(self) -> dict[str, str]:
@@ -735,9 +742,7 @@ class AsyncGumlet(AsyncAPIClient):
         params: Mapping[str, object],
         cookies: Mapping[str, str],
     ) -> None:
-        if headers.get("Authorization"):
-            return
-        if isinstance(custom_headers.get("Authorization"), Omit):
+        if self._header_given("Authorization", headers, custom_headers):
             return
         raise TypeError(
             '"Could not resolve authentication method. Expected the api_key to be set. Or for the `Authorization` headers to be explicitly omitted"'
@@ -752,8 +757,8 @@ class AsyncGumlet(AsyncAPIClient):
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
         max_retries: int | NotGiven = not_given,
-        default_headers: Mapping[str, str] | None = None,
-        set_default_headers: Mapping[str, str] | None = None,
+        default_headers: Mapping[str, str | Omit] | None = None,
+        set_default_headers: Mapping[str, str | Omit] | None = None,
         default_query: Mapping[str, object] | None = None,
         set_default_query: Mapping[str, object] | None = None,
         _extra_kwargs: Mapping[str, Any] = {},
@@ -765,7 +770,8 @@ class AsyncGumlet(AsyncAPIClient):
             raise ValueError("The `default_query` and `set_default_query` arguments are mutually exclusive")
         headers = self._custom_headers
         if default_headers is not None:
-            headers = {**headers, **default_headers}
+            replaced = {name.lower() for name in default_headers}
+            headers = {**{k: v for k, v in headers.items() if k.lower() not in replaced}, **default_headers}
         elif set_default_headers is not None:
             headers = set_default_headers
         params = self._custom_query

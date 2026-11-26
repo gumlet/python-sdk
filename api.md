@@ -1284,6 +1284,7 @@ Pagination uses `page_number` / `page_size` (max page size 200). Use `next_page_
 video_workspace = client.video_workspaces.list(
     page_number=1,
     page_size=20,
+    order_by="asc",
 )
 ```
 

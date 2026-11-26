@@ -582,11 +582,17 @@ def _merge_scheme_credentials(parts: List[SchemeCredentials]) -> SchemeCredentia
 
 @dataclass(frozen=True)
 class AuthLocations:
-    """The lower-cased header names, and the query and cookie names, the client's credentials use."""
+    """
+    The lower-cased header names, and the query and cookie names, the client's credentials use.
+
+    `scheme_headers` holds the same header names by the security scheme they belong to, keyed as
+    `_auth_by_scheme` is, so an operation's own check can tell whose header a caller left out.
+    """
 
     headers: frozenset[str] = frozenset()
     query: frozenset[str] = frozenset()
     cookies: frozenset[str] = frozenset()
+    scheme_headers: Mapping[str, frozenset[str]] = field(default_factory=dict)
 
 
 @dataclass
@@ -927,7 +933,7 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
         _strict_response_validation: bool,
         max_retries: int = DEFAULT_MAX_RETRIES,
         timeout: float | Timeout | None = DEFAULT_TIMEOUT,
-        custom_headers: Mapping[str, str] | None = None,
+        custom_headers: Mapping[str, str | Omit] | None = None,
         custom_query: Mapping[str, object] | None = None,
     ) -> None:
         self._version = version
@@ -1017,6 +1023,75 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
         """Where the client's credentials travel, configured or not."""
         return AuthLocations()
 
+    def _header_given(self, name: str, headers: Mapping[str, object], custom_headers: Mapping[str, object]) -> bool:
+        """
+        Whether the merged request `headers` carry a value for header `name`, or the caller left it out
+        on purpose (`_header_omitted`). Names match case-insensitively, as HTTP header names do.
+        """
+        lowered = name.lower()
+        return any(value for key, value in headers.items() if key.lower() == lowered) or self._header_omitted(
+            name, custom_headers
+        )
+
+    def _without_omitted(self, headers: dict[str, _T], custom_headers: Mapping[str, object]) -> dict[str, _T]:
+        """
+        `headers` with each credential header (`_auth_locations`) the caller decided on spelled the
+        caller's way only: gone when the caller left it out with `Omit()` (`_header_omitted`), and kept
+        only under the caller's spelling when the caller set it in another case than the SDK did.
+
+        `_merge_mappings` matches names exactly, so this is what lets
+        `default_headers={"authorization": Omit()}` remove a configured `Authorization`, and a call's
+        `{"authorization": "..."}` replace it rather than travel beside it. It reads credential headers
+        alone: the SDK writes `Omit()` placeholders of its own for an unset client option or header
+        argument, which must not remove a caller's value spelled another way.
+        """
+        credential_headers = self._auth_locations.headers
+        kept: dict[str, _T] = {}
+        for name, value in headers.items():
+            lowered = name.lower()
+            if lowered in credential_headers:
+                if self._header_omitted(name, custom_headers):
+                    continue
+                scope = self._deciding_headers(name, custom_headers)
+                # A spelling the caller did not write yields to the caller's, but only when the
+                # caller's value is on this request: a websocket connect never sends the client's
+                # `default_headers`, so their spelling must not remove the credential it does send.
+                if (
+                    scope is not None
+                    and name not in scope
+                    and any(key in headers for key in scope if key.lower() == lowered)
+                ):
+                    continue
+            kept[name] = value
+        return kept
+
+    def _deciding_headers(self, name: str, custom_headers: Mapping[str, object]) -> Mapping[str, object] | None:
+        """
+        The caller's headers that decide header `name`, matched case-insensitively: the call's own when
+        they name it, else the client's `default_headers` when those do, else `None`.
+        """
+        lowered = name.lower()
+        for scope in (custom_headers, self._custom_headers):
+            if any(key.lower() == lowered for key in scope):
+                return scope
+        return None
+
+    def _header_omitted(self, name: str, custom_headers: Mapping[str, object]) -> bool:
+        """
+        Whether the caller left header `name` out of the request with `Omit()`: in the call's own
+        headers, or, when those do not name it at all, in the client's `default_headers`
+        (`_deciding_headers`). A call that names the header decides for itself, so a real value there
+        wins over a client-wide `Omit()`.
+
+        Names match case-insensitively, and of several entries for one name the last wins, as it does
+        when the headers merge, so `copy(default_headers=...)` setting a real value replaces an `Omit()`.
+        """
+        scope = self._deciding_headers(name, custom_headers)
+        if scope is None:
+            return False
+        lowered = name.lower()
+        return isinstance([value for key, value in scope.items() if key.lower() == lowered][-1], Omit)
+
     def _credential_supplied(
         self,
         security: SecurityOptions,
@@ -1028,23 +1103,30 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
         """
         Whether the request already carries a credential the caller set some other way than a client
         option — the client's `default_headers` or `default_query`, or the call's `extra_headers` or
-        `extra_query` — or omits a credential header on purpose, as the client-wide check accepts.
+        `extra_query` — or omits on purpose (`_header_omitted`) the header of a scheme the operation
+        lists.
 
         A value `_select_auth` put on the request is the client's own partial credential, not the
         caller's, so it never counts: a half-configured alternative is refused unless the caller
-        supplies the rest.
+        supplies the rest. An omission counts only for the operation's own schemes: a client-wide
+        `{"Authorization": Omit()}` for a gateway that adds a bearer token says nothing about an
+        operation that needs an API key header, which is still refused before it is sent.
         """
         locations = self._auth_locations
         selected = self._select_auth(security)
         selected_headers = {name.lower(): value for name, value in selected.headers.items()}
+        operation_headers = {
+            name
+            for alternative in security
+            for scheme in alternative
+            for name in locations.scheme_headers.get(scheme, frozenset())
+        }
         return (
             any(
                 name.lower() in locations.headers and value and selected_headers.get(name.lower()) != value
                 for name, value in headers.items()
             )
-            or any(
-                name.lower() in locations.headers and isinstance(value, Omit) for name, value in custom_headers.items()
-            )
+            or any(self._header_omitted(name, custom_headers) for name in operation_headers)
             or any(
                 params.get(name) is not None and params.get(name) != selected.query.get(name)
                 for name in locations.query
@@ -1114,7 +1196,7 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
                 **self._select_auth(options.security).headers,
                 **self._custom_headers,
             }
-        headers_dict = _merge_mappings(default_headers, custom_headers)
+        headers_dict = self._without_omitted(_merge_mappings(default_headers, custom_headers), custom_headers)
         if options.security is None:
             # The client-wide check that some credential is configured.
             self._validate_headers(headers_dict, custom_headers, params, cookies)
@@ -1616,7 +1698,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         max_retries: int = DEFAULT_MAX_RETRIES,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
-        custom_headers: Mapping[str, str] | None = None,
+        custom_headers: Mapping[str, str | Omit] | None = None,
         custom_query: Mapping[str, object] | None = None,
         _strict_response_validation: bool,
         **kwargs: Any,
@@ -2209,6 +2291,57 @@ class _DefaultAsyncHttpxClient(httpx.AsyncClient):
         super().__init__(**kwargs)
 
 
+class _AioHttpUploadConnection:
+    """The proxy and TLS settings a `DefaultAioHttpClient` built its transports with, kept for signed uploads.
+
+    The client's aiohttp transport never carries an upload (its session keeps a cookie jar), so an
+    upload builds an `httpx.AsyncHTTPTransport` of its own from these instead. Only what httpx handed
+    the client's transport hooks is kept: `verify`, `cert` and `trust_env`, and the `httpx.Proxy`
+    behind each proxy transport (`proxy=`, or the environment's when `trust_env` allowed it). Headers,
+    auth, cookies, params, hooks and the base URL live on the client and are never read. The `repr`
+    names none of it, since a proxy URL can carry a password.
+    """
+
+    __slots__ = ("tls", "default_transport", "proxy_transports", "ssl_context")
+
+    def __init__(self) -> None:
+        """Starts empty: httpx fills it in while the client builds its transports."""
+        self.tls: Optional[Dict[str, Any]] = None
+        self.default_transport: Optional[httpx.AsyncBaseTransport] = None
+        self.proxy_transports: List[tuple[httpx.AsyncBaseTransport, httpx.Proxy]] = []
+        self.ssl_context: Any = None
+
+    def __repr__(self) -> str:
+        """Names the type only, so printing the settings cannot show a proxy password."""
+        return "<signed upload connection settings>"
+
+    def upload_transport(self, routed: object) -> Optional[httpx.AsyncHTTPTransport]:
+        """A fresh `httpx.AsyncHTTPTransport` with the settings of `routed`, the transport the client routes an upload URL to.
+
+        `None` when `routed` is not one the client built itself (a `mounts=` entry or `transport=` of
+        the caller's own, whose settings cannot be read), or when httpx cannot build a transport from
+        them (a SOCKS proxy without `socksio`, say): the upload then falls back to httpx's defaults, as
+        before, rather than carrying only some of them.
+        """
+        if self.tls is None:
+            return None
+        proxy: Optional[httpx.Proxy] = None
+        if self.default_transport is None or routed is not self.default_transport:
+            proxy = next((candidate for built, candidate in self.proxy_transports if built is routed), None)
+            if proxy is None:
+                return None
+        # Any failure here means a setting cannot be carried over, so none of them is.
+        try:
+            # Built once, from the same arguments the aiohttp transport got, so a `cert=` is loaded once.
+            if self.ssl_context is None:
+                self.ssl_context = httpx.create_ssl_context(**self.tls)
+            return httpx.AsyncHTTPTransport(verify=self.ssl_context, proxy=proxy)
+        except Exception as err:
+            # The class name only: the message can carry the proxy URL, and with it a password.
+            log.debug("Signed upload falls back to httpx's defaults: %s", type(err).__name__)
+            return None
+
+
 try:
     import httpx_aiohttp
 except ImportError:
@@ -2224,8 +2357,32 @@ else:
             kwargs.setdefault("limits", DEFAULT_CONNECTION_LIMITS)
             # The SDK follows redirects itself (see `_send_following_redirects`), so httpx never does.
             kwargs.setdefault("follow_redirects", False)
+            # Set first: httpx builds the transports, through the hooks below, inside `super().__init__`.
+            self._signed_upload_connection = _AioHttpUploadConnection()
 
             super().__init__(**kwargs)
+
+        def _init_transport(self, *args: Any, **kwargs: Any) -> httpx.AsyncBaseTransport:
+            """Builds the default transport as `httpx_aiohttp` does, and notes its TLS settings for signed uploads."""
+            transport = super()._init_transport(*args, **kwargs)
+            # Read, not assumed: a subclass that skips this class's `__init__` never set it, and its
+            # uploads never use the settings anyway.
+            connection = getattr(self, "_signed_upload_connection", None)
+            # httpx passes these by keyword; anything else is a call this cannot read, so nothing is noted.
+            if isinstance(connection, _AioHttpUploadConnection) and not args:
+                connection.tls = {name: kwargs[name] for name in ("verify", "cert", "trust_env") if name in kwargs}
+                # A `transport=` of the caller's own comes back as given, and its settings are not ours to read.
+                if transport is not kwargs.get("transport"):
+                    connection.default_transport = transport
+            return transport
+
+        def _init_proxy_transport(self, proxy: httpx.Proxy, *args: Any, **kwargs: Any) -> httpx.AsyncBaseTransport:
+            """Builds a proxy transport as `httpx_aiohttp` does, and notes which proxy it is for signed uploads."""
+            transport = super()._init_proxy_transport(proxy, *args, **kwargs)
+            connection = getattr(self, "_signed_upload_connection", None)
+            if isinstance(connection, _AioHttpUploadConnection):
+                connection.proxy_transports.append((transport, proxy))
+            return transport
 
 
 if TYPE_CHECKING:
@@ -2269,7 +2426,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         max_retries: int = DEFAULT_MAX_RETRIES,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
-        custom_headers: Mapping[str, str] | None = None,
+        custom_headers: Mapping[str, str | Omit] | None = None,
         custom_query: Mapping[str, object] | None = None,
         **kwargs: Any,
     ) -> None:

@@ -12,6 +12,7 @@ class TestVideoWorkspaces:
         video_workspace = client.video_workspaces.list(
             page_number=1,
             page_size=20,
+            order_by="asc",
         )
 
     @smoke_case("videoWorkspaces.list:all", operation="list", path="/video/workspaces")
@@ -20,6 +21,7 @@ class TestVideoWorkspaces:
             page_number=1,
             page_size=20,
             next_page_token="next_page_token",
+            order_by="asc",
         )
 
     @smoke_case("videoWorkspaces.create:required", operation="create", path="/video/workspaces")

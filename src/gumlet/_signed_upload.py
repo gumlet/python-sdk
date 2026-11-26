@@ -19,6 +19,11 @@ class sends the request itself and can add headers, credentials or cookies the S
 with one the upload falls back to a fresh client of httpx's defaults, where proxy and CA settings
 come from the environment (`HTTPS_PROXY`, `SSL_CERT_FILE`, ...) only.
 
+`DefaultAioHttpClient`, the SDK's own aiohttp client, is the one class whose settings are read
+rather than its transport borrowed: its aiohttp session keeps a cookie jar, so the upload never goes
+through it, but the client notes the `proxy=`, `verify=`, `cert=` and `trust_env=` it was built with,
+and the upload builds an `httpx.AsyncHTTPTransport` of its own from them (`_aiohttp_client_transport`).
+
 A caller whose proxy or TLS setup lives only in a transport class of its own opts that transport in
 by inheriting `SignedUploadTransport`. That is the caller's declaration, never a guess: the SDK
 reads it off the routed transport itself, so a wrapper is lent only if it inherits the marker too.
@@ -68,7 +73,12 @@ from ._types import NotGiven, FileTypes
 from ._models import BaseModel
 from ._constants import MAX_RETRY_DELAY, INITIAL_RETRY_DELAY
 from ._exceptions import APITimeoutError, APIConnectionError, GumletError
-from ._base_client import SyncHttpxClientWrapper, AsyncHttpxClientWrapper
+from ._base_client import (
+    DefaultAioHttpClient,
+    SyncHttpxClientWrapper,
+    AsyncHttpxClientWrapper,
+    _AioHttpUploadConnection,
+)
 
 if TYPE_CHECKING:
     from ._base_client import SyncAPIClient, AsyncAPIClient
@@ -119,6 +129,8 @@ class SignedUploadTransport:
     By default a signed upload borrows only httpx's own `HTTPTransport` (or `AsyncHTTPTransport`)
     from a custom `http_client`, and any other transport class falls back to a fresh client of
     httpx's defaults, since a class of its own may add headers, credentials or cookies as it sends.
+    (`DefaultAioHttpClient` itself is the exception: the upload builds an httpx transport of its own
+    from the proxy and TLS settings that client was given.)
     Inheriting this marker declares that the transport sends a request as handed over: it adds no
     credentials, cookies or headers of its own, keeps no session or cookie jar that would, is bound
     to no Unix socket, follows no redirects, and honours the timeout httpx hands it with each request
@@ -358,6 +370,11 @@ def _async_upload_client(
     """The async twin of `_upload_client`."""
     transport = _caller_transport(source, url, httpx.AsyncHTTPTransport, httpx.AsyncBaseTransport)
     if transport is None:
+        rebuilt = _aiohttp_client_transport(source, url)
+        if rebuilt is not None:
+            # Built for this upload alone, so it closes with the upload's client, unlike a borrowed one.
+            return httpx.AsyncClient(timeout=timeout, follow_redirects=False, transport=rebuilt)
+    if transport is None:
         return httpx.AsyncClient(timeout=timeout, follow_redirects=False)
     return httpx.AsyncClient(timeout=timeout, follow_redirects=False, transport=_AsyncBorrowedTransport(transport))
 
@@ -404,6 +421,25 @@ def _caller_transport(source: object, url: str, httpx_type: Type[_T], base_type:
     if pool is None or not hasattr(pool, "_uds") or getattr(pool, "_uds") is not None:
         return None
     return transport
+
+
+def _aiohttp_client_transport(source: object, url: str) -> Optional[httpx.AsyncHTTPTransport]:
+    """An `httpx.AsyncHTTPTransport` for `url` with the proxy and TLS settings `DefaultAioHttpClient` was built with.
+
+    Only for that exact class, which the SDK defines and so knows notes nothing but those settings: a
+    subclass can change what it builds or sends, and an aiohttp client built directly notes nothing, so
+    both keep the fallback to httpx's defaults unless their routed transport is marked. The settings
+    are those of the transport the client routes `url` to, so a proxy for another host, or a `NO_PROXY`
+    match, applies here as it does to the API calls; a mount of the caller's own, which cannot be read,
+    gives `None` (see `_AioHttpUploadConnection.upload_transport`).
+    """
+    if type(source) is not DefaultAioHttpClient:
+        return None
+    connection = getattr(source, "_signed_upload_connection", None)
+    pick = getattr(source, "_transport_for_url", None)
+    if not isinstance(connection, _AioHttpUploadConnection) or not callable(pick):
+        return None
+    return connection.upload_transport(pick(httpx.URL(url)))
 
 
 class _BorrowedTransport(httpx.BaseTransport):

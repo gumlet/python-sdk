@@ -54,6 +54,7 @@ class TestImageSources:
         image_source = client.image_sources.list(
             page_number=1,
             page_size=20,
+            order_by="asc",
         )
 
     @smoke_case("imageSources.list:all", operation="list", path="/image/sources")
@@ -62,6 +63,7 @@ class TestImageSources:
             page_number=1,
             page_size=20,
             next_page_token="next_page_token",
+            order_by="asc",
         )
 
     @smoke_case("imageSources.retrieve:single", operation="retrieve", path="/image/sources/{image_source_id}")

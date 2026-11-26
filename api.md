@@ -974,6 +974,7 @@ Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-ba
 image_source = client.image_sources.list(
     page_number=1,
     page_size=20,
+    order_by="asc",
 )
 ```
 

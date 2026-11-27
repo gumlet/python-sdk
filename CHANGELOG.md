@@ -1,0 +1,638 @@
+# Changelog
+
+## [1.6.2](https://github.com/gumlet/python-sdk/compare/v1.6.1...v1.6.2) (2026-11-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 3 breaking changes to the SDK surface.
+    - method-name POST video/assets/{p}/thumbnail — method names differ (breaking: renamed; the old spelling no longer resolves)
+    - types-files types/video_asset_upload_thumbnail_response.py — type file only in before (1 member: 0 matched by name and kind elsewhere in after, 1 not found) (breaking: removed; video_asset_upload_thumbnail_file_response.py appeared in its place, likely a rename)
+    - types-classes types/__init__.py:VideoAssetUploadThumbnailResponse — reexport only in before (breaking: removed; VideoAssetUploadThumbnailFileResponse appeared in its place, likely a rename)
+
+### Features
+
+* **api:** update SDK surface (5 changes) ([ecbb04d](https://github.com/gumlet/python-sdk/commit/ecbb04d908b7232a4c5465cff1a81f225c2ca895))
+
+
+### Chores
+
+* **api:** update generated SDK content ([5924b2d](https://github.com/gumlet/python-sdk/commit/5924b2d8d2e1d241b9b6e5fc2c88e8151109ccca))
+* release 1.6.2 ([b7b08c7](https://github.com/gumlet/python-sdk/commit/b7b08c7f45943a977a71766d588740f2f5587abc))
+
+## [1.6.1](https://github.com/gumlet/python-sdk/compare/v1.6.0...v1.6.1) (2026-11-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 3 breaking changes to the SDK surface.
+    - method-name POST video/assets/upload — method names differ (breaking: renamed; the old spelling no longer resolves)
+    - path-params POST video/assets/upload — path parameter missing on one side (breaking: changed in a way existing callers can observe)
+    - request-shape POST video/assets/upload.file — field only in after (breaking: new required request member; existing calls lack it)
+* **api:** 3 breaking changes to the SDK surface.
+    - method-name POST video/assets/{p}/thumbnail — method names differ (breaking: renamed; the old spelling no longer resolves)
+    - types-files types/video_asset_upload_thumbnail_file_response.py — type file only in before (1 member: 0 matched by name and kind elsewhere in after, 1 not found) (breaking: removed; video_asset_upload_thumbnail_response.py appeared in its place, likely a rename)
+    - types-classes types/__init__.py:VideoAssetUploadThumbnailFileResponse — reexport only in before (breaking: removed; VideoAssetUploadThumbnailResponse appeared in its place, likely a rename)
+* **api:** 5 breaking changes to the SDK surface.
+    - method-name POST video/assets/{p}/thumbnail — method names differ (breaking: renamed; the old spelling no longer resolves)
+    - path-params POST video/assets/{p}/thumbnail — path parameter missing on one side (breaking: changed in a way existing callers can observe)
+    - request-shape POST video/assets/{p}/thumbnail.file — field only in after (breaking: new required request member; existing calls lack it)
+    - types-files types/video_asset_thumbnail_upload_response.py — type file only in before (1 member: 0 matched by name and kind elsewhere in after, 1 not found) (breaking: removed; video_asset_upload_thumbnail_file_response.py appeared in its place, likely a rename)
+    - types-classes types/__init__.py:VideoAssetThumbnailUploadResponse — reexport only in before (breaking: removed; VideoAssetUploadThumbnailFileResponse appeared in its place, likely a rename)
+
+### Features
+
+* **api:** update SDK surface (2 changes) ([de6129e](https://github.com/gumlet/python-sdk/commit/de6129ef4f205fffeed9d90f71ff46e06b460331))
+* **api:** update SDK surface (5 changes) ([8a894b8](https://github.com/gumlet/python-sdk/commit/8a894b820c9c57d565378060f9c3f9cf2f94aaaf))
+* **api:** update SDK surface (7 changes) ([b667221](https://github.com/gumlet/python-sdk/commit/b667221b3a612844112fe3e862e1221b245910d6))
+* **api:** update SDK surface (7 changes) ([34b2533](https://github.com/gumlet/python-sdk/commit/34b25338de94f693b44becff3c643689ea230f42))
+
+
+### Chores
+
+* **api:** update generated SDK content ([b8d812d](https://github.com/gumlet/python-sdk/commit/b8d812d61ddc9adeff26c8718602e0bdca9baf3a))
+* release 1.6.1 ([a3ac8bb](https://github.com/gumlet/python-sdk/commit/a3ac8bbb6a8d7efe7e7a210988e48671e22173f9))
+
+## [1.6.0](https://github.com/gumlet/python-sdk/compare/v1.5.2...v1.6.0) (2026-11-23)
+
+
+### Features
+
+* **api:** update SDK surface (2 changes) ([3746978](https://github.com/gumlet/python-sdk/commit/3746978cdaef79241d9cbc8b875fae6a9adb14f0))
+
+
+### Chores
+
+* **api:** update generated SDK content ([b3e0d1f](https://github.com/gumlet/python-sdk/commit/b3e0d1f1a0c9ecab4aedf746f832e91a422c3667))
+* **api:** update generated SDK content ([7599e35](https://github.com/gumlet/python-sdk/commit/7599e35d9f63fc7f1716d1d149deb26ff87833f9))
+* **api:** update generated SDK content ([9cb6089](https://github.com/gumlet/python-sdk/commit/9cb6089019aba59200bc349f06e5faba9ffc2b31))
+
+## [1.5.2](https://github.com/gumlet/python-sdk/compare/v1.5.0...v1.5.2) (2026-11-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 3 breaking changes to the SDK surface.
+    - Operation `videoProfiles.list` is no longer paginated.
+    - Operation `imageSources.list` is no longer paginated.
+    - Operation `liveStreamAssets.filter` is no longer paginated.
+
+### Features
+
+* **api:** remove pagination of videoProfiles.list (+2 more changes) ([86cbb92](https://github.com/gumlet/python-sdk/commit/86cbb929268954f59273f49f252c9c2ef44114a2))
+
+
+### Chores
+
+* **api:** update generated SDK content ([245b0c1](https://github.com/gumlet/python-sdk/commit/245b0c1084928c3638aa7a1fa23c722937230299))
+* release 1.5.2 ([0a40b9c](https://github.com/gumlet/python-sdk/commit/0a40b9c4c8059d264d015f318f2665472b673df4))
+
+## [1.5.0](https://github.com/gumlet/python-sdk/compare/v1.4.2...v1.5.0) (2026-11-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 21 breaking changes to the SDK surface.
+    - Operation `videoAssets.list` route changed from `GET /video/workspaces/{workspace_id}/list` to `GET /video/assets/list/{workspace_id}`.
+    - Serialization or defaults of query param `sortBy` on `videoAssets.list` changed.
+    - Serialization or defaults of query param `orderBy` on `videoAssets.list` changed.
+    - Removed query param `type` from `videoAssets.list`.
+    - Removed query param `parent_id` from `videoAssets.list`.
+    - Removed query param `searchIndex` from `videoAssets.list`.
+    - Removed query param `offset` from `videoAssets.list`.
+    - Removed query param `size` from `videoAssets.list`.
+    - `401` error response of `videoAssets.list` changed from `error` to `application/json`.
+    - Removed query param `offset` from `videoProfiles.list`.
+    - Removed query param `size` from `videoProfiles.list`.
+    - Removed query param `offset` from `imageSources.list`.
+    - Removed query param `size` from `imageSources.list`.
+    - Removed query param `offset` from `liveStreamAssets.filter`.
+    - Removed query param `size` from `liveStreamAssets.filter`.
+    - Removed query param `offset` from `recycleBin.list`.
+    - Removed query param `size` from `recycleBin.list`.
+    - Removed query param `offset` from `videoWorkspaces.list`.
+    - Removed query param `size` from `videoWorkspaces.list`.
+    - Serialization or defaults of query param `page_size` on `channelViewers.listSubscribers` changed.
+    - Removed operation `videoAssets.listDeprecated` (`GET /video/assets/list/{workspace_id}`).
+
+### Features
+
+* **api:** add pagination of imageSources.list ([bdbf10b](https://github.com/gumlet/python-sdk/commit/bdbf10b5de3684a3796a1ca7848bffc3d5f5be14))
+* **api:** add pagination of liveStreamAssets.filter ([1d196fb](https://github.com/gumlet/python-sdk/commit/1d196fb2ace4e1467bace69b480a556387dbeb62))
+* **api:** update operation videoAssets.list (+45 more changes) ([1e5ae21](https://github.com/gumlet/python-sdk/commit/1e5ae21b0408fce5989488ac7f54242ec2296eb2))
+* **api:** update SDK surface (2 changes) ([44b41f8](https://github.com/gumlet/python-sdk/commit/44b41f8db4f1a241ff424f354b0f8384014cc2e6))
+
+
+### Chores
+
+* **api:** update generated SDK content ([22416eb](https://github.com/gumlet/python-sdk/commit/22416eb09c435fa10422040567027ef900388f00))
+* release 1.5.0 ([c4bf7c6](https://github.com/gumlet/python-sdk/commit/c4bf7c61c0c8d7369bbe3f3e249b5a1c53899d3c))
+
+## [1.4.2](https://github.com/gumlet/python-sdk/compare/v1.4.1...v1.4.2) (2026-11-13)
+
+
+### Chores
+
+* **api:** update generated SDK content ([c981a09](https://github.com/gumlet/python-sdk/commit/c981a09b12e492de8eb6f44a9837cd0c846104b5))
+
+## [1.4.1](https://github.com/gumlet/python-sdk/compare/v1.4.0...v1.4.1) (2026-11-09)
+
+
+### Chores
+
+* **api:** update generated SDK content ([f204cac](https://github.com/gumlet/python-sdk/commit/f204cac9b4df1d55f09009d7bb8863fdc1af378c))
+* **api:** update generated SDK content ([7fb0095](https://github.com/gumlet/python-sdk/commit/7fb00956027766eae9444d696704f18f6fa4acdf))
+
+## [1.4.0](https://github.com/gumlet/python-sdk/compare/v1.3.3...v1.4.0) (2026-11-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 4 breaking changes to the SDK surface.
+    - Added required body field `workspace_id` to `videoAssets.upload`.
+    - Added required body field `workspace_id` to `videoAssets.deleteMany`.
+    - Added required body field `workspace_id` to `videoAssets.tagMany`.
+    - Added required body field `workspace_id` to `videoPlaylists.create`.
+
+### Features
+
+* **api:** update SDK surface (8 changes) ([1380d95](https://github.com/gumlet/python-sdk/commit/1380d95c4d96245759dccdff50755915b8703c3f))
+
+
+### Chores
+
+* release 1.4.0 ([08ba2c0](https://github.com/gumlet/python-sdk/commit/08ba2c036f720e69bcb7962e529713a22ebb560a))
+
+## [1.3.3](https://github.com/gumlet/python-sdk/compare/v1.3.2...v1.3.3) (2026-10-25)
+
+
+### Chores
+
+* **api:** update generated SDK content ([a863f60](https://github.com/gumlet/python-sdk/commit/a863f60402926233a1179f891999512015fce9c2))
+
+## [1.3.2](https://github.com/gumlet/python-sdk/compare/v1.3.0...v1.3.2) (2026-10-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 3 breaking changes to the SDK surface.
+    - Removed operation `folders.deleteAssets` (`POST /video/workspaces/{workspace_id}/remove-assets-from-folder`).
+    - Removed operation `channelViewers.delete` (`POST /channel/{video_workspace_id}/viewers/remove`).
+    - Removed operation `videoAnalytics.chartData` (`POST /insights/viewer-analytics`).
+* **api:** query param `collection_id` on `videoPlaylists.listAll` is now required.
+
+### Features
+
+* **api:** remove operation folders.deleteAssets (+5 more changes) ([a69343c](https://github.com/gumlet/python-sdk/commit/a69343c1e27cb114ca45dd6d80abb40a46d2c9cf))
+* **api:** update SDK surface (2 changes) ([2656fa1](https://github.com/gumlet/python-sdk/commit/2656fa1b5ddd304b8566482f3507a320dbcc4322))
+
+
+### Chores
+
+* **api:** regenerate SDK ([976363d](https://github.com/gumlet/python-sdk/commit/976363d4fdaed2ace3bf8d7b5df55fee6b0ac53e))
+* release 1.3.2 ([e9f52a8](https://github.com/gumlet/python-sdk/commit/e9f52a8c53e295c389d0e9958ae27e32c09bfab9))
+
+## [1.3.0](https://github.com/gumlet/python-sdk/compare/v1.2.2...v1.3.0) (2026-10-22)
+
+
+### Features
+
+* **api:** update SDK surface (2 changes) ([6961ef9](https://github.com/gumlet/python-sdk/commit/6961ef96b644410a435993e13b0d6e93a111d850))
+
+
+### Chores
+
+* **api:** regenerate SDK ([1a8da58](https://github.com/gumlet/python-sdk/commit/1a8da58196105bce858d99c114fd22dac65a25d2))
+* **api:** update generated SDK content ([9a8ed30](https://github.com/gumlet/python-sdk/commit/9a8ed3037ae51f25fa0b56702a16591e0c98a3e2))
+
+## [1.2.2](https://github.com/gumlet/python-sdk/compare/v1.2.1...v1.2.2) (2026-10-15)
+
+
+### Chores
+
+* **api:** regenerate SDK ([ab7321f](https://github.com/gumlet/python-sdk/commit/ab7321f04a407bf2f38decc49e5f55c99aab778f))
+* **api:** update generated SDK content ([0a32835](https://github.com/gumlet/python-sdk/commit/0a3283563935151c50fca48554e99fd2d28b98a2))
+
+## [1.2.1](https://github.com/gumlet/python-sdk/compare/v1.2.0...v1.2.1) (2026-10-12)
+
+
+### Chores
+
+* **api:** update generated SDK content ([fadeb7f](https://github.com/gumlet/python-sdk/commit/fadeb7fc95e7470485fdb9810ea0d21c65d8219e))
+* **api:** update generated SDK content ([7f88ca0](https://github.com/gumlet/python-sdk/commit/7f88ca07b28ccbeb61f13644b17795a550758d99))
+* **api:** update generated SDK content ([c4d9f18](https://github.com/gumlet/python-sdk/commit/c4d9f188da1b04372e1fe83330bc3e8d7a1d86f9))
+* **api:** update generated SDK content ([9b51b19](https://github.com/gumlet/python-sdk/commit/9b51b197ca78cb22f25752809dc7140490ef2d6e))
+
+## [1.2.0](https://github.com/gumlet/python-sdk/compare/v1.1.0...v1.2.0) (2026-10-12)
+
+
+### Features
+
+* **api:** update SDK surface (2 changes) ([83d7f9f](https://github.com/gumlet/python-sdk/commit/83d7f9f5fe6e2cb5c5c746103ad9337bf9293dc2))
+
+
+### Chores
+
+* **api:** update generated SDK content ([cf74657](https://github.com/gumlet/python-sdk/commit/cf74657cc215aba1a2e3c90f1d11b3d2b0c7ebc0))
+
+## [1.1.0](https://github.com/gumlet/python-sdk/compare/v1.0.14...v1.1.0) (2026-10-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 5 breaking changes to the SDK surface.
+    - Removed operation `webhooks.create` (`POST /org/webhooks`).
+    - Removed operation `webhooks.list` (`GET /org/webhooks`).
+    - Removed operation `webhooks.update` (`POST /org/webhooks/{webhook_id}`).
+    - Removed operation `webhooks.delete` (`DELETE /org/webhooks/{webhook_id}`).
+    - Removed operation `webhooks.history` (`GET /org/webhook/{webhook_id}/history`).
+
+### Features
+
+* **api:** add schema webhook_error_detail (+10 more changes) ([8157aa1](https://github.com/gumlet/python-sdk/commit/8157aa164e643129ffc848d15307f38872732c6d))
+* **api:** remove operation webhooks.create (+9 more changes) ([5ed1245](https://github.com/gumlet/python-sdk/commit/5ed1245e63a9b5bd153ec41160bee3bdd228419f))
+
+
+### Chores
+
+* release 1.1.0 ([ef5a530](https://github.com/gumlet/python-sdk/commit/ef5a53067ecfc184678502f28cc919bf51f49965))
+* release 1.1.0 ([1f7fe22](https://github.com/gumlet/python-sdk/commit/1f7fe22aa6546716bdc8eb8856804d3b3349e416))
+
+## [1.0.14](https://github.com/gumlet/python-sdk/compare/v1.0.12...v1.0.14) (2026-10-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 11 breaking changes to the SDK surface.
+    - Removed schema `webhook_error_detail`.
+    - Removed schema `webhook_warning`.
+    - Removed schema `video_webhook_transformations`.
+    - Removed schema `video_webhook_input`.
+    - Removed schema `video_webhook_output`.
+    - Removed schema `video_webhook_payload`.
+    - Removed schema `live_video_webhook_input`.
+    - Removed schema `live_video_webhook_output`.
+    - Removed schema `live_video_webhook_payload`.
+    - Removed schema `event_webhook_payload`.
+    - Removed webhook `Unwrap` (`productEvent`).
+* **api:** 4 breaking changes to the SDK surface.
+    - Removed operation `webhooks.createEndpoint` (`POST /org/webhooks`).
+    - Removed operation `webhooks.listEndpoints` (`GET /org/webhooks`).
+    - Removed operation `webhooks.updateEndpoint` (`POST /org/webhooks/{webhook_id}`).
+    - Removed operation `webhooks.deleteEndpoint` (`DELETE /org/webhooks/{webhook_id}`).
+* **api:** 4 breaking changes to the SDK surface.
+    - Removed operation `webhooks.create` (`POST /org/webhooks`).
+    - Removed operation `webhooks.list` (`GET /org/webhooks`).
+    - Removed operation `webhooks.update` (`POST /org/webhooks/{webhook_id}`).
+    - Removed operation `webhooks.delete` (`DELETE /org/webhooks/{webhook_id}`).
+
+### Features
+
+* **api:** add schema webhook_error_detail (+10 more changes) ([7e05ce0](https://github.com/gumlet/python-sdk/commit/7e05ce0f11b4fe47cc3d200471851f95cb00f4cb))
+* **api:** remove operation webhooks.create (+7 more changes) ([07ce05b](https://github.com/gumlet/python-sdk/commit/07ce05b33f2570b36b492e2f870e0f1cefc0a6e6))
+* **api:** remove operation webhooks.createEndpoint (+7 more changes) ([ce441c2](https://github.com/gumlet/python-sdk/commit/ce441c24780956bba3be0bae19a04ee83f89c682))
+* **api:** remove schema webhook_error_detail (+10 more changes) ([34942d1](https://github.com/gumlet/python-sdk/commit/34942d14c13f338426a54e8a4f2134c21538f88e))
+
+
+### Chores
+
+* **api:** regenerate SDK ([5495053](https://github.com/gumlet/python-sdk/commit/5495053df9b90cfc78c4997c98ea0ccb5980ceba))
+* release 1.0.14 ([cd404b5](https://github.com/gumlet/python-sdk/commit/cd404b53963792f4ca5e457547fc2da035aaf0f6))
+* release 1.0.14 ([f640a8f](https://github.com/gumlet/python-sdk/commit/f640a8f0f9a2492f3dde9b00417e47b2fc6959fd))
+
+## [1.0.12](https://github.com/gumlet/python-sdk/compare/v1.0.11...v1.0.12) (2026-10-01)
+
+
+### Chores
+
+* release 1.0.12 ([18f7cae](https://github.com/gumlet/python-sdk/commit/18f7cae31ed9f9297cdf97b7feefe82bfd54e649))
+* release 1.0.12 ([60a3201](https://github.com/gumlet/python-sdk/commit/60a32012b097ed2036c961dcaa96e98adb7f70ee))
+
+## [1.0.11](https://github.com/gumlet/python-sdk/compare/v1.0.10...v1.0.11) (2026-10-01)
+
+
+### Chores
+
+* **api:** update generated SDK content ([120feb4](https://github.com/gumlet/python-sdk/commit/120feb4ceb12d94f0c50fb79fa524c38e7dc707a))
+* **api:** update generated SDK content ([d29bf1c](https://github.com/gumlet/python-sdk/commit/d29bf1c9e8d147f61c3ea5a247d5dfe334db75bb))
+* **api:** update generated SDK content ([3aa425d](https://github.com/gumlet/python-sdk/commit/3aa425d5ca27cde31dc3a3a73080d21db78d6898))
+
+## [1.0.10](https://github.com/gumlet/python-sdk/compare/v1.0.9...v1.0.10) (2026-10-01)
+
+
+### Chores
+
+* **api:** regenerate SDK ([e37e639](https://github.com/gumlet/python-sdk/commit/e37e63968649f0bd4255474dc60d3a02a05d9c5d))
+* **api:** update generated SDK content ([1688e35](https://github.com/gumlet/python-sdk/commit/1688e3564514205decc281591877f21901ba836f))
+
+## [1.0.9](https://github.com/gumlet/python-sdk/compare/v1.0.8...v1.0.9) (2026-09-29)
+
+
+### Chores
+
+* **api:** regenerate SDK ([8a68df8](https://github.com/gumlet/python-sdk/commit/8a68df8c41a67b01f287dd9b08117db005ba9708))
+
+## [1.0.8](https://github.com/gumlet/python-sdk/compare/v1.0.6...v1.0.8) (2026-09-25)
+
+
+### Features
+
+* **api:** add operation multipartUpload.abort (+1 more change) ([4812260](https://github.com/gumlet/python-sdk/commit/48122605f0f8ced3cde4a9b78875eaa3c95e6e45))
+
+
+### Chores
+
+* **api:** regenerate SDK ([a1f8ed9](https://github.com/gumlet/python-sdk/commit/a1f8ed9cb0fad9a745954b62d8e74841cba483d4))
+* release 1.0.8 ([f27dc4b](https://github.com/gumlet/python-sdk/commit/f27dc4bb85be957747f9193ac92f99c42d24737e))
+* release 1.0.8 ([aecfd81](https://github.com/gumlet/python-sdk/commit/aecfd81e9034a21fda71e42c7708e600da693579))
+
+## [1.0.6](https://github.com/gumlet/python-sdk/compare/v1.0.5...v1.0.6) (2026-09-21)
+
+
+### Chores
+
+* **api:** update generated SDK content ([2eb4c7e](https://github.com/gumlet/python-sdk/commit/2eb4c7e2e70a942e6a70cb823778971720fca95b))
+* **api:** update generated SDK content ([687091f](https://github.com/gumlet/python-sdk/commit/687091f7e8d5d5b3ad53cf7903d2994b9fae851c))
+* **api:** update generated SDK content ([7a90920](https://github.com/gumlet/python-sdk/commit/7a9092023d74162fad2033615b58a76952866d9e))
+
+## [1.0.5](https://github.com/gumlet/python-sdk/compare/v1.0.4...v1.0.5) (2026-09-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 187 breaking changes to the SDK surface.
+    - `401` error response of `videoAssets.create` changed from `application/json` to `error`.
+    - `403` error response of `videoAssets.create` changed from `application/json` to `error`.
+    - `422` error response of `videoAssets.create` changed from `application/json` to `error`.
+    - `500` error response of `videoAssets.create` changed from `application/json` to `error`.
+    - `403` error response of `videoAssets.upload` changed from `application/json` to `error`.
+    - `422` error response of `videoAssets.upload` changed from `application/json` to `error`.
+    - `500` error response of `videoAssets.upload` changed from `application/json` to `error`.
+    - `403` error response of `videoAssets.delete` changed from `application/json` to `error`.
+    - `401` error response of `videoAssets.update` changed from `application/json` to `error`.
+    - `403` error response of `videoAssets.update` changed from `application/json` to `error`.
+    - `422` error response of `videoAssets.update` changed from `application/json` to `error`.
+    - `401` error response of `videoAssets.thumbnailSelect` changed from `application/json` to `error`.
+    - `403` error response of `videoAssets.thumbnailSelect` changed from `application/json` to `error`.
+    - `500` error response of `videoAssets.thumbnailSelect` changed from `application/json` to `error`.
+    - `401` error response of `videoAssets.thumbnailUpload` changed from `application/json` to `error`.
+    - `403` error response of `videoAssets.thumbnailUpload` changed from `application/json` to `error`.
+    - `500` error response of `videoAssets.thumbnailUpload` changed from `application/json` to `error`.
+    - `401` error response of `videoAssets.createUpdateChapter` changed from `application/json` to `error`.
+    - `403` error response of `videoAssets.createUpdateChapter` changed from `application/json` to `error`.
+    - `500` error response of `videoAssets.createUpdateChapter` changed from `application/json` to `error`.
+    - `401` error response of `videoAssets.list` changed from `application/json` to `error`.
+    - `403` error response of `videoAssets.list` changed from `application/json` to `error`.
+    - `403` error response of `videoAssets.listDeprecated` changed from `application/json` to `error`.
+    - `401` error response of `videoAssets.deleteMany` changed from `application/json` to `error`.
+    - `403` error response of `videoAssets.deleteMany` changed from `application/json` to `error`.
+    - `500` error response of `videoAssets.deleteMany` changed from `application/json` to `error`.
+    - `401` error response of `videoAssets.tagMany` changed from `application/json` to `error`.
+    - `403` error response of `videoAssets.tagMany` changed from `application/json` to `error`.
+    - `500` error response of `videoAssets.tagMany` changed from `application/json` to `error`.
+    - `401` error response of `videoAssets.analytics` changed from `application/json` to `error`.
+    - `403` error response of `videoAssets.analytics` changed from `application/json` to `error`.
+    - `500` error response of `videoAssets.analytics` changed from `application/json` to `error`.
+    - `401` error response of `subtitleUpload.upload` changed from `application/json` to `error`.
+    - `403` error response of `subtitleUpload.upload` changed from `application/json` to `error`.
+    - `500` error response of `subtitleUpload.upload` changed from `application/json` to `error`.
+    - `401` error response of `subtitleUpload.complete` changed from `application/json` to `error`.
+    - `403` error response of `subtitleUpload.complete` changed from `application/json` to `error`.
+    - `500` error response of `subtitleUpload.complete` changed from `application/json` to `error`.
+    - `401` error response of `audioUpload.upload` changed from `application/json` to `error`.
+    - `403` error response of `audioUpload.upload` changed from `application/json` to `error`.
+    - `500` error response of `audioUpload.upload` changed from `application/json` to `error`.
+    - `401` error response of `audioUpload.complete` changed from `application/json` to `error`.
+    - `403` error response of `audioUpload.complete` changed from `application/json` to `error`.
+    - `500` error response of `audioUpload.complete` changed from `application/json` to `error`.
+    - `401` error response of `videoUsageAnalytics.retrieve` changed from `application/json` to `error`.
+    - `403` error response of `videoUsageAnalytics.retrieve` changed from `application/json` to `error`.
+    - `401` error response of `videoUsageAnalytics.topAssets` changed from `application/json` to `error`.
+    - `403` error response of `videoUsageAnalytics.topAssets` changed from `application/json` to `error`.
+    - `401` error response of `multipartUpload.retrievePartUrl` changed from `application/json` to `error`.
+    - `403` error response of `multipartUpload.retrievePartUrl` changed from `application/json` to `error`.
+    - `401` error response of `multipartUpload.complete` changed from `application/json` to `error`.
+    - `403` error response of `multipartUpload.complete` changed from `application/json` to `error`.
+    - `403` error response of `videoProfiles.create` changed from `application/json` to `error`.
+    - `422` error response of `videoProfiles.create` changed from `application/json` to `error`.
+    - `500` error response of `videoProfiles.create` changed from `application/json` to `error`.
+    - `401` error response of `videoProfiles.list` changed from `application/json` to `error`.
+    - `403` error response of `videoProfiles.list` changed from `application/json` to `error`.
+    - `401` error response of `videoProfiles.update` changed from `application/json` to `error`.
+    - `403` error response of `videoProfiles.update` changed from `application/json` to `error`.
+    - `500` error response of `videoProfiles.update` changed from `application/json` to `error`.
+    - `403` error response of `videoProfiles.retrieve` changed from `application/json` to `error`.
+    - `403` error response of `videoProfiles.delete` changed from `application/json` to `error`.
+    - `401` error response of `videoPlaylists.create` changed from `application/json` to `error`.
+    - `403` error response of `videoPlaylists.create` changed from `application/json` to `error`.
+    - `422` error response of `videoPlaylists.create` changed from `application/json` to `error`.
+    - `401` error response of `videoPlaylists.listAll` changed from `application/json` to `error`.
+    - `403` error response of `videoPlaylists.listAll` changed from `application/json` to `error`.
+    - `401` error response of `videoPlaylists.createAsset` changed from `application/json` to `error`.
+    - `403` error response of `videoPlaylists.createAsset` changed from `application/json` to `error`.
+    - `401` error response of `videoPlaylists.deleteAsset` changed from `application/json` to `error`.
+    - `403` error response of `videoPlaylists.deleteAsset` changed from `application/json` to `error`.
+    - `401` error response of `videoPlaylists.update` changed from `application/json` to `error`.
+    - `403` error response of `videoPlaylists.update` changed from `application/json` to `error`.
+    - `401` error response of `videoPlaylists.delete` changed from `application/json` to `error`.
+    - `403` error response of `videoPlaylists.delete` changed from `application/json` to `error`.
+    - `401` error response of `videoPlaylists.listAssets` changed from `application/json` to `error`.
+    - `403` error response of `videoPlaylists.listAssets` changed from `application/json` to `error`.
+    - `401` error response of `videoPlaylists.reorderAsset` changed from `application/json` to `error`.
+    - `403` error response of `videoPlaylists.reorderAsset` changed from `application/json` to `error`.
+    - `401` error response of `webhooks.create` changed from `application/json` to `error`.
+    - `403` error response of `webhooks.create` changed from `application/json` to `error`.
+    - `422` error response of `webhooks.create` changed from `application/json` to `error`.
+    - `401` error response of `webhooks.list` changed from `application/json` to `error`.
+    - `403` error response of `webhooks.list` changed from `application/json` to `error`.
+    - `401` error response of `webhooks.update` changed from `application/json` to `error`.
+    - `403` error response of `webhooks.update` changed from `application/json` to `error`.
+    - `401` error response of `webhooks.delete` changed from `application/json` to `error`.
+    - `403` error response of `webhooks.delete` changed from `application/json` to `error`.
+    - `401` error response of `webhooks.history` changed from `application/json` to `error`.
+    - `403` error response of `webhooks.history` changed from `application/json` to `error`.
+    - `401` error response of `imageSources.create` changed from `application/json` to `error`.
+    - `422` error response of `imageSources.create` changed from `application/json` to `error`.
+    - `401` error response of `imageSources.list` changed from `application/json` to `error`.
+    - `403` error response of `imageSources.list` changed from `application/json` to `error`.
+    - `401` error response of `imageSources.retrieve` changed from `application/json` to `error`.
+    - `403` error response of `imageSources.retrieve` changed from `application/json` to `error`.
+    - `401` error response of `imageSources.update` changed from `application/json` to `error`.
+    - `403` error response of `imageSources.update` changed from `application/json` to `error`.
+    - `401` error response of `imageSources.delete` changed from `application/json` to `error`.
+    - `403` error response of `imageSources.delete` changed from `application/json` to `error`.
+    - `401` error response of `imageSources.purgeCache` changed from `application/json` to `error`.
+    - `403` error response of `imageSources.purgeCache` changed from `application/json` to `error`.
+    - `401` error response of `imageSources.purge` changed from `application/json` to `error`.
+    - `403` error response of `imageSources.purge` changed from `application/json` to `error`.
+    - `401` error response of `imageUsageAnalytics.retrieve` changed from `application/json` to `error`.
+    - `403` error response of `imageUsageAnalytics.retrieve` changed from `application/json` to `error`.
+    - `422` error response of `liveStreamAssets.create` changed from `application/json` to `error`.
+    - `403` error response of `liveStreamAssets.update` changed from `application/json` to `error`.
+    - `403` error response of `liveStreamAssets.retrieveStatus` changed from `application/json` to `error`.
+    - `403` error response of `liveStreamAssets.delete` changed from `application/json` to `error`.
+    - `403` error response of `liveStreamAssets.complete` changed from `application/json` to `error`.
+    - `403` error response of `liveStreamAssets.filter` changed from `application/json` to `error`.
+    - `401` error response of `liveStreamAssets.start` changed from `application/json` to `error`.
+    - `403` error response of `liveStreamAssets.start` changed from `application/json` to `error`.
+    - `401` error response of `liveStreamAssets.upload` changed from `application/json` to `error`.
+    - `500` error response of `liveStreamAssets.upload` changed from `application/json` to `error`.
+    - `403` error response of `liveStreamAssets.statusHistory` changed from `application/json` to `error`.
+    - `401` error response of `recycleBin.recover` changed from `application/json` to `error`.
+    - `403` error response of `recycleBin.recover` changed from `application/json` to `error`.
+    - `401` error response of `recycleBin.list` changed from `application/json` to `error`.
+    - `403` error response of `recycleBin.list` changed from `application/json` to `error`.
+    - `401` error response of `videoWorkspaces.list` changed from `application/json` to `error`.
+    - `403` error response of `videoWorkspaces.list` changed from `application/json` to `error`.
+    - `401` error response of `videoWorkspaces.create` changed from `application/json` to `error`.
+    - `422` error response of `videoWorkspaces.create` changed from `application/json` to `error`.
+    - `401` error response of `videoWorkspaces.update` changed from `application/json` to `error`.
+    - `403` error response of `videoWorkspaces.update` changed from `application/json` to `error`.
+    - `401` error response of `videoWorkspaces.retrieve` changed from `application/json` to `error`.
+    - `403` error response of `videoWorkspaces.retrieve` changed from `application/json` to `error`.
+    - `401` error response of `videoWorkspaces.delete` changed from `application/json` to `error`.
+    - `403` error response of `videoWorkspaces.delete` changed from `application/json` to `error`.
+    - `401` error response of `folders.create` changed from `application/json` to `error`.
+    - `403` error response of `folders.create` changed from `application/json` to `error`.
+    - `422` error response of `folders.create` changed from `application/json` to `error`.
+    - `401` error response of `folders.list` changed from `application/json` to `error`.
+    - `403` error response of `folders.list` changed from `application/json` to `error`.
+    - `401` error response of `folders.retrieve` changed from `application/json` to `error`.
+    - `403` error response of `folders.retrieve` changed from `application/json` to `error`.
+    - `401` error response of `folders.update` changed from `application/json` to `error`.
+    - `403` error response of `folders.update` changed from `application/json` to `error`.
+    - `401` error response of `folders.delete` changed from `application/json` to `error`.
+    - `403` error response of `folders.delete` changed from `application/json` to `error`.
+    - `401` error response of `folders.deleteAssets` changed from `application/json` to `error`.
+    - `403` error response of `folders.deleteAssets` changed from `application/json` to `error`.
+    - `401` error response of `channelViewers.invite` changed from `application/json` to `error`.
+    - `403` error response of `channelViewers.invite` changed from `application/json` to `error`.
+    - `401` error response of `channelViewers.delete` changed from `application/json` to `error`.
+    - `403` error response of `channelViewers.delete` changed from `application/json` to `error`.
+    - `401` error response of `channelViewers.inviteCsv` changed from `application/json` to `error`.
+    - `403` error response of `channelViewers.inviteCsv` changed from `application/json` to `error`.
+    - `401` error response of `channelViewers.listSubscribers` changed from `application/json` to `error`.
+    - `403` error response of `channelViewers.listSubscribers` changed from `application/json` to `error`.
+    - `403` error response of `videoAnalytics.chartData` changed from `application/json` to `error`.
+    - `500` error response of `videoAnalytics.chartData` changed from `application/json` to `error`.
+    - `403` error response of `videoAnalytics.breakdownData` changed from `application/json` to `error`.
+    - `500` error response of `videoAnalytics.breakdownData` changed from `application/json` to `error`.
+    - `403` error response of `videoAnalytics.aggregatedData` changed from `application/json` to `error`.
+    - `500` error response of `videoAnalytics.aggregatedData` changed from `application/json` to `error`.
+    - `401` error response of `organizationData.fetchOrg` changed from `application/json` to `error`.
+    - `403` error response of `organizationData.fetchOrg` changed from `application/json` to `error`.
+    - `401` error response of `userData.fetch` changed from `application/json` to `error`.
+    - `403` error response of `userData.fetch` changed from `application/json` to `error`.
+    - `401` error response of `auditLogs.fetch` changed from `application/json` to `error`.
+    - `403` error response of `auditLogs.fetch` changed from `application/json` to `error`.
+    - `422` error response of `auditLogs.fetch` changed from `application/json` to `error`.
+    - `401` error response of `billing.listInvoices` changed from `application/json` to `error`.
+    - `403` error response of `billing.listInvoices` changed from `application/json` to `error`.
+    - `401` error response of `billing.fetchDetails` changed from `application/json` to `error`.
+    - `403` error response of `billing.fetchDetails` changed from `application/json` to `error`.
+    - `401` error response of `billing.updateDetails` changed from `application/json` to `error`.
+    - `403` error response of `billing.updateDetails` changed from `application/json` to `error`.
+    - `500` error response of `billing.updateDetails` changed from `application/json` to `error`.
+    - `401` error response of `billing.fetchUpcomingInvoice` changed from `application/json` to `error`.
+    - `403` error response of `billing.fetchUpcomingInvoice` changed from `application/json` to `error`.
+    - `500` error response of `billing.fetchUpcomingInvoice` changed from `application/json` to `error`.
+    - `401` error response of `liveStreamWorkspaces.list` changed from `application/json` to `error`.
+    - `403` error response of `liveStreamWorkspaces.list` changed from `application/json` to `error`.
+    - `401` error response of `liveStreamWorkspaces.create` changed from `application/json` to `error`.
+    - `422` error response of `liveStreamWorkspaces.create` changed from `application/json` to `error`.
+    - `401` error response of `liveStreamWorkspaces.update` changed from `application/json` to `error`.
+    - `403` error response of `liveStreamWorkspaces.update` changed from `application/json` to `error`.
+    - `401` error response of `liveStreamWorkspaces.delete` changed from `application/json` to `error`.
+    - `403` error response of `liveStreamWorkspaces.delete` changed from `application/json` to `error`.
+    - `401` error response of `liveStreamAnalytics.usage` changed from `application/json` to `error`.
+    - `403` error response of `liveStreamAnalytics.usage` changed from `application/json` to `error`.
+    - `401` error response of `globalSearch.search` changed from `application/json` to `error`.
+    - `403` error response of `globalSearch.search` changed from `application/json` to `error`.
+* **api:** 4 breaking changes to the SDK surface.
+    - `400` error response of `videoAssets.deleteMany` changed from `none` to `application/json`.
+    - `400` error response of `videoAssets.tagMany` changed from `none` to `application/json`.
+    - `400` error response of `userData.fetch` changed from `none` to `application/json`.
+    - `400` error response of `liveStreamAnalytics.usage` changed from `none` to `application/json`.
+
+### Features
+
+* **api:** update SDK surface (188 changes) ([48d33e8](https://github.com/gumlet/python-sdk/commit/48d33e8cb141ee71cf27713864695f327662238a))
+* **api:** update SDK surface (240 changes) ([a87c378](https://github.com/gumlet/python-sdk/commit/a87c3783e35373327132e0b290d22b19db9ad583))
+
+
+### Chores
+
+* **api:** update generated SDK content ([03ed245](https://github.com/gumlet/python-sdk/commit/03ed24554589fd44a92604dc5368987921e998a9))
+* release 1.0.5 ([5ce3d44](https://github.com/gumlet/python-sdk/commit/5ce3d44a0a184bf576618251703b7684d8d04877))
+* release 1.0.5 ([1c1b6ee](https://github.com/gumlet/python-sdk/commit/1c1b6ee81f378775e469dc592a9f079cb64e3eed))
+
+## [1.0.4](https://github.com/gumlet/python-sdk/compare/v1.0.2...v1.0.4) (2026-09-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 2 breaking changes to the SDK surface.
+    - Added required body field `workspace_id` to `videoAssets.create`.
+    - Removed body field `collection_id` from `videoAssets.create`.
+
+### Features
+
+* **api:** update SDK surface (2 changes) ([6df7d37](https://github.com/gumlet/python-sdk/commit/6df7d37ce176c7953e00a5abb7d0cb926338764e))
+
+
+### Chores
+
+* **api:** update generated SDK content ([05aee94](https://github.com/gumlet/python-sdk/commit/05aee9405ac0fb7e03a0d9da89ac08c072552842))
+* release 1.0.4 ([9413867](https://github.com/gumlet/python-sdk/commit/94138671b8c19e1756d9ff4edf636d8539aa1684))
+* release 1.0.4 ([185bd62](https://github.com/gumlet/python-sdk/commit/185bd626d99028b521bf5d612390fdcf238d4159))
+
+## [1.0.2](https://github.com/gumlet/python-sdk/compare/v1.0.1...v1.0.2) (2026-09-21)
+
+
+### Chores
+
+* **api:** regenerate SDK ([425e252](https://github.com/gumlet/python-sdk/commit/425e25222ebda0df8fb7b62d9a78805c07a5aeae))
+
+## [1.0.1](https://github.com/gumlet/python-sdk/compare/v1.0.0...v1.0.1) (2026-09-21)
+
+
+### Chores
+
+* **api:** update generated SDK content ([c2292f5](https://github.com/gumlet/python-sdk/commit/c2292f53d0f12751ba308ba9490119ae33f3ea37))
+
+## [1.0.0](https://github.com/gumlet/python-sdk/compare/v0.3.0...v1.0.0) (2026-09-21)
+
+
+### Features
+
+* **api:** add operation globalSearch.search ([c9a2c9e](https://github.com/gumlet/python-sdk/commit/c9a2c9e615154d7b6e4cf94944921dd5d2b1b817))
+
+
+### Chores
+
+* **api:** update generated SDK content ([845699d](https://github.com/gumlet/python-sdk/commit/845699da69cc1f5c42598ca4c79b3887abf4035d))
+* **api:** update generated SDK content ([291aea8](https://github.com/gumlet/python-sdk/commit/291aea8216202666d891c685212a501fda5b8845))
+* **api:** update generated SDK content ([8580466](https://github.com/gumlet/python-sdk/commit/8580466d1130c2031af0bf9e9bbdea9393d1db67))
+* release 1.0.0 ([d7118c8](https://github.com/gumlet/python-sdk/commit/d7118c81f86075f054d1a0922435d638b2fcd553))
+* release 1.0.0 ([0bbcd73](https://github.com/gumlet/python-sdk/commit/0bbcd73e3fc8a463601854168acfb72f780b68de))
+
+## [0.3.0](https://github.com/gumlet/python-sdk/compare/v0.2.0...v0.3.0) (2026-09-21)
+
+
+### Features
+
+* **api:** add operation liveStreamAnalytics.usage ([ac60a30](https://github.com/gumlet/python-sdk/commit/ac60a305166b5bcd069f543f67c4a40308d71331))
+
+
+### Chores
+
+* **api:** regenerate SDK ([02bd3cb](https://github.com/gumlet/python-sdk/commit/02bd3cb58ad9d5bd2f46b0baf29ef9e29e5d4b7a))
+* **api:** update generated SDK content ([04b0f2e](https://github.com/gumlet/python-sdk/commit/04b0f2eb66043f416c7779a5507efa648258287a))
+* **api:** update generated SDK content ([82f24bf](https://github.com/gumlet/python-sdk/commit/82f24bf8486f195dfc974657c8bb7d40419b1a6d))
+
+## [0.2.0](https://github.com/gumlet/python-sdk/compare/v0.1.0...v0.2.0) (2026-09-18)
+
+
+### Features
+
+* **api:** initial SDK generation ([860d43a](https://github.com/gumlet/python-sdk/commit/860d43a0575952e5e8d658b65f4f99c332b7af59))

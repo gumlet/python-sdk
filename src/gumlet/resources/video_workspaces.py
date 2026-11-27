@@ -160,7 +160,7 @@ class VideoWorkspacesResource(SyncAPIResource):
             backblaze: This is a required field if workspace type is backblaze.
             cloudflare: This is a required field if workspace type is cloudflare.
             zoom: This is a required field if workspace type is zoom.
-            data_localization: Data localization region
+            data_localization: Data storage region (Only available in enterprise plan)
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -573,7 +573,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
             backblaze: This is a required field if workspace type is backblaze.
             cloudflare: This is a required field if workspace type is cloudflare.
             zoom: This is a required field if workspace type is zoom.
-            data_localization: Data localization region
+            data_localization: Data storage region (Only available in enterprise plan)
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.

@@ -330,7 +330,7 @@ class WebhookEndpointsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookEndpointHistoryResponse:
         """
-        Get logs history for a given webhook.
+        Get delivery history logs for a given webhook.
 
         Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
 
@@ -675,7 +675,7 @@ class AsyncWebhookEndpointsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookEndpointHistoryResponse:
         """
-        Get logs history for a given webhook.
+        Get delivery history logs for a given webhook.
 
         Pagination uses `page_number` / `page_size`. Use `next_page_token` for cursor-based pagination.
 

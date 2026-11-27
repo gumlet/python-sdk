@@ -1,5 +1,35 @@
 # Changelog
 
+## [1.7.0](https://github.com/gumlet/python-sdk/compare/v1.6.2...v1.7.0) (2026-11-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 2 breaking changes to the SDK surface.
+    - types-files types/webhook_retrieve_response.py — type file only in before (1 member: 0 matched by name and kind elsewhere in after, 1 not found) (breaking: removed; webhook_endpoint_retrieve_response.py appeared in its place, likely a rename)
+    - types-classes types/__init__.py:WebhookRetrieveResponse — reexport only in before (breaking: removed; WebhookEndpointRetrieveResponse appeared in its place, likely a rename)
+* **api:** 6 breaking changes to the SDK surface.
+    - response-shape GET org/webhook/{p}/history→.id — field only in before (breaking: removed; history, page_size, total_count (and 2 more) appeared in its place, likely a rename)
+    - response-shape GET org/webhook/{p}/history→.status — field only in before (breaking: removed; history, page_size, total_count (and 2 more) appeared in its place, likely a rename)
+    - response-shape GET org/webhook/{p}/history→.retry_count — field only in before (breaking: removed; total_count, current_offset, page_size (and 2 more) appeared in its place, likely a rename)
+    - response-shape GET org/webhook/{p}/history→.event — field only in before (breaking: removed; history, total_count, page_size (and 2 more) appeared in its place, likely a rename)
+    - response-shape GET org/webhook/{p}/history→.asset_id — field only in before (breaking: removed; history, page_size, total_count (and 2 more) appeared in its place, likely a rename)
+    - response-shape GET org/webhook/{p}/history→.created_at — field only in before (breaking: removed; total_count, current_offset, page_size (and 2 more) appeared in its place, likely a rename)
+
+### Features
+
+* **api:** add operation-coverage GET org/webhooks/{p} (+2 more changes) ([6ef1d68](https://github.com/gumlet/python-sdk/commit/6ef1d68f50c8b75d88db471a357ec30e998d0e36))
+* **api:** add request-shape GET image/sources.order_by ([e7678fc](https://github.com/gumlet/python-sdk/commit/e7678fcfd18c84c322fa8a6a448c5a2ad561a113))
+* **api:** add request-shape GET video/workspaces.order_by ([0eb3fd1](https://github.com/gumlet/python-sdk/commit/0eb3fd1a38c2b67052d80d108d459488f9cf0c7d))
+* **api:** update SDK surface (12 changes) ([c2066d0](https://github.com/gumlet/python-sdk/commit/c2066d0e1384317074e956462fdb4b3cd0d536ea))
+* **api:** update SDK surface (4 changes) ([388ed6a](https://github.com/gumlet/python-sdk/commit/388ed6a9f30e416c73a69090034416d337f86766))
+
+
+### Chores
+
+* release 1.7.0 ([f5c3698](https://github.com/gumlet/python-sdk/commit/f5c36983692d8d7fdcd7cf500bc10fa6e764cae2))
+* release 1.7.1 ([c8b5251](https://github.com/gumlet/python-sdk/commit/c8b52511b6d57df3a72e6c5e1df8b9ac5fc7ceac))
+
 ## [1.6.2](https://github.com/gumlet/python-sdk/compare/v1.6.1...v1.6.2) (2026-11-24)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/gumlet/python-sdk/compare/v1.7.0...v1.7.1) (2026-11-27)
+
+
+### Chores
+
+* **api:** update generated SDK content ([e7e04c0](https://github.com/gumlet/python-sdk/commit/e7e04c01432600eb3ddff9e58170d92b397c5dc0))
+
 ## [1.7.0](https://github.com/gumlet/python-sdk/compare/v1.6.2...v1.7.0) (2026-11-27)
 
 

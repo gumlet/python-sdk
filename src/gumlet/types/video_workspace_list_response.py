@@ -165,7 +165,7 @@ class AllSource(BaseModel):
     """Whether the workspace is disabled for streaming. `true` means it's disabled."""
 
     data_localization: Optional[Literal["us", "in", "eu"]] = None
-    """Data storage region"""
+    """Data storage region (Only available in enterprise plan)"""
 
 
 class VideoWorkspaceListResponse(BaseModel):

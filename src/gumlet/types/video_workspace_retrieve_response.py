@@ -234,4 +234,4 @@ class VideoWorkspaceRetrieveResponse(BaseModel):
     storage_event_listener: Optional[List[StorageEventListener]] = None
 
     data_localization: Optional[Literal["us", "in", "eu"]] = None
-    """Data storage region"""
+    """Data storage region (Only available in enterprise plan)"""

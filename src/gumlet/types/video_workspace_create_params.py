@@ -88,7 +88,7 @@ class VideoWorkspaceCreateParams(TypedDict, total=False):
     """This is a required field if workspace type is zoom."""
 
     data_localization: Literal["us", "in", "eu"]
-    """Data localization region"""
+    """Data storage region (Only available in enterprise plan)"""
 
 
 class Zoom(TypedDict, total=False):

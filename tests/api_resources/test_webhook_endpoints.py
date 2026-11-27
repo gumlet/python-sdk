@@ -7,6 +7,12 @@ from tests.smoke_support import client, smoke_case
 
 
 class TestWebhookEndpoints:
+    @smoke_case("webhookEndpoints.retrieve:single", operation="retrieve", path="/org/webhooks/{webhook_id}")
+    def test_method_retrieve(self) -> None:
+        webhook_endpoint = client.webhook_endpoints.retrieve(
+            webhook_id="webhookId",
+        )
+
     @smoke_case("webhookEndpoints.create:single", operation="create", path="/org/webhooks")
     def test_method_create(self) -> None:
         webhook_endpoint = client.webhook_endpoints.create(

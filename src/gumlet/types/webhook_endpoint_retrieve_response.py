@@ -5,10 +5,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["WebhookRetrieveResponse"]
+__all__ = ["WebhookEndpointRetrieveResponse"]
 
 
-class WebhookRetrieveResponse(BaseModel):
+class WebhookEndpointRetrieveResponse(BaseModel):
     id: str
     """Webhook ID"""
 

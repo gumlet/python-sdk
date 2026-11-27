@@ -64,14 +64,6 @@ from .webhook_endpoints import (
     WebhookEndpointsResourceWithStreamingResponse,
     AsyncWebhookEndpointsResourceWithStreamingResponse,
 )
-from .webhooks import (
-    WebhooksResource,
-    AsyncWebhooksResource,
-    WebhooksResourceWithRawResponse,
-    AsyncWebhooksResourceWithRawResponse,
-    WebhooksResourceWithStreamingResponse,
-    AsyncWebhooksResourceWithStreamingResponse,
-)
 from .image_sources import (
     ImageSourcesResource,
     AsyncImageSourcesResource,
@@ -192,6 +184,10 @@ from .global_search import (
     GlobalSearchResourceWithStreamingResponse,
     AsyncGlobalSearchResourceWithStreamingResponse,
 )
+from .webhooks import (
+    WebhooksResource,
+    AsyncWebhooksResource,
+)
 
 __all__ = [
     "VideoAssetsResource",
@@ -242,12 +238,6 @@ __all__ = [
     "AsyncWebhookEndpointsResourceWithRawResponse",
     "WebhookEndpointsResourceWithStreamingResponse",
     "AsyncWebhookEndpointsResourceWithStreamingResponse",
-    "WebhooksResource",
-    "AsyncWebhooksResource",
-    "WebhooksResourceWithRawResponse",
-    "AsyncWebhooksResourceWithRawResponse",
-    "WebhooksResourceWithStreamingResponse",
-    "AsyncWebhooksResourceWithStreamingResponse",
     "ImageSourcesResource",
     "AsyncImageSourcesResource",
     "ImageSourcesResourceWithRawResponse",
@@ -338,4 +328,6 @@ __all__ = [
     "AsyncGlobalSearchResourceWithRawResponse",
     "GlobalSearchResourceWithStreamingResponse",
     "AsyncGlobalSearchResourceWithStreamingResponse",
+    "WebhooksResource",
+    "AsyncWebhooksResource",
 ]

@@ -4,7 +4,6 @@ version = "1.6.2" # x-release-please-version
 description = "Gumlet helps developers deliver online video and images. This API encompasses Gumlet Video, Image and Video Analytics functionality to help you build your products better and faster than ever before."
 readme = "README.md"
 license = "Apache-2.0"
-keywords = ["gumlet", "api", "video", "image"]
 authors = [
   { name = "Gumlet", email = "support@gumlet.com"},
 ]

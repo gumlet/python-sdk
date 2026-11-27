@@ -55,6 +55,8 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [Update Webhook](#update-webhook)
   - [Delete Webhook](#delete-webhook)
   - [Get Webhook History](#get-webhook-history)
+- [`Webhooks`](#webhooks)
+  - [Get Webhook](#get-webhook)
 - [`ImageSources`](#imagesources)
   - [Create Source](#create-source)
   - [List Sources](#list-sources)
@@ -934,6 +936,24 @@ webhook_endpoint = client.webhook_endpoints.history(
     webhook_id="webhookId",
     page_number=1,
     page_size=20,
+)
+```
+
+## `Webhooks`
+
+Create webhook listeners and receive video status, live video status, and product events. Gumlet POSTs JSON to your URL with the `x-gumlet-token` header.
+
+### Get Webhook
+
+Retrieve details of a single webhook by ID.
+
+| Direction | Type |
+| --- | --- |
+| Response | [`WebhookRetrieveResponse`](./src/gumlet/types/webhook_retrieve_response.py) |
+
+```python
+webhook = client.webhooks.retrieve(
+    webhook_id="webhookId",
 )
 ```
 

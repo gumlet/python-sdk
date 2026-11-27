@@ -2,7 +2,7 @@
 
 This library provides convenient access to the Gumlet REST API from Python.
 
-The REST API documentation can be found on [docs.gumlet.com](https://docs.gumlet.com/reference). The full API of this library can be found in [api.md](./api.md).
+The full API of this library can be found in [api.md](./api.md).
 
 <br />
 
@@ -90,7 +90,9 @@ asyncio.run(main())
 
 Some methods upload a file to a pre-signed URL the API returns, usually on another host, then confirm the upload where the API asks for that. The upload goes out on a short-lived HTTP client of its own, carrying only the file, its content type and the headers the API named for it: none of the client's credentials, default headers, default query or cookies, and none of the `auth`, headers, cookies, params or event hooks of a custom `http_client`. The client's retries and timeout apply. The upload URL must be `https:` (plain `http:` only to this machine), and a redirect from the upload host is refused rather than followed.
 
-Without an `http_client`, the upload goes out on httpx's defaults: it takes its proxy and CA settings from the environment (`HTTPS_PROXY`, `SSL_CERT_FILE` and the like) when it is sent. With one you pass, the upload uses that client's proxy and TLS settings — `proxy=`, `mounts=`, `verify=` (`verify=False` included) and `cert=`, so a corporate proxy or a private CA works for uploads too, and a client certificate is presented to the upload host — when the transport the client would send the upload URL through is httpx's own `httpx.HTTPTransport` (`httpx.AsyncHTTPTransport` on the async client). Any other transport class, such as a subclass of your own or `DefaultAioHttpClient`'s, sends the request itself and could add headers, credentials or cookies, so with one the upload falls back to httpx's defaults as if no `http_client` were passed. So does an httpx transport bound to a Unix socket (`uds=`).
+Without an `http_client`, the upload goes out on httpx's defaults: it takes its proxy and CA settings from the environment (`HTTPS_PROXY`, `SSL_CERT_FILE` and the like) when it is sent. With one you pass, the upload uses that client's proxy and TLS settings — `proxy=`, `mounts=`, `verify=` (`verify=False` included) and `cert=`, so a corporate proxy or a private CA works for uploads too, and a client certificate is presented to the upload host — when the transport the client would send the upload URL through is httpx's own `httpx.HTTPTransport` (`httpx.AsyncHTTPTransport` on the async client). Any other transport class, such as a subclass of your own, sends the request itself and could add headers, credentials or cookies, so with one the upload falls back to httpx's defaults as if no `http_client` were passed. So does an httpx transport bound to a Unix socket (`uds=`).
+
+`DefaultAioHttpClient` is the exception. Its aiohttp transport keeps a cookie jar, so the upload never goes through it; instead the upload builds an `httpx.AsyncHTTPTransport` of its own from the settings the client was created with: its `proxy=` for the upload URL (or, with `trust_env` on, the environment's proxy for it as read when the client was created), `verify=` and `cert=`, and none of its headers, auth, cookies, params or hooks. That transport is new for each upload, so the upload does not share the client's connection pool or count against its `limits`. With the default `verify=True`, the CA bundle `SSL_CERT_FILE` or `SSL_CERT_DIR` names is read when the client's first upload is sent. A mount or `transport=` of your own for the upload URL is treated as on any client: exactly `httpx.AsyncHTTPTransport` is borrowed, and any other class falls back to httpx's defaults, without the client's `verify=` or `cert=`. A setting httpx's transport cannot carry, such as a SOCKS proxy without the `socksio` package, makes the upload fall back to httpx's defaults rather than use the rest. Only `DefaultAioHttpClient` itself is read this way: a subclass of it, or an `httpx_aiohttp` client you build directly, falls back to httpx's defaults unless the transport it routes the upload URL to inherits `SignedUploadTransport`.
 
 When your proxy or TLS setup lives only in a transport class of your own, opt that transport in by inheriting `SignedUploadTransport` (`from gumlet import SignedUploadTransport`), as in `class CorporateTransport(SignedUploadTransport, httpx.HTTPTransport)`. Inheriting it declares that the transport sends a request as handed over: it adds no credentials, cookies or headers of its own, keeps no session or cookie jar that would, is bound to no Unix socket, follows no redirects and honours the timeout httpx hands it with each request, which is the only way the upload's timeout reaches it. The upload then goes through it, still carrying only the file, its type and the headers the API named. The SDK checks the marker, not what it promises, and reads it off the transport the client routes the upload URL to, so a wrapper around another transport has to inherit it itself.
 
@@ -157,7 +159,7 @@ client = Gumlet(
 | `base_url` | `str \| httpx.URL \| None` | - | Override the default API base URL. |
 | `timeout` | `float \| Timeout \| None` | `60.0` | Maximum time in seconds to wait for a response before aborting a request. |
 | `max_retries` | `int` | `2` | Number of retries for temporary failures. |
-| `default_headers` | `Mapping[str, str] \| None` | - | Headers sent with every request. |
+| `default_headers` | `Mapping[str, str \| Omit] \| None` | - | Headers sent with every request. `{"Authorization": Omit()}` sends every request without that credential header, matched in any case; a value a call sets still wins. |
 | `default_query` | `Mapping[str, object] \| None` | - | Query parameters sent with every request. |
 
 <br />
@@ -178,6 +180,8 @@ event = client.webhooks.unwrap(payload, headers=headers)
 ```
 
 The signing secret comes from the client's `webhook_secret` option, which defaults to the `GUMLET_WEBHOOK_SECRET` environment variable. Pass `key` to use a different secret for one call.
+
+A delivery that does not verify raises `WebhookVerificationError`, which is not a `GumletError`, so an `except GumletError` around your API calls does not also catch a forged or stale delivery. When `standardwebhooks` is installed, the SDK's `WebhookVerificationError` is also that library's class of the same name, so a handler written against the library's class keeps catching it.
 
 The same resource also has:
 
@@ -204,3 +208,5 @@ The same resource also has:
 ## Requirements
 
 - Python 3.9 or newer
+
+Powered by Scalar.

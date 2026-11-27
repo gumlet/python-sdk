@@ -43,6 +43,7 @@ class VideoWorkspacesResource(SyncAPIResource):
         page_number: int | Omit = omit,
         page_size: int | Omit = omit,
         next_page_token: str | Omit = omit,
+        order_by: Literal["asc", "desc"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -59,6 +60,7 @@ class VideoWorkspacesResource(SyncAPIResource):
             page_number: Page number to retrieve. Starts at `1`.
             page_size: Number of items to return per page. **Default: `20`**. **Maximum: `200`**.
             next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
+            order_by: Sort direction for the workspace list (`asc` or `desc`). **Default: `asc`**.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -72,6 +74,7 @@ class VideoWorkspacesResource(SyncAPIResource):
             video_workspace = client.video_workspaces.list(
                 page_number=1,
                 page_size=20,
+                order_by="asc",
             )
             ```
         """
@@ -83,7 +86,12 @@ class VideoWorkspacesResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
+                    {
+                        "page_number": page_number,
+                        "page_size": page_size,
+                        "next_page_token": next_page_token,
+                        "order_by": order_by,
+                    },
                     video_workspace_list_params.VideoWorkspaceListParams,
                 ),
             ),
@@ -448,6 +456,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
         page_number: int | Omit = omit,
         page_size: int | Omit = omit,
         next_page_token: str | Omit = omit,
+        order_by: Literal["asc", "desc"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -464,6 +473,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
             page_number: Page number to retrieve. Starts at `1`.
             page_size: Number of items to return per page. **Default: `20`**. **Maximum: `200`**.
             next_page_token: Cursor for the next page. Pass the `next_page_token` value returned in the previous response.
+            order_by: Sort direction for the workspace list (`asc` or `desc`). **Default: `asc`**.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -477,6 +487,7 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
             video_workspace = await client.video_workspaces.list(
                 page_number=1,
                 page_size=20,
+                order_by="asc",
             )
             ```
         """
@@ -488,7 +499,12 @@ class AsyncVideoWorkspacesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"page_number": page_number, "page_size": page_size, "next_page_token": next_page_token},
+                    {
+                        "page_number": page_number,
+                        "page_size": page_size,
+                        "next_page_token": next_page_token,
+                        "order_by": order_by,
+                    },
                     video_workspace_list_params.VideoWorkspaceListParams,
                 ),
             ),
